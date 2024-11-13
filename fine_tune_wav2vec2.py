@@ -69,7 +69,7 @@ def prepare_dataset(df, feature_extractor):
         return {
             'input_values': inputs.input_values.squeeze(),
             'attention_mask': attention_mask.squeeze(),
-            'label': 1 if example['Label'] == 'เย็ดแม่' else 0
+            'label': 1 if example['Label'] == 'profanity' else 0
         }
     
     dataset = Dataset.from_pandas(df)
