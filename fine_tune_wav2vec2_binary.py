@@ -9,18 +9,15 @@ from sklearn.model_selection import train_test_split
 import os
 from torch.nn.utils.rnn import pad_sequence
 from transformers import EarlyStoppingCallback
-
 # Load and preprocess the dataset
 def load_dataset(csv_file):
     df = pd.read_csv(csv_file)
     return df
-
 # Load and preprocess audio
 def preprocess_audio(file_path, start_time, end_time, max_length=16000):
     # First, get the sample rate
     metadata = torchaudio.info(file_path)
     sr = metadata.sample_rate
-
     # Now load the audio with the correct frame offset and number of frames
     audio, sr = torchaudio.load(file_path, 
                                 frame_offset=int(start_time * sr), 
@@ -40,7 +37,6 @@ def preprocess_audio(file_path, start_time, end_time, max_length=16000):
         audio = audio[:, :max_length]
     
     return audio.squeeze().numpy()
-
 # Prepare dataset for Hugging Face Trainer
 def prepare_dataset(df, feature_extractor):
     def process_example(example):
@@ -49,7 +45,6 @@ def prepare_dataset(df, feature_extractor):
         if not os.path.exists(file_path):
             print(f"File not found: {file_path}")
             return None
-
         audio = preprocess_audio(file_path, example['Start Time (s)'], example['End Time (s)'])
         print(f"Audio shape after preprocessing: {audio.shape}")
         
@@ -69,34 +64,29 @@ def prepare_dataset(df, feature_extractor):
         return {
             'input_values': inputs.input_values.squeeze(),
             'attention_mask': attention_mask.squeeze(),
-            'label': 1 if example['Label'] == 'profanity' else 0
+            'label': 1 if example['Label'] == 'เย็ดแม่' else 0
         }
     
     dataset = Dataset.from_pandas(df)
     dataset = dataset.map(process_example, remove_columns=dataset.column_names)
     dataset = dataset.filter(lambda example: example is not None)
     return dataset
-
 def collate_fn(batch):
     input_values = [torch.tensor(item['input_values']).squeeze() for item in batch]
     attention_mask = [torch.tensor(item['attention_mask']).squeeze() for item in batch]
     labels = torch.tensor([item['label'] for item in batch])
-
     input_values = pad_sequence(input_values, batch_first=True)
     attention_mask = pad_sequence(attention_mask, batch_first=True)
-
     return {
         'input_values': input_values,
         'attention_mask': attention_mask,
         'labels': labels
     }
-
 # Main training function
 def train_wav2vec2_model(csv_file, model_name, output_dir):
     # Load dataset
     df = load_dataset(csv_file)
     train_df, val_df = train_test_split(df, test_size=0.2, random_state=42)
-
     # Load pre-trained model and feature extractor
     config = Wav2Vec2Config.from_pretrained(
         model_name,
@@ -112,11 +102,9 @@ def train_wav2vec2_model(csv_file, model_name, output_dir):
         return_attention_mask=True,
         do_normalize=True,
     )
-
     # Prepare datasets
     train_dataset = prepare_dataset(train_df, feature_extractor)
     val_dataset = prepare_dataset(val_df, feature_extractor)
-
     # Define training arguments
     training_args = TrainingArguments(
         output_dir=output_dir,
@@ -135,7 +123,6 @@ def train_wav2vec2_model(csv_file, model_name, output_dir):
         warmup_steps=500,  # Add warmup steps
         weight_decay=0.01,  # Add weight decay
     )
-
     # Define Trainer
     early_stopping_callback = EarlyStoppingCallback(early_stopping_patience=3)
     trainer = Trainer(
@@ -147,22 +134,17 @@ def train_wav2vec2_model(csv_file, model_name, output_dir):
         data_collator=collate_fn,
         callbacks=[early_stopping_callback],  # Add this line
     )
-
     # Train the model
     trainer.train()
-
     # Save the fine-tuned model
     model.save_pretrained(output_dir)
     feature_extractor.save_pretrained(output_dir)
-
 def compute_metrics(eval_pred):
     logits, labels = eval_pred
     predictions = np.argmax(logits, axis=-1)
     return {"accuracy": (predictions == labels).astype(np.float32).mean().item()}
-
 if __name__ == "__main__":
-    csv_file = 'profanity_dataset_word.csv'
+    csv_file = 'profanity_dataset_p1.csv'
     model_name = "airesearch/wav2vec2-large-xlsr-53-th"  # Thai pre-trained model
     output_dir = './models/fine_tuned_wav2vec2'
-
     train_wav2vec2_model(csv_file, model_name, output_dir)
