@@ -26,8 +26,8 @@ def convert_folder_to_wav(input_folder, output_folder):
                 print(f"Failed to convert: {filename}")
 
 if __name__ == "__main__":
-    input_folder = "./one_audio/non-profanity"  # Change this to your input folder path
-    output_folder = "./Converted_WAV/non-profanity"  # Change this to your desired output folder path
+    input_folder = "./Audio/Non-Profanity"  # Change this to your input folder path
+    output_folder = "./Converted_WAV/Non-profanity"  # Change this to your desired output folder path
     
     print(f"Converting audio files in {input_folder} to WAV format...")
     convert_folder_to_wav(input_folder, output_folder)

@@ -56,9 +56,11 @@ def predict(model, feature_extractor, audio_segment):
 
     return predicted_class, probabilities[0].tolist()
 
-def merge_detections(detections, threshold=0.25, min_gap=0.2):
+def merge_detections(detections, threshold=0.4, min_gap=0.5):
     """
-    Merge detections with improved confidence handling
+    Merge detections with improved handling of different profanity words
+    threshold: minimum probability to keep the detection
+    min_gap: minimum gap in seconds between detections of the same word
     """
     if not detections:
         return []
@@ -70,19 +72,21 @@ def merge_detections(detections, threshold=0.25, min_gap=0.2):
     current_group = list(detections[0])
     
     for start, end, prob, word in detections[1:]:
-        # Only merge if same word AND very close together
-        if word == current_group[3] and start - current_group[1] < min_gap:
-            # Update probability and end time if needed
-            if prob > current_group[2]:
-                current_group[2] = prob
-            current_group[1] = max(current_group[1], end)
-        else:
-            # Different word or gap too large, start new group
+        # If this detection starts after the current group ends (plus min_gap)
+        # or if it's a different word
+        if start - current_group[1] >= min_gap or word != current_group[3]:
             if current_group[2] >= threshold:
                 merged.append(tuple(current_group))
             current_group = [start, end, prob, word]
+        else:
+            # Merge only if it's the same word and has higher probability
+            if prob > current_group[2]:
+                current_group[1] = end
+                current_group[2] = prob
+            else:
+                current_group[1] = max(current_group[1], end)
     
-    # Add the last group
+    # Add the last group if it meets the threshold
     if current_group[2] >= threshold:
         merged.append(tuple(current_group))
     
@@ -130,7 +134,7 @@ def censor_audio(file_path, detections):
 
 def main():
     # Load your fine-tuned model and feature extractor
-    model_path = "./models/first_attempt/fine_tuned_wav2vec2_fold_best"  # Update this to your model's path
+    model_path = "./models/fine_tuned_wav2vec2"  # Update this to your model's path
     model = Wav2Vec2ForSequenceClassification.from_pretrained(model_path)
     feature_extractor = Wav2Vec2FeatureExtractor.from_pretrained(model_path)
 
@@ -142,7 +146,7 @@ def main():
     model = model.to(device)
 
     # Test file or directory
-    test_path = "test6.wav"  # Update this to your test audio file or directory
+    test_path = "test3.wav"  # Update this to your test audio file or directory
 
     def process_file(file_path):
         segments, duration = preprocess_audio(file_path)
@@ -154,6 +158,9 @@ def main():
         for i, segment in enumerate(segments):
             prediction, probabilities = predict(model, feature_extractor, segment)
             
+            # Get the probability for the predicted class
+            max_prob = probabilities[prediction]
+            
             # Debug print for all segments
             print(f"\nSegment {i}:")
             print(f"Predicted class: {labels[prediction]} (index: {prediction})")
@@ -161,20 +168,15 @@ def main():
             for label, prob in zip(labels, probabilities):
                 print(f"- {label}: {prob:.3f}")
             
-            # Check all profanity classes with lower threshold
-            threshold = 0.25  # Lowered from 0.4 to 0.25
-            
+            # Check all profanity classes
             for class_idx, prob in enumerate(probabilities):
-                if class_idx != 0:  # Skip 'none' class
-                    # Add confidence check against 'none' class
-                    none_prob = probabilities[0]
-                    if prob > threshold and prob > none_prob * 0.8:  # Check if profanity prob is significant compared to 'none'
-                        start_time = i * 0.5  # 0.5 seconds hop length
-                        end_time = min(start_time + 1, duration)
-                        detected_word = labels[class_idx]
-                        results.append((start_time, end_time, prob, detected_word))
+                if class_idx != 0 and prob > 0.4:  # Skip 'none' class
+                    start_time = i * 0.5  # 0.5 seconds hop length
+                    end_time = min(start_time + 1, duration)
+                    detected_word = labels[class_idx]
+                    results.append((start_time, end_time, prob, detected_word))
         
-        merged_results = merge_detections(results, threshold=0.25)  # Match the new threshold
+        merged_results = merge_detections(results)
         
         print(f"\nFile: {file_path}")
         if merged_results:
