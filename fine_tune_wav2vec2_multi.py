@@ -13,6 +13,8 @@ import librosa
 from sklearn.model_selection import KFold
 import torch.nn as nn
 import matplotlib.pyplot as plt
+from background_removal import remove_background_noise, validate_for_wav2vec2, resample_if_needed
+import tempfile
 
 # Define label mapping
 label_map = {
@@ -50,28 +52,64 @@ def load_dataset(csv_file):
     return df
 # Load and preprocess audio
 def preprocess_audio(file_path, start_time, end_time, max_length=16000):
+    """Updated to include background noise removal with proper file handling and format conversion"""
     # First, get the sample rate
     metadata = torchaudio.info(file_path)
     sr = metadata.sample_rate
-    # Now load the audio with the correct frame offset and number of frames
-    audio, sr = torchaudio.load(file_path, 
-                                frame_offset=int(start_time * sr), 
-                                num_frames=int((end_time - start_time) * sr))
     
-    if sr != 16000:
-        audio = torchaudio.functional.resample(audio, sr, 16000)
-    
-    # Convert to mono if stereo
-    if audio.shape[0] > 1:
-        audio = torch.mean(audio, dim=0, keepdim=True)
-    
-    # Pad or truncate to max_length
-    if audio.shape[1] < max_length:
-        audio = torch.nn.functional.pad(audio, (0, max_length - audio.shape[1]))
-    else:
-        audio = audio[:, :max_length]
-    
-    return audio.squeeze().numpy()
+    try:
+        # Create temporary files with unique names
+        with tempfile.NamedTemporaryFile(suffix='.wav', delete=False) as temp_file:
+            temp_path = temp_file.name
+            
+        cleaned_temp = temp_path.replace('.wav', '_cleaned.wav')
+        
+        # Load the specific segment
+        audio, sr = torchaudio.load(file_path, 
+                                  frame_offset=int(start_time * sr), 
+                                  num_frames=int((end_time - start_time) * sr))
+        
+        # Convert to mono first if stereo
+        if audio.shape[0] > 1:
+            audio = torch.mean(audio, dim=0, keepdim=True)
+        
+        # Resample to 16kHz before noise removal
+        if sr != 16000:
+            audio = torchaudio.functional.resample(audio, sr, 16000)
+            sr = 16000
+        
+        # Save the preprocessed segment temporarily
+        torchaudio.save(temp_path, audio, sr)
+        
+        # Remove background noise
+        remove_background_noise(temp_path, cleaned_temp)
+        
+        # Load the cleaned audio
+        audio, sr = torchaudio.load(cleaned_temp)
+        
+        # Pad or truncate to max_length
+        if audio.shape[1] < max_length:
+            audio = torch.nn.functional.pad(audio, (0, max_length - audio.shape[1]))
+        else:
+            audio = audio[:, :max_length]
+        
+        return audio.squeeze().numpy()
+        
+    finally:
+        # Clean up temporary files in finally block to ensure cleanup
+        try:
+            if os.path.exists(temp_path):
+                os.close(os.open(temp_path, os.O_RDONLY))  # Close any open handles
+                os.unlink(temp_path)
+        except Exception as e:
+            print(f"Warning: Could not delete temporary file {temp_path}: {e}")
+            
+        try:
+            if os.path.exists(cleaned_temp):
+                os.close(os.open(cleaned_temp, os.O_RDONLY))  # Close any open handles
+                os.unlink(cleaned_temp)
+        except Exception as e:
+            print(f"Warning: Could not delete temporary file {cleaned_temp}: {e}")
 # Prepare dataset for Hugging Face Trainer
 def prepare_dataset(df, feature_extractor):
     def process_example(example):
@@ -92,9 +130,10 @@ def prepare_dataset(df, feature_extractor):
         start_time = max(0, example['Start Time (s)'] - padding)
         end_time = min(example['End Time (s)'] + padding, audio_length)
         
+        # Process audio with background noise removal
         audio = preprocess_audio(file_path, start_time, end_time)
         
-        # Apply feature extractor directly (no augmentation for now)
+        # Apply feature extractor
         inputs = feature_extractor(
             audio, 
             sampling_rate=16000, 
@@ -102,7 +141,6 @@ def prepare_dataset(df, feature_extractor):
             padding=True
         )
         
-        # Return a single example instead of a list
         return {
             'input_values': inputs.input_values.squeeze().numpy(),
             'attention_mask': inputs.attention_mask.squeeze().numpy(),
