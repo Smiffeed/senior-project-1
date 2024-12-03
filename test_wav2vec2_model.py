@@ -146,7 +146,7 @@ def main():
     model = model.to(device)
 
     # Test file or directory
-    test_path = "test3.wav"  # Update this to your test audio file or directory
+    test_path = "test.wav"  # Update this to your test audio file or directory
 
     def process_file(file_path):
         segments, duration = preprocess_audio(file_path)

@@ -327,30 +327,7 @@ class ProfanityClassificationHead(nn.Module):
         x = self.dropout(x)
         x = self.out_proj(x)
         return x
-def visualize_k_fold_results(fold_metrics):
-    """
-    Visualize results across different folds
-    """
-    # Extract metrics
-    accuracies = [m['eval_accuracy'] for m in fold_metrics]
-    precisions = [m['eval_precision'] for m in fold_metrics]
-    recalls = [m['eval_recall'] for m in fold_metrics]
-    
-    # Create plot
-    plt.figure(figsize=(10, 6))
-    folds = range(1, len(fold_metrics) + 1)
-    
-    plt.plot(folds, accuracies, 'o-', label='Accuracy')
-    plt.plot(folds, precisions, 's-', label='Precision')
-    plt.plot(folds, recalls, '^-', label='Recall')
-    
-    plt.xlabel('Fold')
-    plt.ylabel('Score')
-    plt.title('Model Performance Across Folds')
-    plt.legend()
-    plt.grid(True)
-    
-    plt.show()
+
 def evaluate_model(model, feature_extractor, test_data):
     predictions = []
     labels = []
