@@ -15,6 +15,7 @@ import torch.nn as nn
 import matplotlib.pyplot as plt
 from background_removal import remove_background_noise, validate_for_wav2vec2, resample_if_needed
 import tempfile
+import seaborn as sns
 
 # Define label mapping
 label_map = {
@@ -22,8 +23,15 @@ label_map = {
     'เย็ดแม่': 1,
     'กู': 2,
     'มึง': 3,
-    'เหี้ย': 4
+    'เหี้ย': 4,
+    'ควย': 5,
+    "สวะ": 6,
+    "หี": 7,
+    'แตด': 8
 }
+
+# Define the number of labels
+num_labels = len(label_map)
 
 # Add this after your imports and before other functions
 class CustomTrainer(Trainer):
@@ -33,9 +41,9 @@ class CustomTrainer(Trainer):
         logits = outputs.logits
         
         # Apply class weights
-        class_weights = torch.tensor([1.0, 1.0, 1.5, 1.5, 1.0]).to(logits.device)
+        class_weights = torch.tensor([1.0] * num_labels).to(logits.device)
         loss_fct = nn.CrossEntropyLoss(weight=class_weights)
-        loss = loss_fct(logits.view(-1, 5), labels.view(-1))
+        loss = loss_fct(logits.view(-1, num_labels), labels.view(-1))
         
         return (loss, outputs) if return_outputs else loss
 
@@ -141,10 +149,16 @@ def prepare_dataset(df, feature_extractor):
             padding=True
         )
         
+        # Check if label is within the expected range
+        label = label_map.get(example['Label'])
+        if label is None or label < 0 or label >= num_labels:
+            print(f"Warning: Label {example['Label']} is out of range or not found in label_map for file {file_path}")
+            return None
+        
         return {
             'input_values': inputs.input_values.squeeze().numpy(),
             'attention_mask': inputs.attention_mask.squeeze().numpy(),
-            'label': label_map[example['Label']]
+            'label': label
         }
     
     dataset = Dataset.from_pandas(df)
@@ -214,7 +228,7 @@ def train_wav2vec2_model(csv_file, model_name, output_dir):
     # Load pre-trained model and feature extractor
     config = Wav2Vec2Config.from_pretrained(
         model_name,
-        num_labels=5,
+        num_labels=num_labels,
         finetuning_task="audio-classification"
     )
     
@@ -238,8 +252,8 @@ def train_wav2vec2_model(csv_file, model_name, output_dir):
     training_args = TrainingArguments(
         output_dir=output_dir,
         num_train_epochs=100,
-        per_device_train_batch_size=4,
-        per_device_eval_batch_size=4,
+        per_device_train_batch_size=2,
+        per_device_eval_batch_size=2,
         gradient_accumulation_steps=2,
         eval_steps=100,
         logging_steps=100,
@@ -251,7 +265,7 @@ def train_wav2vec2_model(csv_file, model_name, output_dir):
         metric_for_best_model="accuracy",
         greater_is_better=True,
         save_total_limit=2,
-        evaluation_strategy="steps",
+        eval_strategy="steps",
     )
     
     # Initialize trainer with custom trainer class
@@ -343,7 +357,7 @@ def evaluate_model(model, feature_extractor, test_data):
     accuracy = sum(p == l for p, l in zip(predictions, labels)) / len(labels)
     
     # Calculate per-class metrics
-    class_names = ['none', 'เย็ดม่', 'กู', 'มึง', 'เหี้ย']
+    class_names = ['none', 'เย็ดม่', 'กู', 'มึง', 'เหี้ย', 'ควย', "สวะ", "หี", 'แตด']
     per_class_metrics = {}
     for i, name in enumerate(class_names):
         class_preds = [p == i for p in predictions]
@@ -357,6 +371,40 @@ def evaluate_model(model, feature_extractor, test_data):
         'accuracy': accuracy,
         'per_class_metrics': per_class_metrics
     }
+def plot_fold_performances(fold_performances):
+    """
+    Plot accuracy metrics for each fold
+    """
+    # Prepare data
+    folds = list(fold_performances.keys())
+    accuracies = [data['accuracy'] for data in fold_performances.values()]
+    
+    # Create figure and axis
+    plt.figure(figsize=(10, 6))
+    
+    # Create bar plot
+    bars = plt.bar(folds, accuracies)
+    
+    # Customize plot
+    plt.title('Model Accuracy Across K-Folds', fontsize=14)
+    plt.xlabel('Fold Number', fontsize=12)
+    plt.ylabel('Accuracy', fontsize=12)
+    plt.ylim(0, 1.0)  # Set y-axis from 0 to 1
+    
+    # Add value labels on top of each bar
+    for bar in bars:
+        height = bar.get_height()
+        plt.text(bar.get_x() + bar.get_width()/2., height,
+                f'{height:.4f}',
+                ha='center', va='bottom')
+    
+    # Add grid for better readability
+    plt.grid(True, axis='y', linestyle='--', alpha=0.7)
+    
+    # Save plot
+    plt.savefig('kfold_accuracy.png')
+    plt.close()
+
 def evaluate_all_folds(test_data, num_folds=5, base_dir='./models/fine_tuned_wav2vec2'):
     fold_performances = {}
     
@@ -381,9 +429,12 @@ def evaluate_all_folds(test_data, num_folds=5, base_dir='./models/fine_tuned_wav
         print(f"Accuracy: {results['accuracy']:.4f}")
         print("Per-class metrics:", results['per_class_metrics'])
     
+    # Plot the fold performances
+    plot_fold_performances(fold_performances)
+    
     # Find best performing fold
     best_fold = max(fold_performances.items(), 
-                   key=lambda x: x[1]['accuracy'])
+                    key=lambda x: x[1]['accuracy'])
     
     print(f"\nBest performing model is Fold {best_fold[0]}")
     print(f"Path: {best_fold[1]['model_path']}")

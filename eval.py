@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import torch
 import torchaudio
 from transformers import Wav2Vec2ForSequenceClassification, Wav2Vec2FeatureExtractor
@@ -110,6 +112,10 @@ def evaluate_model(model_path, eval_csv):
     # Create confusion matrix
     cm = confusion_matrix(true_labels, predicted_labels)
     plt.figure(figsize=(10, 8))
+    
+    # Set font family that supports Thai characters
+    plt.rcParams['font.family'] = 'Cordia New'  # Try this first
+    
     sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
                 xticklabels=class_names,
                 yticklabels=class_names)
@@ -147,7 +153,7 @@ def evaluate_model(model_path, eval_csv):
     }
 
 if __name__ == "__main__":
-    model_path = "./models/fine_tuned_wav2vec2_fold_best"
+    model_path = "./models/fine_tuned_wav2vec2_fold_1"
     eval_csv = "eval.csv"  # Path to your evaluation CSV file
     
     print("Starting evaluation...")
