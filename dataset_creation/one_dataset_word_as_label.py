@@ -37,7 +37,7 @@ def create_dataset(audio_dir, output_csv):
     print(f"Dataset created and saved to {output_csv}")
 
 # Usage
-audio_dir = './dataset'
-output_csv = 'profanity_dataset_word.csv'
+audio_dir = './eval'
+output_csv = 'eval.csv'
 
 create_dataset(audio_dir, output_csv)

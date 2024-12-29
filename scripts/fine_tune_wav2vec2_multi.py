@@ -13,7 +13,7 @@ import librosa
 from sklearn.model_selection import KFold
 import torch.nn as nn
 import matplotlib.pyplot as plt
-from background_removal import remove_background_noise, validate_for_wav2vec2, resample_if_needed
+from audio_processing.background_removal import remove_background_noise, validate_for_wav2vec2, resample_if_needed
 import tempfile
 import seaborn as sns
 
