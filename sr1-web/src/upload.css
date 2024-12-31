@@ -146,3 +146,17 @@
 .download-button:hover {
   background-color: #535bf2;
 }
+
+.audio-player {
+  width: 100%;
+  max-width: 500px;
+  margin: 20px 0;
+}
+
+.result-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+}

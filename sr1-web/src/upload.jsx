@@ -9,6 +9,7 @@ const Upload = () => {
   const [error, setError] = useState(null);
   const [censoredUrl, setCensoredUrl] = useState(null);
   const [processingStatus, setProcessingStatus] = useState('');
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -124,6 +125,15 @@ const Upload = () => {
       {censoredUrl && (
         <div className="result-container">
           <h2>Censored File Ready!</h2>
+          <audio
+            controls
+            className="audio-player"
+            onPlay={() => setIsPlaying(true)}
+            onPause={() => setIsPlaying(false)}
+          >
+            <source src={censoredUrl} type={file?.type || 'audio/mpeg'} />
+            Your browser does not support the audio element.
+          </audio>
           <a href={censoredUrl} download className="download-button">
             Download Censored File
           </a>
