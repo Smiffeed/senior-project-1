@@ -97,7 +97,7 @@ def censor_audio(file_path, detections):
         audio = AudioSegment.from_wav(file_path)
         
         # Check if beep.wav exists
-        beep_path = "beep.wav"
+        beep_path = "./server/beep.wav"
         if not os.path.exists(beep_path):
             raise FileNotFoundError(f"Beep sound file not found at {beep_path}")
             
@@ -134,7 +134,7 @@ def censor_audio(file_path, detections):
 
 def main():
     # Load your fine-tuned model and feature extractor
-    model_path = "./models/fine_tuned_wav2vec2_fold_best"  # Update this to your model's path
+    model_path = "./server/models/fine_tuned_wav2vec2_fold_best"  # Update this to your model's path
     model = Wav2Vec2ForSequenceClassification.from_pretrained(model_path)
     feature_extractor = Wav2Vec2FeatureExtractor.from_pretrained(model_path)
 
@@ -146,7 +146,7 @@ def main():
     model = model.to(device)
 
     # Test file or directory
-    test_path = "test2.wav"  # Update this to your test audio file or directory
+    test_path = "./test/test2.wav"  # Update this to your test audio file or directory
 
     def process_file(file_path):
         segments, duration = preprocess_audio(file_path)
