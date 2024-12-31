@@ -2,6 +2,36 @@ import { useState } from 'react';
 import axios from 'axios';
 import './upload.css';
 
+const Timeline = ({ segments, duration }) => {
+  return (
+    <div className="timeline-container">
+      <div className="timeline">
+        {segments.map((segment, index) => {
+          const [start, end, probability, word] = segment;
+          const startPercent = (start / duration) * 100;
+          const widthPercent = ((end - start) / duration) * 100;
+          
+          return (
+            <div
+              key={index}
+              className="censored-segment"
+              style={{
+                left: `${startPercent}%`,
+                width: `${widthPercent}%`
+              }}
+              title={`${word} (${start.toFixed(2)}s - ${end.toFixed(2)}s)`}
+            />
+          );
+        })}
+      </div>
+      <div className="timeline-labels">
+        <span>0:00</span>
+        <span>{Math.floor(duration / 60)}:{String(Math.floor(duration % 60)).padStart(2, '0')}</span>
+      </div>
+    </div>
+  );
+};
+
 const Upload = () => {
   const [file, setFile] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
@@ -10,6 +40,7 @@ const Upload = () => {
   const [censoredUrl, setCensoredUrl] = useState(null);
   const [processingStatus, setProcessingStatus] = useState('');
   const [isPlaying, setIsPlaying] = useState(false);
+  const [censoredSegments, setCensoredSegments] = useState([]);
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -62,6 +93,7 @@ const Upload = () => {
       // Construct full URL for download
       const downloadUrl = `http://localhost:8080${response.data.censoredUrl}`;
       setCensoredUrl(downloadUrl);
+      setCensoredSegments(response.data.censoredSegments || []);
     } catch (err) {
       setError('Error processing file: ' + (err.response?.data?.message || err.message));
       setProcessingStatus('');
@@ -134,6 +166,27 @@ const Upload = () => {
             <source src={censoredUrl} type={file?.type || 'audio/mpeg'} />
             Your browser does not support the audio element.
           </audio>
+          
+          {censoredSegments.length > 0 && (
+            <div className="censored-info">
+              <h3>Censored Segments</h3>
+              <Timeline 
+                segments={censoredSegments} 
+                duration={document.querySelector('audio')?.duration || 0} 
+              />
+              <div className="censored-list">
+                {censoredSegments.map(([start, end, prob, word], index) => (
+                  <div key={index} className="censored-item">
+                    <span className="censored-word">{word}</span>
+                    <span className="censored-time">
+                      {start.toFixed(2)}s - {end.toFixed(2)}s
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          
           <a href={censoredUrl} download className="download-button">
             Download Censored File
           </a>

@@ -137,6 +137,10 @@ def censor_file():
             processed_filename = f'censored_{filename}'
             processed_path = os.path.join(PROCESSED_FOLDER, processed_filename)
             
+            # Remove existing file if it exists
+            if os.path.exists(processed_path):
+                os.remove(processed_path)
+            
             # If it's an audio file, move it to processed folder
             if temp_path == audio_path:
                 os.rename(censored_path, processed_path)
@@ -152,9 +156,16 @@ def censor_file():
                 censored_audio.close()
                 return_path = output_path
 
+            # Convert numpy float32 to regular Python float for JSON serialization
+            json_merged_results = [
+                (float(start), float(end), float(prob), word)
+                for start, end, prob, word in merged_results
+            ]
+
             # Return the URL to download the censored file
             return jsonify({
-                'censoredUrl': f'/download/{os.path.basename(return_path)}'
+                'censoredUrl': f'/download/{os.path.basename(return_path)}',
+                'censoredSegments': json_merged_results  # Now contains regular Python floats
             })
         else:
             # If no profanity detected, just copy the original file
