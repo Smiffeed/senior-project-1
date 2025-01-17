@@ -13,7 +13,6 @@ import librosa
 from sklearn.model_selection import KFold
 import torch.nn as nn
 import matplotlib.pyplot as plt
-from audio_processing.background_removal import remove_background_noise, validate_for_wav2vec2, resample_if_needed
 import tempfile
 import seaborn as sns
 
@@ -60,64 +59,31 @@ def load_dataset(csv_file):
     return df
 # Load and preprocess audio
 def preprocess_audio(file_path, start_time, end_time, max_length=16000):
-    """Updated to include background noise removal with proper file handling and format conversion"""
-    # First, get the sample rate
+    """Load and preprocess audio segment"""
+    # Get the sample rate
     metadata = torchaudio.info(file_path)
     sr = metadata.sample_rate
     
-    try:
-        # Create temporary files with unique names
-        with tempfile.NamedTemporaryFile(suffix='.wav', delete=False) as temp_file:
-            temp_path = temp_file.name
-            
-        cleaned_temp = temp_path.replace('.wav', '_cleaned.wav')
-        
-        # Load the specific segment
-        audio, sr = torchaudio.load(file_path, 
-                                  frame_offset=int(start_time * sr), 
-                                  num_frames=int((end_time - start_time) * sr))
-        
-        # Convert to mono first if stereo
-        if audio.shape[0] > 1:
-            audio = torch.mean(audio, dim=0, keepdim=True)
-        
-        # Resample to 16kHz before noise removal
-        if sr != 16000:
-            audio = torchaudio.functional.resample(audio, sr, 16000)
-            sr = 16000
-        
-        # Save the preprocessed segment temporarily
-        torchaudio.save(temp_path, audio, sr)
-        
-        # Remove background noise
-        remove_background_noise(temp_path, cleaned_temp)
-        
-        # Load the cleaned audio
-        audio, sr = torchaudio.load(cleaned_temp)
-        
-        # Pad or truncate to max_length
-        if audio.shape[1] < max_length:
-            audio = torch.nn.functional.pad(audio, (0, max_length - audio.shape[1]))
-        else:
-            audio = audio[:, :max_length]
-        
-        return audio.squeeze().numpy()
-        
-    finally:
-        # Clean up temporary files in finally block to ensure cleanup
-        try:
-            if os.path.exists(temp_path):
-                os.close(os.open(temp_path, os.O_RDONLY))  # Close any open handles
-                os.unlink(temp_path)
-        except Exception as e:
-            print(f"Warning: Could not delete temporary file {temp_path}: {e}")
-            
-        try:
-            if os.path.exists(cleaned_temp):
-                os.close(os.open(cleaned_temp, os.O_RDONLY))  # Close any open handles
-                os.unlink(cleaned_temp)
-        except Exception as e:
-            print(f"Warning: Could not delete temporary file {cleaned_temp}: {e}")
+    # Load the specific segment
+    audio, sr = torchaudio.load(file_path, 
+                              frame_offset=int(start_time * sr), 
+                              num_frames=int((end_time - start_time) * sr))
+    
+    # Convert to mono if stereo
+    if audio.shape[0] > 1:
+        audio = torch.mean(audio, dim=0, keepdim=True)
+    
+    # Resample to 16kHz if needed
+    if sr != 16000:
+        audio = torchaudio.functional.resample(audio, sr, 16000)
+    
+    # Pad or truncate to max_length
+    if audio.shape[1] < max_length:
+        audio = torch.nn.functional.pad(audio, (0, max_length - audio.shape[1]))
+    else:
+        audio = audio[:, :max_length]
+    
+    return audio.squeeze().numpy()
 # Prepare dataset for Hugging Face Trainer
 def prepare_dataset(df, feature_extractor):
     def process_example(example):
@@ -223,6 +189,21 @@ def collate_fn(batch):
 def train_wav2vec2_model(csv_file, model_name, output_dir):
     # Load dataset
     df = load_dataset(csv_file)
+    
+    # Check class distribution
+    class_counts = df['Label'].value_counts()
+    print("Class distribution:")
+    print(class_counts)
+    
+    # For classes with only one sample, duplicate it
+    for label, count in class_counts.items():
+        if count < 2:
+            # Find the row with this label
+            row_to_duplicate = df[df['Label'] == label].iloc[0]
+            # Add it to the dataframe again
+            df = pd.concat([df, pd.DataFrame([row_to_duplicate])], ignore_index=True)
+    
+    # Now perform the train-test split
     train_df, val_df = train_test_split(df, test_size=0.2, random_state=42, stratify=df['Label'])
     
     # Load pre-trained model and feature extractor
@@ -443,9 +424,9 @@ def evaluate_all_folds(test_data, num_folds=5, base_dir='./models/fine_tuned_wav
     return best_fold[1]['model_path']
 
 if __name__ == "__main__":
-    csv_file = 'profanity_dataset_word.csv'
+    csv_file = './csv/profanity_dataset_word.csv'
     model_name = "airesearch/wav2vec2-large-xlsr-53-th"
-    output_dir = './models/fine_tuned_wav2vec2'
+    output_dir = './models/clear_audio_train'
     
     # Load the dataset first
     df = load_dataset(csv_file)
