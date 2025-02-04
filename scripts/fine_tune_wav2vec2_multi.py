@@ -34,7 +34,7 @@ num_labels = len(label_map)
 
 # Add this after your imports and before other functions
 class CustomTrainer(Trainer):
-    def compute_loss(self, model, inputs, return_outputs=False):
+    def compute_loss(self, model, inputs, return_outputs=False, num_items_in_batch=None):
         labels = inputs.pop("labels")
         outputs = model(**inputs)
         logits = outputs.logits
@@ -99,8 +99,6 @@ def prepare_dataset(df, feature_extractor):
             
         # Add padding around the profanity segments
         padding = 0.2  # Increase from 0.1 to 0.2 seconds
-        if example['Label'] in ['กู', 'มึง']:  # Special handling for short words
-            padding = 0.3  # Even more context for single-syllable words
         start_time = max(0, example['Start Time (s)'] - padding)
         end_time = min(example['End Time (s)'] + padding, audio_length)
         
@@ -233,20 +231,25 @@ def train_wav2vec2_model(csv_file, model_name, output_dir):
     training_args = TrainingArguments(
         output_dir=output_dir,
         num_train_epochs=100,
-        per_device_train_batch_size=2,
-        per_device_eval_batch_size=2,
+        per_device_train_batch_size=4,
+        per_device_eval_batch_size=4,
         gradient_accumulation_steps=2,
+        save_strategy="steps",
+        save_steps=100,              # Save every 100 steps
+        logging_dir=f"{output_dir}/logs",
         eval_steps=100,
         logging_steps=100,
-        learning_rate=2e-5,
+        learning_rate=1e-4,
+        save_total_limit=2, 
         warmup_ratio=0.15,
         weight_decay=0.02,
         fp16=True,
         load_best_model_at_end=True,
         metric_for_best_model="accuracy",
         greater_is_better=True,
-        save_total_limit=2,
         eval_strategy="steps",
+        push_to_hub=False,
+        save_on_each_node=True       # Add this line for distributed training
     )
     
     # Initialize trainer with custom trainer class
@@ -424,7 +427,7 @@ def evaluate_all_folds(test_data, num_folds=5, base_dir='./models/fine_tuned_wav
     return best_fold[1]['model_path']
 
 if __name__ == "__main__":
-    csv_file = './csv/profanity_dataset_word.csv'
+    csv_file = './modified_profanity_dataset.csv'
     model_name = "airesearch/wav2vec2-large-xlsr-53-th"
     output_dir = './models/clear_audio_train'
     
