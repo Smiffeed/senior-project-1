@@ -115,8 +115,8 @@ def prepare_dataset(df, feature_extractor):
             
         # Add padding around the profanity segments
         padding = 0.2  # Increase from 0.1 to 0.2 seconds
-        start_time = max(0, example['Start Time (s)'] - padding)
-        end_time = min(example['End Time (s)'] + padding, audio_length)
+        start_time = max(0, example['start_time'] - padding)
+        end_time = min(example['end_time'] + padding, audio_length)
         
         # Process audio with background noise removal
         audio = preprocess_audio(file_path, start_time, end_time)
@@ -130,9 +130,9 @@ def prepare_dataset(df, feature_extractor):
         )
         
         # Check if label is within the expected range
-        label = label_map.get(example['Label'])
+        label = label_map.get(example['label'])
         if label is None or label < 0 or label >= num_labels:
-            print(f"Warning: Label {example['Label']} is out of range or not found in label_map for file {file_path}")
+            print(f"Warning: Label {example['label']} is out of range or not found in label_map for file {file_path}")
             return None
         
         return {
@@ -443,9 +443,9 @@ def evaluate_all_folds(test_data, num_folds=5, base_dir='./models/fine_tuned_wav
     return best_fold[1]['model_path']
 
 if __name__ == "__main__":
-    csv_file = './csv/profanity_dataset_word.csv'
+    csv_file = './csv/combined_dataset.csv'
     model_name = "airesearch/wav2vec2-large-xlsr-53-th"
-    output_dir = './models/clear_audio_train'
+    output_dir = './models/mixed_audio_train'
     
     # Load the dataset first
     df = load_dataset(csv_file)
