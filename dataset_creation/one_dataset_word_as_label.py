@@ -19,15 +19,15 @@ def create_dataset(audio_dir, output_csv):
                     if line.strip():  # Skip empty lines
                         start_time, end_time, word = line.strip().split('\t')
                         dataset.append({
-                            'File Name': audio_path,
-                            'Start Time (s)': float(start_time),
-                            'End Time (s)': float(end_time),
-                            'Label': word,
+                            'file_path': audio_path,
+                            'start_time': float(start_time),
+                            'end_time': float(end_time),
+                            'label': word,
                         })
 
     # Write dataset to CSV file
     with open(output_csv, 'w', newline='', encoding='utf-8') as csvfile:
-        fieldnames = ['File Name', 'Start Time (s)', 'End Time (s)', 'Label']
+        fieldnames = ['file_path', 'start_time', 'end_time', 'label']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         
         writer.writeheader()
