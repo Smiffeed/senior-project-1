@@ -134,7 +134,7 @@ def censor_audio(file_path, detections):
 
 def main():
     # Load your fine-tuned model and feature extractor
-    model_path = "./server/models/fine_tuned_wav2vec2_fold_best"  # Update this to your model's path
+    model_path = "./server/models/clear_audio_train_fold_5"  # Update this to your model's path
     model = Wav2Vec2ForSequenceClassification.from_pretrained(model_path)
     feature_extractor = Wav2Vec2FeatureExtractor.from_pretrained(model_path)
 
@@ -146,14 +146,14 @@ def main():
     model = model.to(device)
 
     # Test file or directory
-    test_path = "./test/test2.wav"  # Update this to your test audio file or directory
+    test_path = "./eval_syn/กู (เอไอ4).wav"  # Update this to your test audio file or directory
 
     def process_file(file_path):
         segments, duration = preprocess_audio(file_path)
         results = []
         
         # Labels matching the fine-tuned model
-        labels = ["none", "เย็ดแม่", "กู", "มึง", "เหี้ย"]
+        labels = ["none", "เย็ดแม่", "กู", "มึง", "เหี้ย", "ควย", "สวะ", "หี", "แตด"]
         
         for i, segment in enumerate(segments):
             prediction, probabilities = predict(model, feature_extractor, segment)

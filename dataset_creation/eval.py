@@ -17,6 +17,7 @@ label_map = {
     'เย็ดแม่': 1,
     'กู': 2,
     'มึง': 3,
+    'เหี้ย': 4,
 }
 
 def load_audio_segment(file_path, start_time, end_time, feature_extractor):
@@ -71,6 +72,7 @@ def evaluate_model(model_path, eval_csv):
     # Process each row in the CSV
     for _, row in tqdm(df.iterrows(), total=len(df)):
         if row['Label'] not in label_map:
+            print(f"Skipping unknown label: {row['Label']}")
             continue
             
         try:
@@ -91,9 +93,15 @@ def evaluate_model(model_path, eval_csv):
                 prediction = torch.argmax(logits, dim=-1)
                 confidence = torch.max(probs, dim=-1)[0]
                 
-            true_labels.append(label_map[row['Label']])
-            predicted_labels.append(prediction.item())
-            confidences.append(confidence.item())
+                # Ensure prediction is within valid range
+                pred_idx = prediction.item()
+                if pred_idx >= len(label_map):
+                    print(f"Warning: Invalid prediction index {pred_idx}, defaulting to 'none'")
+                    pred_idx = 0  # Default to 'none' class
+                
+                true_labels.append(label_map[row['Label']])
+                predicted_labels.append(pred_idx)
+                confidences.append(confidence.item())
             
         except Exception as e:
             print(f"Error processing {row['File Name']}: {e}")
@@ -107,14 +115,15 @@ def evaluate_model(model_path, eval_csv):
     class_names = list(label_map.keys())
     report = classification_report(true_labels, predicted_labels, 
                                  target_names=class_names, 
-                                 digits=4)
+                                 digits=4,
+                                 zero_division=0)  # Added zero_division parameter
     
     # Create confusion matrix
     cm = confusion_matrix(true_labels, predicted_labels)
     plt.figure(figsize=(10, 8))
     
     # Set font family that supports Thai characters
-    plt.rcParams['font.family'] = 'Cordia New'  # Try this first
+    plt.rcParams['font.family'] = 'Cordia New'
     
     sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
                 xticklabels=class_names,
@@ -128,7 +137,8 @@ def evaluate_model(model_path, eval_csv):
     # Calculate average confidence per class
     class_confidences = {class_name: [] for class_name in class_names}
     for pred, conf in zip(predicted_labels, confidences):
-        class_confidences[class_names[pred]].append(conf)
+        class_name = class_names[pred]  # This should now be safe
+        class_confidences[class_name].append(conf)
     
     avg_confidences = {class_name: np.mean(confs) if confs else 0 
                       for class_name, confs in class_confidences.items()}
@@ -153,8 +163,8 @@ def evaluate_model(model_path, eval_csv):
     }
 
 if __name__ == "__main__":
-    model_path = "./models/fine_tuned_wav2vec2_fold_1"
-    eval_csv = "eval.csv"  # Path to your evaluation CSV file
+    model_path = "./models/clear_audio_train_fold_5"
+    eval_csv = "./csv/eval.csv"  # Path to your evaluation CSV file
     
     print("Starting evaluation...")
     results = evaluate_model(model_path, eval_csv)

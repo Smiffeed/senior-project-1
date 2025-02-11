@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Load the CSV file
-df = pd.read_csv('profanity_dataset_word.csv')
+df = pd.read_csv('./csv/profanity_dataset_word.csv')
 
 # Count the occurrences of each word
 word_counts = df['Label'].value_counts()

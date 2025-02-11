@@ -37,4 +37,4 @@ def check_missing_files(csv_path):
     return missing_files, existing_files
 
 # Usage
-missing_files, existing_files = check_missing_files('profanity_dataset_word.csv')
+missing_files, existing_files = check_missing_files('./csv/profanity_dataset_word.csv')

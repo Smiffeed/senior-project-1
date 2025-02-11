@@ -38,6 +38,6 @@ def create_dataset(audio_dir, output_csv):
 
 # Usage
 audio_dir = './eval'
-output_csv = 'eval.csv'
+output_csv = './csv/eval.csv'
 
 create_dataset(audio_dir, output_csv)

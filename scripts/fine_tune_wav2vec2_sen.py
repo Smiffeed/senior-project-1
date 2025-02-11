@@ -59,7 +59,7 @@ def load_dataset(csv_file):
     return df
 # Load and preprocess audio
 def preprocess_audio(file_path, start_time, end_time, max_length=16000):
-    """Load and preprocess audio segment"""
+    """Load and preprocess audio segment with basic noise reduction"""
     # Get the sample rate
     metadata = torchaudio.info(file_path)
     sr = metadata.sample_rate
@@ -73,9 +73,25 @@ def preprocess_audio(file_path, start_time, end_time, max_length=16000):
     if audio.shape[0] > 1:
         audio = torch.mean(audio, dim=0, keepdim=True)
     
+    # Convert to numpy array for processing
+    audio_np = audio.squeeze().numpy()
+    
+    # Apply pre-emphasis filter to reduce noise
+    audio_np = librosa.effects.preemphasis(audio_np)
+    
+    # Simple noise reduction by removing low amplitude noise
+    noise_threshold = 0.005  # Adjust this value based on your needs
+    audio_np = np.where(np.abs(audio_np) < noise_threshold, 0, audio_np)
+    
+    # Convert back to torch tensor
+    audio = torch.from_numpy(audio_np).unsqueeze(0)
+    
     # Resample to 16kHz if needed
     if sr != 16000:
         audio = torchaudio.functional.resample(audio, sr, 16000)
+    
+    # Normalize audio
+    audio = (audio - audio.mean()) / (audio.std() + 1e-8)
     
     # Pad or truncate to max_length
     if audio.shape[1] < max_length:
@@ -249,7 +265,7 @@ def train_wav2vec2_model(csv_file, model_name, output_dir):
         greater_is_better=True,
         eval_strategy="steps",
         push_to_hub=False,
-        save_on_each_node=True       # Add this line for distributed training
+        save_on_each_node=False      # Changed to False to reduce disk writes
     )
     
     # Initialize trainer with custom trainer class
@@ -427,7 +443,7 @@ def evaluate_all_folds(test_data, num_folds=5, base_dir='./models/fine_tuned_wav
     return best_fold[1]['model_path']
 
 if __name__ == "__main__":
-    csv_file = './modified_profanity_dataset.csv'
+    csv_file = './csv/profanity_dataset_word.csv'
     model_name = "airesearch/wav2vec2-large-xlsr-53-th"
     output_dir = './models/clear_audio_train'
     
