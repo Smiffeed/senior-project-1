@@ -205,7 +205,7 @@ def train_wav2vec2_model(csv_file, model_name, output_dir):
     df = load_dataset(csv_file)
     
     # Check class distribution
-    class_counts = df['Label'].value_counts()
+    class_counts = df['label'].value_counts()
     print("Class distribution:")
     print(class_counts)
     
@@ -213,12 +213,12 @@ def train_wav2vec2_model(csv_file, model_name, output_dir):
     for label, count in class_counts.items():
         if count < 2:
             # Find the row with this label
-            row_to_duplicate = df[df['Label'] == label].iloc[0]
+            row_to_duplicate = df[df['label'] == label].iloc[0]
             # Add it to the dataframe again
             df = pd.concat([df, pd.DataFrame([row_to_duplicate])], ignore_index=True)
     
     # Now perform the train-test split
-    train_df, val_df = train_test_split(df, test_size=0.2, random_state=42, stratify=df['Label'])
+    train_df, val_df = train_test_split(df, test_size=0.2, random_state=42, stratify=df['label'])
     
     # Load pre-trained model and feature extractor
     config = Wav2Vec2Config.from_pretrained(
@@ -357,7 +357,7 @@ def evaluate_model(model, feature_extractor, test_data):
     accuracy = sum(p == l for p, l in zip(predictions, labels)) / len(labels)
     
     # Calculate per-class metrics
-    class_names = ['none', 'เย็ดม่', 'กู', 'มึง', 'เหี้ย', 'ควย', "สวะ", "หี", 'แตด']
+    class_names = ['none', 'เย็ดแม่', 'กู', 'มึง', 'เหี้ย', 'ควย', "สวะ", "หี", 'แตด']
     per_class_metrics = {}
     for i, name in enumerate(class_names):
         class_preds = [p == i for p in predictions]
