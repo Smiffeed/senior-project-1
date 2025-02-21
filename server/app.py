@@ -11,6 +11,7 @@ import numpy as np
 import utils
 import logging
 import torchaudio
+import librosa
 
 app = Flask(__name__)
 CORS(app)
@@ -31,7 +32,7 @@ tempfile.tempdir = TEMP_FOLDER
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Load the model and feature extractor
-MODEL_PATH = './models/fine_tuned_wav2vec2_fold_best'
+MODEL_PATH = './models/humanv1'
 model = Wav2Vec2ForSequenceClassification.from_pretrained(MODEL_PATH)
 feature_extractor = Wav2Vec2FeatureExtractor.from_pretrained(MODEL_PATH)
 model.eval()
@@ -48,20 +49,40 @@ def extract_audio(file_path):
 
 def preprocess_audio(file_path, segment_length=16000, hop_length=8000):
     """
+    Preprocess audio using the same techniques as in fine-tuning.
     segment_length=16000 represents 1 second at 16kHz
     hop_length=8000 represents 0.5 second overlap
     """
-    audio, sr = torchaudio.load(file_path)
+    # Get the sample rate
+    metadata = torchaudio.info(file_path)
+    sr = metadata.sample_rate
     
-    if sr != 16000:
-        audio = torchaudio.functional.resample(audio, sr, 16000)
+    # Load the audio
+    audio, sr = torchaudio.load(file_path)
     
     # Convert to mono if stereo
     if audio.shape[0] > 1:
         audio = torch.mean(audio, dim=0, keepdim=True)
     
+    # Convert to numpy array for processing
+    audio_np = audio.squeeze().numpy()
+    
+    # Apply pre-emphasis filter to reduce noise
+    audio_np = librosa.effects.preemphasis(audio_np)
+    
+    # Simple noise reduction by removing low amplitude noise
+    noise_threshold = 0.005
+    audio_np = np.where(np.abs(audio_np) < noise_threshold, 0, audio_np)
+    
+    # Convert back to torch tensor
+    audio = torch.from_numpy(audio_np).unsqueeze(0)
+    
+    # Resample to 16kHz if needed
+    if sr != 16000:
+        audio = torchaudio.functional.resample(audio, sr, 16000)
+    
     # Normalize audio
-    audio = (audio - audio.mean()) / (audio.std() + 1e-7)
+    audio = (audio - audio.mean()) / (audio.std() + 1e-8)
     
     audio = audio.squeeze().numpy()
     
@@ -101,7 +122,7 @@ def censor_file():
         logging.debug(f"Processing {len(segments)} segments")
         
         # Labels matching the fine-tuned model
-        labels = ["none", "เย็ดแม่", "กู", "มึง", "เหี้ย"]
+        labels = ["none", "เย็ดแม่", "กู", "มึง", "เหี้ย", "ควย", "สวะ", "หี", "แตด"]
         
         for i, segment in enumerate(segments):
             prediction, probabilities = utils.predict(model, feature_extractor, segment)
