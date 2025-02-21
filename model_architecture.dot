@@ -1,0 +1,26 @@
+digraph G {
+    rankdir=TB;
+    node [shape=record, style=filled, fillcolor=lightgrey];
+    
+    input_layer [label="input_1: InputLayer|{input:|output:}|{[(None, 16000)]|[(None, 16000)]}"];
+    
+    feature_encoder [label="feature_encoder: Wav2Vec2FeatureEncoder|{input:|output:}|{(None, 16000)|(None, 49, 512)}"];
+    
+    feature_proj [label="feature_projection: Wav2Vec2FeatureProjection|{input:|output:}|{(None, 49, 512)|(None, 49, 1024)}"];
+    
+    transformer [label="transformer: Wav2Vec2Encoder|{input:|output:}|{(None, 49, 1024)|(None, 49, 1024)}"];
+    
+    pooling [label="mean_pooling: MeanPooling|{input:|output:}|{(None, 49, 1024)|(None, 1024)}"];
+    
+    dropout [label="dropout: Dropout|{input:|output:}|{(None, 1024)|(None, 1024)}"];
+    
+    classifier [label="classifier: Dense|{input:|output:}|{(None, 1024)|(None, 9)}"];
+
+    # Connect the nodes
+    input_layer -> feature_encoder;
+    feature_encoder -> feature_proj;
+    feature_proj -> transformer;
+    transformer -> pooling;
+    pooling -> dropout;
+    dropout -> classifier;
+}
