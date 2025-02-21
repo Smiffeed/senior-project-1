@@ -1,17 +1,17 @@
 import pandas as pd
 
 # Load the CSV file
-df = pd.read_csv('./csv/profanity_dataset_word.csv')
+df = pd.read_csv('./csv/main.csv')
 
 # Count the occurrences of each word
-word_counts = df['Label'].value_counts()
+word_counts = df['label'].value_counts()
 
 # Count the number of unique datasets
-dataset_counts = df['File Name'].nunique()
+dataset_counts = df['file_path'].nunique()
 
 # Calculate the total time for each word
-df['Duration'] = df['End Time (s)'] - df['Start Time (s)']
-total_time_per_word = df.groupby('Label')['Duration'].sum()
+df['Duration'] = df['end_time'] - df['start_time']
+total_time_per_word = df.groupby('label')['Duration'].sum()
 
 print("Word Counts:")
 print(word_counts)
