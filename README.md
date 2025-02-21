@@ -32,8 +32,6 @@ The system processes video files to detect and censor Thai profanity in audio co
 7. Post-processing:
    - Implement a method to censor or bleep out the identified profanity.
 
-ผม train A.I. โดยใช้หลักการของอาจารย์ waveform analysis approach ที่จะทำการตรวจจับคำทีละคำในรูปแบบของคลื่นเสียงโดยตรงตามที่อาจารย์ให้คำแนะนำซื้งเท่าที่ผมหายังไม่มี model ภาษาไทย และ model ส่วนใหญ่เป็น text ครับ ผมเลยพยายาม train A.I. โดยใช้ model ที่มีอยู่แล้วอย่าง SpeechBrain ระหว่างนี้ที่รอ A.I. train ผมก็หาวิธีการอื่นเพิ่มเติมเหมือนกันรวมถึงลองวิธี speech to text ด้วยครับ ซึ่ง data ที่ผมใช้นั้นยังมีแค่เสียงของผม เพราะว่าอยากทราบในเบื่องต้นก่อนว่าการที่ train ผ่านคนๆ คนเดียว มันได้ผลลัพธ์ที่ตรงตามที่ต้องการก่อนที่จะขอรวบรวม data จากคนอื่นๆ เพิ่มเติมครับ อันนี้เป็น progression ที่ผมไปศึกษาและลองทำมาทั้งหมดครับ
-
 So, I am doing first one is waveform analysis approach which will detect word by word in audio format directly as you advised. 
 
 ## Technologies Used
