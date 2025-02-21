@@ -16,23 +16,27 @@ import matplotlib.pyplot as plt
 import tempfile
 import seaborn as sns
 
+# Set these environment variables before running your Python script
+os.environ["TRANSFORMERS_VERBOSITY"] = "info"
+os.environ["DATASETS_VERBOSITY"] = "info"
+os.environ["PYTHONPATH"] = "."
+
 # Define label mapping
 label_map = {
     'none': 0,
-    'เย็ดแม่': 1,
+    'เย็ด': 1,
     'กู': 2,
     'มึง': 3,
     'เหี้ย': 4,
     'ควย': 5,
-    "สวะ": 6,
-    "หี": 7,
+    'สวะ': 6,
+    'หี': 7,
     'แตด': 8
 }
 
 # Define the number of labels
 num_labels = len(label_map)
 
-# Add this after your imports and before other functions
 class CustomTrainer(Trainer):
     def compute_loss(self, model, inputs, return_outputs=False, num_items_in_batch=None):
         labels = inputs.pop("labels")
@@ -103,7 +107,7 @@ def preprocess_audio(file_path, start_time, end_time, max_length=16000):
 # Prepare dataset for Hugging Face Trainer
 def prepare_dataset(df, feature_extractor):
     def process_example(example):
-        file_path = example['File Name'].replace('\\', '/')
+        file_path = example['file_path'].replace('\\', '/')
         
         if not os.path.exists(file_path):
             print(f"File not found: {file_path}")
@@ -251,31 +255,34 @@ def train_wav2vec2_model(csv_file, model_name, output_dir):
         per_device_eval_batch_size=4,
         gradient_accumulation_steps=2,
         save_strategy="steps",
-        save_steps=100,              # Save every 100 steps
+        save_steps=100,
         logging_dir=f"{output_dir}/logs",
         eval_steps=100,
         logging_steps=100,
-        learning_rate=1e-4,
-        save_total_limit=2, 
-        warmup_ratio=0.15,
-        weight_decay=0.02,
+        learning_rate=2e-5,
+        save_total_limit=2,
+        warmup_ratio=0.1,
+        weight_decay=0.01,
         fp16=True,
         load_best_model_at_end=True,
         metric_for_best_model="accuracy",
         greater_is_better=True,
         eval_strategy="steps",
         push_to_hub=False,
-        save_on_each_node=False      # Changed to False to reduce disk writes
+        save_on_each_node=False,
+        max_steps=14700,
+        disable_tqdm=False,
+        remove_unused_columns=True,
     )
     
-    # Initialize trainer with custom trainer class
+    # Initialize trainer with modified early stopping
     trainer = CustomTrainer(
         model=model,
         args=training_args,
         train_dataset=train_dataset,
         eval_dataset=val_dataset,
         compute_metrics=compute_metrics,
-        callbacks=[EarlyStoppingCallback(early_stopping_patience=3)],
+        callbacks=[EarlyStoppingCallback(early_stopping_patience=10)],
         data_collator=collate_fn,
     )
     
@@ -286,43 +293,107 @@ def train_wav2vec2_model(csv_file, model_name, output_dir):
     trainer.save_model(output_dir)
     feature_extractor.save_pretrained(output_dir)
 def augment_audio(audio):
+    """
+    Apply complex augmentation techniques to audio data
+    """
     augmented = audio.copy()
-    # Add random noise
-    noise_level = np.random.uniform(0.001, 0.005)
-    noise = np.random.normal(0, noise_level, len(audio))
-    augmented += noise
     
-    # Random time shift
-    shift = np.random.randint(-1000, 1000)
-    augmented = np.roll(augmented, shift)
+    # Random combination of augmentations
+    augmentation_types = np.random.choice([
+        'noise', 'pitch', 'speed', 'reverb', 'time_mask'
+    ], size=np.random.randint(1, 4), replace=False)
     
-    # Random pitch shift
-    pitch_shift = np.random.uniform(-100, 100)
-    augmented = librosa.effects.pitch_shift(augmented, sr=16000, n_steps=pitch_shift)
+    for aug_type in augmentation_types:
+        if aug_type == 'noise':
+            # Add different types of noise
+            noise_type = np.random.choice(['gaussian', 'pink', 'uniform'])
+            if noise_type == 'gaussian':
+                noise_level = np.random.uniform(0.001, 0.005)
+                noise = np.random.normal(0, noise_level, len(augmented))
+            elif noise_type == 'pink':
+                noise = np.random.uniform(-0.003, 0.003, len(augmented))
+                noise = librosa.core.pink_noise(len(augmented)) * noise_level
+            else:  # uniform
+                noise = np.random.uniform(-0.002, 0.002, len(augmented))
+            augmented += noise
+            
+        elif aug_type == 'pitch':
+            # More varied pitch shifting
+            pitch_shift = np.random.uniform(-300, 300)
+            augmented = librosa.effects.pitch_shift(
+                augmented, 
+                sr=16000, 
+                n_steps=pitch_shift/100,
+                bins_per_octave=200
+            )
+            
+        elif aug_type == 'speed':
+            # Time stretching with variable rates
+            speed_factor = np.random.uniform(0.8, 1.2)
+            augmented = librosa.effects.time_stretch(augmented, rate=speed_factor)
+            
+        elif aug_type == 'reverb':
+            # Add simple reverb effect
+            reverb_delay = np.random.randint(1000, 3000)
+            decay = np.random.uniform(0.1, 0.5)
+            reverb = np.exp(-decay * np.linspace(0, 1, reverb_delay))
+            augmented = np.convolve(augmented, reverb, mode='full')[:len(augmented)]
+            
+        elif aug_type == 'time_mask':
+            # Random time masking
+            mask_size = int(len(augmented) * np.random.uniform(0.05, 0.15))
+            mask_start = np.random.randint(0, len(augmented) - mask_size)
+            augmented[mask_start:mask_start + mask_size] = 0
     
+    # Normalize after augmentation
+    augmented = augmented / (np.max(np.abs(augmented)) + 1e-6)
     return augmented
+
 def augment_short_words(audio, label):
     """
-    Special augmentation for short words
+    Enhanced augmentation specifically for short words
     """
     if label in ['กู', 'มึง']:
         augmented = []
         # Create multiple variations
-        for _ in range(3):  # Create 3 variations
+        for _ in range(3):
             aug_audio = audio.copy()
             
-            # Slight volume variations
+            # Apply chain of augmentations
+            # 1. Volume variation
             volume_factor = np.random.uniform(0.8, 1.2)
             aug_audio = aug_audio * volume_factor
             
-            # Small time stretching
-            stretch_factor = np.random.uniform(0.9, 1.1)
+            # 2. Time stretching with controlled range
+            stretch_factor = np.random.uniform(0.85, 1.15)
             aug_audio = librosa.effects.time_stretch(aug_audio, rate=stretch_factor)
             
-            # Slight pitch variations
-            n_steps = np.random.uniform(-1, 1)
-            aug_audio = librosa.effects.pitch_shift(aug_audio, sr=16000, n_steps=n_steps)
+            # 3. Pitch shifting with finer control
+            n_steps = np.random.uniform(-2, 2)
+            aug_audio = librosa.effects.pitch_shift(
+                aug_audio, 
+                sr=16000, 
+                n_steps=n_steps,
+                bins_per_octave=200
+            )
             
+            # 4. Add subtle background noise
+            noise_level = np.random.uniform(0.0005, 0.002)
+            noise = np.random.normal(0, noise_level, len(aug_audio))
+            aug_audio += noise
+            
+            # 5. Optional frequency masking
+            if np.random.random() < 0.5:
+                mask_size = int(len(aug_audio) * np.random.uniform(0.05, 0.1))
+                mask_start = np.random.randint(0, len(aug_audio) - mask_size)
+                aug_audio[mask_start:mask_start + mask_size] *= np.random.uniform(0.1, 0.3)
+            
+            # 6. Optional time reversal
+            if np.random.random() < 0.2:
+                aug_audio = np.flip(aug_audio)
+            
+            # Normalize
+            aug_audio = aug_audio / (np.max(np.abs(aug_audio)) + 1e-6)
             augmented.append(aug_audio)
         
         return augmented
@@ -357,7 +428,7 @@ def evaluate_model(model, feature_extractor, test_data):
     accuracy = sum(p == l for p, l in zip(predictions, labels)) / len(labels)
     
     # Calculate per-class metrics
-    class_names = ['none', 'เย็ดแม่', 'กู', 'มึง', 'เหี้ย', 'ควย', "สวะ", "หี", 'แตด']
+    class_names = ['none', 'เย็ด', 'กู', 'มึง', 'เหี้ย', 'ควย', "สวะ", "หี", 'แตด']
     per_class_metrics = {}
     for i, name in enumerate(class_names):
         class_preds = [p == i for p in predictions]
@@ -407,6 +478,9 @@ def plot_fold_performances(fold_performances):
 
 def evaluate_all_folds(test_data, num_folds=5, base_dir='./models/fine_tuned_wav2vec2'):
     fold_performances = {}
+    best_accuracy = 0
+    best_model = None
+    best_feature_extractor = None
     
     for fold in range(1, num_folds + 1):
         model_path = f'{base_dir}_fold_{fold}'
@@ -425,6 +499,13 @@ def evaluate_all_folds(test_data, num_folds=5, base_dir='./models/fine_tuned_wav
             'model_path': model_path
         }
         
+        # Track best model
+        if results['accuracy'] > best_accuracy:
+            best_accuracy = results['accuracy']
+            best_model = model
+            best_feature_extractor = feature_extractor
+            best_fold = fold
+        
         print(f"\nFold {fold} Performance:")
         print(f"Accuracy: {results['accuracy']:.4f}")
         print("Per-class metrics:", results['per_class_metrics'])
@@ -432,20 +513,22 @@ def evaluate_all_folds(test_data, num_folds=5, base_dir='./models/fine_tuned_wav
     # Plot the fold performances
     plot_fold_performances(fold_performances)
     
-    # Find best performing fold
-    best_fold = max(fold_performances.items(), 
-                    key=lambda x: x[1]['accuracy'])
+    print(f"\nBest performing model is Fold {best_fold}")
+    print(f"Path: {fold_performances[best_fold]['model_path']}")
+    print(f"Accuracy: {best_accuracy:.4f}")
     
-    print(f"\nBest performing model is Fold {best_fold[0]}")
-    print(f"Path: {best_fold[1]['model_path']}")
-    print(f"Accuracy: {best_fold[1]['accuracy']:.4f}")
+    # Save the best model to a dedicated "best_model" directory
+    best_model_dir = f'{base_dir}_best_model'
+    best_model.save_pretrained(best_model_dir)
+    best_feature_extractor.save_pretrained(best_model_dir)
+    print(f"Best model saved to: {best_model_dir}")
     
-    return best_fold[1]['model_path']
+    return best_model_dir
 
 if __name__ == "__main__":
-    csv_file = './csv/combined_dataset.csv'
+    csv_file = './csv/main.csv'
     model_name = "airesearch/wav2vec2-large-xlsr-53-th"
-    output_dir = './models/mixed_audio_train'
+    output_dir = './models/audio_train'
     
     # Load the dataset first
     df = load_dataset(csv_file)
