@@ -14,10 +14,14 @@ import pandas as pd
 # Define label mapping (same as in training)
 label_map = {
     'none': 0,
-    'เย็ดแม่': 1,
+    'เย็ด': 1,
     'กู': 2,
     'มึง': 3,
     'เหี้ย': 4,
+    'ควย': 5,
+    'สวะ': 6,
+    'หี': 7,
+    'แตด': 8
 }
 
 def load_audio_segment(file_path, start_time, end_time, feature_extractor):
@@ -62,8 +66,9 @@ def evaluate_model(model_path, eval_csv):
     model = model.to(device)
     model.eval()
     
-    # Read CSV file
+    # Read CSV file and handle different possible column names
     df = pd.read_csv(eval_csv)
+    print("\nAvailable columns in CSV:", df.columns.tolist())
     
     true_labels = []
     predicted_labels = []
@@ -71,16 +76,16 @@ def evaluate_model(model_path, eval_csv):
     
     # Process each row in the CSV
     for _, row in tqdm(df.iterrows(), total=len(df)):
-        if row['Label'] not in label_map:
-            print(f"Skipping unknown label: {row['Label']}")
+        if row['label'] not in label_map:
+            print(f"Skipping unknown label: {row['label']}")
             continue
             
         try:
             # Load and process audio segment
             inputs = load_audio_segment(
-                row['File Name'],
-                float(row['Start Time (s)']),
-                float(row['End Time (s)']),
+                row['file_path'],
+                float(row['start_time']),
+                float(row['end_time']),
                 feature_extractor
             )
             
@@ -93,18 +98,12 @@ def evaluate_model(model_path, eval_csv):
                 prediction = torch.argmax(logits, dim=-1)
                 confidence = torch.max(probs, dim=-1)[0]
                 
-                # Ensure prediction is within valid range
-                pred_idx = prediction.item()
-                if pred_idx >= len(label_map):
-                    print(f"Warning: Invalid prediction index {pred_idx}, defaulting to 'none'")
-                    pred_idx = 0  # Default to 'none' class
-                
-                true_labels.append(label_map[row['Label']])
-                predicted_labels.append(pred_idx)
+                true_labels.append(label_map[row['label']])
+                predicted_labels.append(prediction.item())
                 confidences.append(confidence.item())
             
         except Exception as e:
-            print(f"Error processing {row['File Name']}: {e}")
+            print(f"Error processing {row['file_path']}: {e}")
             continue
     
     # Check if we have any predictions
@@ -163,7 +162,7 @@ def evaluate_model(model_path, eval_csv):
     }
 
 if __name__ == "__main__":
-    model_path = "./models/clear_audio_train_fold_5"
+    model_path = "./models/humanv1"
     eval_csv = "./csv/eval.csv"  # Path to your evaluation CSV file
     
     print("Starting evaluation...")
