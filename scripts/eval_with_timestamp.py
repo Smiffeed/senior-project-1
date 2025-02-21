@@ -101,8 +101,22 @@ def evaluate_model(model_path, eval_csv_path, output_dir):
     feature_extractor = Wav2Vec2FeatureExtractor.from_pretrained(model_path)
     model.eval()
     
-    # Read CSV file
-    df = pd.read_csv(eval_csv_path)
+    # Read CSV file with explicit encoding and print first few rows for debugging
+    try:
+        df = pd.read_csv(eval_csv_path, encoding='utf-8')
+        print("\nFirst few rows of CSV file:")
+        print(df.head())
+        print("\nCSV columns:", df.columns.tolist())
+        
+        # Check if required columns exist
+        required_columns = ['File Name', 'Start Time (s)', 'End Time (s)', 'Label']
+        missing_columns = [col for col in required_columns if col not in df.columns]
+        if missing_columns:
+            raise ValueError(f"Missing required columns in CSV: {missing_columns}")
+            
+    except Exception as e:
+        print(f"Error reading CSV file: {str(e)}")
+        return
     
     all_predictions = []
     all_true_labels = []
@@ -117,10 +131,17 @@ def evaluate_model(model_path, eval_csv_path, output_dir):
     with torch.no_grad():
         for idx, row in df.iterrows():
             try:
-                file_path = row['File Name'].strip()
+                # Strip whitespace and handle potential NaN values
+                file_path = str(row['File Name']).strip()
+                
+                # Verify file exists
+                if not os.path.exists(file_path):
+                    print(f"Warning: File not found: {file_path}")
+                    continue
+                
                 start_time = float(row['Start Time (s)'])
                 end_time = float(row['End Time (s)'])
-                true_label = row['Label']
+                true_label = str(row['Label']).strip()
                 
                 # Skip if label not in label_map
                 if true_label not in label_map:
@@ -232,7 +253,7 @@ if __name__ == "__main__":
     current_dir = os.path.dirname(os.path.abspath(__file__))
     project_dir = os.path.dirname(current_dir)
     
-    model_path = os.path.join(project_dir, "models", "clear_audio_train_fold_5")  # Update this to your model path
+    model_path = os.path.join(project_dir, "models", "humanv1")  # Update this to your model path
     eval_csv_path = os.path.join(project_dir, "csv", "eval.csv")
     output_dir = os.path.join(project_dir, "evaluation_results")
     

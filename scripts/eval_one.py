@@ -14,7 +14,7 @@ label_map = {
     'มึง': 2,
     'สวะ': 3,
     'หี': 4,
-    'เย็ด': 5,
+    'เย็ดแม่': 5,
     'เหี้ย': 6,
     'แตด': 7
 }
@@ -217,7 +217,7 @@ if __name__ == "__main__":
     setup_thai_font()
     
     # Paths
-    model_path = "./models/wav2vec2_one/fold_1"
+    model_path = "./models/mixed_audio_train_fold_4"
     test_file_path = "./eval_syn"  # Can be a single file or directory
     output_dir = "./evaluation_results"
     

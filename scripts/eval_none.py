@@ -7,6 +7,11 @@ from sklearn.metrics import classification_report, confusion_matrix
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+# Set these environment variables for verbose output
+os.environ["TRANSFORMERS_VERBOSITY"] = "info"
+os.environ["DATASETS_VERBOSITY"] = "info"
+os.environ["PYTHONPATH"] = "."
+
 # Define label mapping (same as training)
 label_map = {
     'none': 0,
@@ -117,8 +122,16 @@ def plot_confusion_matrix(y_true, y_pred, output_dir):
                 bbox_inches='tight')
     plt.close()
 
-def evaluate_model(model_path, test_file_path, output_dir):
-    """Evaluate the model on test data"""
+def evaluate_model(model_path, test_file_path, output_dir, noise_reduce_factor=1.5):
+    """
+    Evaluate the model on test data
+    
+    Args:
+        model_path: Path to the model
+        test_file_path: Path to test file or directory
+        output_dir: Directory to save results
+        noise_reduce_factor: Controls noise reduction strength (higher = more aggressive)
+    """
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
     
@@ -183,6 +196,12 @@ def evaluate_model(model_path, test_file_path, output_dir):
     
     # Generate and save results
     if all_predictions:
+        # Filter out 'none' labels (label_id 0) for accuracy calculation
+        non_none_indices = [i for i, label in enumerate(all_true_labels) if label != 0]
+        filtered_true_labels = [all_true_labels[i] for i in non_none_indices]
+        filtered_predictions = [all_predictions[i] for i in non_none_indices]
+        
+        # Generate full report including 'none'
         report = classification_report(
             all_true_labels,
             all_predictions,
@@ -192,10 +211,14 @@ def evaluate_model(model_path, test_file_path, output_dir):
             zero_division=0
         )
         
+        # Calculate accuracy excluding 'none'
+        non_none_accuracy = (np.array(filtered_predictions) == np.array(filtered_true_labels)).mean() if filtered_true_labels else 0
+        
         # Save results
         with open(os.path.join(output_dir, 'evaluation_results.txt'), 'w', encoding='utf-8') as f:
-            f.write("Classification Report:\n")
+            f.write("Classification Report (Including 'none'):\n")
             f.write(report)
+            f.write(f"\nAccuracy (Excluding 'none'): {non_none_accuracy:.4f}")
             f.write("\n\nDetailed Results:\n")
             for result in results:
                 f.write(f"\nFile: {result['file']}")
@@ -204,11 +227,13 @@ def evaluate_model(model_path, test_file_path, output_dir):
                 f.write(f"\nConfidence: {result['confidence']:.2f}")
                 f.write(f"\nCorrect: {result['correct']}\n")
         
-        print("\n=== Classification Report ===")
+        print("\n=== Classification Report (Including 'none') ===")
         print(report)
         
-        accuracy = (np.array(all_predictions) == np.array(all_true_labels)).mean()
-        print(f"\nOverall Accuracy: {accuracy:.4f}")
+        print(f"\nAccuracy (Excluding 'none'): {non_none_accuracy:.4f}")
+        
+        # Generate confusion matrix
+        plot_confusion_matrix(all_true_labels, all_predictions, output_dir)
     else:
         print("No predictions were made. Check if test files exist and are properly labeled.")
 
@@ -217,7 +242,7 @@ if __name__ == "__main__":
     setup_thai_font()
     
     # Paths
-    model_path = "./models/clear_audio_train_fold_5"
+    model_path = "./models/mixed_audio_train_fold_1"
     test_file_path = "./eval_syn"  # Can be a single file or directory
     output_dir = "./evaluation_results"
     
