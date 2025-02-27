@@ -112,7 +112,7 @@ def main():
     setup_thai_font()
     
     # Load the model
-    model_path = './models/ham_audio'  # Update this path to your best model
+    model_path = './models/humanv3'  # Update this path to your best model
     model = Wav2Vec2ForSequenceClassification.from_pretrained(model_path)
     feature_extractor = Wav2Vec2FeatureExtractor.from_pretrained(model_path)
     
@@ -202,14 +202,26 @@ def main():
     
     # Binary profanity detection metrics with detailed breakdown
     all_results = pd.DataFrame(results)
+    
+    # For each row, determine if it's a true profanity and if the prediction was correct
     all_results['is_true_profanity'] = all_results['true_label'] != 'none'
     all_results['is_predicted_profanity'] = all_results['predicted_label'] != 'none'
+    all_results['is_correct_prediction'] = all_results['true_label'] == all_results['predicted_label']
     
     # Calculate True Positives, False Positives, True Negatives, False Negatives
-    tp = ((all_results['is_true_profanity']) & (all_results['is_predicted_profanity'])).sum()
-    fp = ((~all_results['is_true_profanity']) & (all_results['is_predicted_profanity'])).sum()
-    tn = ((~all_results['is_true_profanity']) & (~all_results['is_predicted_profanity'])).sum()
-    fn = ((all_results['is_true_profanity']) & (~all_results['is_predicted_profanity'])).sum()
+    tp = ((all_results['is_true_profanity']) & 
+          (all_results['is_predicted_profanity']) & 
+          (all_results['is_correct_prediction'])).sum()
+    
+    fp = ((all_results['is_predicted_profanity']) & 
+          (~all_results['is_correct_prediction'])).sum()
+    
+    tn = ((~all_results['is_true_profanity']) & 
+          (~all_results['is_predicted_profanity'])).sum()
+    
+    fn = (all_results['is_true_profanity'] & 
+          (~all_results['is_predicted_profanity'] | 
+           ~all_results['is_correct_prediction'])).sum()
     
     # Calculate balanced accuracy
     sensitivity = tp / (tp + fn) if (tp + fn) > 0 else 0  # True Positive Rate (Recall)
