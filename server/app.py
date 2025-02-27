@@ -122,7 +122,7 @@ def censor_file():
         logging.debug(f"Processing {len(segments)} segments")
         
         # Labels matching the fine-tuned model
-        labels = ["none", "เย็ดแม่", "กู", "มึง", "เหี้ย", "ควย", "สวะ", "หี", "แตด"]
+        labels = ["none", "เย็ด", "กู", "มึง", "เหี้ย", "ควย", "สวะ", "หี", "แตด"]
         
         for i, segment in enumerate(segments):
             prediction, probabilities = utils.predict(model, feature_extractor, segment)
