@@ -1,0 +1,27 @@
+=== Classification Report ===
+                  precision    recall  f1-score   support
+
+            เย็ด     0.0000    0.0000    0.0000        16
+              กู     0.5000    0.0536    0.0968        56
+             มึง     1.0000    0.0800    0.1481        75
+           เหี้ย     1.0000    0.0476    0.0909        42
+             ควย     1.0000    0.0833    0.1538        24
+             สวะ     1.0000    0.1250    0.2222        16
+              หี     0.0000    0.0000    0.0000        43
+             แตด     1.0000    0.1000    0.1818        10
+missed_profanity     0.0000    0.0000    0.0000         0
+
+        accuracy                         0.0567       282
+       macro avg     0.6111    0.0544    0.0993       282
+    weighted avg     0.6915    0.0567    0.1043       282
+
+
+Overall Accuracy (excluding 'none'): 0.0567
+Total Profanity Windows: 282
+Correct Predictions: 16
+
+=== Binary Profanity Detection Metrics ===
+Binary Accuracy: 0.8241
+Precision: 0.7308
+Recall: 0.0674
+F1-score: 0.1234
