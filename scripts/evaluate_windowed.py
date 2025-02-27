@@ -112,7 +112,7 @@ def main():
     setup_thai_font()
     
     # Load the model
-    model_path = './models/ham_FFT_audio'  # Update this path to your best model
+    model_path = './models/ham_audio'  # Update this path to your best model
     model = Wav2Vec2ForSequenceClassification.from_pretrained(model_path)
     feature_extractor = Wav2Vec2FeatureExtractor.from_pretrained(model_path)
     
@@ -200,19 +200,34 @@ def main():
     print(f"Total Profanity Windows: {total_predictions}")
     print(f"Correct Predictions: {correct_predictions}")
     
-    # Add binary profanity detection metrics
+    # Binary profanity detection metrics with detailed breakdown
     all_results = pd.DataFrame(results)
     all_results['is_true_profanity'] = all_results['true_label'] != 'none'
     all_results['is_predicted_profanity'] = all_results['predicted_label'] != 'none'
     
-    binary_correct = (all_results['is_true_profanity'] == all_results['is_predicted_profanity']).sum()
-    binary_total = len(all_results)
-    binary_accuracy = binary_correct / binary_total if binary_total > 0 else 0
+    # Calculate True Positives, False Positives, True Negatives, False Negatives
+    tp = ((all_results['is_true_profanity']) & (all_results['is_predicted_profanity'])).sum()
+    fp = ((~all_results['is_true_profanity']) & (all_results['is_predicted_profanity'])).sum()
+    tn = ((~all_results['is_true_profanity']) & (~all_results['is_predicted_profanity'])).sum()
+    fn = ((all_results['is_true_profanity']) & (~all_results['is_predicted_profanity'])).sum()
+    
+    # Calculate metrics
+    binary_accuracy = (tp + tn) / (tp + tn + fp + fn) if (tp + tn + fp + fn) > 0 else 0
+    precision = tp / (tp + fp) if (tp + fp) > 0 else 0
+    recall = tp / (tp + fn) if (tp + fn) > 0 else 0
+    f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
     
     print("\n=== Binary Profanity Detection Metrics ===")
     print(f"Binary Accuracy: {binary_accuracy:.4f}")
-    print(f"Total Windows: {binary_total}")
-    print(f"Correct Binary Classifications: {binary_correct}")
+    print(f"Precision: {precision:.4f}")
+    print(f"Recall: {recall:.4f}")
+    print(f"F1-score: {f1:.4f}")
+    print("\nDetailed Counts:")
+    print(f"True Positives: {tp}")
+    print(f"False Positives: {fp}")
+    print(f"True Negatives: {tn}")
+    print(f"False Negatives: {fn}")
+    print(f"Total Windows: {len(all_results)}")
     
     # Ensure plots directory exists
     os.makedirs('./plots', exist_ok=True)
