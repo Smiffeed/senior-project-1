@@ -211,14 +211,18 @@ def main():
     tn = ((~all_results['is_true_profanity']) & (~all_results['is_predicted_profanity'])).sum()
     fn = ((all_results['is_true_profanity']) & (~all_results['is_predicted_profanity'])).sum()
     
+    # Calculate balanced accuracy
+    sensitivity = tp / (tp + fn) if (tp + fn) > 0 else 0  # True Positive Rate (Recall)
+    specificity = tn / (tn + fp) if (tn + fp) > 0 else 0  # True Negative Rate
+    balanced_accuracy = (sensitivity + specificity) / 2
+    
     # Calculate metrics
-    binary_accuracy = (tp + tn) / (tp + tn + fp + fn) if (tp + tn + fp + fn) > 0 else 0
     precision = tp / (tp + fp) if (tp + fp) > 0 else 0
-    recall = tp / (tp + fn) if (tp + fn) > 0 else 0
+    recall = sensitivity  # Same as sensitivity
     f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
     
     print("\n=== Binary Profanity Detection Metrics ===")
-    print(f"Binary Accuracy: {binary_accuracy:.4f}")
+    print(f"Balanced Accuracy: {balanced_accuracy:.4f}")
     print(f"Precision: {precision:.4f}")
     print(f"Recall: {recall:.4f}")
     print(f"F1-score: {f1:.4f}")
@@ -228,6 +232,13 @@ def main():
     print(f"True Negatives: {tn}")
     print(f"False Negatives: {fn}")
     print(f"Total Windows: {len(all_results)}")
+    
+    # Calculate class-wise proportions
+    total_profanity = tp + fn
+    total_none = tn + fp
+    print("\nClass Distribution:")
+    print(f"Profanity samples: {total_profanity} ({total_profanity/len(all_results):.2%})")
+    print(f"None samples: {total_none} ({total_none/len(all_results):.2%})")
     
     # Ensure plots directory exists
     os.makedirs('./plots', exist_ok=True)
