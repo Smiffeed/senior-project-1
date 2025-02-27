@@ -1,0 +1,64 @@
+file_path,start_time,end_time,true_label,predicted_label,confidence,overlap_ratio,timing_status,label_status
+./eval\จารย์แดง1.wav,3.0,4.0,เหี้ย,เหี้ย,0.9825746417045593,1.0,correct,correct
+./eval\ถามจริง กูจะรั่ว.wav,0.5,1.5,none,เหี้ย,0.966424822807312,0.574266432059687,correct,incorrect
+./eval\ถามจริง กูจะรั่ว.wav,1.5,2.5,กู,กู,0.9867477416992188,1.0,correct,correct
+./eval\ทายคำเย็ดแม่.wav,13.5,14.5,none,มึง,0.5814745426177979,0.028035428033981406,incorrect,incorrect
+./eval\นกนางนวลขโมยขนมปัง.wav,9.5,10.5,กู,กู,0.7671971321105957,1.0,correct,correct
+./eval\นกนางนวลขโมยขนมปัง.wav,10.0,11.0,none,เหี้ย,0.7831608057022095,0.5912887789354553,correct,incorrect
+./eval\พูดยาว1.wav,0.0,1.0,none,มึง,0.9617082476615906,0.04643997858002428,incorrect,incorrect
+./eval\พูดยาว1.wav,0.5,1.5,none,มึง,0.9437183737754822,0.04643997858002428,incorrect,incorrect
+./eval\พูดยาว1.wav,2.5,3.5,none,หี,0.9515571594238281,0.04643997858002428,incorrect,incorrect
+./eval\พูดยาว1.wav,4.0,5.0,none,มึง,0.6080295443534851,0.04643997858002428,incorrect,incorrect
+./eval\พูดยาว1.wav,9.5,10.5,none,แตด,0.5258706212043762,0.04643997858002428,incorrect,incorrect
+./eval\พูดยาว1.wav,13.0,14.0,none,แตด,0.668855607509613,0.04643997858002428,incorrect,incorrect
+./eval\พูดยาว1.wav,17.0,18.0,none,มึง,0.9695245027542114,0.04643997858002428,incorrect,incorrect
+./eval\พูดยาว1.wav,27.5,28.5,none,แตด,0.861030638217926,0.14215307896461388,correct,incorrect
+./eval\พูดอะไรเนี่ย เย็ดแม่ ฟังไม่รู้เรื่อง.wav,0.5,1.5,เย็ดแม่,เหี้ย,0.9029257297515869,0.34185180574261237,correct,incorrect
+./eval\มึง กูหิวข้าววะ อยากกินตีนอะ.wav,0.0,1.0,none,มึง,0.9860578179359436,1.0,correct,incorrect
+./eval\เช้านี้สดใส.wav,2.5,3.5,เหี้ย,เหี้ย,0.9871852993965149,1.0,correct,correct
+./eval\เช้านี้สดใส.wav,11.0,12.0,มึง,มึง,0.9849927425384521,1.0,correct,correct
+./eval\เอลซ่าเถื่อน.wav,3.0,4.0,กู,กู,0.9706649780273438,1.0,correct,correct
+./eval\เอลซ่าเถื่อน.wav,5.5,6.5,หี,หี,0.9820544719696045,1.0,correct,correct
+./eval\เอลซ่าเถื่อน.wav,32.5,33.5,none,แตด,0.8302547335624695,0.0,incorrect,incorrect
+./eval\เอลซ่าเถื่อน.wav,35.0,36.0,none,แตด,0.9344027042388916,0.0,incorrect,incorrect
+./eval\เอลซ่าเถื่อน.wav,41.5,42.5,none,เหี้ย,0.5506302118301392,0.0,incorrect,incorrect
+./eval\เอลซ่าเถื่อน.wav,56.5,57.5,none,มึง,0.9511315226554871,0.0,incorrect,incorrect
+./eval\จารย์แดง1.wav,0.11913,0.222818,กู,missed,0.0,0.0,missed,missed
+./eval\จารย์แดง1.wav,2.554681,2.775293,ควย,missed,0.0,0.0,missed,missed
+./eval\จารย์แดง1.wav,2.775293,2.848094,มึง,missed,0.0,0.0,missed,missed
+./eval\จารย์แดง1.wav,4.661521,4.793888,มึง,missed,0.0,0.0,missed,missed
+./eval\จารย์แดง1.wav,6.532306,6.669085,มึง,missed,0.0,0.0,missed,missed
+./eval\จารย์แดง1.wav,7.355187,7.666249,เหี้ย,missed,0.0,0.0,missed,missed
+./eval\จารย์แดง1.wav,7.697617,7.919911,มึง,missed,0.0,0.0,missed,missed
+./eval\จารย์แดง1.wav,8.525175,8.880846,เหี้ย,missed,0.0,0.0,missed,missed
+./eval\จารย์แดง1.wav,9.145259,9.308274,มึง,missed,0.0,0.0,missed,missed
+./eval\จารย์แดง1.wav,10.891632,11.191145,เหี้ย,missed,0.0,0.0,missed,missed
+./eval\ถามอะไรแปลกๆกูก็ต้องกินมาม่าอยู่แล้วสิ.wav,1.13823,1.293457,กู,missed,0.0,0.0,missed,missed
+./eval\ทายคำเย็ดแม่.wav,35.669154,36.138809,เย็ดแม่,missed,0.0,0.0,missed,missed
+./eval\ทายคำเย็ดแม่.wav,49.356848,49.841674,เย็ดแม่,missed,0.0,0.0,missed,missed
+./eval\ทายคำเย็ดแม่.wav,54.494,54.905976,เย็ดแม่,missed,0.0,0.0,missed,missed
+./eval\ทายคำเย็ดแม่.wav,64.102608,64.527145,เย็ดแม่,missed,0.0,0.0,missed,missed
+./eval\ทำไมกูต้องทำงานหนักขนาดนี้ด้วยวะ.wav,0.480342,0.591976,กู,missed,0.0,0.0,missed,missed
+./eval\นกนางนวลขโมยขนมปัง.wav,0.807056,0.888023,กู,missed,0.0,0.0,missed,missed
+./eval\นกนางนวลขโมยขนมปัง.wav,3.304003,3.457291,กู,missed,0.0,0.0,missed,missed
+./eval\นกนางนวลขโมยขนมปัง.wav,7.615599,7.699163,กู,missed,0.0,0.0,missed,missed
+./eval\นี่มันจะเกินไปแล้วนะไอเย็ดแม่.wav,1.52459,2.06287,เย็ดแม่,missed,0.0,0.0,missed,missed
+./eval\พรุ่งนี้กูไม่ว่างนะ นัดไว้แล้ว.wav,0.456954,0.610757,กู,missed,0.0,0.0,missed,missed
+./eval\พอเหอะเย็ดแม่ เหนื่อยที่จะต้องพูดซ้ำๆอ่ะ.wav,0.560904,1.066332,เย็ดแม่,missed,0.0,0.0,missed,missed
+./eval\พูดยาว1.wav,21.533171,22.383789,เย็ดแม่,missed,0.0,0.0,missed,missed
+./eval\มึง กูหิวข้าววะ อยากกินตีนอะ.wav,0.530361,0.91843,มึง,missed,0.0,0.0,missed,missed
+./eval\มึง กูหิวข้าววะ อยากกินตีนอะ.wav,1.112465,1.303265,กู,missed,0.0,0.0,missed,missed
+./eval\มึงนี่มัน ไอ้เย็ดแม่.wav,1.695323,2.354455,เย็ดแม่,missed,0.0,0.0,missed,missed
+./eval\วันนี้กูไปวันเดอร์แลนมาแหละทุกคน.wav,0.96954,1.124752,กู,missed,0.0,0.0,missed,missed
+./eval\หยุดทำแบบนี้ซะทีดิ๊ เย็ดแม่.wav,1.179796,1.661891,เย็ดแม่,missed,0.0,0.0,missed,missed
+./eval\เช้านี้สดใส.wav,3.47985,3.71695,มึง,missed,0.0,0.0,missed,missed
+./eval\เช้านี้สดใส.wav,9.200121,9.427862,มึง,missed,0.0,0.0,missed,missed
+./eval\เช้านี้สดใส.wav,9.983622,10.145848,มึง,missed,0.0,0.0,missed,missed
+./eval\เอลซ่าเถื่อน.wav,12.901787,12.993111,กู,missed,0.0,0.0,missed,missed
+./eval\เอลซ่าเถื่อน.wav,19.988271,20.420744,เหี้ย,missed,0.0,0.0,missed,missed
+./eval\เอลซ่าเถื่อน.wav,21.954347,22.206274,หี,missed,0.0,0.0,missed,missed
+./eval\เอลซ่าเถื่อน.wav,26.40295,26.64228,หี,missed,0.0,0.0,missed,missed
+./eval\เอลซ่าเถื่อน.wav,29.840697,29.941468,หี,missed,0.0,0.0,missed,missed
+./eval\เอลซ่าเถื่อน.wav,53.638349,53.76318,เย็ด,missed,0.0,0.0,missed,missed
+./eval\เอลซ่าเถื่อน.wav,60.211915,60.470314,เหี้ย,missed,0.0,0.0,missed,missed
+./eval\เอลซ่าเถื่อน.wav,74.576142,74.72469,หี,missed,0.0,0.0,missed,missed
