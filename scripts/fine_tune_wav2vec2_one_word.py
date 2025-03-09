@@ -317,24 +317,25 @@ def train_model(csv_file, model_name, output_dir):
         
         # Training arguments with more disk-efficient settings
         training_args = TrainingArguments(
-            output_dir=fold_output_dir,
+            output_dir=output_dir,
             num_train_epochs=100,
-            per_device_train_batch_size=4,
-            per_device_eval_batch_size=4,
-            gradient_accumulation_steps=4,
-            evaluation_strategy="epoch",     # Changed from "steps" to "epoch"
-            save_strategy="epoch",           # Changed from "steps" to "epoch"
-            save_steps=500,
-            eval_steps=100,
+            per_device_train_batch_size=12,
+            per_device_eval_batch_size=12,
+            gradient_accumulation_steps=1,
+            eval_strategy="steps",
+            save_strategy="steps",
+            save_steps=1000,
+            eval_steps=1000,
             logging_steps=100,
             learning_rate=1e-4,
-            save_total_limit=1,             # Reduced to only keep the best model
+            save_total_limit=3,
             load_best_model_at_end=True,
             metric_for_best_model="accuracy",
             greater_is_better=True,
             fp16=True,
             warmup_ratio=0.1,
-            dataloader_num_workers=0,
+            warmup_steps=1000,
+            dataloader_num_workers=4,
             remove_unused_columns=False,
             no_cuda=False,
             seed=42,
@@ -342,7 +343,8 @@ def train_model(csv_file, model_name, output_dir):
             max_grad_norm=1.0,
             save_safetensors=True,
             push_to_hub=False,
-            overwrite_output_dir=True
+            overwrite_output_dir=True,
+            report_to="tensorboard"
         )
         
         try:

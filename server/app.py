@@ -32,7 +32,7 @@ tempfile.tempdir = TEMP_FOLDER
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Load the model and feature extractor
-MODEL_PATH = './models/humanv1'
+MODEL_PATH = './models/CW_ham'
 model = Wav2Vec2ForSequenceClassification.from_pretrained(MODEL_PATH)
 feature_extractor = Wav2Vec2FeatureExtractor.from_pretrained(MODEL_PATH)
 model.eval()

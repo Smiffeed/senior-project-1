@@ -112,7 +112,7 @@ def main():
     setup_thai_font()
     
     # Load the model
-    model_path = './models/humanv3'  # Update this path to your best model
+    model_path = './models/CW_ham'  # Update this path to your best model
     model = Wav2Vec2ForSequenceClassification.from_pretrained(model_path)
     feature_extractor = Wav2Vec2FeatureExtractor.from_pretrained(model_path)
     

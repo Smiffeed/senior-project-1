@@ -7,7 +7,7 @@ import re
 def create_combined_dataset():
     # Process human dataset (with note labels)
     human_dataset = []
-    human_dir = "./dataset_human"
+    human_dir = "./eval"
     labels_dir = os.path.join(human_dir, 'labels')
 
     # Process all label files from human dataset
@@ -58,7 +58,7 @@ def create_combined_dataset():
     df_combined = pd.concat([df_human, df_syn], ignore_index=True)
     
     # Save to CSV
-    output_path = 'combined_dataset.csv'
+    output_path = 'eval.csv'
     df_combined.to_csv(output_path, index=False)
     print(f"Combined dataset created successfully: {output_path}")
     print(f"Total samples: {len(df_combined)}")

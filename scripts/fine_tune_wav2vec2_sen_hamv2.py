@@ -252,23 +252,27 @@ def train_wav2vec2_model(csv_file, model_name, output_dir):
     train_dataset = prepare_dataset(train_df, feature_extractor)
     val_dataset = prepare_dataset(val_df, feature_extractor)
     
-    # Training arguments
+    # Training arguments optimized for RTX 6000
     training_args = TrainingArguments(
         output_dir=output_dir,
         num_train_epochs=100,
-        per_device_train_batch_size=4,
-        per_device_eval_batch_size=4,
-        gradient_accumulation_steps=2,
+        per_device_train_batch_size=16,  # Increased from 4
+        per_device_eval_batch_size=16,   # Increased from 4
+        gradient_accumulation_steps=1,    # Reduced from 2 since we increased batch size
         save_strategy="steps",
-        save_steps=100,
+        save_steps=50,                    # More frequent saving
         logging_dir=f"{output_dir}/logs",
-        eval_steps=100,
-        logging_steps=100,
-        learning_rate=2e-5,
+        eval_steps=50,                    # More frequent evaluation
+        logging_steps=50,
+        learning_rate=3e-5,              # Slightly increased learning rate
         save_total_limit=2,
         warmup_ratio=0.1,
         weight_decay=0.01,
-        fp16=True,
+        fp16=True,                       # Keep mixed precision training
+        bf16=False,                      # RTX 6000 performs better with fp16 than bf16
+        gradient_checkpointing=True,     # Enable gradient checkpointing
+        dataloader_num_workers=4,        # Parallel data loading
+        dataloader_pin_memory=True,      # Pin memory for faster data transfer to GPU
         load_best_model_at_end=True,
         metric_for_best_model="accuracy",
         greater_is_better=True,

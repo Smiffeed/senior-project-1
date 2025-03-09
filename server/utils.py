@@ -10,7 +10,8 @@ from pydub import AudioSegment
 
 def preprocess_audio(file_path: str, segment_duration: float = 0.5) -> Tuple[List[np.ndarray], float]:
     """
-    Preprocess audio file into segments for profanity detection.
+    Preprocess audio file into segments for profanity detection using the same
+    preprocessing steps as in model fine-tuning.
     
     Args:
         file_path: Path to the audio file
@@ -34,50 +35,48 @@ def preprocess_audio(file_path: str, segment_duration: float = 0.5) -> Tuple[Lis
         if audio.shape[0] > 1:
             audio = torch.mean(audio, dim=0, keepdim=True)
         
+        # Convert to numpy array for processing
+        audio_np = audio.squeeze().numpy()
+        
+        # Apply Hamming window
+        window_length = len(audio_np)
+        hamming_window = np.hamming(window_length)
+        audio_np = audio_np * hamming_window
+        
+        # Apply pre-emphasis filter to reduce noise
+        audio_np = librosa.effects.preemphasis(audio_np)
+        
+        # Simple noise reduction by removing low amplitude noise
+        noise_threshold = 0.005
+        audio_np = np.where(np.abs(audio_np) < noise_threshold, 0, audio_np)
+        
+        # Convert back to torch tensor
+        audio = torch.from_numpy(audio_np).unsqueeze(0)
+        
         # Resample to 16kHz if needed
         if sr != 16000:
             audio = torchaudio.functional.resample(audio, sr, 16000)
             sr = 16000
         
+        # Normalize audio
+        audio = (audio - audio.mean()) / (audio.std() + 1e-8)
+        
         # Calculate segment size in samples
         segment_size = int(segment_duration * sr)
         
-        # Split audio into segments
+        # Split audio into segments with overlap
+        hop_length = segment_size // 2  # 50% overlap
         segments = []
-        for start in range(0, audio.shape[1], segment_size):
-            end = min(start + segment_size, audio.shape[1])
+        for start in range(0, audio.shape[1], hop_length):
+            end = start + segment_size
             segment = audio[:, start:end]
             
             # Pad if segment is shorter than segment_size
             if segment.shape[1] < segment_size:
                 segment = torch.nn.functional.pad(segment, (0, segment_size - segment.shape[1]))
             
-            # Process segment
-            try:
-                # Create temporary files with unique names
-                with tempfile.NamedTemporaryFile(suffix='.wav', delete=False) as temp_file:
-                    temp_path = temp_file.name
-                cleaned_temp = temp_path.replace('.wav', '_cleaned.wav')
-                
-                # Save segment temporarily
-                torchaudio.save(temp_path, segment, sr)
-                
-                # Remove background noise
-                # remove_background_noise(temp_path, cleaned_temp)
-                
-                # Load the cleaned segment
-                cleaned_segment, _ = torchaudio.load(cleaned_temp)
-                segments.append(cleaned_segment.squeeze().numpy())
-                
-            finally:
-                # Clean up temporary files
-                for path in [temp_path, cleaned_temp]:
-                    try:
-                        if os.path.exists(path):
-                            os.close(os.open(path, os.O_RDONLY))  # Close any open handles
-                            os.unlink(path)
-                    except Exception as e:
-                        print(f"Warning: Could not delete temporary file {path}: {e}")
+            # Convert to numpy and append
+            segments.append(segment.squeeze().numpy())
         
         return segments, duration
         
@@ -163,7 +162,7 @@ def censor_audio(file_path, detections):
         beep_path = "beep.wav"
         if not os.path.exists(beep_path):
             raise FileNotFoundError(f"Beep sound file not found at {beep_path}")
-            
+           
         beep = AudioSegment.from_wav(beep_path)
 
         # Sort detections by start time

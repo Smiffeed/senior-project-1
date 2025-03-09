@@ -153,7 +153,7 @@ def main():
         results = []
         
         # Labels matching the fine-tuned model
-        labels = ["none", "เย็ดแม่", "กู", "มึง", "เหี้ย", "ควย", "สวะ", "หี", "แตด"]
+        labels = ["none", "เย็ด", "กู", "มึง", "เหี้ย", "ควย", "สวะ", "หี", "แตด"]
         
         for i, segment in enumerate(segments):
             prediction, probabilities = predict(model, feature_extractor, segment)
