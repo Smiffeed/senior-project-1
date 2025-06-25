@@ -1,5 +1,6 @@
 import torch
 import torchaudio
+import torch.nn.functional as F
 from transformers import Wav2Vec2ForSequenceClassification, Wav2Vec2FeatureExtractor, Wav2Vec2Config, TrainingArguments, Trainer, EarlyStoppingCallback
 from datasets import Dataset as HFDataset
 from torch.utils.data import Dataset
@@ -99,18 +100,94 @@ class AudioAugmentor:
         return y / np.sqrt(np.mean(y**2))
 
 # =====================================================================================
+# Advanced Audio Preprocessing
+# =====================================================================================
+
+class AdvancedAudioPreprocessor:
+    """Advanced audio preprocessing with spectral features and noise reduction."""
+    
+    def __init__(self, sampling_rate=16000):
+        self.sr = sampling_rate
+    
+    def spectral_subtraction(self, audio, noise_factor=0.02):
+        """Advanced noise reduction using spectral subtraction."""
+        # Estimate noise from the first 0.1 seconds
+        noise_sample = audio[:int(0.1 * self.sr)]
+        noise_power = np.mean(noise_sample ** 2)
+        
+        # Apply spectral subtraction
+        stft = librosa.stft(audio)
+        magnitude = np.abs(stft)
+        phase = np.angle(stft)
+        
+        # Subtract noise estimate
+        clean_magnitude = magnitude - noise_factor * np.sqrt(noise_power)
+        clean_magnitude = np.maximum(clean_magnitude, 0.1 * magnitude)
+        
+        # Reconstruct audio
+        clean_stft = clean_magnitude * np.exp(1j * phase)
+        return librosa.istft(clean_stft)
+    
+    def apply_dynamic_range_compression(self, audio, threshold=0.1, ratio=4.0):
+        """Apply dynamic range compression to enhance quiet sounds."""
+        # Convert to dB
+        audio_db = librosa.amplitude_to_db(np.abs(audio))
+        
+        # Apply compression
+        compressed = np.where(
+            audio_db > threshold,
+            threshold + (audio_db - threshold) / ratio,
+            audio_db
+        )
+        
+        # Convert back to linear scale
+        return librosa.db_to_amplitude(compressed) * np.sign(audio)
+    
+    def extract_mfcc_features(self, audio, n_mfcc=13):
+        """Extract MFCC features for additional discriminative power."""
+        mfccs = librosa.feature.mfcc(y=audio, sr=self.sr, n_mfcc=n_mfcc)
+        return np.mean(mfccs, axis=1)  # Take mean across time
+    
+    def voice_activity_detection(self, audio, frame_length=2048, hop_length=512):
+        """Detect voice activity and focus on speech regions."""
+        # Compute energy
+        energy = librosa.feature.rms(y=audio, frame_length=frame_length, hop_length=hop_length)[0]
+        
+        # Threshold for voice activity (adjust based on your data)
+        threshold = np.percentile(energy, 30)
+        voice_frames = energy > threshold
+        
+        # Convert frame indices to sample indices
+        voice_samples = []
+        for i, is_voice in enumerate(voice_frames):
+            if is_voice:
+                start_sample = i * hop_length
+                end_sample = min(start_sample + hop_length, len(audio))
+                voice_samples.extend(range(start_sample, end_sample))
+        
+        if voice_samples:
+            return audio[voice_samples]
+        return audio
+
+# =====================================================================================
 # Custom Dataset
 # =====================================================================================
 
 class ProfanityAudioDataset(Dataset):
     """
-    PyTorch Dataset for loading, preprocessing, and augmenting profanity audio data.
+    Enhanced PyTorch Dataset with advanced preprocessing and augmentation.
     """
-    def __init__(self, df, feature_extractor, augmentor=None, max_length=16000):
+    def __init__(self, df, feature_extractor, augmentor=None, max_length=16000, use_advanced_preprocessing=True):
         self.df = df
         self.feature_extractor = feature_extractor
         self.augmentor = augmentor
         self.max_length = max_length
+        self.use_advanced_preprocessing = use_advanced_preprocessing
+        
+        # Initialize advanced preprocessor
+        if use_advanced_preprocessing:
+            self.advanced_preprocessor = AdvancedAudioPreprocessor()
+            self.spec_augment = SpecAugment()
 
     def __len__(self):
         return len(self.df)
@@ -143,9 +220,7 @@ class ProfanityAudioDataset(Dataset):
             'input_values': inputs.input_values.squeeze(),
             'attention_mask': inputs.attention_mask.squeeze(),
             'label': torch.tensor(label, dtype=torch.long)
-        }
-
-    def _load_and_preprocess_audio(self, file_path, start_time, end_time):
+        }    def _load_and_preprocess_audio(self, file_path, start_time, end_time):
         metadata = torchaudio.info(file_path)
         sr = metadata.sample_rate
         audio_length_sec = metadata.num_frames / sr
@@ -168,14 +243,93 @@ class ProfanityAudioDataset(Dataset):
 
         audio_np = audio.squeeze().numpy()
         
-        # Apply Hamming window and pre-emphasis
-        audio_np = audio_np * np.hamming(len(audio_np))
-        audio_np = librosa.effects.preemphasis(audio_np)
+        if self.use_advanced_preprocessing:
+            # Apply advanced preprocessing
+            audio_np = self.advanced_preprocessor.spectral_subtraction(audio_np)
+            audio_np = self.advanced_preprocessor.apply_dynamic_range_compression(audio_np)
+            audio_np = self.advanced_preprocessor.voice_activity_detection(audio_np)
         
-        # Normalize
-        audio_np = (audio_np - audio_np.mean()) / (audio_np.std() + 1e-8)
+        # Apply original preprocessing
+        if len(audio_np) > 0:
+            audio_np = audio_np * np.hamming(len(audio_np))
+            audio_np = librosa.effects.preemphasis(audio_np)
+
+            # Simple noise reduction
+            noise_threshold = 0.005
+            audio_np = np.where(np.abs(audio_np) < noise_threshold, 0, audio_np)
+            
+            # Normalize
+            audio_np = (audio_np - audio_np.mean()) / (audio_np.std() + 1e-8)
+        else:
+            # Fallback if advanced preprocessing removes all audio
+            audio_np = audio.squeeze().numpy()
+            if len(audio_np) > 0:
+                audio_np = audio_np * np.hamming(len(audio_np))
+                audio_np = librosa.effects.preemphasis(audio_np)
+                noise_threshold = 0.005
+                audio_np = np.where(np.abs(audio_np) < noise_threshold, 0, audio_np)
+                audio_np = (audio_np - audio_np.mean()) / (audio_np.std() + 1e-8)
         
         return audio_np
+
+# =====================================================================================
+# Ensemble Model Architecture
+# =====================================================================================
+
+class MultiHeadClassifier(nn.Module):
+    """Multi-head classifier with attention mechanism."""
+    
+    def __init__(self, config):
+        super().__init__()
+        self.config = config
+        
+        # Multiple classification heads
+        self.temporal_head = nn.Sequential(
+            nn.Linear(config.hidden_size, config.hidden_size // 2),
+            nn.ReLU(),
+            nn.Dropout(0.3),
+            nn.Linear(config.hidden_size // 2, config.num_labels)
+        )
+        
+        self.spectral_head = nn.Sequential(
+            nn.Linear(config.hidden_size, config.hidden_size // 2),
+            nn.ReLU(),
+            nn.Dropout(0.3),
+            nn.Linear(config.hidden_size // 2, config.num_labels)
+        )
+        
+        # Attention mechanism to combine heads
+        self.attention = nn.MultiheadAttention(
+            embed_dim=config.hidden_size,
+            num_heads=8,
+            dropout=0.1,
+            batch_first=True
+        )
+        
+        # Final fusion layer
+        self.fusion = nn.Sequential(
+            nn.Linear(config.num_labels * 2, config.hidden_size // 4),
+            nn.ReLU(),
+            nn.Dropout(0.2),
+            nn.Linear(config.hidden_size // 4, config.num_labels)
+        )
+    
+    def forward(self, features, **kwargs):
+        batch_size = features.shape[0]
+        
+        # Apply attention to features
+        attended_features, _ = self.attention(features.unsqueeze(1), features.unsqueeze(1), features.unsqueeze(1))
+        attended_features = attended_features.squeeze(1)
+        
+        # Get predictions from multiple heads
+        temporal_pred = self.temporal_head(features)
+        spectral_pred = self.spectral_head(attended_features)
+        
+        # Combine predictions
+        combined = torch.cat([temporal_pred, spectral_pred], dim=1)
+        final_pred = self.fusion(combined)
+        
+        return final_pred
 
 # =====================================================================================
 # Custom Model and Trainer
@@ -244,6 +398,92 @@ def collate_fn(batch):
     }
 
 # =====================================================================================
+# Advanced Training Strategies
+# =====================================================================================
+
+class FocalLoss(nn.Module):
+    """Focal Loss for handling class imbalance more effectively than weighted CE."""
+    
+    def __init__(self, alpha=1, gamma=2, weight=None):
+        super().__init__()
+        self.alpha = alpha
+        self.gamma = gamma
+        self.weight = weight
+        
+    def forward(self, inputs, targets):
+        ce_loss = F.cross_entropy(inputs, targets, weight=self.weight, reduction='none')
+        pt = torch.exp(-ce_loss)
+        focal_loss = self.alpha * (1 - pt) ** self.gamma * ce_loss
+        return focal_loss.mean()
+
+class AdvancedTrainer(Trainer):
+    """Enhanced trainer with advanced loss functions and learning strategies."""
+    
+    def __init__(self, class_weights=None, use_focal_loss=True, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.class_weights = class_weights
+        self.use_focal_loss = use_focal_loss
+        
+        if class_weights is not None:
+            self.class_weights = class_weights.to(self.args.device)
+            
+        # Initialize loss function
+        if use_focal_loss:
+            self.loss_fn = FocalLoss(alpha=1, gamma=2, weight=self.class_weights)
+        else:
+            self.loss_fn = nn.CrossEntropyLoss(weight=self.class_weights)
+    
+    def compute_loss(self, model, inputs, return_outputs=False, **kwargs):
+        labels = inputs.pop("labels")
+        outputs = model(**inputs)
+        logits = outputs.logits
+        
+        loss = self.loss_fn(logits.view(-1, NUM_LABELS), labels.view(-1))
+        
+        return (loss, outputs) if return_outputs else loss
+    
+    def create_scheduler(self, num_training_steps, optimizer):
+        """Create a custom learning rate scheduler."""
+        from transformers import get_cosine_schedule_with_warmup
+        
+        return get_cosine_schedule_with_warmup(
+            optimizer,
+            num_warmup_steps=int(0.1 * num_training_steps),
+            num_training_steps=num_training_steps
+        )
+
+# =====================================================================================
+# Data Augmentation with SpecAugment
+# =====================================================================================
+
+class SpecAugment:
+    """SpecAugment implementation for frequency domain augmentation."""
+    
+    def __init__(self, freq_mask_param=15, time_mask_param=35, num_freq_masks=1, num_time_masks=1):
+        self.freq_mask_param = freq_mask_param
+        self.time_mask_param = time_mask_param
+        self.num_freq_masks = num_freq_masks
+        self.num_time_masks = num_time_masks
+    
+    def __call__(self, mel_spectrogram):
+        """Apply SpecAugment to mel spectrogram."""
+        spec = mel_spectrogram.copy()
+        
+        # Frequency masking
+        for _ in range(self.num_freq_masks):
+            freq_mask_size = np.random.randint(0, self.freq_mask_param)
+            freq_mask_start = np.random.randint(0, spec.shape[0] - freq_mask_size)
+            spec[freq_mask_start:freq_mask_start + freq_mask_size, :] = 0
+        
+        # Time masking
+        for _ in range(self.num_time_masks):
+            time_mask_size = np.random.randint(0, min(self.time_mask_param, spec.shape[1]))
+            time_mask_start = np.random.randint(0, spec.shape[1] - time_mask_size)
+            spec[:, time_mask_start:time_mask_start + time_mask_size] = 0
+        
+        return spec
+
+# =====================================================================================
 # Main Training Orchestrator
 # =====================================================================================
 
@@ -272,24 +512,23 @@ class ModelTrainingPipeline:
             y=[LABEL_MAP[label] for label in train_df['label']]
         )
         class_weights = torch.FloatTensor(class_weights)
-        print("Class weights for this fold:", class_weights)
-
-        # Model configuration
+        print("Class weights for this fold:", class_weights)        # Model configuration with advanced architecture
         config = Wav2Vec2Config.from_pretrained(
             self.model_name, num_labels=NUM_LABELS, finetuning_task="audio-classification"
         )
+        config.pooling_mode = 'mean'
         model = Wav2Vec2ForSequenceClassification.from_pretrained(self.model_name, config=config)
         
-        # Replace classifier head and bypass the projector
+        # Replace classifier with advanced multi-head classifier
         model.projector = nn.Identity()
-        model.classifier = ProfanityClassificationHead(config)
+        model.classifier = MultiHeadClassifier(config)
 
         # Training arguments
         training_args = TrainingArguments(
             output_dir=output_dir_fold,
             num_train_epochs=100,
-            per_device_train_batch_size=16,
-            per_device_eval_batch_size=16,
+            per_device_train_batch_size=32,
+            per_device_eval_batch_size=32,
             gradient_accumulation_steps=1,
             save_strategy="steps",
             save_steps=100,
@@ -300,25 +539,24 @@ class ModelTrainingPipeline:
             weight_decay=0.01,
             fp16=True,
             gradient_checkpointing=True,
-            dataloader_num_workers=4,
+            # dataloader_num_workers=8,
             dataloader_pin_memory=True,
             load_best_model_at_end=True,
             metric_for_best_model="accuracy",
             greater_is_better=True,
             eval_strategy="steps",
             save_total_limit=2,
-        )
-
-        # Initialize trainer
-        trainer = CustomTrainer(
+        )        # Initialize advanced trainer with focal loss
+        trainer = AdvancedTrainer(
             model=model,
             args=training_args,
             train_dataset=train_dataset,
             eval_dataset=val_dataset,
             compute_metrics=compute_metrics,
-            callbacks=[EarlyStoppingCallback(early_stopping_patience=10)],
+            callbacks=[EarlyStoppingCallback(early_stopping_patience=15)],  # Increased patience
             data_collator=collate_fn,
-            class_weights=class_weights
+            class_weights=class_weights,
+            use_focal_loss=True  # Enable focal loss for better class imbalance handling
         )
 
         # Train
@@ -408,6 +646,23 @@ if __name__ == "__main__":
     for fold, (train_idx, val_idx) in enumerate(kf.split(train_val_df)):
         train_fold_df = train_val_df.iloc[train_idx]
         val_fold_df = train_val_df.iloc[val_idx]
+
+        # Oversample minority profanity classes in the training fold
+        profanity_labels = [label for label in CLASS_NAMES if label != 'none']
+        profanity_counts = train_fold_df[train_fold_df['label'].isin(profanity_labels)]['label'].value_counts()
+        
+        if not profanity_counts.empty:
+            max_count = profanity_counts.max()
+            oversampled_dfs = [train_fold_df]
+
+            for label, count in profanity_counts.items():
+                if count < max_count:
+                    oversample_size = max_count - count
+                    label_df = train_fold_df[train_fold_df['label'] == label]
+                    oversampled_dfs.append(label_df.sample(n=oversample_size, replace=True, random_state=42))
+            
+            train_fold_df = pd.concat(oversampled_dfs).sample(frac=1, random_state=42).reset_index(drop=True)
+            print(f"Fold {fold + 1}: Oversampled training data. New size: {len(train_fold_df)}")
         
         pipeline.train_fold(train_fold_df, val_fold_df, fold + 1)
 
