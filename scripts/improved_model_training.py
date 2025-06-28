@@ -1,6 +1,5 @@
 import torch
 import torchaudio
-import torch.nn.functional as F
 from transformers import Wav2Vec2ForSequenceClassification, Wav2Vec2FeatureExtractor, Wav2Vec2Config, TrainingArguments, Trainer, EarlyStoppingCallback
 from datasets import Dataset as HFDataset
 from torch.utils.data import Dataset
@@ -100,94 +99,18 @@ class AudioAugmentor:
         return y / np.sqrt(np.mean(y**2))
 
 # =====================================================================================
-# Advanced Audio Preprocessing
-# =====================================================================================
-
-class AdvancedAudioPreprocessor:
-    """Advanced audio preprocessing with spectral features and noise reduction."""
-    
-    def __init__(self, sampling_rate=16000):
-        self.sr = sampling_rate
-    
-    def spectral_subtraction(self, audio, noise_factor=0.02):
-        """Advanced noise reduction using spectral subtraction."""
-        # Estimate noise from the first 0.1 seconds
-        noise_sample = audio[:int(0.1 * self.sr)]
-        noise_power = np.mean(noise_sample ** 2)
-        
-        # Apply spectral subtraction
-        stft = librosa.stft(audio)
-        magnitude = np.abs(stft)
-        phase = np.angle(stft)
-        
-        # Subtract noise estimate
-        clean_magnitude = magnitude - noise_factor * np.sqrt(noise_power)
-        clean_magnitude = np.maximum(clean_magnitude, 0.1 * magnitude)
-        
-        # Reconstruct audio
-        clean_stft = clean_magnitude * np.exp(1j * phase)
-        return librosa.istft(clean_stft)
-    
-    def apply_dynamic_range_compression(self, audio, threshold=0.1, ratio=4.0):
-        """Apply dynamic range compression to enhance quiet sounds."""
-        # Convert to dB
-        audio_db = librosa.amplitude_to_db(np.abs(audio))
-        
-        # Apply compression
-        compressed = np.where(
-            audio_db > threshold,
-            threshold + (audio_db - threshold) / ratio,
-            audio_db
-        )
-        
-        # Convert back to linear scale
-        return librosa.db_to_amplitude(compressed) * np.sign(audio)
-    
-    def extract_mfcc_features(self, audio, n_mfcc=13):
-        """Extract MFCC features for additional discriminative power."""
-        mfccs = librosa.feature.mfcc(y=audio, sr=self.sr, n_mfcc=n_mfcc)
-        return np.mean(mfccs, axis=1)  # Take mean across time
-    
-    def voice_activity_detection(self, audio, frame_length=2048, hop_length=512):
-        """Detect voice activity and focus on speech regions."""
-        # Compute energy
-        energy = librosa.feature.rms(y=audio, frame_length=frame_length, hop_length=hop_length)[0]
-        
-        # Threshold for voice activity (adjust based on your data)
-        threshold = np.percentile(energy, 30)
-        voice_frames = energy > threshold
-        
-        # Convert frame indices to sample indices
-        voice_samples = []
-        for i, is_voice in enumerate(voice_frames):
-            if is_voice:
-                start_sample = i * hop_length
-                end_sample = min(start_sample + hop_length, len(audio))
-                voice_samples.extend(range(start_sample, end_sample))
-        
-        if voice_samples:
-            return audio[voice_samples]
-        return audio
-
-# =====================================================================================
 # Custom Dataset
 # =====================================================================================
 
 class ProfanityAudioDataset(Dataset):
     """
-    Enhanced PyTorch Dataset with advanced preprocessing and augmentation.
+    PyTorch Dataset for loading, preprocessing, and augmenting profanity audio data.
     """
-    def __init__(self, df, feature_extractor, augmentor=None, max_length=16000, use_advanced_preprocessing=True):
+    def __init__(self, df, feature_extractor, augmentor=None, max_length=16000):
         self.df = df
         self.feature_extractor = feature_extractor
         self.augmentor = augmentor
         self.max_length = max_length
-        self.use_advanced_preprocessing = use_advanced_preprocessing
-        
-        # Initialize advanced preprocessor
-        if use_advanced_preprocessing:
-            self.advanced_preprocessor = AdvancedAudioPreprocessor()
-            self.spec_augment = SpecAugment()
 
     def __len__(self):
         return len(self.df)
@@ -220,7 +143,9 @@ class ProfanityAudioDataset(Dataset):
             'input_values': inputs.input_values.squeeze(),
             'attention_mask': inputs.attention_mask.squeeze(),
             'label': torch.tensor(label, dtype=torch.long)
-        }    def _load_and_preprocess_audio(self, file_path, start_time, end_time):
+        }
+
+    def _load_and_preprocess_audio(self, file_path, start_time, end_time):
         metadata = torchaudio.info(file_path)
         sr = metadata.sample_rate
         audio_length_sec = metadata.num_frames / sr
@@ -243,93 +168,18 @@ class ProfanityAudioDataset(Dataset):
 
         audio_np = audio.squeeze().numpy()
         
-        if self.use_advanced_preprocessing:
-            # Apply advanced preprocessing
-            audio_np = self.advanced_preprocessor.spectral_subtraction(audio_np)
-            audio_np = self.advanced_preprocessor.apply_dynamic_range_compression(audio_np)
-            audio_np = self.advanced_preprocessor.voice_activity_detection(audio_np)
-        
-        # Apply original preprocessing
-        if len(audio_np) > 0:
-            audio_np = audio_np * np.hamming(len(audio_np))
-            audio_np = librosa.effects.preemphasis(audio_np)
+        # Apply Hamming window and pre-emphasis
+        audio_np = audio_np * np.hamming(len(audio_np))
+        audio_np = librosa.effects.preemphasis(audio_np)
 
-            # Simple noise reduction
-            noise_threshold = 0.005
-            audio_np = np.where(np.abs(audio_np) < noise_threshold, 0, audio_np)
-            
-            # Normalize
-            audio_np = (audio_np - audio_np.mean()) / (audio_np.std() + 1e-8)
-        else:
-            # Fallback if advanced preprocessing removes all audio
-            audio_np = audio.squeeze().numpy()
-            if len(audio_np) > 0:
-                audio_np = audio_np * np.hamming(len(audio_np))
-                audio_np = librosa.effects.preemphasis(audio_np)
-                noise_threshold = 0.005
-                audio_np = np.where(np.abs(audio_np) < noise_threshold, 0, audio_np)
-                audio_np = (audio_np - audio_np.mean()) / (audio_np.std() + 1e-8)
+        # Simple noise reduction
+        noise_threshold = 0.005  # Adjust this value based on your needs
+        audio_np = np.where(np.abs(audio_np) < noise_threshold, 0, audio_np)
+        
+        # Normalize
+        audio_np = (audio_np - audio_np.mean()) / (audio_np.std() + 1e-8)
         
         return audio_np
-
-# =====================================================================================
-# Ensemble Model Architecture
-# =====================================================================================
-
-class MultiHeadClassifier(nn.Module):
-    """Multi-head classifier with attention mechanism."""
-    
-    def __init__(self, config):
-        super().__init__()
-        self.config = config
-        
-        # Multiple classification heads
-        self.temporal_head = nn.Sequential(
-            nn.Linear(config.hidden_size, config.hidden_size // 2),
-            nn.ReLU(),
-            nn.Dropout(0.3),
-            nn.Linear(config.hidden_size // 2, config.num_labels)
-        )
-        
-        self.spectral_head = nn.Sequential(
-            nn.Linear(config.hidden_size, config.hidden_size // 2),
-            nn.ReLU(),
-            nn.Dropout(0.3),
-            nn.Linear(config.hidden_size // 2, config.num_labels)
-        )
-        
-        # Attention mechanism to combine heads
-        self.attention = nn.MultiheadAttention(
-            embed_dim=config.hidden_size,
-            num_heads=8,
-            dropout=0.1,
-            batch_first=True
-        )
-        
-        # Final fusion layer
-        self.fusion = nn.Sequential(
-            nn.Linear(config.num_labels * 2, config.hidden_size // 4),
-            nn.ReLU(),
-            nn.Dropout(0.2),
-            nn.Linear(config.hidden_size // 4, config.num_labels)
-        )
-    
-    def forward(self, features, **kwargs):
-        batch_size = features.shape[0]
-        
-        # Apply attention to features
-        attended_features, _ = self.attention(features.unsqueeze(1), features.unsqueeze(1), features.unsqueeze(1))
-        attended_features = attended_features.squeeze(1)
-        
-        # Get predictions from multiple heads
-        temporal_pred = self.temporal_head(features)
-        spectral_pred = self.spectral_head(attended_features)
-        
-        # Combine predictions
-        combined = torch.cat([temporal_pred, spectral_pred], dim=1)
-        final_pred = self.fusion(combined)
-        
-        return final_pred
 
 # =====================================================================================
 # Custom Model and Trainer
@@ -398,90 +248,17 @@ def collate_fn(batch):
     }
 
 # =====================================================================================
-# Advanced Training Strategies
+# Self-Training
 # =====================================================================================
 
-class FocalLoss(nn.Module):
-    """Focal Loss for handling class imbalance more effectively than weighted CE."""
-    
-    def __init__(self, alpha=1, gamma=2, weight=None):
-        super().__init__()
-        self.alpha = alpha
-        self.gamma = gamma
-        self.weight = weight
-        
-    def forward(self, inputs, targets):
-        ce_loss = F.cross_entropy(inputs, targets, weight=self.weight, reduction='none')
-        pt = torch.exp(-ce_loss)
-        focal_loss = self.alpha * (1 - pt) ** self.gamma * ce_loss
-        return focal_loss.mean()
-
-class AdvancedTrainer(Trainer):
-    """Enhanced trainer with advanced loss functions and learning strategies."""
-    
-    def __init__(self, class_weights=None, use_focal_loss=True, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.class_weights = class_weights
-        self.use_focal_loss = use_focal_loss
-        
-        if class_weights is not None:
-            self.class_weights = class_weights.to(self.args.device)
-            
-        # Initialize loss function
-        if use_focal_loss:
-            self.loss_fn = FocalLoss(alpha=1, gamma=2, weight=self.class_weights)
-        else:
-            self.loss_fn = nn.CrossEntropyLoss(weight=self.class_weights)
-    
-    def compute_loss(self, model, inputs, return_outputs=False, **kwargs):
-        labels = inputs.pop("labels")
-        outputs = model(**inputs)
-        logits = outputs.logits
-        
-        loss = self.loss_fn(logits.view(-1, NUM_LABELS), labels.view(-1))
-        
-        return (loss, outputs) if return_outputs else loss
-    
-    def create_scheduler(self, num_training_steps, optimizer):
-        """Create a custom learning rate scheduler."""
-        from transformers import get_cosine_schedule_with_warmup
-        
-        return get_cosine_schedule_with_warmup(
-            optimizer,
-            num_warmup_steps=int(0.1 * num_training_steps),
-            num_training_steps=num_training_steps
-        )
-
-# =====================================================================================
-# Data Augmentation with SpecAugment
-# =====================================================================================
-
-class SpecAugment:
-    """SpecAugment implementation for frequency domain augmentation."""
-    
-    def __init__(self, freq_mask_param=15, time_mask_param=35, num_freq_masks=1, num_time_masks=1):
-        self.freq_mask_param = freq_mask_param
-        self.time_mask_param = time_mask_param
-        self.num_freq_masks = num_freq_masks
-        self.num_time_masks = num_time_masks
-    
-    def __call__(self, mel_spectrogram):
-        """Apply SpecAugment to mel spectrogram."""
-        spec = mel_spectrogram.copy()
-        
-        # Frequency masking
-        for _ in range(self.num_freq_masks):
-            freq_mask_size = np.random.randint(0, self.freq_mask_param)
-            freq_mask_start = np.random.randint(0, spec.shape[0] - freq_mask_size)
-            spec[freq_mask_start:freq_mask_start + freq_mask_size, :] = 0
-        
-        # Time masking
-        for _ in range(self.num_time_masks):
-            time_mask_size = np.random.randint(0, min(self.time_mask_param, spec.shape[1]))
-            time_mask_start = np.random.randint(0, spec.shape[1] - time_mask_size)
-            spec[:, time_mask_start:time_mask_start + time_mask_size] = 0
-        
-        return spec
+def self_training_step(model, unlabeled_data, confidence_threshold=0.95):
+    """Add confident predictions to training set."""
+    pseudo_labels = []
+    for batch in unlabeled_data:
+        predictions = model(batch)
+        confident_samples = predictions.max(dim=-1)[0] > confidence_threshold
+        pseudo_labels.extend(confident_samples)
+    return pseudo_labels
 
 # =====================================================================================
 # Main Training Orchestrator
@@ -512,16 +289,18 @@ class ModelTrainingPipeline:
             y=[LABEL_MAP[label] for label in train_df['label']]
         )
         class_weights = torch.FloatTensor(class_weights)
-        print("Class weights for this fold:", class_weights)        # Model configuration with advanced architecture
+        print("Class weights for this fold:", class_weights)
+
+        # Model configuration
         config = Wav2Vec2Config.from_pretrained(
             self.model_name, num_labels=NUM_LABELS, finetuning_task="audio-classification"
         )
         config.pooling_mode = 'mean'
         model = Wav2Vec2ForSequenceClassification.from_pretrained(self.model_name, config=config)
         
-        # Replace classifier with advanced multi-head classifier
+        # Replace classifier head and bypass the projector
         model.projector = nn.Identity()
-        model.classifier = MultiHeadClassifier(config)
+        model.classifier = ProfanityClassificationHead(config)
 
         # Training arguments
         training_args = TrainingArguments(
@@ -546,17 +325,18 @@ class ModelTrainingPipeline:
             greater_is_better=True,
             eval_strategy="steps",
             save_total_limit=2,
-        )        # Initialize advanced trainer with focal loss
-        trainer = AdvancedTrainer(
+        )
+
+        # Initialize trainer
+        trainer = CustomTrainer(
             model=model,
             args=training_args,
             train_dataset=train_dataset,
             eval_dataset=val_dataset,
             compute_metrics=compute_metrics,
-            callbacks=[EarlyStoppingCallback(early_stopping_patience=15)],  # Increased patience
+            callbacks=[EarlyStoppingCallback(early_stopping_patience=10)],
             data_collator=collate_fn,
-            class_weights=class_weights,
-            use_focal_loss=True  # Enable focal loss for better class imbalance handling
+            class_weights=class_weights
         )
 
         # Train
@@ -614,6 +394,392 @@ class ModelTrainingPipeline:
         print(f"Best model saved to: {best_model_dir}")
 
 # =====================================================================================
+# Curriculum Learning
+# =====================================================================================
+
+def create_curriculum_dataset(df, difficulty_scores):
+    """Create curriculum based on difficulty."""
+    sorted_indices = np.argsort(difficulty_scores)
+    return df.iloc[sorted_indices]
+
+# =====================================================================================
+# Advanced Model Improvement Techniques
+# =====================================================================================
+
+class FocalLoss(nn.Module):
+    """Focal Loss for handling severe class imbalance - much better than weighted CE."""
+    def __init__(self, alpha=1, gamma=2, weight=None, reduction='mean'):
+        super().__init__()
+        self.alpha = alpha
+        self.gamma = gamma
+        self.weight = weight
+        self.reduction = reduction
+
+    def forward(self, inputs, targets):
+        ce_loss = F.cross_entropy(inputs, targets, weight=self.weight, reduction='none')
+        pt = torch.exp(-ce_loss)
+        focal_loss = self.alpha * (1 - pt) ** self.gamma * ce_loss
+        
+        if self.reduction == 'mean':
+            return focal_loss.mean()
+        elif self.reduction == 'sum':
+            return focal_loss.sum()
+        return focal_loss
+
+class AdvancedAudioPreprocessor:
+    """State-of-the-art audio preprocessing techniques."""
+    
+    def __init__(self, sr=16000):
+        self.sr = sr
+    
+    def spectral_gating_denoising(self, audio, stationary_noise_reduction=6, non_stationary_noise_reduction=6):
+        """Advanced noise reduction using spectral gating."""
+        import scipy.signal
+        
+        # Convert to STFT
+        f, t, stft = scipy.signal.stft(audio, fs=self.sr, nperseg=512)
+        magnitude = np.abs(stft)
+        phase = np.angle(stft)
+        
+        # Estimate noise floor from quietest 10% of frames
+        noise_floor = np.percentile(magnitude, 10, axis=1, keepdims=True)
+        
+        # Create spectral gate
+        gate = magnitude / (noise_floor + 1e-10)
+        gate = np.clip(gate, 0.1, 1.0)  # Soft gating
+        
+        # Apply gating
+        denoised_stft = magnitude * gate * np.exp(1j * phase)
+        
+        # Convert back to time domain
+        _, denoised_audio = scipy.signal.istft(denoised_stft, fs=self.sr)
+        return denoised_audio
+    
+    def dynamic_range_compression(self, audio, threshold=-20, ratio=4, attack=0.003, release=0.1):
+        """Professional audio compression for consistent levels."""
+        # Convert to dB
+        rms = np.sqrt(np.mean(audio**2))
+        audio_db = 20 * np.log10(np.abs(audio) + 1e-10)
+        
+        # Apply compression
+        compressed = np.where(
+            audio_db > threshold,
+            threshold + (audio_db - threshold) / ratio,
+            audio_db
+        )
+        
+        # Convert back to linear
+        return np.sign(audio) * (10 ** (compressed / 20))
+    
+    def voice_activity_detection_advanced(self, audio, frame_length=512, hop_length=160):
+        """Advanced VAD using multiple features."""
+        # Energy-based VAD
+        frames = librosa.util.frame(audio, frame_length=frame_length, hop_length=hop_length)
+        energy = np.sum(frames**2, axis=0)
+        
+        # Zero crossing rate
+        zcr = np.sum(np.diff(np.sign(frames), axis=0) != 0, axis=0)
+        
+        # Spectral features
+        spec_centroid = []
+        for i in range(frames.shape[1]):
+            frame = frames[:, i]
+            if len(frame) > 0:
+                fft = np.abs(np.fft.rfft(frame))
+                freqs = np.fft.rfftfreq(len(frame), 1/self.sr)
+                centroid = np.sum(freqs * fft) / (np.sum(fft) + 1e-10)
+                spec_centroid.append(centroid)
+        
+        spec_centroid = np.array(spec_centroid)
+        
+        # Combine features for VAD decision
+        energy_thresh = np.percentile(energy, 30)
+        zcr_thresh = np.percentile(zcr, 70)
+        centroid_thresh = np.percentile(spec_centroid, 40)
+        
+        voice_mask = (energy > energy_thresh) & (zcr < zcr_thresh) & (spec_centroid > centroid_thresh)
+        
+        # Expand mask to original audio length
+        voice_samples = np.repeat(voice_mask, hop_length)[:len(audio)]
+        return audio * voice_samples
+
+class MultiScaleAudioEncoder(nn.Module):
+    """Multi-scale audio encoder for capturing different temporal patterns."""
+    
+    def __init__(self, input_dim, hidden_dim=256):
+        super().__init__()
+        self.scales = [1, 2, 4, 8]  # Different temporal scales
+        
+        self.scale_encoders = nn.ModuleList([
+            nn.Sequential(
+                nn.Conv1d(input_dim, hidden_dim // len(self.scales), 
+                         kernel_size=3*scale, stride=scale, padding=scale),
+                nn.BatchNorm1d(hidden_dim // len(self.scales)),
+                nn.ReLU(),
+                nn.Conv1d(hidden_dim // len(self.scales), hidden_dim // len(self.scales),
+                         kernel_size=3, stride=1, padding=1),
+                nn.BatchNorm1d(hidden_dim // len(self.scales)),
+                nn.ReLU()
+            ) for scale in self.scales
+        ])
+        
+        self.fusion = nn.Sequential(
+            nn.Conv1d(hidden_dim, hidden_dim, kernel_size=1),
+            nn.BatchNorm1d(hidden_dim),
+            nn.ReLU()
+        )
+        
+    def forward(self, x):
+        # x shape: (batch, input_dim, time)
+        scale_outputs = []
+        
+        for encoder, scale in zip(self.scale_encoders, self.scales):
+            # Encode at this scale
+            scaled_out = encoder(x)
+            # Upsample back to original resolution
+            upsampled = F.interpolate(scaled_out, size=x.shape[-1], mode='linear', align_corners=False)
+            scale_outputs.append(upsampled)
+        
+        # Concatenate all scales
+        multi_scale = torch.cat(scale_outputs, dim=1)
+        
+        # Fuse information
+        fused = self.fusion(multi_scale)
+        return fused
+
+class AttentionPooling(nn.Module):
+    """Attention-based pooling for better sequence representation."""
+    
+    def __init__(self, hidden_dim):
+        super().__init__()
+        self.attention = nn.Sequential(
+            nn.Linear(hidden_dim, hidden_dim // 2),
+            nn.Tanh(),
+            nn.Linear(hidden_dim // 2, 1)
+        )
+        
+    def forward(self, x, mask=None):
+        # x shape: (batch, seq_len, hidden_dim)
+        # mask shape: (batch, seq_len)
+        
+        attention_weights = self.attention(x).squeeze(-1)  # (batch, seq_len)
+        
+        if mask is not None:
+            attention_weights = attention_weights.masked_fill(~mask.bool(), float('-inf'))
+        
+        attention_weights = F.softmax(attention_weights, dim=1)
+        
+        # Apply attention
+        pooled = torch.sum(x * attention_weights.unsqueeze(-1), dim=1)
+        return pooled, attention_weights
+
+class ImprovedProfanityClassifier(nn.Module):
+    """Advanced classifier with multiple improvements."""
+    
+    def __init__(self, config):
+        super().__init__()
+        self.config = config
+        hidden_dim = config.hidden_size
+        
+        # Multi-scale audio encoder
+        self.multi_scale_encoder = MultiScaleAudioEncoder(hidden_dim, hidden_dim)
+        
+        # Bidirectional LSTM for temporal modeling
+        self.lstm = nn.LSTM(
+            hidden_dim, hidden_dim // 2, 
+            num_layers=2, batch_first=True, 
+            bidirectional=True, dropout=0.3
+        )
+        
+        # Self-attention mechanism
+        self.self_attention = nn.MultiheadAttention(
+            embed_dim=hidden_dim,
+            num_heads=8,
+            dropout=0.1,
+            batch_first=True
+        )
+        
+        # Attention pooling
+        self.attention_pooling = AttentionPooling(hidden_dim)
+        
+        # Multi-layer classifier with residual connections
+        self.classifier = nn.ModuleList([
+            nn.Sequential(
+                nn.Linear(hidden_dim, hidden_dim),
+                nn.LayerNorm(hidden_dim),
+                nn.ReLU(),
+                nn.Dropout(0.3)
+            ),
+            nn.Sequential(
+                nn.Linear(hidden_dim, hidden_dim // 2),
+                nn.LayerNorm(hidden_dim // 2),
+                nn.ReLU(),
+                nn.Dropout(0.2)
+            ),
+            nn.Linear(hidden_dim // 2, config.num_labels)
+        ])
+        
+        # Auxiliary tasks for better representation learning
+        self.emotion_classifier = nn.Linear(hidden_dim, 5)  # anger, neutral, surprise, etc.
+        self.intensity_regressor = nn.Linear(hidden_dim, 1)  # profanity intensity
+        
+    def forward(self, features, attention_mask=None, return_auxiliary=False):
+        batch_size, seq_len, hidden_dim = features.shape
+        
+        # Multi-scale encoding
+        features_transposed = features.transpose(1, 2)  # (batch, hidden_dim, seq_len)
+        multi_scale_features = self.multi_scale_encoder(features_transposed)
+        multi_scale_features = multi_scale_features.transpose(1, 2)  # Back to (batch, seq_len, hidden_dim)
+        
+        # LSTM processing
+        lstm_out, _ = self.lstm(multi_scale_features)
+        
+        # Self-attention
+        attn_out, _ = self.self_attention(lstm_out, lstm_out, lstm_out, key_padding_mask=~attention_mask.bool() if attention_mask is not None else None)
+        
+        # Residual connection
+        features_enhanced = lstm_out + attn_out
+        
+        # Attention pooling
+        pooled_features, attention_weights = self.attention_pooling(features_enhanced, attention_mask)
+        
+        # Multi-layer classification with residual connections
+        x = pooled_features
+        for i, layer in enumerate(self.classifier[:-1]):
+            residual = x
+            x = layer(x)
+            if x.shape == residual.shape:  # Add residual connection when dimensions match
+                x = x + residual
+        
+        logits = self.classifier[-1](x)
+        
+        result = {'logits': logits}
+        
+        if return_auxiliary:
+            emotion_logits = self.emotion_classifier(pooled_features)
+            intensity_score = self.intensity_regressor(pooled_features)
+            result.update({
+                'emotion_logits': emotion_logits,
+                'intensity_score': intensity_score,
+                'attention_weights': attention_weights
+            })
+        
+        return result
+
+class AdvancedTrainer(Trainer):
+    """Enhanced trainer with multiple loss functions and advanced training strategies."""
+    
+    def __init__(self, class_weights=None, use_focal_loss=True, auxiliary_loss_weight=0.1, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.class_weights = class_weights
+        self.use_focal_loss = use_focal_loss
+        self.auxiliary_loss_weight = auxiliary_loss_weight
+        
+        if class_weights is not None:
+            self.class_weights = class_weights.to(self.args.device)
+        
+        # Initialize loss functions
+        if use_focal_loss:
+            self.main_loss_fn = FocalLoss(alpha=1, gamma=2, weight=self.class_weights)
+        else:
+            self.main_loss_fn = nn.CrossEntropyLoss(weight=self.class_weights)
+            
+        self.emotion_loss_fn = nn.CrossEntropyLoss()
+        self.intensity_loss_fn = nn.MSELoss()
+        
+    def compute_loss(self, model, inputs, return_outputs=False, **kwargs):
+        labels = inputs.pop("labels")
+        
+        # Get model outputs
+        outputs = model(**inputs, return_auxiliary=True)
+        logits = outputs['logits']
+        
+        # Main classification loss
+        main_loss = self.main_loss_fn(logits.view(-1, NUM_LABELS), labels.view(-1))
+        
+        # Auxiliary losses (if available)
+        total_loss = main_loss
+        
+        if 'emotion_logits' in outputs and self.auxiliary_loss_weight > 0:
+            # Create pseudo emotion labels based on profanity type
+            emotion_labels = self._create_emotion_labels(labels)
+            emotion_loss = self.emotion_loss_fn(outputs['emotion_logits'], emotion_labels)
+            total_loss += self.auxiliary_loss_weight * emotion_loss
+            
+        if 'intensity_score' in outputs and self.auxiliary_loss_weight > 0:
+            # Create intensity labels (0 for none, increasing for profanity severity)
+            intensity_labels = self._create_intensity_labels(labels)
+            intensity_loss = self.intensity_loss_fn(outputs['intensity_score'].squeeze(), intensity_labels)
+            total_loss += self.auxiliary_loss_weight * intensity_loss
+        
+        # Create outputs object for compatibility
+        from transformers.modeling_outputs import SequenceClassifierOutput
+        final_outputs = SequenceClassifierOutput(
+            loss=total_loss,
+            logits=logits,
+            hidden_states=None,
+            attentions=outputs.get('attention_weights', None)
+        )
+        
+        return (total_loss, final_outputs) if return_outputs else total_loss
+    
+    def _create_emotion_labels(self, profanity_labels):
+        """Create emotion labels based on profanity type."""
+        # Map profanity types to emotions: 0=neutral, 1=anger, 2=disgust, 3=surprise, 4=emphasis
+        emotion_mapping = {
+            0: 0,  # none -> neutral
+            1: 1,  # เย็ด -> anger
+            2: 1,  # กู -> anger
+            3: 1,  # มึง -> anger  
+            4: 2,  # เหี้ย -> disgust
+            5: 1,  # ควย -> anger
+            6: 2,  # สวะ -> disgust
+            7: 1,  # หี -> anger
+            8: 2,  # แตด -> disgust
+        }
+        
+        emotion_labels = torch.tensor([emotion_mapping[label.item()] for label in profanity_labels])
+        return emotion_labels.to(profanity_labels.device)
+    
+    def _create_intensity_labels(self, profanity_labels):
+        """Create intensity labels for regression."""
+        # Assign intensity scores: none=0, mild=0.3, moderate=0.6, severe=1.0
+        intensity_mapping = {
+            0: 0.0,  # none
+            1: 0.8,  # เย็ด (severe)
+            2: 0.6,  # กู (moderate)
+            3: 0.5,  # มึง (mild-moderate)
+            4: 0.7,  # เหี้ย (moderate-severe)
+            5: 0.9,  # ควย (severe)
+            6: 0.4,  # สวะ (mild)
+            7: 0.8,  # หี (severe)
+            8: 0.6,  # แตด (moderate)
+        }
+        
+        intensity_labels = torch.tensor([intensity_mapping[label.item()] for label in profanity_labels], dtype=torch.float32)
+        return intensity_labels.to(profanity_labels.device)
+
+class CurriculumLearningScheduler:
+    """Implement curriculum learning for gradual difficulty increase."""
+    
+    def __init__(self, total_epochs=100):
+        self.total_epochs = total_epochs
+        self.current_epoch = 0
+        
+    def get_difficulty_threshold(self):
+        """Return current difficulty threshold (0=easy, 1=hard)."""
+        return min(1.0, self.current_epoch / (self.total_epochs * 0.7))
+    
+    def update_epoch(self, epoch):
+        self.current_epoch = epoch
+        
+    def filter_dataset_by_difficulty(self, dataset, difficulty_scores):
+        """Filter dataset based on current curriculum stage."""
+        threshold = self.get_difficulty_threshold()
+        easy_samples = difficulty_scores <= threshold
+        return dataset[easy_samples]
+
+# =====================================================================================
 # Main Execution
 # =====================================================================================
 
@@ -669,3 +835,15 @@ if __name__ == "__main__":
     # Evaluate all folds on the test set and save the best one
     print("\n--- Final Evaluation on Test Set ---")
     pipeline.evaluate_and_save_best_model(test_df, NUM_FOLDS)
+
+def ensemble_predict(models, inputs):
+    """Ensemble prediction from multiple models."""
+    predictions = []
+    for model in models:
+        with torch.no_grad():
+            logits = model(**inputs).logits
+            predictions.append(F.softmax(logits, dim=-1))
+    
+    # Average predictions
+    ensemble_pred = torch.stack(predictions).mean(dim=0)
+    return ensemble_pred

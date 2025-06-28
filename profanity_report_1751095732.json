@@ -1,0 +1,408 @@
+{
+  "system_info": {
+    "system_name": "Unified Advanced Profanity Detection System",
+    "version": "1.0.0-unified",
+    "generated_at": "2025-06-28T14:28:52.122248",
+    "input_file": "test.wav",
+    "output_file": "output.wav"
+  },
+  "results": {
+    "input_file": "test.wav",
+    "output_file": "output.wav",
+    "processing_timestamp": "2025-06-28T14:28:52.121249",
+    "system_version": "1.0.0-unified",
+    "detections": {
+      "total_count": 7,
+      "details": [
+        {
+          "start_time": 1.24,
+          "end_time": 2.615,
+          "predicted_class": "หี",
+          "confidence": 0.7685137391090392,
+          "detection_method": "merged_precision_scan",
+          "context_score": 0.5030167155835721,
+          "merged_from": [
+            {
+              "start_time": 1.24,
+              "end_time": 1.49,
+              "predicted_class": "ควย",
+              "confidence": 0.4771580398082733,
+              "detection_method": "precision_scan",
+              "context_score": 0.0,
+              "merged_from": []
+            },
+            {
+              "start_time": 1.365,
+              "end_time": 1.615,
+              "predicted_class": "กู",
+              "confidence": 0.9397686719894409,
+              "detection_method": "precision_scan",
+              "context_score": 0.0,
+              "merged_from": []
+            },
+            {
+              "start_time": 1.49,
+              "end_time": 1.74,
+              "predicted_class": "ควย",
+              "confidence": 0.9394327998161316,
+              "detection_method": "precision_scan",
+              "context_score": 0.0,
+              "merged_from": []
+            },
+            {
+              "start_time": 1.615,
+              "end_time": 1.865,
+              "predicted_class": "ควย",
+              "confidence": 0.8344001770019531,
+              "detection_method": "precision_scan",
+              "context_score": 0.0,
+              "merged_from": []
+            },
+            {
+              "start_time": 1.74,
+              "end_time": 1.99,
+              "predicted_class": "เหี้ย",
+              "confidence": 0.8610380291938782,
+              "detection_method": "precision_scan",
+              "context_score": 0.0,
+              "merged_from": []
+            },
+            {
+              "start_time": 1.865,
+              "end_time": 2.115,
+              "predicted_class": "มึง",
+              "confidence": 0.33798375725746155,
+              "detection_method": "precision_scan",
+              "context_score": 0.0,
+              "merged_from": []
+            },
+            {
+              "start_time": 1.99,
+              "end_time": 2.24,
+              "predicted_class": "มึง",
+              "confidence": 0.9235028624534607,
+              "detection_method": "precision_scan",
+              "context_score": 0.0,
+              "merged_from": []
+            },
+            {
+              "start_time": 2.115,
+              "end_time": 2.365,
+              "predicted_class": "มึง",
+              "confidence": 0.92379230260849,
+              "detection_method": "precision_scan",
+              "context_score": 0.0,
+              "merged_from": []
+            },
+            {
+              "start_time": 2.24,
+              "end_time": 2.49,
+              "predicted_class": "หี",
+              "confidence": 0.5045021176338196,
+              "detection_method": "precision_scan",
+              "context_score": 0.0,
+              "merged_from": []
+            },
+            {
+              "start_time": 2.365,
+              "end_time": 2.615,
+              "predicted_class": "หี",
+              "confidence": 0.9435586333274841,
+              "detection_method": "precision_scan",
+              "context_score": 0.0,
+              "merged_from": []
+            }
+          ]
+        },
+        {
+          "start_time": 2.74,
+          "end_time": 3.115,
+          "predicted_class": "กู",
+          "confidence": 0.9043010175228119,
+          "detection_method": "merged_precision_scan",
+          "context_score": 0.7170889882519685,
+          "merged_from": [
+            {
+              "start_time": 2.74,
+              "end_time": 2.99,
+              "predicted_class": "กู",
+              "confidence": 0.8759452700614929,
+              "detection_method": "precision_scan",
+              "context_score": 0.0,
+              "merged_from": []
+            },
+            {
+              "start_time": 2.865,
+              "end_time": 3.115,
+              "predicted_class": "กู",
+              "confidence": 0.9326567649841309,
+              "detection_method": "precision_scan",
+              "context_score": 0.0,
+              "merged_from": []
+            }
+          ]
+        },
+        {
+          "start_time": 3.3,
+          "end_time": 3.8,
+          "predicted_class": "หี",
+          "confidence": 0.9129801789919536,
+          "detection_method": "merged_precision_scan",
+          "context_score": 0.6863001214443628,
+          "merged_from": [
+            {
+              "start_time": 3.3,
+              "end_time": 3.55,
+              "predicted_class": "หี",
+              "confidence": 0.9423854351043701,
+              "detection_method": "precision_scan",
+              "context_score": 0.0,
+              "merged_from": []
+            },
+            {
+              "start_time": 3.425,
+              "end_time": 3.675,
+              "predicted_class": "หี",
+              "confidence": 0.8566270470619202,
+              "detection_method": "precision_scan",
+              "context_score": 0.0,
+              "merged_from": []
+            },
+            {
+              "start_time": 3.55,
+              "end_time": 3.8,
+              "predicted_class": "เหี้ย",
+              "confidence": 0.9399280548095703,
+              "detection_method": "precision_scan",
+              "context_score": 0.0,
+              "merged_from": []
+            }
+          ]
+        },
+        {
+          "start_time": 4.69,
+          "end_time": 5.6,
+          "predicted_class": "เย็ด",
+          "confidence": 0.6642629653215408,
+          "detection_method": "merged_precision_scan",
+          "context_score": 0.46213836425440835,
+          "merged_from": [
+            {
+              "start_time": 4.69,
+              "end_time": 4.94,
+              "predicted_class": "หี",
+              "confidence": 0.4627370238304138,
+              "detection_method": "precision_scan",
+              "context_score": 0.0,
+              "merged_from": []
+            },
+            {
+              "start_time": 4.815,
+              "end_time": 5.065,
+              "predicted_class": "เย็ด",
+              "confidence": 0.869046151638031,
+              "detection_method": "precision_scan",
+              "context_score": 0.0,
+              "merged_from": []
+            },
+            {
+              "start_time": 5.1,
+              "end_time": 5.35,
+              "predicted_class": "มึง",
+              "confidence": 0.5860122442245483,
+              "detection_method": "precision_scan",
+              "context_score": 0.0,
+              "merged_from": []
+            },
+            {
+              "start_time": 5.35,
+              "end_time": 5.6,
+              "predicted_class": "แตด",
+              "confidence": 0.7392564415931702,
+              "detection_method": "precision_scan",
+              "context_score": 0.0,
+              "merged_from": []
+            }
+          ]
+        },
+        {
+          "start_time": 6.88,
+          "end_time": 7.13,
+          "predicted_class": "มึง",
+          "confidence": 0.9461690783500671,
+          "detection_method": "precision_scan",
+          "context_score": 0.3423046390755607,
+          "merged_from": []
+        },
+        {
+          "start_time": 7.395,
+          "end_time": 7.77,
+          "predicted_class": "ควย",
+          "confidence": 0.5818106383085251,
+          "detection_method": "merged_precision_scan",
+          "context_score": 0.4855959030599129,
+          "merged_from": [
+            {
+              "start_time": 7.395,
+              "end_time": 7.645,
+              "predicted_class": "ควย",
+              "confidence": 0.6738420128822327,
+              "detection_method": "precision_scan",
+              "context_score": 0.0,
+              "merged_from": []
+            },
+            {
+              "start_time": 7.52,
+              "end_time": 7.77,
+              "predicted_class": "มึง",
+              "confidence": 0.4897792637348175,
+              "detection_method": "precision_scan",
+              "context_score": 0.0,
+              "merged_from": []
+            }
+          ]
+        },
+        {
+          "start_time": 9.17,
+          "end_time": 9.469999999999999,
+          "predicted_class": "กู",
+          "confidence": 0.885525025170425,
+          "detection_method": "merged_precision_scan",
+          "context_score": 0.5347931698552341,
+          "merged_from": [
+            {
+              "start_time": 9.17,
+              "end_time": 9.35,
+              "predicted_class": "กู",
+              "confidence": 0.940013587474823,
+              "detection_method": "precision_scan",
+              "context_score": 0.0,
+              "merged_from": []
+            },
+            {
+              "start_time": 9.36,
+              "end_time": 9.469999999999999,
+              "predicted_class": "แตด",
+              "confidence": 0.7963619232177734,
+              "detection_method": "precision_scan",
+              "context_score": 0.0,
+              "merged_from": []
+            }
+          ]
+        }
+      ],
+      "class_distribution": {
+        "หี": {
+          "count": 2,
+          "total_duration": 1.8750000000000002,
+          "avg_confidence": 0.8407469590504963
+        },
+        "กู": {
+          "count": 2,
+          "total_duration": 0.6749999999999989,
+          "avg_confidence": 0.8949130213466184
+        },
+        "เย็ด": {
+          "count": 1,
+          "total_duration": 0.9099999999999993,
+          "avg_confidence": 0.6642629653215408
+        },
+        "มึง": {
+          "count": 1,
+          "total_duration": 0.25,
+          "avg_confidence": 0.9461690783500671
+        },
+        "ควย": {
+          "count": 1,
+          "total_duration": 0.375,
+          "avg_confidence": 0.5818106383085251
+        }
+      },
+      "total_censored_duration": 4.084999999999998,
+      "confidence_stats": {
+        "mean": 0.8090803775391947,
+        "std": 0.13025716567467913,
+        "min": 0.5818106383085251,
+        "max": 0.9461690783500671
+      }
+    },
+    "performance": {
+      "total_processing_time": 8.37481427192688,
+      "vad_processing_time": 0.11348462104797363,
+      "detection_processing_time": 6.5830888748168945,
+      "post_processing_time": 0.014037609100341797,
+      "audio_duration": 11.648,
+      "speech_duration": 7.930000000000001,
+      "total_windows": 64,
+      "processed_windows": 55,
+      "detections_found": 24,
+      "efficiency_gain": 31.91964285714285,
+      "vad_enabled": true,
+      "detection_stages_used": [
+        "quick_scan",
+        "precision_scan"
+      ]
+    },
+    "configuration": {
+      "vad_enabled": true,
+      "adaptive_windowing": true,
+      "multi_stage_detection": true,
+      "context_analysis": true,
+      "advanced_preprocessing": true,
+      "performance_monitoring": true,
+      "real_time_optimization": true,
+      "parallel_processing": false,
+      "confidence_thresholds": {
+        "high_confidence": 0.8,
+        "medium_confidence": 0.6,
+        "low_confidence": 0.4,
+        "minimum_detection": 0.3
+      },
+      "window_sizes": {
+        "quick_scan": 1.0,
+        "precision": 0.25,
+        "balanced": 0.5,
+        "context": 2.0
+      },
+      "vad_sensitivity": 0.5,
+      "vad_frame_length": 0.025,
+      "vad_hop_length": 0.01,
+      "merge_threshold": 0.1,
+      "context_window": 1.0,
+      "min_detection_duration": 0.1,
+      "max_detection_gap": 0.2,
+      "censor_method": "beep",
+      "censor_frequency": 1000,
+      "preserve_timing": true,
+      "fade_edges": true,
+      "generate_report": true,
+      "save_visualizations": false,
+      "detailed_logging": true,
+      "export_timeline": true
+    },
+    "session_stats": {
+      "files_processed": 1,
+      "total_detections": 7,
+      "total_processing_time": 8.37481427192688,
+      "average_efficiency_gain": 31.91964285714285
+    },
+    "success": true
+  },
+  "technical_details": {
+    "model_architecture": "Enhanced Wav2Vec2 + Production Preprocessing",
+    "detection_techniques": [
+      "Voice Activity Detection (VAD)",
+      "Adaptive Window Sizing",
+      "Multi-stage Detection",
+      "Context-aware Post-processing",
+      "Confidence-based Filtering"
+    ],
+    "preprocessing_pipeline": [
+      "Pre-emphasis filtering",
+      "Noise reduction",
+      "Amplitude normalization",
+      "Hamming windowing",
+      "Feature extraction"
+    ]
+  }
+}

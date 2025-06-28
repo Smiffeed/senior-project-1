@@ -33,32 +33,76 @@ def setup_thai_font():
         font_prop = fm.FontProperties(fname=font_path)
         plt.rcParams['font.family'] = 'Cordia New'
     except:
-        print("Warning: Thai font not found. Using default font.")
+        pass
 
 def preprocess_audio(file_path, start_time, end_time):
-    # Load audio
-    audio, sr = librosa.load(file_path, sr=16000, offset=start_time, duration=end_time-start_time)
-    
-    # Apply same preprocessing as in training
-    # Noise reduction using librosa
-    audio_reduced_noise = librosa.effects.preemphasis(audio)
-    
-    # Normalize audio
-    audio_normalized = librosa.util.normalize(audio_reduced_noise)
-    
-    return audio_normalized
+    """Load and preprocess audio segment to match training."""
+    try:
+        file_path = file_path.replace('\\', '/')
+        if not os.path.exists(file_path):
+            print(f"File not found: {file_path}")
+            return None
+
+        metadata = torchaudio.info(file_path)
+        sr = metadata.sample_rate
+        audio_length_sec = metadata.num_frames / sr
+
+        padding = 0.2
+        start_time = max(0, start_time - padding)
+        end_time = min(end_time + padding, audio_length_sec)
+
+        if end_time <= start_time:
+            return None
+
+        audio, sr = torchaudio.load(
+            file_path,
+            frame_offset=int(start_time * sr),
+            num_frames=int((end_time - start_time) * sr)
+        )
+
+        if audio.shape[0] > 1:
+            audio = torch.mean(audio, dim=0, keepdim=True)
+
+        if sr != 16000:
+            audio = torchaudio.functional.resample(audio, sr, 16000)
+
+        audio_np = audio.squeeze().numpy()
+
+        if len(audio_np) == 0:
+            return None
+
+        # Apply Hamming window and pre-emphasis
+        audio_np = audio_np * np.hamming(len(audio_np))
+        audio_np = librosa.effects.preemphasis(audio_np)
+
+        # Simple noise reduction
+        noise_threshold = 0.005
+        audio_np = np.where(np.abs(audio_np) < noise_threshold, 0, audio_np)
+
+        # Normalize
+        audio_np = (audio_np - audio_np.mean()) / (audio_np.std() + 1e-8)
+
+        return audio_np
+    except Exception as e:
+        print(f"Error preprocessing {file_path} ({start_time}-{end_time}): {e}")
+        return None
+
 
 def evaluate_window(model, feature_extractor, file_path, start_time, end_time):
     try:
         # Process audio with same preprocessing as training
         audio = preprocess_audio(file_path, start_time, end_time)
+        if audio is None:
+            return "error", 0.0
         
         # Apply feature extractor
         inputs = feature_extractor(
             audio, 
             sampling_rate=16000, 
             return_tensors="pt", 
-            padding=True
+            padding="max_length",
+            truncation=True,
+            max_length=16000
         )
         
         # Move inputs to the same device as model
@@ -66,8 +110,8 @@ def evaluate_window(model, feature_extractor, file_path, start_time, end_time):
         
         # Get prediction
         with torch.no_grad():
-            outputs = model(**inputs)
-            predictions = torch.softmax(outputs.logits, dim=-1)
+            logits = model(**inputs).logits
+            predictions = torch.softmax(logits, dim=-1)
             predicted_label_id = torch.argmax(predictions, dim=-1).item()
             confidence = predictions[0][predicted_label_id].item()
             
@@ -263,4 +307,4 @@ def main():
     )
 
 if __name__ == "__main__":
-    main() 
+    main()

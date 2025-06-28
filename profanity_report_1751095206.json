@@ -1,0 +1,105 @@
+{
+  "system_info": {
+    "system_name": "Unified Advanced Profanity Detection System",
+    "version": "1.0.0-unified",
+    "generated_at": "2025-06-28T14:20:06.522813",
+    "input_file": "./eval\\กฤต.wav",
+    "output_file": "./quick_test_output.wav"
+  },
+  "results": {
+    "input_file": "./eval\\กฤต.wav",
+    "output_file": "./quick_test_output.wav",
+    "processing_timestamp": "2025-06-28T14:20:06.522813",
+    "system_version": "1.0.0-unified",
+    "detections": {
+      "total_count": 0,
+      "details": [],
+      "class_distribution": {},
+      "total_censored_duration": 0,
+      "confidence_stats": {
+        "mean": 0,
+        "std": 0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    "performance": {
+      "total_processing_time": 1.6606452465057373,
+      "vad_processing_time": 0.11428713798522949,
+      "detection_processing_time": 0.0020055770874023438,
+      "post_processing_time": 0.0,
+      "audio_duration": 3.861375,
+      "speech_duration": 2.77,
+      "total_windows": 21,
+      "processed_windows": 21,
+      "detections_found": 0,
+      "efficiency_gain": 28.263895633032266,
+      "vad_enabled": true,
+      "detection_stages_used": [
+        "quick_scan",
+        "precision_scan"
+      ]
+    },
+    "configuration": {
+      "vad_enabled": true,
+      "adaptive_windowing": true,
+      "multi_stage_detection": true,
+      "context_analysis": true,
+      "advanced_preprocessing": true,
+      "performance_monitoring": true,
+      "real_time_optimization": true,
+      "parallel_processing": false,
+      "confidence_thresholds": {
+        "high_confidence": 0.8,
+        "medium_confidence": 0.6,
+        "low_confidence": 0.4,
+        "minimum_detection": 0.3
+      },
+      "window_sizes": {
+        "quick_scan": 1.0,
+        "precision": 0.25,
+        "balanced": 0.5,
+        "context": 2.0
+      },
+      "vad_sensitivity": 0.5,
+      "vad_frame_length": 0.025,
+      "vad_hop_length": 0.01,
+      "merge_threshold": 0.1,
+      "context_window": 1.0,
+      "min_detection_duration": 0.1,
+      "max_detection_gap": 0.2,
+      "censor_method": "beep",
+      "censor_frequency": 1000,
+      "preserve_timing": true,
+      "fade_edges": true,
+      "generate_report": true,
+      "save_visualizations": false,
+      "detailed_logging": true,
+      "export_timeline": true
+    },
+    "session_stats": {
+      "files_processed": 1,
+      "total_detections": 0,
+      "total_processing_time": 1.6606452465057373,
+      "average_efficiency_gain": 28.263895633032266
+    },
+    "success": true
+  },
+  "technical_details": {
+    "model_architecture": "Enhanced Wav2Vec2 + Production Preprocessing",
+    "detection_techniques": [
+      "Voice Activity Detection (VAD)",
+      "Adaptive Window Sizing",
+      "Multi-stage Detection",
+      "Context-aware Post-processing",
+      "Confidence-based Filtering"
+    ],
+    "preprocessing_pipeline": [
+      "Pre-emphasis filtering",
+      "Noise reduction",
+      "Amplitude normalization",
+      "Hamming windowing",
+      "Feature extraction"
+    ]
+  }
+}

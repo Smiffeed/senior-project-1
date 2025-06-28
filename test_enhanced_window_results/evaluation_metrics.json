@@ -1,0 +1,76 @@
+{
+  "accuracy": 0.36776315789473685,
+  "classification_report": {
+    "none": {
+      "precision": 1.0,
+      "recall": 0.36776315789473685,
+      "f1-score": 0.5377585377585378,
+      "support": 1520.0
+    },
+    "\u0e40\u0e22\u0e47\u0e14": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 0.0
+    },
+    "\u0e01\u0e39": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 0.0
+    },
+    "\u0e21\u0e36\u0e07": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 0.0
+    },
+    "\u0e40\u0e2b\u0e35\u0e49\u0e22": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 0.0
+    },
+    "\u0e04\u0e27\u0e22": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 0.0
+    },
+    "\u0e2a\u0e27\u0e30": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 0.0
+    },
+    "\u0e2b\u0e35": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 0.0
+    },
+    "\u0e41\u0e15\u0e14": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 0.0
+    },
+    "accuracy": 0.36776315789473685,
+    "macro avg": {
+      "precision": 0.1111111111111111,
+      "recall": 0.040862573099415204,
+      "f1-score": 0.05975094863983753,
+      "support": 1520.0
+    },
+    "weighted avg": {
+      "precision": 1.0,
+      "recall": 0.36776315789473685,
+      "f1-score": 0.5377585377585378,
+      "support": 1520.0
+    }
+  },
+  "total_windows": 1520,
+  "window_size": 0.5,
+  "hop_length": 0.25,
+  "overlap_threshold": 0.25
+}
