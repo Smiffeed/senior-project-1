@@ -120,35 +120,60 @@ class FrameLevelCensor:
         print(f"Merged into {len(merged)} distinct profane regions.")
         return merged
 
-    def _refine_boundaries(self, audio_np: np.ndarray, region: Tuple[float, float, str]) -> Tuple[float, float, str]:
+    def _refine_boundaries(self, audio_np: np.ndarray, region: Tuple[float, float, str]) -> Optional[Tuple[float, float, str]]:
         """
-        Stage 2: Refine the boundaries of a detected region using energy-based VAD.
-        This finds the actual speech within the coarse window.
+        Stage 2: Refine the boundaries of a detected region using energy-based VAD
+        and re-classification. This finds the actual speech within the coarse window
+        and verifies if it's profane.
         """
-        start_time, end_time, label = region
+        start_time, end_time, initial_label = region
         start_sample = int(start_time * self.sample_rate)
         end_sample = int(end_time * self.sample_rate)
         
         region_audio = audio_np[start_sample:end_sample]
         
-        # Use librosa's split to find non-silent parts
+        # 1. Split the coarse region into smaller clips based on silence
         # top_db is the threshold in dB below the peak for what is considered silence
-        clips = librosa.effects.split(region_audio, top_db=20, frame_length=256, hop_length=64)
+        clips = librosa.effects.split(region_audio, top_db=25, frame_length=256, hop_length=64)
         
+        profane_clips = []
         if clips.size > 0:
-            # Get the start of the first clip and end of the last clip
-            refined_start_sample = start_sample + clips[0][0]
-            refined_end_sample = start_sample + clips[-1][1]
+            # 2. Re-evaluate each individual clip
+            for clip_start, clip_end in clips:
+                # Ensure clip is not too short to be meaningful
+                if clip_end - clip_start < (self.sample_rate * 0.1): # at least 100ms
+                    continue
+
+                clip_audio = region_audio[clip_start:clip_end]
+                
+                # Run the model on this smaller, specific clip
+                with torch.no_grad():
+                    inputs = self._preprocess_window(clip_audio)
+                    logits = self.model(inputs).logits
+                    prediction = torch.argmax(logits, dim=-1).item()
+                
+                label = self.id_to_label.get(prediction, "unknown")
+
+                # 3. Only keep clips that are confirmed to be profane
+                if label != 'none' and label != 'unknown':
+                    # Convert clip sample times back to absolute times
+                    absolute_start_time = start_time + (clip_start / self.sample_rate)
+                    absolute_end_time = start_time + (clip_end / self.sample_rate)
+                    profane_clips.append((absolute_start_time, absolute_end_time, label))
+
+        if profane_clips:
+            # If multiple profane clips are found within the region, merge them
+            # This handles cases where a single profane utterance is broken by a small silence
+            final_start = profane_clips[0][0]
+            final_end = profane_clips[-1][1]
+            final_label = profane_clips[0][2] # Take the label of the first one
             
-            refined_start_time = refined_start_sample / self.sample_rate
-            refined_end_time = refined_end_sample / self.sample_rate
-            
-            print(f"Refined region [{start_time:.2f}-{end_time:.2f}] to [{refined_start_time:.2f}-{refined_end_time:.2f}]")
-            return (refined_start_time, refined_end_time, label)
+            print(f"Refined region [{start_time:.2f}-{end_time:.2f}] to a precise profane clip at [{final_start:.2f}-{final_end:.2f}]")
+            return (final_start, final_end, final_label)
         
-        # If no speech is found, return the original region
-        print(f"Could not refine region [{start_time:.2f}-{end_time:.2f}], using original.")
-        return region
+        # If no specific profane clip is confirmed, discard the region
+        print(f"Could not confirm profanity in region [{start_time:.2f}-{end_time:.2f}]. Discarding.")
+        return None
 
     def censor_audio_file(self, input_path: str, output_path: str):
         """
@@ -184,6 +209,11 @@ class FrameLevelCensor:
         print("\nStarting refinement and censoring...")
         for region in profane_regions:
             refined_region = self._refine_boundaries(audio_np, region)
+            
+            # Skip if refinement found no confirmed profanity
+            if refined_region is None:
+                continue
+
             start_time, end_time, label = refined_region
             
             # Censor by silencing the refined region

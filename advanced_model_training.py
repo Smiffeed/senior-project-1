@@ -56,7 +56,7 @@ class TrainingConfig:
     model_type: str = "wav2vec2_enhanced"  # wav2vec2_enhanced, cnn_lstm, transformer, ensemble
     data_path: str = "csv/main.csv"
     output_dir: str = "models/advanced_training"
-    num_epochs: int = 50
+    num_epochs: int = 100
     batch_size: int = 16
     learning_rate: float = 2e-5
     weight_decay: float = 0.01
@@ -419,6 +419,26 @@ class AudioDataCollator:
         
         return batch
 
+class AudioPadCollate:
+    """
+    Collator to pad audio samples to the maximum length in a batch.
+    This is for use with custom PyTorch models, not the HuggingFace Trainer.
+    """
+    def __call__(self, batch: List[Dict[str, torch.Tensor]]) -> Dict[str, torch.Tensor]:
+        # Find the maximum length of audio tensors in the batch
+        max_len = max(item['audio'].shape[0] for item in batch)
+
+        # Pad each audio tensor to the max length
+        padded_audios = torch.stack([
+            torch.nn.functional.pad(item['audio'], (0, max_len - item['audio'].shape[0]), 'constant', 0)
+            for item in batch
+        ])
+
+        # Stack labels
+        labels = torch.stack([item['label'] for item in batch])
+
+        return {'audio': padded_audios, 'label': labels}
+
 class AdvancedTrainer:
     """Advanced training system with multiple architectures and techniques."""
     
@@ -451,9 +471,21 @@ class AdvancedTrainer:
             
             # Stratified split
             from sklearn.model_selection import train_test_split
-            train_df, val_df = train_test_split(
-                df, test_size=0.2, stratify=df['label'], random_state=42
-            )
+            try:
+                train_df, val_df = train_test_split(
+                    df, test_size=0.2, stratify=df['label'], random_state=42
+                )
+                print("Successfully performed stratified split.")
+            except ValueError:
+                print("\n" + "="*50)
+                print("⚠️ WARNING: Could not perform stratified split.")
+                print("This is likely because one or more labels have only a single sample.")
+                print("Falling back to a non-stratified split. The class distribution in")
+                print("your training and validation sets may not be perfectly proportional.")
+                print("="*50 + "\n")
+                train_df, val_df = train_test_split(
+                    df, test_size=0.2, random_state=42
+                )
         
         return train_df, val_df
     
@@ -486,7 +518,7 @@ class AdvancedTrainer:
     def create_wav2vec2_model(self, num_classes: int):
         """Create enhanced Wav2Vec2 model."""
         model = Wav2Vec2ForSequenceClassification.from_pretrained(
-            "facebook/wav2vec2-base",
+            "airesearch/wav2vec2-large-xlsr-53-th",
             num_labels=num_classes,
             hidden_dropout=self.config.dropout_rate,
             attention_dropout=self.config.dropout_rate,
@@ -579,19 +611,22 @@ class AdvancedTrainer:
         val_dataset = AdvancedAudioDataset(val_df, self.config, None, False)
         
         # Data loaders
+        collate_fn = AudioPadCollate()
         train_loader = DataLoader(
             train_dataset, 
             batch_size=self.config.batch_size, 
             shuffle=True,
-            num_workers=4,
-            pin_memory=True
+            num_workers=0, # Setting to 0 to avoid potential multi-processing issues on Windows
+            pin_memory=True,
+            collate_fn=collate_fn
         )
         val_loader = DataLoader(
             val_dataset, 
             batch_size=self.config.batch_size, 
             shuffle=False,
-            num_workers=4,
-            pin_memory=True
+            num_workers=0, # Setting to 0 to avoid potential multi-processing issues on Windows
+            pin_memory=True,
+            collate_fn=collate_fn
         )
         
         # Loss function with class weights
@@ -620,25 +655,32 @@ class AdvancedTrainer:
         val_losses = []
         val_f1_scores = []
         
+        scaler = torch.cuda.amp.GradScaler(enabled=self.config.fp16)
+
         for epoch in range(self.config.num_epochs):
             # Training
             model.train()
             train_loss = 0
             
-            for batch in train_loader:
+            for i, batch in enumerate(train_loader):
                 audio = batch['audio'].to(self.device)
                 labels = batch['label'].to(self.device)
                 
-                optimizer.zero_grad()
-                outputs = model(audio)
-                loss = criterion(outputs, labels)
-                loss.backward()
+                with torch.cuda.amp.autocast(enabled=self.config.fp16):
+                    outputs = model(audio)
+                    loss = criterion(outputs, labels)
+                    loss = loss / self.config.gradient_accumulation_steps
+
+                scaler.scale(loss).backward()
                 
-                # Gradient clipping
-                torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
-                
-                optimizer.step()
-                train_loss += loss.item()
+                if (i + 1) % self.config.gradient_accumulation_steps == 0:
+                    scaler.unscale_(optimizer)
+                    torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+                    scaler.step(optimizer)
+                    scaler.update()
+                    optimizer.zero_grad()
+
+                train_loss += loss.item() * self.config.gradient_accumulation_steps
             
             scheduler.step()
             
@@ -723,14 +765,31 @@ class AdvancedTrainer:
             
             # Train model for this fold
             fold_config = self.config
-            fold_config.output_dir = f"{self.config.output_dir}/fold_{fold}"
+            fold_config.output_dir = f"{self.config.output_dir}/fold_{fold+1}"
             
             fold_trainer = AdvancedTrainer(fold_config)
-            model, _ = fold_trainer.train_model(train_df, val_df)
+            # The feature_extractor is returned here, which is crucial
+            model, feature_extractor = fold_trainer.train_model(train_df, val_df)
             
             # Evaluate
-            val_dataset = AdvancedAudioDataset(val_df, fold_config, None, False)
-            val_loader = DataLoader(val_dataset, batch_size=fold_config.batch_size, shuffle=False)
+            # --- FIX STARTS HERE ---
+            # Use the correct dataset, collator, and label key based on model type
+            if fold_config.model_type == "wav2vec2_enhanced":
+                val_dataset = AdvancedAudioDataset(val_df, fold_config, feature_extractor, is_training=False)
+                collate_fn = AudioDataCollator(feature_extractor)
+                label_key = 'labels'
+            else:
+                val_dataset = AdvancedAudioDataset(val_df, fold_config, None, is_training=False)
+                collate_fn = AudioPadCollate()
+                label_key = 'label'
+            # --- FIX ENDS HERE ---
+
+            val_loader = DataLoader(
+                val_dataset, 
+                batch_size=fold_config.batch_size, 
+                shuffle=False,
+                collate_fn=collate_fn
+            )
             
             model.eval()
             all_preds = []
@@ -738,20 +797,33 @@ class AdvancedTrainer:
             
             with torch.no_grad():
                 for batch in val_loader:
+                    # Move the entire batch to the correct device
+                    batch = {k: v.to(self.device) for k, v in batch.items()}
+
                     if fold_config.model_type == "wav2vec2_enhanced":
+                        # Unpack the batch with keys the model expects ('input_values', 'attention_mask', etc.)
                         outputs = model(**batch)
                         preds = torch.argmax(outputs.logits, dim=1)
                     else:
-                        audio = batch['audio'].to(self.device)
+                        # Use the 'audio' key for custom models
+                        audio = batch['audio']
                         outputs = model(audio)
                         preds = torch.argmax(outputs, dim=1)
                     
                     all_preds.extend(preds.cpu().numpy())
-                    all_labels.extend(batch['label'].cpu().numpy())
+                    # Use the correct label key determined earlier
+                    all_labels.extend(batch[label_key].cpu().numpy())
             
             fold_f1 = f1_score(all_labels, all_preds, average='weighted')
             cv_scores.append(fold_f1)
             print(f"Fold {fold + 1} F1 Score: {fold_f1:.4f}")
+
+            # Clean up memory
+            del model
+            del fold_trainer
+            del val_dataset
+            del val_loader
+            torch.cuda.empty_cache()
         
         print(f"\nCross-validation Results:")
         print(f"Mean F1 Score: {np.mean(cv_scores):.4f} ± {np.std(cv_scores):.4f}")
@@ -766,7 +838,7 @@ def main():
     parser.add_argument("--cross-validate", action="store_true", help="Perform cross-validation")
     parser.add_argument("--data-path", type=str, default="csv/balanced_main.csv", help="Path to training data")
     parser.add_argument("--output-dir", type=str, default="models/advanced_training", help="Output directory")
-    parser.add_argument("--num-epochs", type=int, default=50, help="Number of training epochs")
+    parser.add_argument("--num-epochs", type=int, default=100, help="Number of training epochs")
     parser.add_argument("--batch-size", type=int, default=16, help="Batch size")
     parser.add_argument("--learning-rate", type=float, default=2e-5, help="Learning rate")
     parser.add_argument("--quick-test", action="store_true", help="Quick test with 2 epochs and small batch")
