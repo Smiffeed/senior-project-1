@@ -6,7 +6,7 @@ def check_missing_files(csv_path):
     df = pd.read_csv(csv_path)
     
     # Get unique file paths
-    unique_files = df['File Name'].unique()
+    unique_files = df['file_path'].unique()
     
     # Store results
     missing_files = []
@@ -37,4 +37,4 @@ def check_missing_files(csv_path):
     return missing_files, existing_files
 
 # Usage
-missing_files, existing_files = check_missing_files('./csv/profanity_dataset_word.csv')
+missing_files, existing_files = check_missing_files('./csv/eval.csv')

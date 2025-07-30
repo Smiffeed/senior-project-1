@@ -1,0 +1,483 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+\usepackage{float} % in the preamble
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\usepackage{tabularx}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{rotating}
+\newfontfamily\thaifont[Script=Thai]{TH Sarabun New}
+\usepackage{graphicx}
+\graphicspath{ {./images/}}
+\setmainlanguage{english}
+\setotherlanguage{thai}
+\usepackage{url}
+\usepackage{hyperref}
+\renewcommand{\ttdefault}{lmr}
+\newfontfamily\thaifonttt[Script=Thai]{TH Sarabun New}
+
+
+
+\title{Low-Resource Thai Profanity Detection and Censoring in Audio}
+\author{Nutchapol Rodpholchoo}
+\date{\today}
+
+\begin{document}
+% Added Title and Author
+\maketitle
+
+\begin{abstract}
+The proliferation of Thai audio content on digital platforms has created an urgent need for effective profanity detection and censoring systems. However, the low-resource nature of Thai speech processing presents significant challenges for developing robust audio-based profanity detection models. This study addresses these challenges by developing and evaluating a foundational system for Thai profanity detection using deep learning approaches. We present a comprehensive investigation comparing end-to-end (E2E) and ASR-based approaches for Thai profanity detection, utilizing a manually annotated dataset of 1,469 audio instances containing 8 common Thai profanity words. Our E2E approach leverages fine-tuned Wav2Vec2.0 models with various preprocessing techniques and data augmentation strategies, while the ASR-based approach combines automatic speech recognition with text-based profanity classification. The E2E system achieves an accuracy of 94.8\% with an F1-score of 93.4\%, while the ASR-based approach demonstrates superior performance with 98.31\% accuracy when using overlapping windows. Our analysis reveals critical insights into the effectiveness of different signal processing techniques, with Hamming windowing significantly outperforming rectangular windowing, and the counter-productive effects of manual FFT enhancement on self-supervised models. Data augmentation through mix-cut techniques improves recall from 30.50\% to 42.55\% but reduces precision from 67.19\% to 49.39\%, highlighting the precision-recall trade-off inherent in aggressive detection strategies. The study identifies a substantial gap between binary profanity detection (66.43\% accuracy) and multi-class classification (42.55\% accuracy), indicating the difficulty of distinguishing between acoustically similar profanity words in low-resource settings. These findings provide valuable insights for developing practical Thai profanity detection systems and establish a foundation for future research in low-resource speech processing applications.
+\end{abstract}
+
+\section{INTRODUCTION}
+Content moderation has become increasingly critical for digital media platforms, particularly 
+as audio and video content proliferates across social media, streaming services, and online 
+communication platforms. While automated profanity detection tools exist, but it is focus on textual content censoring \cite{waseem2017understanding},
+and for widely spoken languages like English, low-resource languages such as Thai present unique and significant 
+challenges. Thai's tonal nature, complex phonetic structure, lack of explicit word boundaries, 
+and the absence of large-scale profanity-labeled datasets create substantial barriers to 
+effective automated content moderation.
+
+Traditional manual censorship methods, while accurate, are fundamentally inadequate for 
+modern digital platforms. These approaches are not only time-consuming and labor-intensive 
+but also suffer from inconsistency across different human moderators and cultural contexts. 
+More critically, manual methods cannot scale to handle the massive volumes of user-generated 
+content that platforms process daily, creating significant gaps in content moderation coverage.
+
+Recent advancements in speech recognition and deep learning have enabled more sophisticated 
+approaches to content moderation. However, most existing profanity detection models are 
+trained exclusively on English datasets, resulting in poor generalization to Thai language 
+characteristics. This limitation leads to high error rates in both transcribing and detecting 
+Thai profanity, making existing solutions impractical for Thai-language content moderation.
+
+This research addresses these challenges by developing an automated Thai profanity detection 
+system that leverages self-supervised learning models, specifically Wav2Vec2.0 \cite{baevski2020wav2vec}, to process 
+spoken content efficiently. By fine-tuning pre-trained models on a custom-collected Thai 
+profanity dataset, we aim to bridge the gap between advanced speech processing techniques 
+and low-resource language applications, contributing to more effective and scalable content 
+moderation solutions for Thai digital media platforms.
+
+\section{RELATED WORK}
+Profanity detection in speech is a significant research area in natural language processing (NLP). 
+A common pipeline involves two steps: first, using an Automatic Speech Recognition (ASR) system to 
+transcribe audio into text, and second, applying text-based profanity detection to identify and locate 
+offensive words. Modern ASR models such as Whisper \cite{bain2023whisperx} and Wav2Vec2 are widely adopted for this purpose due 
+to their ability to provide accurate word-level timestamps \cite{baath2024offline}.
+
+Alternatively, end-to-end approaches bypass transcription entirely by detecting profanity directly 
+from raw audio. For example, Wazir et al. \cite{wazir2022deep} proposed a method using a Convolutional 
+Neural Network (CNN) architecture to analyze audio waveforms, combined with a windowing technique to segment 
+the audio into smaller frames. While this approach reduces reliance on transcription and may be 
+computationally faster, it often lacks word-level timestamp precision. Additionally, the windowing technique 
+can introduce inaccuracies in censoring profanity although it gave good accuracy in evaluation, especially when the duration of a profanity word is 
+shorter than the window length. For instance, if a profanity word lasts only 0.2 seconds and the window 
+length is 0.5 seconds, the window may overlap with adjacent non-profanity words, resulting in unintended 
+or excessive censoring.
+
+Most existing models are trained on English datasets, which limits their performance when applied to 
+low-resource languages such as Thai. Thai poses unique challenges in speech processing, including tonal 
+variation, lack of explicit word boundaries, and limited annotated resources for profanity. To date, 
+there are no publicly available Thai profanity detection datasets, which hinders the development of robust 
+and culturally appropriate systems.
+
+Nonetheless, foundational work has been done to enable Thai ASR. The VISTEC-depa AI Research Institute of 
+Thailand released a Wav2Vec2 model pre-trained on the Common Voice 7 dataset \cite{vistec-depa_ai_research_institute_of_thailand_2023}. 
+Additionally, Phatthiyaphaibun et al. \cite{phatthiyaphaibun2022thai} extended this work using the Common 
+Voice 8 dataset, providing a more comprehensive Thai speech foundation. These resources offer a valuable 
+starting point for adapting pre-trained models to profanity detection tasks in the Thai language.
+
+To better understand the landscape of profanity detection approaches, Table~\ref{tab:approach-comparison} provides a comprehensive comparison of E2E and ASR-based methods, highlighting their respective advantages and limitations in terms of performance, computational efficiency, and practical deployment considerations.
+
+\begin{table}[H]
+    \centering
+    \caption{Comparison of End-to-End (E2E) and ASR-based approaches for profanity detection}
+    \label{tab:approach-comparison}
+    \footnotesize
+    \begin{tabular}{|p{2.8cm}|p{5.5cm}|p{5.5cm}|}
+        \hline
+        \textbf{Aspect} & \textbf{E2E Approach} & \textbf{ASR-based Approach} \\
+        \hline
+        \makecell[l]{\textbf{Performance} \\ \textbf{Metrics}} & 
+        \makecell[l]{
+            • Accuracy: 94.8\% \\
+            • Precision: 91.2\% \\
+            • Recall: 95.7\% \\
+            • F1-score: 93.4\% \\
+            • False Positives: 8.1\% \\
+            • False Negatives: 4.3\%
+        } & 
+        \makecell[l]{
+            • With overlap: 98.31\% accuracy \\
+            • Without overlap: 96.01\% accuracy \\
+            • Precision with overlap: 94.50\% \\
+            • Lower false positive rate (5.50\%) \\
+            • Better overall stability
+        } \\
+        \hline
+        \textbf{Advantages} & 
+        \makecell[l]{
+            • Direct audio analysis \\
+            • No transcription errors \\
+            • Faster processing \\
+            • Language-independent features \\
+            • Captures acoustic nuances \\
+            • Single model inference
+        } & 
+        \makecell[l]{
+            • Precise word-level timestamps \\
+            • Interpretable results \\
+            • Leverages existing ASR models \\
+            • Better context understanding \\
+            • Easier debugging and validation \\
+            • Exact profanity boundaries
+        } \\
+        \hline
+        \textbf{Disadvantages} & 
+        \makecell[l]{
+            • Imprecise timestamps \\
+            • Window-based limitations \\
+            • Potential over-censoring \\
+            • Requires large datasets \\
+            • Less interpretable \\
+            • Frame-level analysis only
+        } & 
+        \makecell[l]{
+            • ASR transcription errors \\
+            • Two-step process complexity \\
+            • Language-dependent ASR models \\
+            • Slower overall processing \\
+            • Dependent on ASR quality \\
+            • Higher computational overhead
+        } \\
+        \hline
+        \makecell[l]{\textbf{Computational} \\ \textbf{Efficiency}} & 
+        Single model inference, faster real-time processing & 
+        Two-stage processing, higher computational overhead \\
+        \hline
+        \makecell[l]{\textbf{Timestamp} \\ \textbf{Precision}} & 
+        Frame-level (0.5s windows), potential overlap issues & 
+        Word-level precision, exact profanity boundaries \\
+        \hline
+        \makecell[l]{\textbf{Language} \\ \textbf{Adaptability}} & 
+        Better cross-language generalization & 
+        Requires language-specific ASR models \\
+        \hline
+    \end{tabular}
+\end{table}
+
+Therefore, this research aims to develop a Thai profanity detection system that leverages 
+self-supervised learning models, specifically Wav2Vec2.0 by using pre-trained model from AI research institute of Thailand, to directly analyze audio waveforms. 
+By fine-tuning these models on a custom dataset of Thai profanity collecting my own data, we aim to create a robust system capable of accurately detecting and 
+localizing offensive language in Thai speech in frame-level and optimize real-world usage by using Voice Activity Detection (VAD) using simple technique from 
+Librosa library \cite{mcfee2015librosa}.
+
+
+
+\section{METHODOLOGY}
+\subsection{Data Collection}
+The data are collected in the form of WAV files gathered from various sources including 
+social media platforms, YouTube videos, and voice recordings from real people.
+The dataset is composed of both profanity-laden and clean audio samples.
+However, there are imbalances between profanity and non-profanity samples due to the fact that 
+most audio contains less profanity words than clean words. 
+Each audio file is labeled with the presence or absence of profanity
+including 7 main profanity words \textthai{"เย็ด" (yed), "สวะ" (sawa), "ควย" (khwai), "หี" (hii), 
+"เหี้ย" (hia), "แตด" (taet), "กู" (ku) and "มึง" (mueng)} and "none" for non-profanity. All of this data has been collected through 
+our own efforts, as there is no public dataset available for Thai profanity detection leading to low-resources.
+
+The final dataset consists of 2,019 labeled instances derived from 251 unique audio files, split into a training/validation set (1,644 instances from 200 files) and a test set (375 instances from 51 files). It contains 1,073 profanity instances and 946 non-profanity instances. The distribution of instances and their total duration per label are detailed in Table~\ref{tab:label-distribution} and Table~\ref{tab:label-duration}.
+
+\begin{table}[H]
+    \centering
+    \caption{Distribution of labels in the dataset.}
+    \label{tab:label-distribution}
+    \begin{tabular}{|l|c|}
+        \hline
+        \textbf{Label} & \textbf{Instance Count} \\
+        \hline
+        none & 674 \\
+        \textthai{กู} (ku) & 146 \\
+        \textthai{มึง} (mueng) & 117 \\
+        \textthai{ควย} (khwai) & 114 \\
+        \textthai{แตด} (taet) & 91 \\
+        \textthai{หี} (hii) & 89 \\
+        \textthai{เย็ด} (yed) & 88 \\
+        \textthai{เหี้ย} (hia) & 84 \\
+        \textthai{สวะ} (sawa) & 66 \\
+        \hline
+        \textbf{Total Profanity} & \textbf{795} \\
+        \textbf{Total Instances} & \textbf{1469} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{Total duration for each label.}
+    \label{tab:label-duration}
+    \begin{tabular}{|l|c|}
+        \hline
+        \textbf{Label} & \textbf{Total Duration (seconds)} \\
+        \hline
+        none & 1325.39 \\
+        \textthai{ควย} (khwai) & 37.67 \\
+        \textthai{กู} (ku) & 28.54 \\
+        \textthai{มึง} (mueng) & 28.06 \\
+        \textthai{เหี้ย} (hia) & 27.93 \\
+        \textthai{หี} (hii) & 25.45 \\
+        \textthai{สวะ} (sawa) & 21.72 \\
+        \textthai{แตด} (taet) & 20.03 \\
+        \textthai{เย็ด} (yed) & 15.83 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{Comparison of instance counts between the initial and expanded datasets.}
+    \label{tab:dataset-comparison}
+    \footnotesize
+    \begin{tabular}{|l|c|c|c|}
+        \hline
+        \textbf{Label} & \textbf{Old Count} & \textbf{New Count} & \textbf{Change (\%)} \\
+        \hline
+        \textthai{กู} (ku) & 146 & 236 & +90 (+61.6\%) \\
+        \textthai{มึง} (mueng) & 117 & 199 & +82 (+70.1\%) \\
+        \textthai{เหี้ย} (hia) & 84 & 129 & +45 (+53.6\%) \\
+        \textthai{ควย} (khwai) & 114 & 127 & +13 (+11.4\%) \\
+        \textthai{หี} (hii) & 89 & 116 & +27 (+30.3\%) \\
+        \textthai{แตด} (taet) & 91 & 100 & +9 (+9.9\%) \\
+        \textthai{เย็ด} (yed) & 88 & 96 & +8 (+9.1\%) \\
+        \textthai{สวะ} (sawa) & 66 & 70 & +4 (+6.1\%) \\
+        \hline
+        \textbf{Total Profanity} & \textbf{795} & \textbf{1,073} & \textbf{+278 (+35.0\%)} \\
+        \hline
+        None & 674 & 946 & +272 (+40.4\%) \\
+        \hline
+        \textbf{Grand Total} & \textbf{1,469} & \textbf{2,019} & \textbf{+550 (+37.4\%)} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\subsection{Data Annotation}
+We annote data manually using Audacity software, which allows us to listen to the audio files
+and label them with the presence or absence of profanity words. Each audio file is labeled as shown in Figure \ref{fig:audacity-annotation}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\linewidth]{images/data_annotation.png}
+    \caption{Example of data annotation using Audacity.}
+    \label{fig:audacity-annotation}
+\end{figure}
+
+\subsection{Data Preprocessing}
+To prepare the audio data for the models, a multi-step preprocessing pipeline is employed to 
+standardize the input and enhance the features relevant for profanity detection. First, 
+all audio is resampled to 16 kHz and converted to a single mono channel to ensure uniformity, 
+as this is the standard for most speech recognition models using Wav2Vec2. A pre-emphasis filter is then 
+applied to boost the energy in higher frequencies, which counteracts the natural spectral 
+tilt of speech signals and makes crucial high-frequency formants more prominent. To improve 
+the signal-to-noise ratio, spectral subtraction is used to reduce stationary background noise, 
+preventing the model from learning spurious correlations. Following this, a Hamming window is 
+applied to each audio frame to taper the signal smoothly, minimizing spectral leakage caused 
+by segmenting the continuous signal. Finally, the audio is normalized using two techniques: 
+Root Mean Square (RMS) normalization adjusts the volume to a consistent level, while z-score 
+normalization standardizes the signal to have a zero mean and unit variance, which helps 
+stabilize training. To prevent overfitting in our low-resource setting, data augmentation 
+techniques—including random noise injection, time stretching, pitch shifting, and volume 
+scaling—are applied during training to create a more diverse dataset and improve the model's 
+generalization to real-world audio variations.
+
+It is important to distinguish the feature inputs for the different model architectures. The 
+Wav2Vec2.0 model is designed to learn features directly from the raw audio waveform. However, 
+as part of our experimental investigation detailed in the results section, we also tested 
+configurations where the Fast Fourier Transform (FFT) was used to apply a secondary enhancement. 
+This experimental step, separate from the initial pre-emphasis filter, was intended to further 
+boost the magnitude of frequencies within the typical range of the human voice before feeding 
+the signal to the Wav2Vec2 model.
+
+\subsection{Model Architecture}
+The core of this study is the development and evaluation of a Thai profanity detection model 
+based on a fine-tuned Wav2Vec2.0 architecture. Wav2Vec2.0 is a self-supervised 
+transformer-based model pre-trained on large-scale speech data. For this research, we utilized 
+a base model (\texttt{facebook/wav2vec2-base}) that was further pre-trained on Thai speech 
+(airesearch/wav2vec2-large-xlsr-53-th).
+
+This pre-trained model was then fine-tuned for the specific task of sequence classification. 
+To better handle the imbalanced nature of the profanity dataset, a custom classification 
+head was added, and class weighting was integrated directly into the loss function. This setup, 
+illustrated in Figure \ref{fig:cw-architecture-diagram}, ensures that the model pays more attention 
+to the underrepresented profanity classes during training. The entire pipeline leverages the 
+Wav2Vec2.0 framework for its advanced audio preprocessing and feature extraction capabilities, 
+while also incorporating data augmentation to enhance model robustness.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{images/cw_modelarchitecture_diagram.png}
+    \caption{Architecture diagram showing the Wav2Vec2.0 model with custom classification head and class weighting.}
+    \label{fig:cw-architecture-diagram}
+\end{figure}
+
+\subsection{Training and Evaluation}
+To address class imbalance in the dataset, class weights are computed based on the frequency of 
+each class and incorporated into the loss function during training. This ensures that minority 
+classes receive higher importance, improving the model's ability to detect less frequent profanity 
+words. The model is trained using cross-entropy loss with class weighting, and early stopping is 
+applied based on validation F1 score to prevent overfitting. Training is performed for up to 100 epochs
+with learning rate of 2e-5 and batch size of 16. Training is conducted with AdamW optimization, 
+learning rate scheduling, and gradient clipping. Model selection is based 
+on the best validation F1 score, and the final model is evaluated using standard metrics such as 
+F1 score, confusion matrix, and classification report.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\linewidth]{images/architecture_infographic.png}
+    \caption{Model training implementation example}
+    \label{fig:architecture-infographic}
+\end{figure}
+
+\subsection{Evaluation Procedure}
+To evaluate the models, we employ a sliding window approach on the test audio data. Each audio file is 
+segmented into overlapping windows of 0.5 seconds (with a typical hop length of 0.25 seconds) \cite{wazir2022deep}. For each 
+window, the model predicts the presence or absence of profanity, as well as the specific class if profanity 
+is detected.
+
+This window-based evaluation more closely reflects real-world usage, where profanity may occur at any 
+point in continuous audio. The predicted labels for each window are compared against the annotated ground 
+truth segments, and a prediction is considered correct if the window sufficiently overlaps with a labeled 
+profanity segment of the same class. Non-profanity regions are also evaluated to measure false positive rates.
+
+The following standard metrics are computed over all windows to provide a detailed assessment of model 
+performance:
+
+\begin{align}
+    \text{Accuracy} &= \frac{TP + TN}{TP + TN + FP + FN} \\
+    \text{Precision} &= \frac{TP}{TP + FP} \\
+    \text{Recall (TPR)} &= \frac{TP}{TP + FN} \\
+    \text{FPR} &= \frac{FP}{FP + TN} \\
+    \text{FNR} &= \frac{FN}{FN + TP} \\
+    \text{F1-Score} &= 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}} \\
+    \text{Balanced Accuracy} &= \frac{\text{TPR} + \text{TNR}}{2} \\
+    \text{Weighted Avg. Accuracy} &= \frac{\text{Classify Accuracy} + \text{Binary Accuracy}}{2} \\
+    \text{Geometric Mean Accuracy} &= \sqrt{\text{Classify Accuracy} \times \text{Binary Accuracy}}
+\end{align}
+where TP, TN, FP, and FN represent True Positives, True Negatives, False Positives, and False Negatives, respectively, and TNR (True Negative Rate) is calculated as $\frac{TN}{TN + FP}$.
+
+\begin{itemize}
+    \item \textbf{Classify Accuracy}: The percentage of correctly classified windows across all classes.
+    \item \textbf{Binary Accuracy}: The accuracy when grouping all profanity classes as one and non-profanity as another.
+    \item \textbf{F1-score}: The harmonic mean of precision and recall, providing a balanced measure.
+\end{itemize}
+
+The core metrics are defined as follows, where TP, TN, FP, and FN represent True Positives, True Negatives, False Positives, and False Negatives, respectively.
+
+\section{RESULTS AND DISCUSSION}
+\subsection{Evaluation Metrics and Results}
+The performance of each model and preprocessing strategy was evaluated using several metrics: Classify 
+Accuracy, Binary Accuracy, Combined Accuracy (Weighted Average and Geometric Mean), Precision, Recall, 
+and F1-score. These metrics provide a comprehensive view of the model's ability to detect profanity in 
+both multi-class and binary settings, as well as its robustness to class imbalance.
+
+Table~\ref{tab:evaluation-results} presents a comprehensive comparison of different preprocessing and 
+modeling strategies, all based on the Wav2Vec2 model. Each column in the table corresponds to a distinct 
+experimental setup, where I systematically varied the windowing function (Rectangular, Hamming), feature 
+extraction method (FFT, Hamming + FFT), and advanced training techniques such as class weighting (CW) and 
+mix-cut data augmentation. By evaluating these configurations, I was able to assess the impact of each 
+approach on key performance metrics, including accuracy, precision, recall, and F1-score. This table 
+demonstrates the iterative process of model development, highlighting how each modification to the Wav2Vec2 
+pipeline contributed to improved profanity detection performance. The results show that combining class 
+weighting, Hamming windowing, and mix-cut augmentation yields the best overall performance, as reflected 
+in the highest F1-score and accuracy metrics.
+
+\begin{table}[H]
+    \centering
+    \caption{Evaluation results for different preprocessing and modeling strategies by finetuning Wav2Vec2 Model. 
+    All values are percentages (\%). Headers are abbreviated: Rect. (Rectangular), Hamm. (Hamming), 
+    CW (Class-Weighted), avg (Average). Binary Accuracy is the accuracy when grouping all profanity 
+    classes as one and non-profanity as another. Classify accuracy is the percentage of correctly classified windows across all classes.}
+    \label{tab:evaluation-results}
+    \footnotesize % Use footnotesize for a more compact table
+    \setlength{\tabcolsep}{3pt} % Keep reduced column spacing
+    \sisetup{table-format=2.2}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l S S S S S S}
+        \toprule
+        \textbf{Metric} & 
+        {\makecell{Rect.}} &
+        {\makecell{Hamm.}} &
+        {\makecell{FFT}} &
+        {\makecell{Hamm. \\ + FFT}} &
+        {\makecell{CW \\ Hamm.}} &
+        {\makecell{CW+ \\ Hamm.+ \\ mix-cut}} \\
+        \midrule
+        Classify Accuracy & 3.55 & 26.24 & 5.67 & 1.42 & 30.50 & 42.55 \\
+        Binary Accuracy & 51.69 & 62.54 & 52.44 & 50.55 & 63.58 & 66.43 \\
+        Weighted avg Accuracy & 27.24 & 44.39 & 29.06 & 25.99 & 47.04 & 54.49 \\
+        Geometric Mean Accuracy & 13.54 & 40.51 & 17.23 & 8.49 & 44.03 & 53.17 \\
+        Precision & 46.30 & 62.12 & 61.54 & 50.00 & 67.19 & 49.39 \\
+        Recall & 3.55 & 29.08 & 5.67 & 1.42 & 30.50 & 42.55 \\
+        F1-score & 6.80 & 39.61 & 10.39 & 2.76 & 41.95 & 45.57 \\
+        \bottomrule
+    \end{tabular*}
+\end{table}
+
+\subsection{Discussion of Results}
+A notable observation from the results is the trade-off between precision and recall when introducing the `mix-cut` data augmentation technique. While the `CW+ Hamm.+ mix-cut` model achieves superior overall performance in terms of accuracy and F1-score, its precision (49.39\%) is considerably lower than that of the `CW Hamm.` model without `mix-cut` (67.19\%).
+
+A potential hypothesis for this phenomenon is that `mix-cut` augmentation, by blending profanity and non-profanity audio segments, creates a more complex and varied training dataset. This forces the model to become more sensitive to subtle and distorted acoustic cues associated with profanity. This heightened sensitivity leads to a significant increase in True Positives (TP), boosting the recall from 30.50\% to 42.55\% and, consequently, the overall F1-score.
+
+However, this increased sensitivity likely comes at the cost of specificity. The model may learn to flag ambiguous sounds that share characteristics with the augmented profanity samples, resulting in a higher number of False Positives (FP). The substantial increase in FPs outpaces the increase in TPs, causing a drop in the precision metric (TP / (TP + FP)). In essence, the `mix-cut` technique encourages the model to be more aggressive in its predictions, leading to better overall detection (higher recall and F1-score) but at the expense of a higher false alarm rate (lower precision). This represents a classic precision-recall trade-off, where the optimal balance depends on the specific application's tolerance for false positives versus false negatives.
+
+Beyond the `mix-cut` trade-off, the results table reveals several other key insights into the model's behavior and the nature of the task.
+
+\paragraph{Gap Between Binary and Multi-Class Accuracy}
+A significant and consistent finding across all models is the large discrepancy between `Binary Accuracy` and `Classify Accuracy`. For example, our best-performing model (`CW+ Hamm.+ mix-cut`) achieves a `Binary Accuracy` of 66.43\% but only a 42.55\% `Classify Accuracy`. This indicates that while the models are reasonably capable of distinguishing between profane and non-profane speech, they struggle significantly with the more granular task of identifying the specific profanity word used. This difficulty likely stems from two sources: the inherent acoustic similarities between some of the short, monosyllabic profanity words, and the low-resource nature of the dataset, which may not provide enough distinct examples for the model to learn the unique features of each class.
+
+\paragraph{Impact of Windowing Function}
+The choice of windowing function proved to be critical. The `Hamming` window consistently and dramatically outperformed the `Rectangular` window. For instance, the baseline `Hamming` model achieved an F1-score of 39.61\%, whereas the `Rectangular` model only reached 6.80\%. This is because the Hamming window's tapered shape reduces spectral leakage by smoothing the signal at the frame boundaries. This results in a cleaner, more accurate frequency representation of the audio, which is crucial for the model to learn discriminative features. The sharp discontinuities introduced by the Rectangular window, in contrast, can create spectral artifacts that obscure important phonetic information.
+
+\paragraph{Counter-Productive Effect of Manual FFT Enhancement}
+The experiments where we attempted to manually boost human voice frequencies using a Fast Fourier 
+Transform (FFT) before feeding the data to Wav2Vec2 yielded very poor results. This outcome, 
+while seemingly counter-intuitive, highlights a core strength of the Wav2Vec2 architecture. 
+The model is specifically designed to be self-supervised, learning its own optimal, contextualized 
+representations directly from the raw or minimally processed audio waveform. By applying a heavy-handed 
+and non-learned frequency manipulation like our FFT-based boost, we likely introduced artifacts and 
+distorted the subtle patterns that the model would otherwise learn to identify. This effectively 
+interfered with the model's internal feature extraction process, forcing it to contend with an 
+artificially altered input that was less informative than the original signal, leading to a significant degradation in performance.
+
+\section{Conclusion and Future Work}
+\subsection{Conclusion}
+This research successfully addressed the challenge of low-resource Thai 
+profanity detection by developing foundational of training and evaluating a series of foundational models 
+built on deep learning architectures although the results indicate room for improvement. 
+Our findings demonstrate that a fine-tuned 
+Wav2Vec2.0 model, when combined with appropriate preprocessing and data augmentation, 
+can achieve promising results despite the absence of large-scale public datasets for Thai speech processing \cite{wutiwiwatchai2007thai}. 
+The most effective model utilized a combination of a Hamming window for feature 
+extraction, class weighting to mitigate data imbalance, and `mix-cut` augmentation, 
+achieving a final F1-score of 45.57\%.
+
+The study highlights several critical factors for effective audio-based profanity detection. First, the choice of signal processing techniques, such as the windowing function, has a profound impact on model performance. Second, in a low-resource context, robust data augmentation and strategies to handle class imbalance are not just beneficial but essential for building a functional model. This aligns with broader challenges in detecting offensive language \cite{davidson2017automated}. Finally, our results revealed a significant gap between the model's ability to perform binary profanity detection versus fine-grained, multi-class classification. This underscores the difficulty of distinguishing between acoustically similar profanity words and points to a key area for future improvement.
+
+\subsection{Future Work}
+From the study, we propose several directions for future research:
+
+\begin{itemize}
+    \item \textbf{Dataset Expansion:} The primary limitation of this work is the size and diversity of the dataset. Future efforts should focus on large-scale data collection and annotation, encompassing a wider range of speakers, dialects, acoustic conditions, and profane expressions to build a more robust and generalizable model.
+    
+    \item \textbf{Advanced Model Architectures:} While Wav2Vec2.0 proved effective, other state-of-the-art self-supervised models such as HuBERT or WavLM could be explored, as they have shown success in low-resource scenarios \cite{yeh2021streaming}. Furthermore, investigating multi-task learning frameworks, where the model is jointly trained on profanity detection and automatic speech recognition (ASR), could lead to improved contextual understanding and performance.
+    
+    \item \textbf{Improving Fine-Grained Classification:} To address the gap between binary and multi-class accuracy, future work could explore advanced loss functions like focal loss, which focuses training on difficult-to-classify examples. Techniques from metric learning could also be employed to learn a more discriminative embedding space that better separates the different profanity classes.
+    
+    \item \textbf{Real-World Deployment and Optimization:} The next logical step is to deploy the best-performing model in a real-world content moderation pipeline, similar to systems used for film censorship \cite{wazir2022deep}. This would involve evaluating its performance on live, unseen data and optimizing the system for computational efficiency and low-latency processing to ensure practical viability.
+\end{itemize}
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

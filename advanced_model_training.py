@@ -46,18 +46,38 @@ from transformers.data.data_collator import DataCollatorWithPadding
 import warnings
 warnings.filterwarnings('ignore')
 
-# Set device
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-print(f"Using device: {device}")
+# Set device and optimize for RTX 5070
+def get_device_info():
+    """Get device information only when needed."""
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    if torch.cuda.is_available():
+        # Enable cuDNN benchmark for consistent input sizes
+        torch.backends.cudnn.benchmark = True
+        # Set memory format for better Tensor Core utilization
+        torch.backends.cudnn.allow_tf32 = True
+        torch.backends.cuda.matmul.allow_tf32 = True
+    return device
+
+# Initialize device only once at module level
+device = get_device_info()
+
+# Print device info only in main process to avoid worker spam
+import multiprocessing
+if multiprocessing.current_process().name == 'MainProcess':
+    print(f"Using device: {device}")
+    if torch.cuda.is_available():
+        print(f"GPU: {torch.cuda.get_device_name()}")
+        print(f"CUDA Capability: {torch.cuda.get_device_capability()}")
+        print(f"Available VRAM: {torch.cuda.get_device_properties(0).total_memory / 1024**3:.1f} GB")
 
 @dataclass
 class TrainingConfig:
     """Configuration for advanced model training."""
     model_type: str = "wav2vec2_enhanced"  # wav2vec2_enhanced, cnn_lstm, transformer, ensemble
-    data_path: str = "csv/main.csv"
+    data_path: str = "csv/train.csv"
     output_dir: str = "models/advanced_training"
     num_epochs: int = 100
-    batch_size: int = 16
+    batch_size: int = 32  # Optimized for RTX 5070's 12GB VRAM - sweet spot for memory bandwidth
     learning_rate: float = 2e-5
     weight_decay: float = 0.01
     dropout_rate: float = 0.3
@@ -67,8 +87,9 @@ class TrainingConfig:
     early_stopping_patience: int = 10
     save_best_only: bool = True
     warmup_steps: int = 500
-    gradient_accumulation_steps: int = 2
-    fp16: bool = True
+    gradient_accumulation_steps: int = 1  # RTX 5070 works better with smaller accumulation steps
+    fp16: bool = True   # RTX 5070 performs better with FP16 than BF16
+    bf16: bool = False  # Disabled for RTX 5070 - FP16 is faster
     
     # Advanced features
     use_mixup: bool = True
@@ -104,8 +125,11 @@ class AdvancedAudioDataset(Dataset):
             'ควย': 5, 'สวะ': 6, 'หี': 7, 'แตด': 8
         }
         
-        print(f"Dataset initialized with {len(self.df)} samples")
-        print(f"Label distribution: {self.df['label'].value_counts().to_dict()}")
+        # Only print dataset info in main process to avoid spam from workers
+        import multiprocessing
+        if multiprocessing.current_process().name == 'MainProcess':
+            print(f"Dataset initialized with {len(self.df)} samples")
+            print(f"Label distribution: {self.df['label'].value_counts().to_dict()}")
     
     def __len__(self):
         return len(self.df)
@@ -247,7 +271,7 @@ class AdvancedAudioDataset(Dataset):
                 return_tensors="pt", 
                 padding=True,
                 truncation=True,
-                max_length=160000  # 10 seconds at 16kHz
+                max_length=80000  # Reduced to 5 seconds for RTX 5070 optimization
             )
             return {
                 'input_values': inputs.input_values.squeeze(),
@@ -516,9 +540,10 @@ class AdvancedTrainer:
             raise ValueError(f"Unknown model type: {self.config.model_type}")
     
     def create_wav2vec2_model(self, num_classes: int):
-        """Create enhanced Wav2Vec2 model."""
+        """Create enhanced Wav2Vec2 model optimized for RTX 5070."""
+        # Use base model instead of large for RTX 5070 - better memory efficiency and speed
         model = Wav2Vec2ForSequenceClassification.from_pretrained(
-            "airesearch/wav2vec2-large-xlsr-53-th",
+            "facebook/wav2vec2-base",  # Changed from large Thai model to base for RTX 5070
             num_labels=num_classes,
             hidden_dropout=self.config.dropout_rate,
             attention_dropout=self.config.dropout_rate,
@@ -528,7 +553,7 @@ class AdvancedTrainer:
         
         # The model already has a classifier, we can optionally enhance it
         # But let's keep the default one for now to ensure compatibility
-        print(f"Model created with {num_classes} output classes")
+        print(f"Model created with {num_classes} output classes (optimized for RTX 5070)")
         
         return model.to(self.device)
     
@@ -566,6 +591,8 @@ class AdvancedTrainer:
             warmup_steps=self.config.warmup_steps,
             gradient_accumulation_steps=self.config.gradient_accumulation_steps,
             fp16=self.config.fp16,
+            bf16=self.config.bf16,
+            torch_compile=False, # Disabled: Triton not available on Windows
             eval_strategy="epoch",  # Updated from evaluation_strategy
             save_strategy="epoch",
             load_best_model_at_end=True,
@@ -573,14 +600,14 @@ class AdvancedTrainer:
             greater_is_better=True,
             save_total_limit=3,
             logging_steps=50,
-            # dataloader_num_workers=4,  # Removed as this may be deprecated
+            dataloader_pin_memory=True,
         )
         
-        # Custom data collator for variable length sequences
+        # Custom data collator for variable length sequences (optimized for RTX 5070)
         data_collator = AudioDataCollator(
             feature_extractor=feature_extractor,
             padding=True,
-            max_length=160000  # 10 seconds at 16kHz
+            max_length=80000  # Reduced from 160000 (5 seconds instead of 10) for RTX 5070 efficiency
         )
         
         # Trainer
@@ -605,6 +632,7 @@ class AdvancedTrainer:
     def train_pytorch_model(self, train_df: pd.DataFrame, val_df: pd.DataFrame, num_classes: int):
         """Train PyTorch model with custom training loop."""
         model = self.create_model(num_classes)
+        # model = torch.compile(model)  # Disabled: Triton not available on Windows
         
         # Create datasets
         train_dataset = AdvancedAudioDataset(train_df, self.config, None, True)
@@ -616,7 +644,7 @@ class AdvancedTrainer:
             train_dataset, 
             batch_size=self.config.batch_size, 
             shuffle=True,
-            num_workers=0, # Setting to 0 to avoid potential multi-processing issues on Windows
+            num_workers=self.config.num_workers,
             pin_memory=True,
             collate_fn=collate_fn
         )
@@ -624,7 +652,7 @@ class AdvancedTrainer:
             val_dataset, 
             batch_size=self.config.batch_size, 
             shuffle=False,
-            num_workers=0, # Setting to 0 to avoid potential multi-processing issues on Windows
+            num_workers=self.config.num_workers,
             pin_memory=True,
             collate_fn=collate_fn
         )
@@ -842,6 +870,7 @@ def main():
     parser.add_argument("--batch-size", type=int, default=16, help="Batch size")
     parser.add_argument("--learning-rate", type=float, default=2e-5, help="Learning rate")
     parser.add_argument("--quick-test", action="store_true", help="Quick test with 2 epochs and small batch")
+    parser.add_argument("--rtx5070-optimized", action="store_true", help="Use RTX 5070 optimized settings")
     
     args = parser.parse_args()
     
@@ -860,6 +889,22 @@ def main():
                 num_epochs=2,
                 batch_size=8,
                 early_stopping_patience=3
+            )
+        elif args.rtx5070_optimized:
+            # RTX 5070 optimized configuration
+            config = TrainingConfig(
+                model_type=args.model_type,
+                data_path=args.data_path,
+                output_dir=args.output_dir,
+                num_epochs=args.num_epochs,
+                batch_size=48,  # Optimal for RTX 5070's memory bandwidth
+                learning_rate=3e-5,  # Slightly higher for faster convergence
+                fp16=True,  # RTX 5070 performs better with FP16
+                bf16=False,
+                gradient_accumulation_steps=1,  # Better for RTX 5070
+                num_workers=8,  # RTX 5070 can handle more workers
+                dropout_rate=0.2,  # Reduced for faster training
+                warmup_steps=300,  # Reduced warmup
             )
         else:
             config = TrainingConfig(

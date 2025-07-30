@@ -1,0 +1,217 @@
+{
+  "model_path": "./models/new_mix_w2v2V2/final_model",
+  "eval_data_path": "./csv/eval_windowed_0.3s.csv",
+  "optimal_threshold": 0.1,
+  "threshold_metrics": {
+    "0.1": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "accuracy": 0.94,
+      "tp": 0,
+      "fp": 54,
+      "tn": 940,
+      "fn": 6
+    },
+    "0.15000000000000002": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "accuracy": 0.94,
+      "tp": 0,
+      "fp": 54,
+      "tn": 940,
+      "fn": 6
+    },
+    "0.20000000000000004": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "accuracy": 0.941,
+      "tp": 0,
+      "fp": 53,
+      "tn": 941,
+      "fn": 6
+    },
+    "0.25000000000000006": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "accuracy": 0.954,
+      "tp": 0,
+      "fp": 40,
+      "tn": 954,
+      "fn": 6
+    },
+    "0.30000000000000004": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "accuracy": 0.992,
+      "tp": 0,
+      "fp": 2,
+      "tn": 992,
+      "fn": 6
+    },
+    "0.3500000000000001": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "accuracy": 0.992,
+      "tp": 0,
+      "fp": 2,
+      "tn": 992,
+      "fn": 6
+    },
+    "0.40000000000000013": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "accuracy": 0.992,
+      "tp": 0,
+      "fp": 2,
+      "tn": 992,
+      "fn": 6
+    },
+    "0.45000000000000007": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0,
+      "accuracy": 0.993,
+      "tp": 0,
+      "fp": 1,
+      "tn": 993,
+      "fn": 6
+    },
+    "0.5000000000000001": {
+      "precision": 0,
+      "recall": 0.0,
+      "f1": 0,
+      "accuracy": 0.994,
+      "tp": 0,
+      "fp": 0,
+      "tn": 994,
+      "fn": 6
+    },
+    "0.5500000000000002": {
+      "precision": 0,
+      "recall": 0.0,
+      "f1": 0,
+      "accuracy": 0.994,
+      "tp": 0,
+      "fp": 0,
+      "tn": 994,
+      "fn": 6
+    },
+    "0.6000000000000002": {
+      "precision": 0,
+      "recall": 0.0,
+      "f1": 0,
+      "accuracy": 0.994,
+      "tp": 0,
+      "fp": 0,
+      "tn": 994,
+      "fn": 6
+    },
+    "0.6500000000000001": {
+      "precision": 0,
+      "recall": 0.0,
+      "f1": 0,
+      "accuracy": 0.994,
+      "tp": 0,
+      "fp": 0,
+      "tn": 994,
+      "fn": 6
+    },
+    "0.7000000000000002": {
+      "precision": 0,
+      "recall": 0.0,
+      "f1": 0,
+      "accuracy": 0.994,
+      "tp": 0,
+      "fp": 0,
+      "tn": 994,
+      "fn": 6
+    },
+    "0.7500000000000002": {
+      "precision": 0,
+      "recall": 0.0,
+      "f1": 0,
+      "accuracy": 0.994,
+      "tp": 0,
+      "fp": 0,
+      "tn": 994,
+      "fn": 6
+    },
+    "0.8000000000000002": {
+      "precision": 0,
+      "recall": 0.0,
+      "f1": 0,
+      "accuracy": 0.994,
+      "tp": 0,
+      "fp": 0,
+      "tn": 994,
+      "fn": 6
+    },
+    "0.8500000000000002": {
+      "precision": 0,
+      "recall": 0.0,
+      "f1": 0,
+      "accuracy": 0.994,
+      "tp": 0,
+      "fp": 0,
+      "tn": 994,
+      "fn": 6
+    },
+    "0.9000000000000002": {
+      "precision": 0,
+      "recall": 0.0,
+      "f1": 0,
+      "accuracy": 0.994,
+      "tp": 0,
+      "fp": 0,
+      "tn": 994,
+      "fn": 6
+    },
+    "0.9500000000000003": {
+      "precision": 0,
+      "recall": 0.0,
+      "f1": 0,
+      "accuracy": 0.994,
+      "tp": 0,
+      "fp": 0,
+      "tn": 994,
+      "fn": 6
+    }
+  },
+  "window_metrics": {
+    "accuracy": 0.9451587349948205,
+    "balanced_accuracy": 0.49442309860970146,
+    "weighted_accuracy": 0.4944230986097016,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0,
+    "specificity": 0.9491981882727384
+  },
+  "word_metrics": {
+    "precision": 0.003968253968253968,
+    "recall": 1.0,
+    "f1": 0.007905138339920948
+  },
+  "classification_metrics": {
+    "accuracy": 0.0,
+    "total_profanity_windows": 76,
+    "correct_predictions": 0
+  },
+  "confusion_matrix_counts": {
+    "true_positives": 0,
+    "false_positives": 830,
+    "true_negatives": 15508,
+    "false_negatives": 76
+  },
+  "class_distribution": {
+    "profanity_samples": 76,
+    "none_samples": 16338,
+    "total_samples": 16411
+  }
+}

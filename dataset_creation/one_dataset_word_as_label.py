@@ -3,7 +3,7 @@ import csv
 
 def create_dataset(audio_dir, output_csv):
     dataset = []
-    labels_dir = os.path.join(audio_dir, 'labels')
+    labels_dir = os.path.join(audio_dir, 'label')
 
     # Process all label files
     for label_file in os.listdir(labels_dir):
@@ -37,7 +37,7 @@ def create_dataset(audio_dir, output_csv):
     print(f"Dataset created and saved to {output_csv}")
 
 # Usage
-audio_dir = './eval'
+audio_dir = './mix_dataset_split/test'
 output_csv = './csv/eval.csv'
 
 create_dataset(audio_dir, output_csv)

@@ -1,0 +1,44 @@
+Classification Report:
+                  precision    recall  f1-score   support
+
+            เย็ด     1.0000    0.6667    0.8000         9
+              กู     0.7273    0.4444    0.5517        18
+             มึง     0.9062    0.6042    0.7250        48
+           เหี้ย     0.8750    0.4828    0.6222        29
+             ควย     0.8500    0.5667    0.6800        30
+             สวะ     1.0000    0.4231    0.5946        26
+              หี     0.9091    0.2941    0.4444        34
+             แตด     1.0000    0.1500    0.2609        40
+missed_profanity     0.0000    0.0000    0.0000         0
+
+       micro avg     0.3755    0.4316    0.4016       234
+       macro avg     0.8075    0.4035    0.5199       234
+    weighted avg     0.9119    0.4316    0.5615       234
+
+=== Classification Report ===
+                  precision    recall  f1-score   support
+
+            เย็ด     1.0000    0.6667    0.8000         9
+              กู     0.7273    0.4444    0.5517        18
+             มึง     0.9062    0.6042    0.7250        48
+           เหี้ย     0.8750    0.4828    0.6222        29
+             ควย     0.8500    0.5667    0.6800        30
+             สวะ     1.0000    0.4231    0.5946        26
+              หี     0.9091    0.2941    0.4444        34
+             แตด     1.0000    0.1500    0.2609        40
+missed_profanity     0.0000    0.0000    0.0000         0
+
+       micro avg     0.3755    0.4316    0.4016       234
+       macro avg     0.8075    0.4035    0.5199       234
+    weighted avg     0.9119    0.4316    0.5615       234
+
+
+Overall Accuracy (excluding 'none'): 0.3755
+Total Profanity Windows: 269
+Correct Predictions: 101
+
+=== Binary Profanity Detection Metrics ===
+Balanced Accuracy: 0.6622
+Precision: 0.4298
+Recall: 0.3755
+F1-score: 0.4008

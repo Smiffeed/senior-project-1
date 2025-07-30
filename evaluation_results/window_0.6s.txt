@@ -1,0 +1,160 @@
+=== Classification Report (Advanced Preprocessing) ===
+                  precision    recall  f1-score   support
+
+            เย็ด     0.3214    0.0882    0.1385       102
+              กู     0.7797    0.0753    0.1373       611
+             มึง     0.7714    0.0586    0.1089       461
+           เหี้ย     0.8824    0.1420    0.2446       317
+             ควย     0.3636    1.0000    0.5333         4
+             สวะ     0.0000    0.0000    0.0000         0
+              หี     1.0000    0.2368    0.3830        38
+             แตด     0.2667    0.5000    0.3478         8
+missed_profanity     0.0000    0.0000    0.0000         0
+
+        accuracy                         0.0934      1541
+       macro avg     0.4872    0.2334    0.2104      1541
+    weighted avg     0.7697    0.0934    0.1591      1541
+
+
+Overall Accuracy (excluding 'none'): 0.0934
+Total Profanity Windows: 1541
+Correct Predictions: 144
+
+=== Binary Profanity Detection Metrics (Window-level, Advanced Preprocessing) ===
+Balanced Accuracy: 0.5066
+Precision: 0.1856
+Recall: 0.0934
+F1-score: 0.1243
+
+Detailed Counts:
+True Positives: 144
+False Positives: 632
+True Negatives: 7235
+False Negatives: 1397
+Total Windows: 9331
+
+🎯 BINARY CLASSIFICATION ACCURACY:
+Simple Binary Accuracy: 0.7908
+Balanced Binary Accuracy: 0.5066
+(Balanced accounts for class imbalance: 16.5% profane vs 84.3% clean)
+
+Class Distribution:
+Profanity samples: 1541 (16.51%)
+None samples: 7867 (84.31%)
+
+=== MULTI-CLASS PROFANITY CLASSIFICATION ACCURACY ===
+Total Profanity Samples: 1541
+Correct Profanity Classifications: 144
+Simple Profanity Classification Accuracy: 0.0934
+
+Per-Class Profanity Accuracy:
+  เย็ด: 9/102 = 0.088 (weight: 0.066)
+  กู: 46/611 = 0.075 (weight: 0.396)
+  มึง: 27/461 = 0.059 (weight: 0.299)
+  เหี้ย: 45/317 = 0.142 (weight: 0.206)
+  ควย: 4/4 = 1.000 (weight: 0.003)
+  หี: 9/38 = 0.237 (weight: 0.025)
+  แตด: 4/8 = 0.500 (weight: 0.005)
+
+Balanced Profanity Classification Accuracy: 0.3001
+
+============================================================
+NORMALIZED WORD-LEVEL EVALUATION (Advanced Preprocessing)
+============================================================
+
+=== Word-Level Detection Metrics (Advanced Preprocessing) ===
+Total True Words: 359
+Total Predicted Words: 689
+Correct Word Detections: 85
+Word-Level Precision: 0.1234
+Word-Level Recall: 0.2368
+Word-Level F1-Score: 0.1622
+
+=== Word-Level vs Original Ground Truth Accuracy ===
+Total Original GT Words: 389
+Total Predicted Words: 689
+Correct vs Original GT: 82
+Precision vs Original GT: 0.1190
+Recall vs Original GT: 0.2108
+F1-Score vs Original GT: 0.1521
+
+🎯 ACCURACY COMPARISON:
+Windowed-based Word F1: 0.1622
+Original GT-based Word F1: 0.1521
+Difference: 0.0101
+⚠️  Original GT-based metrics are more realistic
+📊 This shows true performance against actual labeled data
+
+=== Class-wise Performance vs Original Ground Truth ===
+เย็ด: 8/26 recall=0.308, 8/127 precision=0.063, F1=0.105
+กู: 27/157 recall=0.172, 27/154 precision=0.175, F1=0.174
+มึง: 18/117 recall=0.154, 18/73 precision=0.247, F1=0.189
+เหี้ย: 23/78 recall=0.295, 23/58 precision=0.397, F1=0.338
+ควย: 1/1 recall=1.000, 1/61 precision=0.016, F1=0.032
+สวะ: 0/0 recall=0.000, 0/115 precision=0.000, F1=0.000
+หี: 3/8 recall=0.375, 3/16 precision=0.188, F1=0.250
+แตด: 2/2 recall=1.000, 2/85 precision=0.024, F1=0.046
+
+=== Comparison: Window vs Word Level (Advanced Preprocessing) ===
+Window-level F1: 0.1243
+Word-level F1: 0.1622
+Original GT Word F1: 0.1521
+Window vs Word difference: -0.0379
+Word vs Original GT difference: 0.0101
+⚠️  Windowed GT metrics may be inflated due to data augmentation
+📊 Original GT-based metrics provide the most realistic performance assessment
+
+======================================================================
+🎯 COMPREHENSIVE ACCURACY SUMMARY
+======================================================================
+
+1️⃣ BINARY CLASSIFICATION ACCURACY (Profane vs Non-Profane):
+   Simple Binary Accuracy: 0.7908
+   Balanced Binary Accuracy: 0.5066 ⭐ (Recommended for imbalanced data)
+   Binary F1-Score: 0.1243
+
+2️⃣ MULTI-CLASS CLASSIFICATION ACCURACY (Which profanity word?):
+   Simple Profanity Class Accuracy: 0.0934
+   Balanced Profanity Class Accuracy: 0.3001 ⭐ (Accounts for class imbalance)
+
+3️⃣ WORD-LEVEL ACCURACY (Realistic performance):
+   Word-level F1 (vs windowed GT): 0.1622
+   Word-level F1 (vs original GT): 0.1521 ⭐ (Most realistic)
+
+📊 KEY INSIGHTS:
+   • Binary detection handles profane vs clean: 50.7%
+   • Profanity classification handles which word: 30.0%
+   • Word-level performance in real scenarios: 15.2%
+   • Data imbalance: 16.5% profane vs 84.3% clean
+
+=== Detailed Word/Instance Statistics ===
+Total Label Instances (segments): 1541
+Total Real Words (after merge overlap): 359
+Reduction ratio: 4.29x
+
+=== Breakdown by Class ===
+Format: [Original Ground Truth] → [Windowed Ground Truth] → [Predicted Instances] → [Merged Words]    
+(Showing original ground truth from eval.csv)
+(Showing windowed ground truth from eval_windowed_0.5s.csv)
+เย็ด: [26] → [109] → 135 predicted → 19 words
+กู: [157] → [641] → 178 predicted → 143 words
+มึง: [117] → [478] → 84 predicted → 112 words
+เหี้ย: [78] → [328] → 83 predicted → 74 words
+ควย: [1] → [4] → 66 predicted → 1 words
+สวะ: [0] → [0] → 116 predicted → 0 words
+หี: [8] → [40] → 22 predicted → 8 words
+แตด: [2] → [8] → 92 predicted → 2 words
+
+📊 SUMMARY COMPARISON:
+Original Ground Truth: 389 profanity instances
+Windowed Ground Truth: 1608 profanity instances
+Predicted Instances: 776 profanity instances
+Merged Words: 359 profanity words
+Original → Windowed GT: 4.13x increase
+Windowed GT → Predicted: 0.48x ratio
+Original → Merged: 0.92x ratio
+
+=== Prediction Statistics ===
+Total Predicted Instances (segments): 776
+Total Predicted Words (after merge): 689
+Prediction reduction ratio: 1.13x
