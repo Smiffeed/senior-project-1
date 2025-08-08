@@ -1,0 +1,840 @@
+                                                                                                 
+{'loss': 1.3365, 'grad_norm': 1.0438883304595947, 'learning_rate': 4.666666666666667e-06, 'epoch': 1.25}
+{'loss': 1.3072, 'grad_norm': 0.923909068107605, 'learning_rate': 9.5e-06, 'epoch': 2.5}
+{'loss': 1.321, 'grad_norm': 0.6298482418060303, 'learning_rate': 1.45e-05, 'epoch': 3.75}
+{'loss': 1.3209, 'grad_norm': 1.293901801109314, 'learning_rate': 1.9333333333333333e-05, 'epoch': 5.0}
+{'loss': 1.2722, 'grad_norm': 1.4379794597625732, 'learning_rate': 2.4333333333333333e-05, 'epoch': 6.25}
+{'loss': 1.2118, 'grad_norm': 1.6033997535705566, 'learning_rate': 2.9333333333333333e-05, 'epoch': 7.5}
+{'loss': 1.1285, 'grad_norm': 3.574106454849243, 'learning_rate': 2.999572205843142e-05, 'epoch': 8.75}
+{'loss': 0.951, 'grad_norm': inf, 'learning_rate': 2.9980157833974258e-05, 'epoch': 10.0}
+                                                                                                 
+{'eval_loss': 0.9626501202583313, 'eval_accuracy': 0.3177083333333333, 'eval_f1_macro': 0.343439167070718, 'eval_f1_weighted': 0.24245461367550938, 'eval_profanity_accuracy': 0.5083333333333333, 'eval_profanity_f1': 0.4732987396590338, 'eval_f1_เย็ด': 0.2553191489361702, 'eval_f1_กู': 0.2727272727272727, 'eval_f1_มึง': 0.4857142857142857, 'eval_f1_เหี้ย': 0.2222222222222222, 'eval_f1_ควย': 0.5, 'eval_f1_สวะ': 0.41379310344827586, 'eval_f1_หี': 0.5, 'eval_f1_แตด': 0.4411764705882353, 'eval_runtime': 1.5034, 'eval_samples_per_second': 129.708, 'eval_steps_per_second': 8.647, 'epoch': 10.42}
+{'loss': 0.8626, 'grad_norm': 10.151260375976562, 'learning_rate': 2.9954298969312294e-05, 'epoch': 11.25}
+{'loss': 0.7575, 'grad_norm': 3.0185091495513916, 'learning_rate': 2.9916381847953328e-05, 'epoch': 12.5}
+{'loss': 0.6446, 'grad_norm': 3.7881417274475098, 'learning_rate': 2.9867137435792734e-05, 'epoch': 13.75}
+{'loss': 0.6019, 'grad_norm': 4.523031234741211, 'learning_rate': 2.9806603128345243e-05, 'epoch': 15.0}
+{'loss': 0.5213, 'grad_norm': 3.302290916442871, 'learning_rate': 2.973739810199627e-05, 'epoch': 16.25}
+{'loss': 0.43, 'grad_norm': 2.7948715686798096, 'learning_rate': 2.9654802461753992e-05, 'epoch': 17.5}
+{'loss': 0.4259, 'grad_norm': 6.016515731811523, 'learning_rate': 2.95610781704208e-05, 'epoch': 18.75}
+{'loss': 0.3637, 'grad_norm': 1.947107195854187, 'learning_rate': 2.9456296400906725e-05, 'epoch': 20.0}
+{'eval_loss': 0.22348587214946747, 'eval_accuracy': 0.5052083333333334, 'eval_f1_macro': 0.5662329109322551, 'eval_f1_weighted': 0.40130969773818176, 'eval_profanity_accuracy': 0.8083333333333333, 'eval_profanity_f1': 0.8020935739887353, 'eval_f1_เย็ด': 0.7586206896551724, 'eval_f1_กู': 0.3870967741935484, 'eval_f1_มึง': 0.6382978723404256, 'eval_f1_เหี้ย': 0.41379310344827586, 'eval_f1_ควย': 0.46511627906976744, 'eval_f1_สวะ': 0.8837209302325582, 'eval_f1_หี': 0.6923076923076923, 'eval_f1_แตด': 0.8571428571428571, 'eval_runtime': 1.599, 'eval_samples_per_second': 121.955, 'eval_steps_per_second': 8.13, 'epoch': 20.83}
+{'loss': 0.2848, 'grad_norm': 4.7667412757873535, 'learning_rate': 2.9340536723015367e-05, 'epoch': 21.25}
+{'loss': 0.3023, 'grad_norm': 14.658268928527832, 'learning_rate': 2.921388704301969e-05, 'epoch': 22.5}
+{'loss': 0.2787, 'grad_norm': 6.402567386627197, 'learning_rate': 2.9076443536907283e-05, 'epoch': 23.75}
+{'loss': 0.2794, 'grad_norm': 2.3425962924957275, 'learning_rate': 2.8928310577345608e-05, 'epoch': 25.0}
+{'loss': 0.3019, 'grad_norm': 7.36723518371582, 'learning_rate': 2.8769600654422906e-05, 'epoch': 26.25}
+{'loss': 0.2572, 'grad_norm': 6.995523929595947, 'learning_rate': 2.8600434290224792e-05, 'epoch': 27.5}
+{'loss': 0.2315, 'grad_norm': 6.69798469543457, 'learning_rate': 2.8420939947311454e-05, 'epoch': 28.75}
+{'loss': 0.2245, 'grad_norm': 17.48484992980957, 'learning_rate': 2.823125393116503e-05, 'epoch': 30.0}
+{'loss': 0.205, 'grad_norm': 5.722617149353027, 'learning_rate': 2.8031520286681115e-05, 'epoch': 31.25}
+{'eval_loss': 0.20464885234832764, 'eval_accuracy': 0.5416666666666666, 'eval_f1_macro': 0.6047486183717907, 'eval_f1_weighted': 0.43281379157361183, 'eval_profanity_accuracy': 0.8666666666666667, 'eval_profanity_f1': 0.8596021577107104, 'eval_f1_เย็ด': 0.7333333333333333, 'eval_f1_กู': 0.5789473684210527, 'eval_f1_มึง': 0.6938775510204082, 'eval_f1_เหี้ย': 0.509090909090909, 'eval_f1_ควย': 0.43902439024390244, 'eval_f1_สวะ': 0.8837209302325582, 'eval_f1_หี': 0.6956521739130435, 'eval_f1_แตด': 0.9090909090909091, 'eval_runtime': 1.5867, 'eval_samples_per_second': 122.9, 'eval_steps_per_second': 8.193, 'epoch': 31.25}
+{'loss': 0.2073, 'grad_norm': 4.835617542266846, 'learning_rate': 2.7821890688783088e-05, 'epoch': 32.5}
+{'loss': 0.2268, 'grad_norm': 2.555393695831299, 'learning_rate': 2.7602524327242317e-05, 'epoch': 33.75}
+{'loss': 0.2011, 'grad_norm': 2.7974274158477783, 'learning_rate': 2.7373587785791675e-05, 'epoch': 35.0}
+{'loss': 0.1958, 'grad_norm': 12.48522663116455, 'learning_rate': 2.7135254915624213e-05, 'epoch': 36.25}
+{'loss': 0.1732, 'grad_norm': 10.990252494812012, 'learning_rate': 2.6887706703372978e-05, 'epoch': 37.5}
+{'loss': 0.1429, 'grad_norm': 3.227445125579834, 'learning_rate': 2.6631131133672324e-05, 'epoch': 38.75}
+{'loss': 0.1776, 'grad_norm': 4.575512409210205, 'learning_rate': 2.6365723046405022e-05, 'epoch': 40.0}
+{'loss': 0.138, 'grad_norm': 6.829742908477783, 'learning_rate': 2.6091683988743582e-05, 'epoch': 41.25}
+{'eval_loss': 0.2285062074661255, 'eval_accuracy': 0.546875, 'eval_f1_macro': 0.6092250582880425, 'eval_f1_weighted': 0.43356643309059056, 'eval_profanity_accuracy': 0.875, 'eval_profanity_f1': 0.8712870545707152, 'eval_f1_เย็ด': 0.7407407407407407, 'eval_f1_กู': 0.65, 'eval_f1_มึง': 0.6037735849056604, 'eval_f1_เหี้ย': 0.5833333333333334, 'eval_f1_ควย': 0.45, 'eval_f1_สวะ': 0.8260869565217391, 'eval_f1_หี': 0.72, 'eval_f1_แตด': 0.9090909090909091, 'eval_runtime': 1.5799, 'eval_samples_per_second': 123.423, 'eval_steps_per_second': 8.228, 'epoch': 41.67}
+{'loss': 0.1311, 'grad_norm': 3.978396415710449, 'learning_rate': 2.5809222062098174e-05, 'epoch': 42.5}
+{'loss': 0.1727, 'grad_norm': 10.984604835510254, 'learning_rate': 2.551855176408733e-05, 'epoch': 43.75}
+{'loss': 0.1208, 'grad_norm': 9.398260116577148, 'learning_rate': 2.5219893825651467e-05, 'epoch': 45.0}
+{'loss': 0.1507, 'grad_norm': 4.064818859100342, 'learning_rate': 2.491347504343292e-05, 'epoch': 46.25}
+{'loss': 0.1381, 'grad_norm': 1.61017644405365, 'learning_rate': 2.459952810754975e-05, 'epoch': 47.5}
+{'loss': 0.1263, 'grad_norm': 7.324427604675293, 'learning_rate': 2.4278291424894142e-05, 'epoch': 48.75}
+{'loss': 0.1184, 'grad_norm': 15.859066009521484, 'learning_rate': 2.3950008938089563e-05, 'epoch': 50.0}
+{'loss': 0.1447, 'grad_norm': 12.715577125549316, 'learning_rate': 2.3614929940244155e-05, 'epoch': 51.25}
+{'eval_loss': 0.19999001920223236, 'eval_accuracy': 0.5677083333333334, 'eval_f1_macro': 0.6299266317723312, 'eval_f1_weighted': 0.4505649763038329, 'eval_profanity_accuracy': 0.9083333333333333, 'eval_profanity_f1': 0.9021350319737417, 'eval_f1_เย็ด': 0.7407407407407407, 'eval_f1_กู': 0.7441860465116279, 'eval_f1_มึง': 0.6538461538461539, 'eval_f1_เหี้ย': 0.5306122448979592, 'eval_f1_ควย': 0.4864864864864865, 'eval_f1_สวะ': 0.8636363636363636, 'eval_f1_หี': 0.7407407407407407, 'eval_f1_แตด': 0.9090909090909091, 'eval_runtime': 1.7031, 'eval_samples_per_second': 114.496, 'eval_steps_per_second': 7.633, 'epoch': 52.08}
+{'loss': 0.1014, 'grad_norm': 0.73152756690979, 'learning_rate': 2.3273308885641053e-05, 'epoch': 52.5}
+{'loss': 0.1038, 'grad_norm': 3.0581321716308594, 'learning_rate': 2.2925405196509387e-05, 'epoch': 53.75}
+{'loss': 0.1093, 'grad_norm': 1.0404990911483765, 'learning_rate': 2.257148306602266e-05, 'epoch': 55.0}
+{'loss': 0.1286, 'grad_norm': 21.957460403442383, 'learning_rate': 2.2211811257674192e-05, 'epoch': 56.25}
+{'loss': 0.0876, 'grad_norm': 3.2951347827911377, 'learning_rate': 2.1846662901181898e-05, 'epoch': 57.5}
+{'loss': 0.1151, 'grad_norm': 10.123748779296875, 'learning_rate': 2.1476315285077393e-05, 'epoch': 58.75}
+{'loss': 0.1009, 'grad_norm': 0.345894992351532, 'learning_rate': 2.1101049646137008e-05, 'epoch': 60.0}
+{'loss': 0.1049, 'grad_norm': 13.579909324645996, 'learning_rate': 2.0721150955814492e-05, 'epoch': 61.25}
+{'loss': 0.0777, 'grad_norm': 1.380752682685852, 'learning_rate': 2.033690770383775e-05, 'epoch': 62.5}
+{'eval_loss': 0.18069441616535187, 'eval_accuracy': 0.5677083333333334, 'eval_f1_macro': 0.6323080359274518, 'eval_f1_weighted': 0.4506464795744196, 'eval_profanity_accuracy': 0.9083333333333333, 'eval_profanity_f1': 0.9038000336387433, 'eval_f1_เย็ด': 0.7407407407407407, 'eval_f1_กู': 0.7441860465116279, 'eval_f1_มึง': 0.5964912280701754, 'eval_f1_เหี้ย': 0.5531914893617021, 'eval_f1_ควย': 0.5142857142857142, 'eval_f1_สวะ': 0.8636363636363636, 'eval_f1_หี': 0.7407407407407407, 'eval_f1_แตด': 0.9375, 'eval_runtime': 1.5382, 'eval_samples_per_second': 126.771, 'eval_steps_per_second': 8.451, 'epoch': 62.5}
+{'loss': 0.0964, 'grad_norm': 15.352567672729492, 'learning_rate': 1.9948611679133742e-05, 'epoch': 63.75}
+{'loss': 0.1035, 'grad_norm': 20.11219024658203, 'learning_rate': 1.9556557748248117e-05, 'epoch': 65.0}
+{'loss': 0.1114, 'grad_norm': 0.36128509044647217, 'learning_rate': 1.916104363142767e-05, 'epoch': 66.25}
+{'loss': 0.0867, 'grad_norm': 10.131226539611816, 'learning_rate': 1.876236967653577e-05, 'epoch': 67.5}
+{'loss': 0.0896, 'grad_norm': 6.230109691619873, 'learning_rate': 1.836083863097244e-05, 'epoch': 68.75}
+{'loss': 0.0835, 'grad_norm': 22.91107940673828, 'learning_rate': 1.7956755411772203e-05, 'epoch': 70.0}
+{'loss': 0.11, 'grad_norm': 1.9392379522323608, 'learning_rate': 1.7550426874054398e-05, 'epoch': 71.25}
+{'loss': 0.0718, 'grad_norm': 0.7039096355438232, 'learning_rate': 1.714216157800168e-05, 'epoch': 72.5}
+{'eval_loss': 0.22188009321689606, 'eval_accuracy': 0.5729166666666666, 'eval_f1_macro': 0.6331263777603456, 'eval_f1_weighted': 0.4583304597684092, 'eval_profanity_accuracy': 0.9083333333333333, 'eval_profanity_f1': 0.9009485215873162, 'eval_f1_เย็ด': 0.7692307692307693, 'eval_f1_กู': 0.723404255319149, 'eval_f1_มึง': 0.5964912280701754, 'eval_f1_เหี้ย': 0.5777777777777777, 'eval_f1_ควย': 0.5454545454545454, 'eval_f1_สวะ': 0.8837209302325582, 'eval_f1_หี': 0.6923076923076923, 'eval_f1_แตด': 0.8823529411764706, 'eval_runtime': 1.601, 'eval_samples_per_second': 121.8, 'eval_steps_per_second': 8.12, 'epoch': 72.92}
+{'loss': 0.1355, 'grad_norm': 2.198885202407837, 'learning_rate': 1.6732269554543794e-05, 'epoch': 73.75}
+{'loss': 0.0818, 'grad_norm': 0.17826050519943237, 'learning_rate': 1.63210620699244e-05, 'epoch': 75.0}
+{'loss': 0.0841, 'grad_norm': 15.20511531829834, 'learning_rate': 1.5908851389329907e-05, 'epoch': 76.25}
+{'loss': 0.1042, 'grad_norm': 3.0470213890075684, 'learning_rate': 1.549595053975962e-05, 'epoch': 77.5}
+{'loss': 0.0752, 'grad_norm': 0.5232837796211243, 'learning_rate': 1.508267307231751e-05, 'epoch': 78.75}
+{'loss': 0.1013, 'grad_norm': 11.557465553283691, 'learning_rate': 1.4669332824105818e-05, 'epoch': 80.0}
+{'loss': 0.0881, 'grad_norm': 9.261208534240723, 'learning_rate': 1.4256243679901665e-05, 'epoch': 81.25}
+{'loss': 0.0928, 'grad_norm': 5.921817302703857, 'learning_rate': 1.3857457735631706e-05, 'epoch': 82.5}
+{'eval_loss': 0.2790241539478302, 'eval_accuracy': 0.5729166666666666, 'eval_f1_macro': 0.6310787402872639, 'eval_f1_weighted': 0.45968740118283496, 'eval_profanity_accuracy': 0.9083333333333333, 'eval_profanity_f1': 0.8978073750993956, 'eval_f1_เย็ด': 0.7407407407407407, 'eval_f1_กู': 0.7727272727272727, 'eval_f1_มึง': 0.6296296296296297, 'eval_f1_เหี้ย': 0.5833333333333334, 'eval_f1_ควย': 0.4864864864864865, 'eval_f1_สวะ': 0.8636363636363636, 'eval_f1_หี': 0.6666666666666666, 'eval_f1_แตด': 0.9090909090909091, 'eval_runtime': 1.5954, 'eval_samples_per_second': 122.228, 'eval_steps_per_second': 8.149, 'epoch': 83.33}
+{'loss': 0.0963, 'grad_norm': 9.398368835449219, 'learning_rate': 1.3445777143386975e-05, 'epoch': 83.75}
+{'loss': 0.0816, 'grad_norm': 1.557391881942749, 'learning_rate': 1.3035276806142884e-05, 'epoch': 85.0}
+{'loss': 0.0873, 'grad_norm': 7.234709739685059, 'learning_rate': 1.2626268452088027e-05, 'epoch': 86.25}
+{'loss': 0.074, 'grad_norm': 7.645891189575195, 'learning_rate': 1.2219062676419965e-05, 'epoch': 87.5}
+{'loss': 0.0761, 'grad_norm': 15.14981460571289, 'learning_rate': 1.1813968705483523e-05, 'epoch': 88.75}
+{'loss': 0.0764, 'grad_norm': 3.5319509506225586, 'learning_rate': 1.141129416194871e-05, 'epoch': 90.0}
+{'loss': 0.0571, 'grad_norm': 0.21395204961299896, 'learning_rate': 1.101134483120635e-05, 'epoch': 91.25}
+{'loss': 0.1118, 'grad_norm': 16.09949493408203, 'learning_rate': 1.061442442915895e-05, 'epoch': 92.5}
+{'loss': 0.0851, 'grad_norm': 3.735870838165283, 'learning_rate': 1.0220834371583137e-05, 'epoch': 93.75}
+{'eval_loss': 0.2609812021255493, 'eval_accuracy': 0.5885416666666666, 'eval_f1_macro': 0.645950345950346, 'eval_f1_weighted': 0.49964844183594187, 'eval_profanity_accuracy': 0.9, 'eval_profanity_f1': 0.8909455711238394, 'eval_f1_เย็ด': 0.7692307692307693, 'eval_f1_กู': 0.7142857142857143, 'eval_f1_มึง': 0.6545454545454545, 'eval_f1_เหี้ย': 0.6190476190476191, 'eval_f1_ควย': 0.46153846153846156, 'eval_f1_สวะ': 0.8636363636363636, 'eval_f1_หี': 0.6923076923076923, 'eval_f1_แตด': 0.9090909090909091, 'eval_runtime': 1.5988, 'eval_samples_per_second': 121.964, 'eval_steps_per_second': 8.131, 'epoch': 93.75}
+{'loss': 0.0771, 'grad_norm': 3.587757110595703, 'learning_rate': 9.830873545238727e-06, 'epoch': 95.0}
+{'loss': 0.0855, 'grad_norm': 0.10991084575653076, 'learning_rate': 9.444838080898345e-06, 'epoch': 96.25}
+{'loss': 0.0768, 'grad_norm': 2.2678945064544678, 'learning_rate': 9.063021128469841e-06, 'epoch': 97.5}
+{'loss': 0.046, 'grad_norm': 7.515186786651611, 'learning_rate': 8.685712634382404e-06, 'epoch': 98.75}
+{'loss': 0.0777, 'grad_norm': 3.787889003753662, 'learning_rate': 8.313199121405286e-06, 'epoch': 100.0}
+{'loss': 0.0512, 'grad_norm': 0.7353120446205139, 'learning_rate': 7.945763471066477e-06, 'epoch': 101.25}
+{'loss': 0.0757, 'grad_norm': 3.438416004180908, 'learning_rate': 7.5836847088364035e-06, 'epoch': 102.5}
+{'loss': 0.0939, 'grad_norm': 37.64013671875, 'learning_rate': 7.227237792239924e-06, 'epoch': 103.75}
+{'eval_loss': 0.25597134232521057, 'eval_accuracy': 0.5833333333333334, 'eval_f1_macro': 0.6407398682398683, 'eval_f1_weighted': 0.48826941393347645, 'eval_profanity_accuracy': 0.9, 'eval_profanity_f1': 0.7940468746723515, 'eval_f1_เย็ด': 0.7692307692307693, 'eval_f1_กู': 0.7083333333333334, 'eval_f1_มึง': 0.6666666666666666, 'eval_f1_เหี้ย': 0.5909090909090909, 'eval_f1_ควย': 0.4864864864864865, 'eval_f1_สวะ': 0.8636363636363636, 'eval_f1_หี': 0.64, 'eval_f1_แตด': 0.9375, 'eval_runtime': 1.5689, 'eval_samples_per_second': 124.291, 'eval_steps_per_second': 8.286, 'epoch': 104.17}
+{'loss': 0.0675, 'grad_norm': 1.8948256969451904, 'learning_rate': 6.876693402057463e-06, 'epoch': 105.0}
+{'loss': 0.0395, 'grad_norm': 4.788905143737793, 'learning_rate': 6.532317736773819e-06, 'epoch': 106.25}
+{'loss': 0.0599, 'grad_norm': 1.514816403388977, 'learning_rate': 6.1943723104307544e-06, 'epoch': 107.5}
+{'loss': 0.0526, 'grad_norm': 0.3183840215206146, 'learning_rate': 5.863113754036931e-06, 'epoch': 108.75}
+{'loss': 0.0686, 'grad_norm': 0.16739514470100403, 'learning_rate': 5.538793620685928e-06, 'epoch': 110.0}
+{'loss': 0.101, 'grad_norm': 0.2808750867843628, 'learning_rate': 5.221658194530351e-06, 'epoch': 111.25}
+{'loss': 0.0755, 'grad_norm': 12.750475883483887, 'learning_rate': 4.911948303757096e-06, 'epoch': 112.5}
+{'loss': 0.0738, 'grad_norm': 10.388324737548828, 'learning_rate': 4.609899137705817e-06, 'epoch': 113.75}
+{'eval_loss': 0.26238593459129333, 'eval_accuracy': 0.5885416666666666, 'eval_f1_macro': 0.6449596606952814, 'eval_f1_weighted': 0.5057973532286751, 'eval_profanity_accuracy': 0.8916666666666667, 'eval_profanity_f1': 0.7867751969201245, 'eval_f1_เย็ด': 0.7692307692307693, 'eval_f1_กู': 0.7111111111111111, 'eval_f1_มึง': 0.6666666666666666, 'eval_f1_เหี้ย': 0.5909090909090909, 'eval_f1_ควย': 0.47368421052631576, 'eval_f1_สวะ': 0.8636363636363636, 'eval_f1_หี': 0.64, 'eval_f1_แตด': 0.9375, 'eval_runtime': 1.6165, 'eval_samples_per_second': 120.632, 'eval_steps_per_second': 8.042, 'epoch': 114.58}
+{'loss': 0.0652, 'grad_norm': 14.322242736816406, 'learning_rate': 4.3157400682694565e-06, 'epoch': 115.0}
+{'loss': 0.0818, 'grad_norm': 0.7223364114761353, 'learning_rate': 4.029694475712443e-06, 'epoch': 116.25}
+{'loss': 0.0488, 'grad_norm': 2.7797646522521973, 'learning_rate': 3.751979579038848e-06, 'epoch': 117.5}
+{'loss': 0.061, 'grad_norm': 2.26757550239563, 'learning_rate': 3.4916389233182227e-06, 'epoch': 118.75}
+{'loss': 0.074, 'grad_norm': 13.110450744628906, 'learning_rate': 3.230916853767485e-06, 'epoch': 120.0}
+{'loss': 0.0424, 'grad_norm': 9.938977241516113, 'learning_rate': 2.979132060603521e-06, 'epoch': 121.25}
+{'loss': 0.0743, 'grad_norm': 7.778501033782959, 'learning_rate': 2.7364757456607064e-06, 'epoch': 122.5}
+{'loss': 0.0751, 'grad_norm': 8.391363143920898, 'learning_rate': 2.5031321787353113e-06, 'epoch': 123.75}
+{'loss': 0.0825, 'grad_norm': 8.368011474609375, 'learning_rate': 2.279278557653611e-06, 'epoch': 125.0}
+{'eval_loss': 0.274531751871109, 'eval_accuracy': 0.59375, 'eval_f1_macro': 0.6468900666070477, 'eval_f1_weighted': 0.5058011102498131, 'eval_profanity_accuracy': 0.9, 'eval_profanity_f1': 0.8891025448528955, 'eval_f1_เย็ด': 0.7692307692307693, 'eval_f1_กู': 0.7083333333333334, 'eval_f1_มึง': 0.6415094339622641, 'eval_f1_เหี้ย': 0.5909090909090909, 'eval_f1_ควย': 0.5454545454545454, 'eval_f1_สวะ': 0.8636363636363636, 'eval_f1_หี': 0.64, 'eval_f1_แตด': 0.9090909090909091, 'eval_runtime': 1.5963, 'eval_samples_per_second': 122.154, 'eval_steps_per_second': 8.144, 'epoch': 125.0}
+{'loss': 0.0783, 'grad_norm': 6.294561386108398, 'learning_rate': 2.0650848737103273e-06, 'epoch': 126.25}
+{'loss': 0.0559, 'grad_norm': 0.20819273591041565, 'learning_rate': 1.8607137825796454e-06, 'epoch': 127.5}
+{'loss': 0.0897, 'grad_norm': 13.74158000946045, 'learning_rate': 1.6663204807967785e-06, 'epoch': 128.75}
+{'loss': 0.0606, 'grad_norm': 5.335537910461426, 'learning_rate': 1.4820525879038981e-06, 'epoch': 130.0}
+{'loss': 0.0398, 'grad_norm': 7.542822360992432, 'learning_rate': 1.3080500343499108e-06, 'epoch': 131.25}
+{'loss': 0.0609, 'grad_norm': 10.151636123657227, 'learning_rate': 1.1444449552292725e-06, 'epoch': 132.5}
+{'loss': 0.0832, 'grad_norm': 2.746412515640259, 'learning_rate': 9.913615899404305e-07, 'epoch': 133.75}
+{'loss': 0.0807, 'grad_norm': 1.9445550441741943, 'learning_rate': 8.489161878401841e-07, 'epoch': 135.0}
+{'eval_loss': 0.28040769696235657, 'eval_accuracy': 0.5989583333333334, 'eval_f1_macro': 0.65067567620913, 'eval_f1_weighted': 0.5155677597342381, 'eval_profanity_accuracy': 0.9, 'eval_profanity_f1': 0.8892704759418791, 'eval_f1_เย็ด': 0.7692307692307693, 'eval_f1_กู': 0.6938775510204082, 'eval_f1_มึง': 0.6666666666666666, 'eval_f1_เหี้ย': 0.5909090909090909, 'eval_f1_ควย': 0.5454545454545454, 'eval_f1_สวะ': 0.8636363636363636, 'eval_f1_หี': 0.64, 'eval_f1_แตด': 0.9090909090909091, 'eval_runtime': 1.6601, 'eval_samples_per_second': 117.46, 'eval_steps_per_second': 7.831, 'epoch': 135.42}
+{'loss': 0.067, 'grad_norm': 0.47334009408950806, 'learning_rate': 7.17216919965536e-07, 'epoch': 136.25}
+{'loss': 0.0594, 'grad_norm': 0.6339181661605835, 'learning_rate': 5.963637968901503e-07, 'epoch': 137.5}
+{'loss': 0.0591, 'grad_norm': 2.4406285285949707, 'learning_rate': 4.864485927777207e-07, 'epoch': 138.75}
+{'loss': 0.0754, 'grad_norm': 9.352721214294434, 'learning_rate': 3.875547756899495e-07, 'epoch': 140.0}
+{'loss': 0.0537, 'grad_norm': 1.379129409790039, 'learning_rate': 2.9975744420208176e-07, 'epoch': 141.25}
+{'loss': 0.0866, 'grad_norm': 1.0542497634887695, 'learning_rate': 2.2312327037410706e-07, 'epoch': 142.5}
+{'loss': 0.0894, 'grad_norm': 59.77812957763672, 'learning_rate': 1.577104491209308e-07, 'epoch': 143.75}
+{'loss': 0.0671, 'grad_norm': 0.13423553109169006, 'learning_rate': 1.0356865401996596e-07, 'epoch': 145.0}
+{'eval_loss': 0.27722489833831787, 'eval_accuracy': 0.5989583333333334, 'eval_f1_macro': 0.6504993430496037, 'eval_f1_weighted': 0.516003871679016, 'eval_profanity_accuracy': 0.9, 'eval_profanity_f1': 0.8892704759418791, 'eval_f1_เย็ด': 0.7692307692307693, 'eval_f1_กู': 0.7083333333333334, 'eval_f1_มึง': 0.6666666666666666, 'eval_f1_เหี้ย': 0.5909090909090909, 'eval_f1_ควย': 0.5294117647058824, 'eval_f1_สวะ': 0.8636363636363636, 'eval_f1_หี': 0.64, 'eval_f1_แตด': 0.9090909090909091, 'eval_runtime': 1.6035, 'eval_samples_per_second': 121.61, 'eval_steps_per_second': 8.107, 'epoch': 145.83}
+{'loss': 0.0531, 'grad_norm': 10.325132369995117, 'learning_rate': 6.073899958972395e-08, 'epoch': 146.25}
+{'loss': 0.0665, 'grad_norm': 3.01918625831604, 'learning_rate': 2.9254010068029413e-08, 'epoch': 147.5}
+{'loss': 0.0653, 'grad_norm': 15.242310523986816, 'learning_rate': 9.137594713563569e-09, 'epoch': 148.75}
+{'loss': 0.0675, 'grad_norm': 17.723222732543945, 'learning_rate': 4.050296495128336e-10, 'epoch': 150.0}
+{'train_runtime': 2024.9491, 'train_samples_per_second': 57.705, 'train_steps_per_second': 1.778, 'train_loss': 0.21387655443615383, 'epoch': 150.0}
+Fold 1 Validation Results:
+  Accuracy: 0.6000
+  F1 Macro: 0.6517
+
+==================================================
+TRAINING FOLD 2/5
+==================================================
+Fold 2 - Train: 779, Val: 195
+
+Class weights:
+none: 0.2599
+เย็ด: 2.0129
+กู: 1.3316
+มึง: 1.1697
+เหี้ย: 1.7664
+ควย: 1.7664
+สวะ: 1.5185
+หี: 1.5456
+แตด: 1.6331
+
+Training set class distribution:
+none: 333
+เย็ด: 43
+กู: 65
+มึง: 74
+เหี้ย: 49
+ควย: 49
+สวะ: 57
+หี: 56
+แตด: 53
+  warnings.warn(
+Some weights of Wav2Vec2ForSequenceClassification were not initialized from the model checkpoint at airesearch/wav2vec2-large-xlsr-53-th and are newly initialized: ['classifier.bias', 'classifier.weight', 'projector.bias', 'projector.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+                                                                                                 
+{'loss': 1.3542, 'grad_norm': 1.1377772092819214, 'learning_rate': 4.666666666666667e-06, 'epoch': 1.25}
+{'loss': 1.2579, 'grad_norm': 1.384024739265442, 'learning_rate': 9.666666666666667e-06, 'epoch': 2.5}
+{'loss': 1.3176, 'grad_norm': 3.772618293762207, 'learning_rate': 1.4666666666666666e-05, 'epoch': 3.75}
+{'loss': 1.2919, 'grad_norm': 0.9198938012123108, 'learning_rate': 1.95e-05, 'epoch': 5.0}
+{'loss': 1.2747, 'grad_norm': 2.0856776237487793, 'learning_rate': 2.4333333333333333e-05, 'epoch': 6.25}
+{'loss': 1.203, 'grad_norm': 2.0329208374023438, 'learning_rate': 2.9333333333333333e-05, 'epoch': 7.5}
+{'loss': 1.0922, 'grad_norm': 1.4083083868026733, 'learning_rate': 2.999572205843142e-05, 'epoch': 8.75}
+{'loss': 0.9926, 'grad_norm': 6.584496974945068, 'learning_rate': 2.9980860006140413e-05, 'epoch': 10.0}
+                                                                                                 
+{'eval_loss': 1.0143834352493286, 'eval_accuracy': 0.1875, 'eval_f1_macro': 0.15941317539104824, 'eval_f1_weighted': 0.10559604149660594, 'eval_profanity_accuracy': 0.32727272727272727, 'eval_profanity_f1': 0.2439561742193321, 'eval_f1_เย็ด': 0.0, 'eval_f1_กู': 0.42857142857142855, 'eval_f1_มึง': 0.26666666666666666, 'eval_f1_เหี้ย': 0.4067796610169492, 'eval_f1_ควย': 0.0, 'eval_f1_สวะ': 0.0, 'eval_f1_หี': 0.11764705882352941, 'eval_f1_แตด': 0.21505376344086022, 'eval_runtime': 1.6131, 'eval_samples_per_second': 120.885, 'eval_steps_per_second': 8.059, 'epoch': 10.42}
+{'loss': 0.8741, 'grad_norm': 8.114651679992676, 'learning_rate': 2.9954298969312294e-05, 'epoch': 11.25}
+{'loss': 0.7614, 'grad_norm': 2.5803418159484863, 'learning_rate': 2.9916381847953328e-05, 'epoch': 12.5}
+{'loss': 0.7252, 'grad_norm': 11.171426773071289, 'learning_rate': 2.9868961039904628e-05, 'epoch': 13.75}
+{'loss': 0.6608, 'grad_norm': inf, 'learning_rate': 2.9808802369178914e-05, 'epoch': 15.0}
+{'loss': 0.6096, 'grad_norm': 4.181650161743164, 'learning_rate': 2.9739958873834064e-05, 'epoch': 16.25}
+{'loss': 0.5755, 'grad_norm': 3.424997568130493, 'learning_rate': 2.965773531587884e-05, 'epoch': 17.5}
+{'loss': 0.5017, 'grad_norm': 2.820894479751587, 'learning_rate': 2.956438087966449e-05, 'epoch': 18.75}
+{'loss': 0.4454, 'grad_norm': 4.875428676605225, 'learning_rate': 2.9459966457238264e-05, 'epoch': 20.0}
+{'eval_loss': 0.2772883176803589, 'eval_accuracy': 0.4375, 'eval_f1_macro': 0.4926604635694995, 'eval_f1_weighted': 0.3166865982282156, 'eval_profanity_accuracy': 0.7636363636363637, 'eval_profanity_f1': 0.7685580367629786, 'eval_f1_เย็ด': 0.7924528301886793, 'eval_f1_กู': 0.3076923076923077, 'eval_f1_มึง': 0.4666666666666667, 'eval_f1_เหี้ย': 0.5416666666666666, 'eval_f1_ควย': 0.4262295081967213, 'eval_f1_สวะ': 0.75, 'eval_f1_หี': 0.6086956521739131, 'eval_f1_แตด': 0.5405405405405406, 'eval_runtime': 1.6478, 'eval_samples_per_second': 118.34, 'eval_steps_per_second': 7.889, 'epoch': 20.83}
+{'loss': 0.3881, 'grad_norm': 13.33308219909668, 'learning_rate': 2.9344571339445534e-05, 'epoch': 21.25}
+{'loss': 0.3479, 'grad_norm': 4.136516094207764, 'learning_rate': 2.921828315571746e-05, 'epoch': 22.5}
+{'loss': 0.3374, 'grad_norm': 6.859076023101807, 'learning_rate': 2.9081197807526433e-05, 'epoch': 23.75}
+{'loss': 0.2811, 'grad_norm': 6.949873924255371, 'learning_rate': 2.8933419395559828e-05, 'epoch': 25.0}
+{'loss': 0.2654, 'grad_norm': 4.3405890464782715, 'learning_rate': 2.8775060140667428e-05, 'epoch': 26.25}
+{'loss': 0.2661, 'grad_norm': 2.1654212474823, 'learning_rate': 2.860624029864246e-05, 'epoch': 27.5}
+{'loss': 0.2549, 'grad_norm': 3.4981236457824707, 'learning_rate': 2.8427088068901053e-05, 'epoch': 28.75}
+{'loss': 0.2355, 'grad_norm': 14.402032852172852, 'learning_rate': 2.8237739497129406e-05, 'epoch': 30.0}
+{'loss': 0.2258, 'grad_norm': 8.252140045166016, 'learning_rate': 2.8038338371972594e-05, 'epoch': 31.25}
+{'eval_loss': 0.12469608336687088, 'eval_accuracy': 0.515625, 'eval_f1_macro': 0.5873753922435463, 'eval_f1_weighted': 0.3875499008916859, 'eval_profanity_accuracy': 0.9, 'eval_profanity_f1': 0.9090776182881446, 'eval_f1_เย็ด': 0.88, 'eval_f1_กู': 0.6153846153846154, 'eval_f1_มึง': 0.5185185185185185, 'eval_f1_เหี้ย': 0.6666666666666666, 'eval_f1_ควย': 0.4827586206896552, 'eval_f1_สวะ': 0.72, 'eval_f1_หี': 0.8148148148148148, 'eval_f1_แตด': 0.5882352941176471, 'eval_runtime': 1.6403, 'eval_samples_per_second': 118.882, 'eval_steps_per_second': 7.925, 'epoch': 31.25}
+{'loss': 0.202, 'grad_norm': 6.899337291717529, 'learning_rate': 2.782903611584349e-05, 'epoch': 32.5}
+{'loss': 0.1907, 'grad_norm': 7.030395030975342, 'learning_rate': 2.7609991669934733e-05, 'epoch': 33.75}
+{'loss': 0.1844, 'grad_norm': 6.063864231109619, 'learning_rate': 2.7381371373520976e-05, 'epoch': 35.0}
+{'loss': 0.201, 'grad_norm': 5.346198558807373, 'learning_rate': 2.7143348837643237e-05, 'epoch': 36.25}
+{'loss': 0.1912, 'grad_norm': 2.5503015518188477, 'learning_rate': 2.690449288505142e-05, 'epoch': 37.5}
+{'loss': 0.1762, 'grad_norm': 3.855525255203247, 'learning_rate': 2.6648513152546707e-05, 'epoch': 38.75}
+{'loss': 0.1728, 'grad_norm': 12.954243659973145, 'learning_rate': 2.6383687702814428e-05, 'epoch': 40.0}
+{'loss': 0.1398, 'grad_norm': 5.511918544769287, 'learning_rate': 2.6110217640580334e-05, 'epoch': 41.25}
+{'eval_loss': 0.15218113362789154, 'eval_accuracy': 0.5208333333333334, 'eval_f1_macro': 0.5874333523995939, 'eval_f1_weighted': 0.3859170865810026, 'eval_profanity_accuracy': 0.9090909090909091, 'eval_profanity_f1': 0.9176524296678463, 'eval_f1_เย็ด': 0.8333333333333334, 'eval_f1_กู': 0.6511627906976745, 'eval_f1_มึง': 0.64, 'eval_f1_เหี้ย': 0.6363636363636364, 'eval_f1_ควย': 0.56, 'eval_f1_สวะ': 0.6923076923076923, 'eval_f1_หี': 0.6451612903225806, 'eval_f1_แตด': 0.6285714285714286, 'eval_runtime': 1.559, 'eval_samples_per_second': 125.077, 'eval_steps_per_second': 8.338, 'epoch': 41.67}
+{'loss': 0.1539, 'grad_norm': 3.2761967182159424, 'learning_rate': 2.582831063516746e-05, 'epoch': 42.5}
+{'loss': 0.1632, 'grad_norm': 6.7923102378845215, 'learning_rate': 2.5538180762794956e-05, 'epoch': 43.75}
+{'loss': 0.1666, 'grad_norm': 7.622040748596191, 'learning_rate': 2.52400483440116e-05, 'epoch': 45.0}
+{'loss': 0.1377, 'grad_norm': 5.654922962188721, 'learning_rate': 2.4934139776387485e-05, 'epoch': 46.25}
+{'loss': 0.1373, 'grad_norm': 2.1461901664733887, 'learning_rate': 2.4620687362590882e-05, 'epoch': 47.5}
+{'loss': 0.1361, 'grad_norm': 5.576557159423828, 'learning_rate': 2.429992913398085e-05, 'epoch': 48.75}
+{'loss': 0.1389, 'grad_norm': 9.540023803710938, 'learning_rate': 2.397210866984957e-05, 'epoch': 50.0}
+{'loss': 0.14, 'grad_norm': 17.186172485351562, 'learning_rate': 2.363747491245166e-05, 'epoch': 51.25}
+{'eval_loss': 0.07288452237844467, 'eval_accuracy': 0.5416666666666666, 'eval_f1_macro': 0.6072268487604937, 'eval_f1_weighted': 0.40110345190674973, 'eval_profanity_accuracy': 0.9454545454545454, 'eval_profanity_f1': 0.9495385641523162, 'eval_f1_เย็ด': 0.8333333333333334, 'eval_f1_กู': 0.7058823529411765, 'eval_f1_มึง': 0.5517241379310345, 'eval_f1_เหี้ย': 0.6666666666666666, 'eval_f1_ควย': 0.6086956521739131, 'eval_f1_สวะ': 0.75, 'eval_f1_หี': 0.6428571428571429, 'eval_f1_แตด': 0.7058823529411765, 'eval_runtime': 1.6097, 'eval_samples_per_second': 121.139, 'eval_steps_per_second': 8.076, 'epoch': 52.08}
+{'loss': 0.1118, 'grad_norm': 2.5081520080566406, 'learning_rate': 2.3296281977960924e-05, 'epoch': 52.5}
+{'loss': 0.1082, 'grad_norm': 1.294256567955017, 'learning_rate': 2.2948788963498073e-05, 'epoch': 53.75}
+{'loss': 0.098, 'grad_norm': 4.679912090301514, 'learning_rate': 2.259525975037606e-05, 'epoch': 55.0}
+{'loss': 0.127, 'grad_norm': 0.9677767157554626, 'learning_rate': 2.2235962803712265e-05, 'epoch': 56.25}
+{'loss': 0.1081, 'grad_norm': 1.3475708961486816, 'learning_rate': 2.1871170968559915e-05, 'epoch': 57.5}
+{'loss': 0.0969, 'grad_norm': 0.6580996513366699, 'learning_rate': 2.1501161262713316e-05, 'epoch': 58.75}
+{'loss': 0.1181, 'grad_norm': 17.976011276245117, 'learning_rate': 2.1126214666344505e-05, 'epoch': 60.0}
+{'loss': 0.0897, 'grad_norm': 1.8894318342208862, 'learning_rate': 2.0746615908630782e-05, 'epoch': 61.25}
+{'loss': 0.0842, 'grad_norm': 2.9691081047058105, 'learning_rate': 2.036265325153545e-05, 'epoch': 62.5}
+{'eval_loss': 0.059948232024908066, 'eval_accuracy': 0.5625, 'eval_f1_macro': 0.6321263254079792, 'eval_f1_weighted': 0.43274256583365117, 'eval_profanity_accuracy': 0.9636363636363636, 'eval_profanity_f1': 0.963588064103369, 'eval_f1_เย็ด': 0.8571428571428571, 'eval_f1_กู': 0.6923076923076923, 'eval_f1_มึง': 0.5333333333333333, 'eval_f1_เหี้ย': 0.7, 'eval_f1_ควย': 0.6511627906976745, 'eval_f1_สวะ': 0.8181818181818182, 'eval_f1_หี': 0.7407407407407407, 'eval_f1_แตด': 0.6486486486486487, 'eval_runtime': 1.6163, 'eval_samples_per_second': 120.642, 'eval_steps_per_second': 8.043, 'epoch': 62.5}
+{'loss': 0.1111, 'grad_norm': 2.6377525329589844, 'learning_rate': 1.9974618270905652e-05, 'epoch': 63.75}
+{'loss': 0.1037, 'grad_norm': 0.6602208018302917, 'learning_rate': 1.9582805635053837e-05, 'epoch': 65.0}
+{'loss': 0.0933, 'grad_norm': 1.5884984731674194, 'learning_rate': 1.918751288099073e-05, 'epoch': 66.25}
+{'loss': 0.0862, 'grad_norm': 5.742966651916504, 'learning_rate': 1.8789040188479954e-05, 'epoch': 67.5}
+{'loss': 0.1025, 'grad_norm': 8.121063232421875, 'learning_rate': 1.8387690152085687e-05, 'epoch': 68.75}
+{'loss': 0.0957, 'grad_norm': 6.176750183105469, 'learning_rate': 1.7983767551386646e-05, 'epoch': 70.0}
+{'loss': 0.0798, 'grad_norm': 6.76314640045166, 'learning_rate': 1.7577579119530727e-05, 'epoch': 71.25}
+{'loss': 0.0812, 'grad_norm': 0.23685041069984436, 'learning_rate': 1.7169433310306176e-05, 'epoch': 72.5}
+{'eval_loss': 0.09137281775474548, 'eval_accuracy': 0.5677083333333334, 'eval_f1_macro': 0.6288960360196801, 'eval_f1_weighted': 0.45775298341214365, 'eval_profanity_accuracy': 0.9454545454545454, 'eval_profanity_f1': 0.9396991752144801, 'eval_f1_เย็ด': 0.875, 'eval_f1_กู': 0.7058823529411765, 'eval_f1_มึง': 0.5714285714285714, 'eval_f1_เหี้ย': 0.6666666666666666, 'eval_f1_ควย': 0.6666666666666666, 'eval_f1_สวะ': 0.6956521739130435, 'eval_f1_หี': 0.7692307692307693, 'eval_f1_แตด': 0.5945945945945946, 'eval_runtime': 1.5539, 'eval_samples_per_second': 125.493, 'eval_steps_per_second': 8.366, 'epoch': 72.92}
+{'loss': 0.0752, 'grad_norm': 2.27168607711792, 'learning_rate': 1.6759640063906095e-05, 'epoch': 73.75}
+{'loss': 0.0959, 'grad_norm': 1.761954665184021, 'learning_rate': 1.6348510571564265e-05, 'epoch': 75.0}
+{'loss': 0.0978, 'grad_norm': 5.851287841796875, 'learning_rate': 1.5936357039240825e-05, 'epoch': 76.25}
+{'loss': 0.0786, 'grad_norm': 6.134043216705322, 'learning_rate': 1.552349245053752e-05, 'epoch': 77.5}
+{'loss': 0.0705, 'grad_norm': 21.88060188293457, 'learning_rate': 1.5110230329022286e-05, 'epoch': 78.75}
+{'loss': 0.0813, 'grad_norm': 1.6057802438735962, 'learning_rate': 1.4696884500143922e-05, 'epoch': 80.0}
+{'loss': 0.0611, 'grad_norm': 1.0223453044891357, 'learning_rate': 1.4283768852917403e-05, 'epoch': 81.25}
+{'loss': 0.1013, 'grad_norm': 16.977521896362305, 'learning_rate': 1.3871197101560997e-05, 'epoch': 82.5}
+{'eval_loss': 0.0790732130408287, 'eval_accuracy': 0.578125, 'eval_f1_macro': 0.6458676143543856, 'eval_f1_weighted': 0.48398154622104617, 'eval_profanity_accuracy': 0.9363636363636364, 'eval_profanity_f1': 0.8388998727687743, 'eval_f1_เย็ด': 0.8085106382978723, 'eval_f1_กู': 0.7058823529411765, 'eval_f1_มึง': 0.5714285714285714, 'eval_f1_เหี้ย': 0.7, 'eval_f1_ควย': 0.6511627906976745, 'eval_f1_สวะ': 0.8571428571428571, 'eval_f1_หี': 0.7142857142857143, 'eval_f1_แตด': 0.6285714285714286, 'eval_runtime': 1.5734, 'eval_samples_per_second': 123.938, 'eval_steps_per_second': 8.263, 'epoch': 83.33}
+{'loss': 0.0654, 'grad_norm': 6.379175662994385, 'learning_rate': 1.3459482547266106e-05, 'epoch': 83.75}
+{'loss': 0.0827, 'grad_norm': 4.440035343170166, 'learning_rate': 1.3048937840280691e-05, 'epoch': 85.0}
+{'loss': 0.0669, 'grad_norm': 7.182966232299805, 'learning_rate': 1.2639874742487136e-05, 'epoch': 86.25}
+{'loss': 0.0646, 'grad_norm': 10.170702934265137, 'learning_rate': 1.2232603890654604e-05, 'epoch': 87.5}
+{'loss': 0.063, 'grad_norm': 12.359041213989258, 'learning_rate': 1.1827434560545872e-05, 'epoch': 88.75}
+{'loss': 0.0846, 'grad_norm': 14.25011920928955, 'learning_rate': 1.1424674432057613e-05, 'epoch': 90.0}
+{'loss': 0.0528, 'grad_norm': 2.075289249420166, 'learning_rate': 1.1024629355572678e-05, 'epoch': 91.25}
+{'loss': 0.0955, 'grad_norm': 6.335788726806641, 'learning_rate': 1.062760311970155e-05, 'epoch': 92.5}
+{'loss': 0.0683, 'grad_norm': 0.5077598690986633, 'learning_rate': 1.023389722058957e-05, 'epoch': 93.75}
+{'eval_loss': 0.06790653616189957, 'eval_accuracy': 0.5989583333333334, 'eval_f1_macro': 0.6644076831173605, 'eval_f1_weighted': 0.5110365832644058, 'eval_profanity_accuracy': 0.9545454545454546, 'eval_profanity_f1': 0.852372153275026, 'eval_f1_เย็ด': 0.8571428571428571, 'eval_f1_กู': 0.68, 'eval_f1_มึง': 0.5714285714285714, 'eval_f1_เหี้ย': 0.717948717948718, 'eval_f1_ควย': 0.6666666666666666, 'eval_f1_สวะ': 0.8, 'eval_f1_หี': 0.7857142857142857, 'eval_f1_แตด': 0.6857142857142857, 'eval_runtime': 1.5803, 'eval_samples_per_second': 123.392, 'eval_steps_per_second': 8.226, 'epoch': 93.75}
+{'loss': 0.0609, 'grad_norm': 0.4911014437675476, 'learning_rate': 9.843810632964988e-06, 'epoch': 95.0}
+{'loss': 0.0393, 'grad_norm': 0.11789993196725845, 'learning_rate': 9.457639583101778e-06, 'epoch': 96.25}
+{'loss': 0.0566, 'grad_norm': 5.084157466888428, 'learning_rate': 9.075677323869535e-06, 'epoch': 97.5}
+{'loss': 0.0718, 'grad_norm': 7.038921356201172, 'learning_rate': 8.698213912041392e-06, 'epoch': 98.75}
+{'loss': 0.073, 'grad_norm': 4.1131696701049805, 'learning_rate': 8.325535988028953e-06, 'epoch': 100.0}
+{'loss': 0.082, 'grad_norm': 3.633820056915283, 'learning_rate': 7.957926558211643e-06, 'epoch': 101.25}
+{'loss': 0.0721, 'grad_norm': 10.695064544677734, 'learning_rate': 7.595664780025571e-06, 'epoch': 102.5}
+{'loss': 0.0417, 'grad_norm': 0.1459386646747589, 'learning_rate': 7.239025749975366e-06, 'epoch': 103.75}
+{'eval_loss': 0.07938285917043686, 'eval_accuracy': 0.6041666666666666, 'eval_f1_macro': 0.6721683336665916, 'eval_f1_weighted': 0.5263606106920568, 'eval_profanity_accuracy': 0.9454545454545454, 'eval_profanity_f1': 0.8525013172991851, 'eval_f1_เย็ด': 0.8333333333333334, 'eval_f1_กู': 0.6938775510204082, 'eval_f1_มึง': 0.5714285714285714, 'eval_f1_เหี้ย': 0.717948717948718, 'eval_f1_ควย': 0.6829268292682927, 'eval_f1_สวะ': 0.9, 'eval_f1_หี': 0.7333333333333333, 'eval_f1_แตด': 0.6666666666666666, 'eval_runtime': 1.5991, 'eval_samples_per_second': 121.944, 'eval_steps_per_second': 8.13, 'epoch': 104.17}
+{'loss': 0.065, 'grad_norm': 19.639488220214844, 'learning_rate': 6.888280294729689e-06, 'epoch': 105.0}
+{'loss': 0.0761, 'grad_norm': 0.1571803092956543, 'learning_rate': 6.543694765459326e-06, 'epoch': 106.25}
+{'loss': 0.0596, 'grad_norm': 6.964100360870361, 'learning_rate': 6.205530835573801e-06, 'epoch': 107.5}
+{'loss': 0.0629, 'grad_norm': 0.15232086181640625, 'learning_rate': 5.874045302010304e-06, 'epoch': 108.75}
+{'loss': 0.07, 'grad_norm': 0.9887831807136536, 'learning_rate': 5.549489890225691e-06, 'epoch': 110.0}
+{'loss': 0.0701, 'grad_norm': 1.6651217937469482, 'learning_rate': 5.23211106303969e-06, 'epoch': 111.25}
+{'loss': 0.0379, 'grad_norm': 0.06879349797964096, 'learning_rate': 4.922149833474522e-06, 'epoch': 112.5}
+{'loss': 0.0508, 'grad_norm': 0.38450363278388977, 'learning_rate': 4.619841581732998e-06, 'epoch': 113.75}
+{'eval_loss': 0.07931023091077805, 'eval_accuracy': 0.5885416666666666, 'eval_f1_macro': 0.6623814245973123, 'eval_f1_weighted': 0.5095893182348645, 'eval_profanity_accuracy': 0.9272727272727272, 'eval_profanity_f1': 0.8378619243624048, 'eval_f1_เย็ด': 0.7916666666666666, 'eval_f1_กู': 0.6538461538461539, 'eval_f1_มึง': 0.5714285714285714, 'eval_f1_เหี้ย': 0.6829268292682927, 'eval_f1_ควย': 0.6829268292682927, 'eval_f1_สวะ': 0.9, 'eval_f1_หี': 0.8, 'eval_f1_แตด': 0.6470588235294118, 'eval_runtime': 1.589, 'eval_samples_per_second': 122.717, 'eval_steps_per_second': 8.181, 'epoch': 114.58}
+{'loss': 0.0669, 'grad_norm': 5.754428863525391, 'learning_rate': 4.325415876454094e-06, 'epoch': 115.0}
+{'loss': 0.0578, 'grad_norm': 1.3434021472930908, 'learning_rate': 4.0390963003817405e-06, 'epoch': 116.25}
+{'loss': 0.0617, 'grad_norm': 7.089797496795654, 'learning_rate': 3.7611002805792427e-06, 'epoch': 117.5}
+{'loss': 0.0707, 'grad_norm': 0.3316909372806549, 'learning_rate': 3.4916389233182227e-06, 'epoch': 118.75}
+{'loss': 0.0721, 'grad_norm': 2.9321839809417725, 'learning_rate': 3.230916853767485e-06, 'epoch': 120.0}
+{'loss': 0.0545, 'grad_norm': 0.5722600221633911, 'learning_rate': 2.979132060603521e-06, 'epoch': 121.25}
+{'loss': 0.0854, 'grad_norm': 5.283919334411621, 'learning_rate': 2.7364757456607064e-06, 'epoch': 122.5}
+{'loss': 0.0639, 'grad_norm': 18.65226936340332, 'learning_rate': 2.5031321787353113e-06, 'epoch': 123.75}
+{'loss': 0.0585, 'grad_norm': 7.139163017272949, 'learning_rate': 2.279278557653611e-06, 'epoch': 125.0}
+{'eval_loss': 0.08084535598754883, 'eval_accuracy': 0.59375, 'eval_f1_macro': 0.6681177266228129, 'eval_f1_weighted': 0.5146777351291394, 'eval_profanity_accuracy': 0.9363636363636364, 'eval_profanity_f1': 0.8433788943836588, 'eval_f1_เย็ด': 0.8163265306122449, 'eval_f1_กู': 0.68, 'eval_f1_มึง': 0.5714285714285714, 'eval_f1_เหี้ย': 0.6666666666666666, 'eval_f1_ควย': 0.6666666666666666, 'eval_f1_สวะ': 0.9, 'eval_f1_หี': 0.8333333333333334, 'eval_f1_แตด': 0.6470588235294118, 'eval_runtime': 1.5659, 'eval_samples_per_second': 124.531, 'eval_steps_per_second': 8.302, 'epoch': 125.0}
+{'loss': 0.0428, 'grad_norm': 0.6158447861671448, 'learning_rate': 2.0650848737103273e-06, 'epoch': 126.25}
+{'loss': 0.0849, 'grad_norm': 5.437287330627441, 'learning_rate': 1.8607137825796454e-06, 'epoch': 127.5}
+{'loss': 0.0588, 'grad_norm': 0.07011669874191284, 'learning_rate': 1.6663204807967785e-06, 'epoch': 128.75}
+{'loss': 0.0622, 'grad_norm': 0.19350725412368774, 'learning_rate': 1.4820525879038981e-06, 'epoch': 130.0}
+{'loss': 0.078, 'grad_norm': 7.777601718902588, 'learning_rate': 1.3080500343499108e-06, 'epoch': 131.25}
+{'loss': 0.0825, 'grad_norm': 13.088685035705566, 'learning_rate': 1.1444449552292725e-06, 'epoch': 132.5}
+{'loss': 0.0661, 'grad_norm': 4.876474380493164, 'learning_rate': 9.913615899404305e-07, 'epoch': 133.75}
+{'loss': 0.0777, 'grad_norm': 10.357344627380371, 'learning_rate': 8.489161878401841e-07, 'epoch': 135.0}
+{'eval_loss': 0.07698297500610352, 'eval_accuracy': 0.59375, 'eval_f1_macro': 0.6702124491123698, 'eval_f1_weighted': 0.5146720646551203, 'eval_profanity_accuracy': 0.9363636363636364, 'eval_profanity_f1': 0.8496712447016708, 'eval_f1_เย็ด': 0.8085106382978723, 'eval_f1_กู': 0.68, 'eval_f1_มึง': 0.5714285714285714, 'eval_f1_เหี้ย': 0.6829268292682927, 'eval_f1_ควย': 0.6666666666666666, 'eval_f1_สวะ': 0.9, 'eval_f1_หี': 0.8461538461538461, 'eval_f1_แตด': 0.6470588235294118, 'eval_runtime': 1.5055, 'eval_samples_per_second': 129.525, 'eval_steps_per_second': 8.635, 'epoch': 135.42}
+{'loss': 0.0483, 'grad_norm': 0.12082783132791519, 'learning_rate': 7.17216919965536e-07, 'epoch': 136.25}
+{'loss': 0.057, 'grad_norm': 0.23787838220596313, 'learning_rate': 5.963637968901503e-07, 'epoch': 137.5}
+{'loss': 0.0512, 'grad_norm': 3.0574615001678467, 'learning_rate': 4.864485927777207e-07, 'epoch': 138.75}
+{'loss': 0.0561, 'grad_norm': 1.9738352298736572, 'learning_rate': 3.875547756899495e-07, 'epoch': 140.0}
+{'loss': 0.0588, 'grad_norm': 7.004083633422852, 'learning_rate': 2.9975744420208176e-07, 'epoch': 141.25}
+{'loss': 0.0599, 'grad_norm': 0.19660496711730957, 'learning_rate': 2.2312327037410706e-07, 'epoch': 142.5}
+{'loss': 0.0662, 'grad_norm': 0.14114558696746826, 'learning_rate': 1.577104491209308e-07, 'epoch': 143.75}
+{'loss': 0.0559, 'grad_norm': 0.7292770743370056, 'learning_rate': 1.0356865401996596e-07, 'epoch': 145.0}
+{'eval_loss': 0.07734555006027222, 'eval_accuracy': 0.59375, 'eval_f1_macro': 0.6702124491123698, 'eval_f1_weighted': 0.5146720646551203, 'eval_profanity_accuracy': 0.9363636363636364, 'eval_profanity_f1': 0.8496712447016708, 'eval_f1_เย็ด': 0.8085106382978723, 'eval_f1_กู': 0.68, 'eval_f1_มึง': 0.5714285714285714, 'eval_f1_เหี้ย': 0.6829268292682927, 'eval_f1_ควย': 0.6666666666666666, 'eval_f1_สวะ': 0.9, 'eval_f1_หี': 0.8461538461538461, 'eval_f1_แตด': 0.6470588235294118, 'eval_runtime': 5.6207, 'eval_samples_per_second': 34.693, 'eval_steps_per_second': 2.313, 'epoch': 145.83}
+{'loss': 0.0724, 'grad_norm': 0.07424724847078323, 'learning_rate': 6.073899958972395e-08, 'epoch': 146.25}
+{'loss': 0.0577, 'grad_norm': 2.2064013481140137, 'learning_rate': 2.9254010068029413e-08, 'epoch': 147.5}
+{'loss': 0.0489, 'grad_norm': 0.7227766513824463, 'learning_rate': 9.137594713563569e-09, 'epoch': 148.75}
+{'loss': 0.0639, 'grad_norm': 0.9870907068252563, 'learning_rate': 4.050296495128336e-10, 'epoch': 150.0}
+{'train_runtime': 2139.8935, 'train_samples_per_second': 54.606, 'train_steps_per_second': 1.682, 'train_loss': 0.21669496142201952, 'epoch': 150.0}
+Fold 2 Validation Results:
+  Accuracy: 0.6051
+  F1 Macro: 0.6745
+
+==================================================
+TRAINING FOLD 3/5
+==================================================
+Fold 3 - Train: 779, Val: 195
+
+Class weights:
+none: 0.2748
+เย็ด: 1.5456
+กู: 1.2191
+มึง: 1.2191
+เหี้ย: 1.6972
+ควย: 1.6029
+สวะ: 1.6645
+หี: 1.6645
+แตด: 1.5185
+
+Training set class distribution:
+none: 315
+เย็ด: 56
+กู: 71
+มึง: 71
+เหี้ย: 51
+ควย: 54
+สวะ: 52
+หี: 52
+แตด: 57
+  warnings.warn(
+Some weights of Wav2Vec2ForSequenceClassification were not initialized from the model checkpoint at airesearch/wav2vec2-large-xlsr-53-th and are newly initialized: ['classifier.bias', 'classifier.weight', 'projector.bias', 'projector.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+                                                                                                 
+{'loss': 1.2881, 'grad_norm': 2.129244565963745, 'learning_rate': 4.666666666666667e-06, 'epoch': 1.25}
+{'loss': 1.3138, 'grad_norm': 2.3609962463378906, 'learning_rate': 9.666666666666667e-06, 'epoch': 2.5}
+{'loss': 1.2912, 'grad_norm': 2.474916458129883, 'learning_rate': 1.45e-05, 'epoch': 3.75}
+{'loss': 1.2446, 'grad_norm': 2.7931807041168213, 'learning_rate': 1.95e-05, 'epoch': 5.0}
+{'loss': 1.2124, 'grad_norm': 2.035444974899292, 'learning_rate': 2.45e-05, 'epoch': 6.25}
+{'loss': 1.1788, 'grad_norm': 2.4091365337371826, 'learning_rate': 2.9333333333333333e-05, 'epoch': 7.5}
+{'loss': 1.0967, 'grad_norm': 2.4189820289611816, 'learning_rate': 2.999572205843142e-05, 'epoch': 8.75}
+{'loss': 0.9844, 'grad_norm': 10.354001998901367, 'learning_rate': 2.9980860006140413e-05, 'epoch': 10.0}
+                                                                                                 
+{'eval_loss': 0.8219149708747864, 'eval_accuracy': 0.19270833333333334, 'eval_f1_macro': 0.22004323254323255, 'eval_f1_weighted': 0.13287134107446605, 'eval_profanity_accuracy': 0.39361702127659576, 'eval_profanity_f1': 0.34800506170847784, 'eval_f1_เย็ด': 0.0, 'eval_f1_กู': 0.35714285714285715, 'eval_f1_มึง': 0.5333333333333333, 'eval_f1_เหี้ย': 0.32432432432432434, 'eval_f1_ควย': 0.0, 'eval_f1_สวะ': 0.1875, 'eval_f1_หี': 0.42424242424242425, 'eval_f1_แตด': 0.15384615384615385, 'eval_runtime': 5.7642, 'eval_samples_per_second': 33.83, 'eval_steps_per_second': 2.255, 'epoch': 10.42}
+{'loss': 0.892, 'grad_norm': 6.02205228805542, 'learning_rate': 2.9954298969312294e-05, 'epoch': 11.25}
+{'loss': 0.7422, 'grad_norm': 20.887470245361328, 'learning_rate': 2.99178284305241e-05, 'epoch': 12.5}
+{'loss': 0.6842, 'grad_norm': 15.222224235534668, 'learning_rate': 2.9868961039904628e-05, 'epoch': 13.75}
+{'loss': 0.6117, 'grad_norm': 3.388261556625366, 'learning_rate': 2.9808802369178914e-05, 'epoch': 15.0}
+{'loss': 0.6024, 'grad_norm': 7.204187870025635, 'learning_rate': 2.973739810199627e-05, 'epoch': 16.25}
+{'loss': 0.5044, 'grad_norm': 6.55679988861084, 'learning_rate': 2.965773531587884e-05, 'epoch': 17.5}
+{'loss': 0.4366, 'grad_norm': 6.600351333618164, 'learning_rate': 2.956438087966449e-05, 'epoch': 18.75}
+{'loss': 0.4364, 'grad_norm': 1.7179511785507202, 'learning_rate': 2.9459966457238264e-05, 'epoch': 20.0}
+{'eval_loss': 0.4390679895877838, 'eval_accuracy': 0.3541666666666667, 'eval_f1_macro': 0.4261334146004615, 'eval_f1_weighted': 0.23307188374100418, 'eval_profanity_accuracy': 0.723404255319149, 'eval_profanity_f1': 0.7359736373511536, 'eval_f1_เย็ด': 0.5333333333333333, 'eval_f1_กู': 0.4444444444444444, 'eval_f1_มึง': 0.5641025641025641, 'eval_f1_เหี้ย': 0.375, 'eval_f1_ควย': 0.41379310344827586, 'eval_f1_สวะ': 0.4782608695652174, 'eval_f1_หี': 0.4878048780487805, 'eval_f1_แตด': 0.5384615384615384, 'eval_runtime': 5.327, 'eval_samples_per_second': 36.606, 'eval_steps_per_second': 2.44, 'epoch': 20.83}
+{'loss': 0.3722, 'grad_norm': 19.54534339904785, 'learning_rate': 2.9344571339445534e-05, 'epoch': 21.25}
+{'loss': 0.3698, 'grad_norm': 5.440633296966553, 'learning_rate': 2.921828315571746e-05, 'epoch': 22.5}
+{'loss': 0.3344, 'grad_norm': 6.316052436828613, 'learning_rate': 2.9081197807526433e-05, 'epoch': 23.75}
+{'loss': 0.3024, 'grad_norm': 8.391779899597168, 'learning_rate': 2.8933419395559828e-05, 'epoch': 25.0}
+{'loss': 0.2606, 'grad_norm': 2.3182082176208496, 'learning_rate': 2.8775060140667428e-05, 'epoch': 26.25}
+{'loss': 0.2737, 'grad_norm': 2.016033411026001, 'learning_rate': 2.860624029864246e-05, 'epoch': 27.5}
+{'loss': 0.2439, 'grad_norm': 19.454256057739258, 'learning_rate': 2.8427088068901053e-05, 'epoch': 28.75}
+{'loss': 0.2304, 'grad_norm': 15.854419708251953, 'learning_rate': 2.8237739497129406e-05, 'epoch': 30.0}
+{'loss': 0.2102, 'grad_norm': 7.3286943435668945, 'learning_rate': 2.8038338371972594e-05, 'epoch': 31.25}
+{'eval_loss': 0.3382337987422943, 'eval_accuracy': 0.359375, 'eval_f1_macro': 0.4409252146321112, 'eval_f1_weighted': 0.23999350969313252, 'eval_profanity_accuracy': 0.7340425531914894, 'eval_profanity_f1': 0.7456421208524996, 'eval_f1_เย็ด': 0.5625, 'eval_f1_กู': 0.41379310344827586, 'eval_f1_มึง': 0.6060606060606061, 'eval_f1_เหี้ย': 0.32142857142857145, 'eval_f1_ควย': 0.5, 'eval_f1_สวะ': 0.5128205128205128, 'eval_f1_หี': 0.5, 'eval_f1_แตด': 0.5517241379310345, 'eval_runtime': 5.2996, 'eval_samples_per_second': 36.795, 'eval_steps_per_second': 2.453, 'epoch': 31.25}
+{'loss': 0.2026, 'grad_norm': 5.26388692855835, 'learning_rate': 2.782903611584349e-05, 'epoch': 32.5}
+{'loss': 0.1849, 'grad_norm': 5.983119010925293, 'learning_rate': 2.7609991669934733e-05, 'epoch': 33.75}
+{'loss': 0.1912, 'grad_norm': 17.651874542236328, 'learning_rate': 2.7381371373520976e-05, 'epoch': 35.0}
+{'loss': 0.2015, 'grad_norm': 11.538774490356445, 'learning_rate': 2.7143348837643237e-05, 'epoch': 36.25}
+{'loss': 0.1876, 'grad_norm': 1.420222282409668, 'learning_rate': 2.689610481327106e-05, 'epoch': 37.5}
+{'loss': 0.1631, 'grad_norm': 15.577682495117188, 'learning_rate': 2.6639827054042802e-05, 'epoch': 38.75}
+{'loss': 0.184, 'grad_norm': 2.094012975692749, 'learning_rate': 2.6374710173688142e-05, 'epoch': 40.0}
+{'loss': 0.1344, 'grad_norm': 0.7849625945091248, 'learning_rate': 2.6100955498241158e-05, 'epoch': 41.25}
+{'eval_loss': 0.33580541610717773, 'eval_accuracy': 0.3854166666666667, 'eval_f1_macro': 0.4699485473804197, 'eval_f1_weighted': 0.25709154535274564, 'eval_profanity_accuracy': 0.7872340425531915, 'eval_profanity_f1': 0.8036107733948152, 'eval_f1_เย็ด': 0.6206896551724138, 'eval_f1_กู': 0.42424242424242425, 'eval_f1_มึง': 0.5882352941176471, 'eval_f1_เหี้ย': 0.45454545454545453, 'eval_f1_ควย': 0.391304347826087, 'eval_f1_สวะ': 0.5405405405405406, 'eval_f1_หี': 0.5945945945945946, 'eval_f1_แตด': 0.6153846153846154, 'eval_runtime': 1.5718, 'eval_samples_per_second': 124.058, 'eval_steps_per_second': 8.271, 'epoch': 41.67}
+{'loss': 0.1669, 'grad_norm': 0.3230868875980377, 'learning_rate': 2.5818770913156156e-05, 'epoch': 42.5}
+{'loss': 0.1469, 'grad_norm': 11.72060489654541, 'learning_rate': 2.5528370705442383e-05, 'epoch': 43.75}
+{'loss': 0.168, 'grad_norm': 28.46580696105957, 'learning_rate': 2.5229975400937478e-05, 'epoch': 45.0}
+{'loss': 0.1184, 'grad_norm': 50.52742004394531, 'learning_rate': 2.4923811596843264e-05, 'epoch': 46.25}
+{'loss': 0.1404, 'grad_norm': 1.1769051551818848, 'learning_rate': 2.4610111789651e-05, 'epoch': 47.5}
+{'loss': 0.1306, 'grad_norm': 2.480611562728882, 'learning_rate': 2.4289114198586803e-05, 'epoch': 48.75}
+{'loss': 0.1607, 'grad_norm': 7.176733493804932, 'learning_rate': 2.3961062584711352e-05, 'epoch': 50.0}
+{'loss': 0.1379, 'grad_norm': 6.1749444007873535, 'learning_rate': 2.3626206065811137e-05, 'epoch': 51.25}
+{'eval_loss': 0.2711109220981598, 'eval_accuracy': 0.40625, 'eval_f1_macro': 0.4952589523267743, 'eval_f1_weighted': 0.27923022362939326, 'eval_profanity_accuracy': 0.8191489361702128, 'eval_profanity_f1': 0.833275940811107, 'eval_f1_เย็ด': 0.6923076923076923, 'eval_f1_กู': 0.5, 'eval_f1_มึง': 0.5365853658536586, 'eval_f1_เหี้ย': 0.4166666666666667, 'eval_f1_ควย': 0.47368421052631576, 'eval_f1_สวะ': 0.5625, 'eval_f1_หี': 0.6153846153846154, 'eval_f1_แตด': 0.64, 'eval_runtime': 1.6186, 'eval_samples_per_second': 120.476, 'eval_steps_per_second': 8.032, 'epoch': 52.08}
+{'loss': 0.1511, 'grad_norm': 2.965106725692749, 'learning_rate': 2.3284798927221897e-05, 'epoch': 52.5}
+{'loss': 0.1036, 'grad_norm': 1.0505918264389038, 'learning_rate': 2.2937100428727946e-05, 'epoch': 53.75}
+{'loss': 0.1082, 'grad_norm': 7.172726154327393, 'learning_rate': 2.2583374607683903e-05, 'epoch': 55.0}
+{'loss': 0.1164, 'grad_norm': 3.7096662521362305, 'learning_rate': 2.2223890078508474e-05, 'epoch': 56.25}
+{'loss': 0.1071, 'grad_norm': 0.8017338514328003, 'learning_rate': 2.1858919828702365e-05, 'epoch': 57.5}
+{'loss': 0.1226, 'grad_norm': 11.194074630737305, 'learning_rate': 2.1488741011545505e-05, 'epoch': 58.75}
+{'loss': 0.0897, 'grad_norm': 12.088695526123047, 'learning_rate': 2.1113634735630653e-05, 'epoch': 60.0}
+{'loss': 0.105, 'grad_norm': 7.888329982757568, 'learning_rate': 2.073388585139354e-05, 'epoch': 61.25}
+{'loss': 0.1032, 'grad_norm': 3.8484129905700684, 'learning_rate': 2.0349782734801414e-05, 'epoch': 62.5}
+{'eval_loss': 0.2364494353532791, 'eval_accuracy': 0.4322916666666667, 'eval_f1_macro': 0.5190959739648293, 'eval_f1_weighted': 0.3110276474564515, 'eval_profanity_accuracy': 0.851063829787234, 'eval_profanity_f1': 0.8644056681552272, 'eval_f1_เย็ด': 0.6923076923076923, 'eval_f1_กู': 0.5263157894736842, 'eval_f1_มึง': 0.5789473684210527, 'eval_f1_เหี้ย': 0.4444444444444444, 'eval_f1_ควย': 0.4864864864864865, 'eval_f1_สวะ': 0.6285714285714286, 'eval_f1_หี': 0.6153846153846154, 'eval_f1_แตด': 0.64, 'eval_runtime': 1.6978, 'eval_samples_per_second': 114.853, 'eval_steps_per_second': 7.657, 'epoch': 62.5}
+{'loss': 0.1097, 'grad_norm': 9.408706665039062, 'learning_rate': 1.9961617068364414e-05, 'epoch': 63.75}
+{'loss': 0.1148, 'grad_norm': 3.1281843185424805, 'learning_rate': 1.956968361963593e-05, 'epoch': 65.0}
+{'loss': 0.0815, 'grad_norm': 4.87876033782959, 'learning_rate': 1.917428001737031e-05, 'epoch': 66.25}
+{'loss': 0.0851, 'grad_norm': 10.168394088745117, 'learning_rate': 1.877570652550772e-05, 'epoch': 67.5}
+{'loss': 0.1011, 'grad_norm': 6.164381504058838, 'learning_rate': 1.8374265815157978e-05, 'epoch': 68.75}
+{'loss': 0.0957, 'grad_norm': 1.1288094520568848, 'learning_rate': 1.7970262734756303e-05, 'epoch': 70.0}
+{'loss': 0.1022, 'grad_norm': 0.333048015832901, 'learning_rate': 1.7564004078565766e-05, 'epoch': 71.25}
+{'loss': 0.0763, 'grad_norm': 1.718274474143982, 'learning_rate': 1.715579835370197e-05, 'epoch': 72.5}
+{'eval_loss': 0.1834018975496292, 'eval_accuracy': 0.4322916666666667, 'eval_f1_macro': 0.5138002227849447, 'eval_f1_weighted': 0.31520955429311825, 'eval_profanity_accuracy': 0.8404255319148937, 'eval_profanity_f1': 0.8569505492139763, 'eval_f1_เย็ด': 0.6666666666666666, 'eval_f1_กู': 0.5263157894736842, 'eval_f1_มึง': 0.5945945945945946, 'eval_f1_เหี้ย': 0.47619047619047616, 'eval_f1_ควย': 0.5142857142857142, 'eval_f1_สวะ': 0.5625, 'eval_f1_หี': 0.5652173913043478, 'eval_f1_แตด': 0.64, 'eval_runtime': 1.613, 'eval_samples_per_second': 120.896, 'eval_steps_per_second': 8.06, 'epoch': 72.92}
+{'loss': 0.0835, 'grad_norm': 3.782042980194092, 'learning_rate': 1.6745955545857127e-05, 'epoch': 73.75}
+{'loss': 0.0874, 'grad_norm': 8.765798568725586, 'learning_rate': 1.6334786883901273e-05, 'epoch': 75.0}
+{'loss': 0.0726, 'grad_norm': 8.657434463500977, 'learning_rate': 1.59226046035394e-05, 'epoch': 76.25}
+{'loss': 0.1134, 'grad_norm': 4.528754234313965, 'learning_rate': 1.5509721710204115e-05, 'epoch': 77.5}
+{'loss': 0.0805, 'grad_norm': 7.696146488189697, 'learning_rate': 1.5096451741363637e-05, 'epoch': 78.75}
+{'loss': 0.0934, 'grad_norm': 1.21546471118927, 'learning_rate': 1.4683108528425902e-05, 'epoch': 80.0}
+{'loss': 0.0803, 'grad_norm': 6.261075019836426, 'learning_rate': 1.4270005958419388e-05, 'epoch': 81.25}
+{'loss': 0.0789, 'grad_norm': 2.5325801372528076, 'learning_rate': 1.3857457735631706e-05, 'epoch': 82.5}
+{'eval_loss': 0.18044228851795197, 'eval_accuracy': 0.4739583333333333, 'eval_f1_macro': 0.5572414637715262, 'eval_f1_weighted': 0.3658109770203413, 'eval_profanity_accuracy': 0.8936170212765957, 'eval_profanity_f1': 0.9034370554648191, 'eval_f1_เย็ด': 0.6666666666666666, 'eval_f1_กู': 0.5714285714285714, 'eval_f1_มึง': 0.6486486486486487, 'eval_f1_เหี้ย': 0.46511627906976744, 'eval_f1_ควย': 0.5625, 'eval_f1_สวะ': 0.6666666666666666, 'eval_f1_หี': 0.6341463414634146, 'eval_f1_แตด': 0.6666666666666666, 'eval_runtime': 1.6472, 'eval_samples_per_second': 118.384, 'eval_steps_per_second': 7.892, 'epoch': 83.33}
+{'loss': 0.0892, 'grad_norm': 19.361032485961914, 'learning_rate': 1.3445777143386975e-05, 'epoch': 83.75}
+{'loss': 0.058, 'grad_norm': 36.827754974365234, 'learning_rate': 1.3035276806142884e-05, 'epoch': 85.0}
+{'loss': 0.0802, 'grad_norm': 0.3048688471317291, 'learning_rate': 1.2626268452088027e-05, 'epoch': 86.25}
+{'loss': 0.0835, 'grad_norm': 3.847623109817505, 'learning_rate': 1.2219062676419965e-05, 'epoch': 87.5}
+{'loss': 0.0847, 'grad_norm': 5.807947635650635, 'learning_rate': 1.1813968705483523e-05, 'epoch': 88.75}
+{'loss': 0.0905, 'grad_norm': 7.603351593017578, 'learning_rate': 1.141129416194871e-05, 'epoch': 90.0}
+{'loss': 0.084, 'grad_norm': 0.24002034962177277, 'learning_rate': 1.101134483120635e-05, 'epoch': 91.25}
+{'loss': 0.0846, 'grad_norm': 0.1780828982591629, 'learning_rate': 1.061442442915895e-05, 'epoch': 92.5}
+{'loss': 0.0676, 'grad_norm': 6.2721076011657715, 'learning_rate': 1.0220834371583137e-05, 'epoch': 93.75}
+{'eval_loss': 0.18013767898082733, 'eval_accuracy': 0.484375, 'eval_f1_macro': 0.5701215140444571, 'eval_f1_weighted': 0.38060474772503183, 'eval_profanity_accuracy': 0.9042553191489362, 'eval_profanity_f1': 0.8144776602577114, 'eval_f1_เย็ด': 0.6923076923076923, 'eval_f1_กู': 0.55, 'eval_f1_มึง': 0.6486486486486487, 'eval_f1_เหี้ย': 0.4888888888888889, 'eval_f1_ควย': 0.5625, 'eval_f1_สวะ': 0.7058823529411765, 'eval_f1_หี': 0.6666666666666666, 'eval_f1_แตด': 0.6666666666666666, 'eval_runtime': 1.5267, 'eval_samples_per_second': 127.724, 'eval_steps_per_second': 8.515, 'epoch': 93.75}
+{'loss': 0.0602, 'grad_norm': 21.17207145690918, 'learning_rate': 9.830873545238727e-06, 'epoch': 95.0}
+{'loss': 0.0561, 'grad_norm': 4.558757781982422, 'learning_rate': 9.444838080898345e-06, 'epoch': 96.25}
+{'loss': 0.0746, 'grad_norm': 4.421478271484375, 'learning_rate': 9.063021128469841e-06, 'epoch': 97.5}
+{'loss': 0.0893, 'grad_norm': 15.744940757751465, 'learning_rate': 8.685712634382404e-06, 'epoch': 98.75}
+{'loss': 0.0758, 'grad_norm': 3.9409658908843994, 'learning_rate': 8.313199121405286e-06, 'epoch': 100.0}
+{'loss': 0.0525, 'grad_norm': 16.936687469482422, 'learning_rate': 7.945763471066477e-06, 'epoch': 101.25}
+{'loss': 0.0693, 'grad_norm': 4.248997211456299, 'learning_rate': 7.5836847088364035e-06, 'epoch': 102.5}
+{'loss': 0.0634, 'grad_norm': 5.815079212188721, 'learning_rate': 7.227237792239924e-06, 'epoch': 103.75}
+{'eval_loss': 0.1747525930404663, 'eval_accuracy': 0.4947916666666667, 'eval_f1_macro': 0.5773664777236966, 'eval_f1_weighted': 0.40689416354443414, 'eval_profanity_accuracy': 0.8936170212765957, 'eval_profanity_f1': 0.8050361552606509, 'eval_f1_เย็ด': 0.6923076923076923, 'eval_f1_กู': 0.5, 'eval_f1_มึง': 0.6, 'eval_f1_เหี้ย': 0.5116279069767442, 'eval_f1_ควย': 0.5625, 'eval_f1_สวะ': 0.75, 'eval_f1_หี': 0.6842105263157895, 'eval_f1_แตด': 0.6956521739130435, 'eval_runtime': 1.529, 'eval_samples_per_second': 127.534, 'eval_steps_per_second': 8.502, 'epoch': 104.17}
+{'loss': 0.0797, 'grad_norm': 2.5367023944854736, 'learning_rate': 6.888280294729689e-06, 'epoch': 105.0}
+{'loss': 0.0759, 'grad_norm': 9.185539245605469, 'learning_rate': 6.543694765459326e-06, 'epoch': 106.25}
+{'loss': 0.0447, 'grad_norm': 28.43001365661621, 'learning_rate': 6.205530835573801e-06, 'epoch': 107.5}
+{'loss': 0.0672, 'grad_norm': 0.3827788233757019, 'learning_rate': 5.874045302010304e-06, 'epoch': 108.75}
+{'loss': 0.0644, 'grad_norm': 1.236656904220581, 'learning_rate': 5.549489890225691e-06, 'epoch': 110.0}
+{'loss': 0.0865, 'grad_norm': 2.6239678859710693, 'learning_rate': 5.23211106303969e-06, 'epoch': 111.25}
+{'loss': 0.0606, 'grad_norm': 6.096695423126221, 'learning_rate': 4.922149833474522e-06, 'epoch': 112.5}
+{'loss': 0.0443, 'grad_norm': 0.15606307983398438, 'learning_rate': 4.619841581732998e-06, 'epoch': 113.75}
+{'eval_loss': 0.17773877084255219, 'eval_accuracy': 0.4947916666666667, 'eval_f1_macro': 0.575141579037243, 'eval_f1_weighted': 0.4007496492093799, 'eval_profanity_accuracy': 0.9042553191489362, 'eval_profanity_f1': 0.9104076153584487, 'eval_f1_เย็ด': 0.6666666666666666, 'eval_f1_กู': 0.5365853658536586, 'eval_f1_มึง': 0.5853658536585366, 'eval_f1_เหี้ย': 0.5238095238095238, 'eval_f1_ควย': 0.5625, 'eval_f1_สวะ': 0.7272727272727273, 'eval_f1_หี': 0.7222222222222222, 'eval_f1_แตด': 0.6666666666666666, 'eval_runtime': 1.6181, 'eval_samples_per_second': 120.51, 'eval_steps_per_second': 8.034, 'epoch': 114.58}
+{'loss': 0.066, 'grad_norm': 2.008208751678467, 'learning_rate': 4.325415876454094e-06, 'epoch': 115.0}
+{'loss': 0.0608, 'grad_norm': 5.601230144500732, 'learning_rate': 4.0390963003817405e-06, 'epoch': 116.25}
+{'loss': 0.065, 'grad_norm': 8.79057502746582, 'learning_rate': 3.7611002805792427e-06, 'epoch': 117.5}
+{'loss': 0.0853, 'grad_norm': 11.69111156463623, 'learning_rate': 3.4916389233182227e-06, 'epoch': 118.75}
+{'loss': 0.0814, 'grad_norm': 7.306510925292969, 'learning_rate': 3.230916853767485e-06, 'epoch': 120.0}
+{'loss': 0.05, 'grad_norm': 0.1441899836063385, 'learning_rate': 2.979132060603521e-06, 'epoch': 121.25}
+{'loss': 0.064, 'grad_norm': 0.24966682493686676, 'learning_rate': 2.7364757456607064e-06, 'epoch': 122.5}
+{'loss': 0.0539, 'grad_norm': 3.4121105670928955, 'learning_rate': 2.5031321787353113e-06, 'epoch': 123.75}
+{'loss': 0.0849, 'grad_norm': 26.027240753173828, 'learning_rate': 2.279278557653611e-06, 'epoch': 125.0}
+{'eval_loss': 0.15203826129436493, 'eval_accuracy': 0.5, 'eval_f1_macro': 0.5825261158594492, 'eval_f1_weighted': 0.4104373057498058, 'eval_profanity_accuracy': 0.9042553191489362, 'eval_profanity_f1': 0.8131917175924585, 'eval_f1_เย็ด': 0.6923076923076923, 'eval_f1_กู': 0.5128205128205128, 'eval_f1_มึง': 0.6153846153846154, 'eval_f1_เหี้ย': 0.5, 'eval_f1_ควย': 0.6060606060606061, 'eval_f1_สวะ': 0.7272727272727273, 'eval_f1_หี': 0.7222222222222222, 'eval_f1_แตด': 0.6666666666666666, 'eval_runtime': 1.588, 'eval_samples_per_second': 122.8, 'eval_steps_per_second': 8.187, 'epoch': 125.0}
+{'loss': 0.0753, 'grad_norm': 5.873115062713623, 'learning_rate': 2.0650848737103273e-06, 'epoch': 126.25}
+{'loss': 0.0841, 'grad_norm': 0.12960582971572876, 'learning_rate': 1.8607137825796454e-06, 'epoch': 127.5}
+{'loss': 0.0696, 'grad_norm': 5.66208553314209, 'learning_rate': 1.6663204807967785e-06, 'epoch': 128.75}
+{'loss': 0.0777, 'grad_norm': 4.699891567230225, 'learning_rate': 1.4820525879038981e-06, 'epoch': 130.0}
+{'loss': 0.0732, 'grad_norm': 4.052427291870117, 'learning_rate': 1.3080500343499108e-06, 'epoch': 131.25}
+{'loss': 0.046, 'grad_norm': 4.216878890991211, 'learning_rate': 1.1444449552292725e-06, 'epoch': 132.5}
+{'loss': 0.0758, 'grad_norm': 2.0166921615600586, 'learning_rate': 9.913615899404305e-07, 'epoch': 133.75}
+{'loss': 0.0789, 'grad_norm': 12.507888793945312, 'learning_rate': 8.489161878401841e-07, 'epoch': 135.0}
+{'eval_loss': 0.1518833488225937, 'eval_accuracy': 0.4947916666666667, 'eval_f1_macro': 0.5765363727320248, 'eval_f1_weighted': 0.4113833798786244, 'eval_profanity_accuracy': 0.8829787234042553, 'eval_profanity_f1': 0.8012662480140411, 'eval_f1_เย็ด': 0.6923076923076923, 'eval_f1_กู': 0.5128205128205128, 'eval_f1_มึง': 0.5945945945945946, 'eval_f1_เหี้ย': 0.5, 'eval_f1_ควย': 0.625, 'eval_f1_สวะ': 0.6875, 'eval_f1_หี': 0.6666666666666666, 'eval_f1_แตด': 0.6956521739130435, 'eval_runtime': 1.6187, 'eval_samples_per_second': 120.464, 'eval_steps_per_second': 8.031, 'epoch': 135.42}
+{'loss': 0.0595, 'grad_norm': 1.5360522270202637, 'learning_rate': 7.17216919965536e-07, 'epoch': 136.25}
+{'loss': 0.0706, 'grad_norm': 4.643754482269287, 'learning_rate': 5.963637968901503e-07, 'epoch': 137.5}
+{'loss': 0.0557, 'grad_norm': 0.5675777792930603, 'learning_rate': 4.864485927777207e-07, 'epoch': 138.75}
+{'loss': 0.0489, 'grad_norm': 15.693477630615234, 'learning_rate': 3.875547756899495e-07, 'epoch': 140.0}
+{'loss': 0.0552, 'grad_norm': 3.149017572402954, 'learning_rate': 2.9975744420208176e-07, 'epoch': 141.25}
+{'loss': 0.0789, 'grad_norm': 0.9822957515716553, 'learning_rate': 2.2312327037410706e-07, 'epoch': 142.5}
+{'loss': 0.0776, 'grad_norm': 0.15224023163318634, 'learning_rate': 1.577104491209308e-07, 'epoch': 143.75}
+{'loss': 0.052, 'grad_norm': 0.24165569245815277, 'learning_rate': 1.0356865401996596e-07, 'epoch': 145.0}
+{'eval_loss': 0.1525271087884903, 'eval_accuracy': 0.4947916666666667, 'eval_f1_macro': 0.5745074286402624, 'eval_f1_weighted': 0.41143528537805746, 'eval_profanity_accuracy': 0.8829787234042553, 'eval_profanity_f1': 0.797143498335736, 'eval_f1_เย็ด': 0.6923076923076923, 'eval_f1_กู': 0.5, 'eval_f1_มึง': 0.631578947368421, 'eval_f1_เหี้ย': 0.5, 'eval_f1_ควย': 0.5806451612903226, 'eval_f1_สวะ': 0.6875, 'eval_f1_หี': 0.6666666666666666, 'eval_f1_แตด': 0.6956521739130435, 'eval_runtime': 1.5991, 'eval_samples_per_second': 121.945, 'eval_steps_per_second': 8.13, 'epoch': 145.83}
+{'loss': 0.0596, 'grad_norm': 2.097708225250244, 'learning_rate': 6.073899958972395e-08, 'epoch': 146.25}
+{'loss': 0.0542, 'grad_norm': 4.281409740447998, 'learning_rate': 2.9254010068029413e-08, 'epoch': 147.5}
+{'loss': 0.0586, 'grad_norm': 1.3067026138305664, 'learning_rate': 9.137594713563569e-09, 'epoch': 148.75}
+{'loss': 0.0869, 'grad_norm': 7.867409706115723, 'learning_rate': 4.050296495128336e-10, 'epoch': 150.0}
+{'train_runtime': 2739.2446, 'train_samples_per_second': 42.658, 'train_steps_per_second': 1.314, 'train_loss': 0.21613238801558812, 'epoch': 150.0}
+Fold 3 Validation Results:
+  Accuracy: 0.4974
+  F1 Macro: 0.5792
+
+==================================================
+TRAINING FOLD 4/5
+==================================================
+Fold 4 - Train: 779, Val: 195
+
+Class weights:
+none: 0.2607
+เย็ด: 1.6331
+กู: 1.2022
+มึง: 1.3739
+เหี้ย: 1.6972
+ควย: 1.7664
+สวะ: 1.6331
+หี: 1.5456
+แตด: 1.7311
+
+Training set class distribution:
+none: 332
+เย็ด: 53
+กู: 72
+มึง: 63
+เหี้ย: 51
+ควย: 49
+สวะ: 53
+หี: 56
+แตด: 50
+  warnings.warn(
+Some weights of Wav2Vec2ForSequenceClassification were not initialized from the model checkpoint at airesearch/wav2vec2-large-xlsr-53-th and are newly initialized: ['classifier.bias', 'classifier.weight', 'projector.bias', 'projector.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+                                                                                                 
+{'loss': 1.3319, 'grad_norm': 1.0255749225616455, 'learning_rate': 4.5e-06, 'epoch': 1.25}
+{'loss': 1.3052, 'grad_norm': 1.4399006366729736, 'learning_rate': 9.5e-06, 'epoch': 2.5}
+{'loss': 1.289, 'grad_norm': 0.5818195343017578, 'learning_rate': 1.45e-05, 'epoch': 3.75}
+{'loss': 1.2851, 'grad_norm': 1.4786021709442139, 'learning_rate': 1.95e-05, 'epoch': 5.0}
+{'loss': 1.2236, 'grad_norm': 1.8128087520599365, 'learning_rate': 2.45e-05, 'epoch': 6.25}
+{'loss': 1.2404, 'grad_norm': 3.580068349838257, 'learning_rate': 2.9333333333333333e-05, 'epoch': 7.5}
+{'loss': 1.1181, 'grad_norm': 2.326876401901245, 'learning_rate': 2.9996044788359496e-05, 'epoch': 8.75}
+{'loss': 0.983, 'grad_norm': 5.858005523681641, 'learning_rate': 2.9980860006140413e-05, 'epoch': 10.0}
+                                                                                                 
+{'eval_loss': 0.9208908081054688, 'eval_accuracy': 0.25, 'eval_f1_macro': 0.23517723424601128, 'eval_f1_weighted': 0.16062887457800093, 'eval_profanity_accuracy': 0.43636363636363634, 'eval_profanity_f1': 0.3478858557805926, 'eval_f1_เย็ด': 0.0, 'eval_f1_กู': 0.3125, 'eval_f1_มึง': 0.5777777777777777, 'eval_f1_เหี้ย': 0.2807017543859649, 'eval_f1_ควย': 0.0, 'eval_f1_สวะ': 0.07407407407407407, 'eval_f1_หี': 0.5454545454545454, 'eval_f1_แตด': 0.32608695652173914, 'eval_runtime': 1.5649, 'eval_samples_per_second': 124.606, 'eval_steps_per_second': 8.307, 'epoch': 10.42}
+{'loss': 0.83, 'grad_norm': 1.566177487373352, 'learning_rate': 2.9955367431827474e-05, 'epoch': 11.25}
+{'loss': 0.7508, 'grad_norm': 3.816779136657715, 'learning_rate': 2.99178284305241e-05, 'epoch': 12.5}
+{'loss': 0.6767, 'grad_norm': 6.941077709197998, 'learning_rate': 2.9868961039904628e-05, 'epoch': 13.75}
+{'loss': 0.6134, 'grad_norm': 4.938352584838867, 'learning_rate': 2.9808802369178914e-05, 'epoch': 15.0}
+{'loss': 0.5698, 'grad_norm': 4.639109134674072, 'learning_rate': 2.9739958873834064e-05, 'epoch': 16.25}
+{'loss': 0.4992, 'grad_norm': 7.089874744415283, 'learning_rate': 2.965773531587884e-05, 'epoch': 17.5}
+{'loss': 0.441, 'grad_norm': 5.9264445304870605, 'learning_rate': 2.956438087966449e-05, 'epoch': 18.75}
+{'loss': 0.4408, 'grad_norm': 8.480798721313477, 'learning_rate': 2.9459966457238264e-05, 'epoch': 20.0}
+{'eval_loss': 0.3902365267276764, 'eval_accuracy': 0.4270833333333333, 'eval_f1_macro': 0.4697534460027287, 'eval_f1_weighted': 0.3090443920705462, 'eval_profanity_accuracy': 0.7454545454545455, 'eval_profanity_f1': 0.7125954433497537, 'eval_f1_เย็ด': 0.5641025641025641, 'eval_f1_กู': 0.3333333333333333, 'eval_f1_มึง': 0.6296296296296297, 'eval_f1_เหี้ย': 0.3333333333333333, 'eval_f1_ควย': 0.5581395348837209, 'eval_f1_สวะ': 0.6, 'eval_f1_หี': 0.5263157894736842, 'eval_f1_แตด': 0.6829268292682927, 'eval_runtime': 1.6008, 'eval_samples_per_second': 121.816, 'eval_steps_per_second': 8.121, 'epoch': 20.83}
+{'loss': 0.4009, 'grad_norm': 3.6510791778564453, 'learning_rate': 2.9344571339445534e-05, 'epoch': 21.25}
+{'loss': 0.3561, 'grad_norm': 9.744139671325684, 'learning_rate': 2.921828315571746e-05, 'epoch': 22.5}
+{'loss': 0.3249, 'grad_norm': 26.2823429107666, 'learning_rate': 2.9081197807526433e-05, 'epoch': 23.75}
+{'loss': 0.2992, 'grad_norm': 9.020272254943848, 'learning_rate': 2.8933419395559828e-05, 'epoch': 25.0}
+{'loss': 0.2775, 'grad_norm': 4.119781494140625, 'learning_rate': 2.8775060140667428e-05, 'epoch': 26.25}
+{'loss': 0.258, 'grad_norm': 9.223716735839844, 'learning_rate': 2.860624029864246e-05, 'epoch': 27.5}
+{'loss': 0.23, 'grad_norm': 15.179645538330078, 'learning_rate': 2.8427088068901053e-05, 'epoch': 28.75}
+{'loss': 0.2288, 'grad_norm': 4.9026947021484375, 'learning_rate': 2.8237739497129406e-05, 'epoch': 30.0}
+{'loss': 0.163, 'grad_norm': 9.817256927490234, 'learning_rate': 2.8038338371972594e-05, 'epoch': 31.25}
+{'eval_loss': 0.27163901925086975, 'eval_accuracy': 0.4479166666666667, 'eval_f1_macro': 0.4944450193037764, 'eval_f1_weighted': 0.3229795275346123, 'eval_profanity_accuracy': 0.7818181818181819, 'eval_profanity_f1': 0.7435128266136128, 'eval_f1_เย็ด': 0.5641025641025641, 'eval_f1_กู': 0.2857142857142857, 'eval_f1_มึง': 0.6779661016949152, 'eval_f1_เหี้ย': 0.3888888888888889, 'eval_f1_ควย': 0.5, 'eval_f1_สวะ': 0.6666666666666666, 'eval_f1_หี': 0.7, 'eval_f1_แตด': 0.6666666666666666, 'eval_runtime': 1.6264, 'eval_samples_per_second': 119.9, 'eval_steps_per_second': 7.993, 'epoch': 31.25}
+{'loss': 0.1714, 'grad_norm': 1.6412856578826904, 'learning_rate': 2.782903611584349e-05, 'epoch': 32.5}
+{'loss': 0.1936, 'grad_norm': 6.713669776916504, 'learning_rate': 2.7609991669934733e-05, 'epoch': 33.75}
+{'loss': 0.1805, 'grad_norm': 20.680408477783203, 'learning_rate': 2.7381371373520976e-05, 'epoch': 35.0}
+{'loss': 0.1878, 'grad_norm': 4.356489658355713, 'learning_rate': 2.7143348837643237e-05, 'epoch': 36.25}
+{'loss': 0.1878, 'grad_norm': 8.538455963134766, 'learning_rate': 2.689610481327106e-05, 'epoch': 37.5}
+{'loss': 0.1442, 'grad_norm': 32.779205322265625, 'learning_rate': 2.6639827054042802e-05, 'epoch': 38.75}
+{'loss': 0.2071, 'grad_norm': 3.764486074447632, 'learning_rate': 2.6374710173688142e-05, 'epoch': 40.0}
+{'loss': 0.1481, 'grad_norm': 13.850265502929688, 'learning_rate': 2.6100955498241158e-05, 'epoch': 41.25}
+{'eval_loss': 0.2504778802394867, 'eval_accuracy': 0.4791666666666667, 'eval_f1_macro': 0.5440090572900219, 'eval_f1_weighted': 0.35067692467303124, 'eval_profanity_accuracy': 0.8363636363636363, 'eval_profanity_f1': 0.8268570969918593, 'eval_f1_เย็ด': 0.6470588235294118, 'eval_f1_กู': 0.5454545454545454, 'eval_f1_มึง': 0.6181818181818182, 'eval_f1_เหี้ย': 0.5294117647058824, 'eval_f1_ควย': 0.5306122448979592, 'eval_f1_สวะ': 0.75, 'eval_f1_หี': 0.6086956521739131, 'eval_f1_แตด': 0.6666666666666666, 'eval_runtime': 1.591, 'eval_samples_per_second': 122.561, 'eval_steps_per_second': 8.171, 'epoch': 41.67}
+{'loss': 0.1471, 'grad_norm': 19.04088592529297, 'learning_rate': 2.5818770913156156e-05, 'epoch': 42.5}
+{'loss': 0.1512, 'grad_norm': 8.68126392364502, 'learning_rate': 2.5528370705442383e-05, 'epoch': 43.75}
+{'loss': 0.1486, 'grad_norm': 24.13932991027832, 'learning_rate': 2.5229975400937478e-05, 'epoch': 45.0}
+{'loss': 0.1278, 'grad_norm': 6.458661079406738, 'learning_rate': 2.4923811596843264e-05, 'epoch': 46.25}
+{'loss': 0.1258, 'grad_norm': 0.9000242352485657, 'learning_rate': 2.4610111789651e-05, 'epoch': 47.5}
+{'loss': 0.1073, 'grad_norm': 3.458984136581421, 'learning_rate': 2.4289114198586803e-05, 'epoch': 48.75}
+{'loss': 0.1279, 'grad_norm': 9.07447338104248, 'learning_rate': 2.3961062584711352e-05, 'epoch': 50.0}
+{'loss': 0.1323, 'grad_norm': 11.946606636047363, 'learning_rate': 2.3626206065811137e-05, 'epoch': 51.25}
+{'eval_loss': 0.24842162430286407, 'eval_accuracy': 0.4895833333333333, 'eval_f1_macro': 0.5652010299069122, 'eval_f1_weighted': 0.3631535947712418, 'eval_profanity_accuracy': 0.8545454545454545, 'eval_profanity_f1': 0.85010686673163, 'eval_f1_เย็ด': 0.6666666666666666, 'eval_f1_กู': 0.5882352941176471, 'eval_f1_มึง': 0.6666666666666666, 'eval_f1_เหี้ย': 0.5, 'eval_f1_ควย': 0.5, 'eval_f1_สวะ': 0.6470588235294118, 'eval_f1_หี': 0.8181818181818182, 'eval_f1_แตด': 0.7, 'eval_runtime': 1.6149, 'eval_samples_per_second': 120.747, 'eval_steps_per_second': 8.05, 'epoch': 52.08}
+{'loss': 0.1323, 'grad_norm': 7.150454998016357, 'learning_rate': 2.3284798927221897e-05, 'epoch': 52.5}
+{'loss': 0.1134, 'grad_norm': 10.59685230255127, 'learning_rate': 2.2937100428727946e-05, 'epoch': 53.75}
+{'loss': 0.1185, 'grad_norm': 5.325918197631836, 'learning_rate': 2.2583374607683903e-05, 'epoch': 55.0}
+{'loss': 0.1119, 'grad_norm': 17.072776794433594, 'learning_rate': 2.2223890078508474e-05, 'epoch': 56.25}
+{'loss': 0.0914, 'grad_norm': 0.2655206620693207, 'learning_rate': 2.1858919828702365e-05, 'epoch': 57.5}
+{'loss': 0.1037, 'grad_norm': 13.399325370788574, 'learning_rate': 2.1488741011545505e-05, 'epoch': 58.75}
+{'loss': 0.0781, 'grad_norm': 6.601675033569336, 'learning_rate': 2.1113634735630653e-05, 'epoch': 60.0}
+{'loss': 0.1223, 'grad_norm': 3.020517349243164, 'learning_rate': 2.073388585139354e-05, 'epoch': 61.25}
+{'loss': 0.0863, 'grad_norm': 0.4436819553375244, 'learning_rate': 2.0349782734801414e-05, 'epoch': 62.5}
+{'eval_loss': 0.2279987335205078, 'eval_accuracy': 0.5104166666666666, 'eval_f1_macro': 0.5786826121084352, 'eval_f1_weighted': 0.3750840528821591, 'eval_profanity_accuracy': 0.8909090909090909, 'eval_profanity_f1': 0.8830070463480075, 'eval_f1_เย็ด': 0.6666666666666666, 'eval_f1_กู': 0.6285714285714286, 'eval_f1_มึง': 0.6792452830188679, 'eval_f1_เหี้ย': 0.5, 'eval_f1_ควย': 0.5833333333333334, 'eval_f1_สวะ': 0.7058823529411765, 'eval_f1_หี': 0.6666666666666666, 'eval_f1_แตด': 0.7777777777777778, 'eval_runtime': 1.5601, 'eval_samples_per_second': 124.993, 'eval_steps_per_second': 8.333, 'epoch': 62.5}
+{'loss': 0.1079, 'grad_norm': 12.190872192382812, 'learning_rate': 1.9961617068364414e-05, 'epoch': 63.75}
+{'loss': 0.0805, 'grad_norm': 4.1840949058532715, 'learning_rate': 1.956968361963593e-05, 'epoch': 65.0}
+{'loss': 0.1216, 'grad_norm': 0.2138507068157196, 'learning_rate': 1.917428001737031e-05, 'epoch': 66.25}
+{'loss': 0.0687, 'grad_norm': 0.19219434261322021, 'learning_rate': 1.877570652550772e-05, 'epoch': 67.5}
+{'loss': 0.0946, 'grad_norm': 22.937759399414062, 'learning_rate': 1.8374265815157978e-05, 'epoch': 68.75}
+{'loss': 0.0953, 'grad_norm': 4.983165264129639, 'learning_rate': 1.7970262734756303e-05, 'epoch': 70.0}
+{'loss': 0.1168, 'grad_norm': 21.831520080566406, 'learning_rate': 1.7564004078565766e-05, 'epoch': 71.25}
+{'loss': 0.0802, 'grad_norm': 0.08034887164831161, 'learning_rate': 1.715579835370197e-05, 'epoch': 72.5}
+{'eval_loss': 0.22633560001850128, 'eval_accuracy': 0.5260416666666666, 'eval_f1_macro': 0.6014224271055392, 'eval_f1_weighted': 0.40275699778064283, 'eval_profanity_accuracy': 0.9, 'eval_profanity_f1': 0.7973535777629345, 'eval_f1_เย็ด': 0.7096774193548387, 'eval_f1_กู': 0.6285714285714286, 'eval_f1_มึง': 0.6545454545454545, 'eval_f1_เหี้ย': 0.5625, 'eval_f1_ควย': 0.56, 'eval_f1_สวะ': 0.8125, 'eval_f1_หี': 0.72, 'eval_f1_แตด': 0.717948717948718, 'eval_runtime': 1.5801, 'eval_samples_per_second': 123.413, 'eval_steps_per_second': 8.228, 'epoch': 72.92}
+{'loss': 0.1045, 'grad_norm': 3.118640422821045, 'learning_rate': 1.6745955545857127e-05, 'epoch': 73.75}
+{'loss': 0.0779, 'grad_norm': 0.1751408576965332, 'learning_rate': 1.6334786883901273e-05, 'epoch': 75.0}
+{'loss': 0.084, 'grad_norm': 0.7432104349136353, 'learning_rate': 1.59226046035394e-05, 'epoch': 76.25}
+{'loss': 0.0884, 'grad_norm': 0.7810272574424744, 'learning_rate': 1.5509721710204115e-05, 'epoch': 77.5}
+{'loss': 0.0854, 'grad_norm': 0.9458844661712646, 'learning_rate': 1.5096451741363637e-05, 'epoch': 78.75}
+{'loss': 0.0766, 'grad_norm': 7.813576698303223, 'learning_rate': 1.4683108528425902e-05, 'epoch': 80.0}
+{'loss': 0.0708, 'grad_norm': 0.2395290732383728, 'learning_rate': 1.4270005958419388e-05, 'epoch': 81.25}
+{'loss': 0.0777, 'grad_norm': 6.5376482009887695, 'learning_rate': 1.3857457735631706e-05, 'epoch': 82.5}
+{'eval_loss': 0.18801796436309814, 'eval_accuracy': 0.5625, 'eval_f1_macro': 0.6280521693756989, 'eval_f1_weighted': 0.4698286109660191, 'eval_profanity_accuracy': 0.9090909090909091, 'eval_profanity_f1': 0.8041132118909897, 'eval_f1_เย็ด': 0.6666666666666666, 'eval_f1_กู': 0.6875, 'eval_f1_มึง': 0.7450980392156863, 'eval_f1_เหี้ย': 0.5294117647058824, 'eval_f1_ควย': 0.5833333333333334, 'eval_f1_สวะ': 0.7878787878787878, 'eval_f1_หี': 0.72, 'eval_f1_แตด': 0.7567567567567568, 'eval_runtime': 1.6202, 'eval_samples_per_second': 120.357, 'eval_steps_per_second': 8.024, 'epoch': 83.33}
+{'loss': 0.0659, 'grad_norm': 5.658633708953857, 'learning_rate': 1.3445777143386975e-05, 'epoch': 83.75}
+{'loss': 0.1075, 'grad_norm': 7.971012115478516, 'learning_rate': 1.3035276806142884e-05, 'epoch': 85.0}
+{'loss': 0.0769, 'grad_norm': 0.28878578543663025, 'learning_rate': 1.2626268452088027e-05, 'epoch': 86.25}
+{'loss': 0.074, 'grad_norm': 0.2238919585943222, 'learning_rate': 1.2219062676419965e-05, 'epoch': 87.5}
+{'loss': 0.0849, 'grad_norm': 2.9040231704711914, 'learning_rate': 1.1813968705483523e-05, 'epoch': 88.75}
+{'loss': 0.0632, 'grad_norm': 1.0250457525253296, 'learning_rate': 1.141129416194871e-05, 'epoch': 90.0}
+{'loss': 0.0904, 'grad_norm': 0.15608611702919006, 'learning_rate': 1.101134483120635e-05, 'epoch': 91.25}
+{'loss': 0.095, 'grad_norm': 2.052263021469116, 'learning_rate': 1.061442442915895e-05, 'epoch': 92.5}
+{'loss': 0.0824, 'grad_norm': 20.4598331451416, 'learning_rate': 1.0220834371583137e-05, 'epoch': 93.75}
+{'eval_loss': 0.2234831601381302, 'eval_accuracy': 0.5729166666666666, 'eval_f1_macro': 0.6335778407000943, 'eval_f1_weighted': 0.4930501765974025, 'eval_profanity_accuracy': 0.9, 'eval_profanity_f1': 0.7967449735701009, 'eval_f1_เย็ด': 0.7096774193548387, 'eval_f1_กู': 0.6666666666666666, 'eval_f1_มึง': 0.7058823529411765, 'eval_f1_เหี้ย': 0.5454545454545454, 'eval_f1_ควย': 0.6086956521739131, 'eval_f1_สวะ': 0.75, 'eval_f1_หี': 0.6923076923076923, 'eval_f1_แตด': 0.7894736842105263, 'eval_runtime': 4.8931, 'eval_samples_per_second': 39.852, 'eval_steps_per_second': 2.657, 'epoch': 93.75}
+{'loss': 0.0911, 'grad_norm': 8.916129112243652, 'learning_rate': 9.830873545238727e-06, 'epoch': 95.0}
+{'loss': 0.0677, 'grad_norm': 0.7250400185585022, 'learning_rate': 9.444838080898345e-06, 'epoch': 96.25}
+{'loss': 0.0691, 'grad_norm': 0.24192163348197937, 'learning_rate': 9.063021128469841e-06, 'epoch': 97.5}
+{'loss': 0.073, 'grad_norm': 2.904930830001831, 'learning_rate': 8.685712634382404e-06, 'epoch': 98.75}
+{'loss': 0.0741, 'grad_norm': 0.33839720487594604, 'learning_rate': 8.313199121405286e-06, 'epoch': 100.0}
+{'loss': 0.089, 'grad_norm': 9.003203392028809, 'learning_rate': 7.945763471066477e-06, 'epoch': 101.25}
+{'loss': 0.0652, 'grad_norm': 5.921558380126953, 'learning_rate': 7.5836847088364035e-06, 'epoch': 102.5}
+{'loss': 0.0694, 'grad_norm': 1.2436522245407104, 'learning_rate': 7.227237792239924e-06, 'epoch': 103.75}
+{'eval_loss': 0.20932094752788544, 'eval_accuracy': 0.578125, 'eval_f1_macro': 0.6459605010627315, 'eval_f1_weighted': 0.4920299813286014, 'eval_profanity_accuracy': 0.9181818181818182, 'eval_profanity_f1': 0.8155101488320278, 'eval_f1_เย็ด': 0.7857142857142857, 'eval_f1_กู': 0.6486486486486487, 'eval_f1_มึง': 0.6792452830188679, 'eval_f1_เหี้ย': 0.5294117647058824, 'eval_f1_ควย': 0.6511627906976745, 'eval_f1_สวะ': 0.7741935483870968, 'eval_f1_หี': 0.7407407407407407, 'eval_f1_แตด': 0.7894736842105263, 'eval_runtime': 1.4322, 'eval_samples_per_second': 136.15, 'eval_steps_per_second': 9.077, 'epoch': 104.17}
+{'loss': 0.0822, 'grad_norm': 6.020069122314453, 'learning_rate': 6.876693402057463e-06, 'epoch': 105.0}
+{'loss': 0.0864, 'grad_norm': 1.7520889043807983, 'learning_rate': 6.532317736773819e-06, 'epoch': 106.25}
+{'loss': 0.0613, 'grad_norm': 0.2836586833000183, 'learning_rate': 6.1943723104307544e-06, 'epoch': 107.5}
+{'loss': 0.063, 'grad_norm': 0.12087782472372055, 'learning_rate': 5.863113754036931e-06, 'epoch': 108.75}
+{'loss': 0.0564, 'grad_norm': 6.205930233001709, 'learning_rate': 5.538793620685928e-06, 'epoch': 110.0}
+{'loss': 0.0615, 'grad_norm': 0.11942415684461594, 'learning_rate': 5.221658194530351e-06, 'epoch': 111.25}
+{'loss': 0.063, 'grad_norm': 10.704316139221191, 'learning_rate': 4.911948303757096e-06, 'epoch': 112.5}
+{'loss': 0.0658, 'grad_norm': 2.3270280361175537, 'learning_rate': 4.609899137705817e-06, 'epoch': 113.75}
+{'eval_loss': 0.20510689914226532, 'eval_accuracy': 0.578125, 'eval_f1_macro': 0.6383571458611493, 'eval_f1_weighted': 0.5022424579364001, 'eval_profanity_accuracy': 0.9, 'eval_profanity_f1': 0.7994362585645891, 'eval_f1_เย็ด': 0.7586206896551724, 'eval_f1_กู': 0.6470588235294118, 'eval_f1_มึง': 0.72, 'eval_f1_เหี้ย': 0.5294117647058824, 'eval_f1_ควย': 0.6363636363636364, 'eval_f1_สวะ': 0.75, 'eval_f1_หี': 0.7142857142857143, 'eval_f1_แตด': 0.7368421052631579, 'eval_runtime': 1.4888, 'eval_samples_per_second': 130.979, 'eval_steps_per_second': 8.732, 'epoch': 114.58}
+{'loss': 0.0629, 'grad_norm': 2.4656617641448975, 'learning_rate': 4.3157400682694565e-06, 'epoch': 115.0}
+{'loss': 0.09, 'grad_norm': 5.493412017822266, 'learning_rate': 4.029694475712443e-06, 'epoch': 116.25}
+{'loss': 0.06, 'grad_norm': 3.41652250289917, 'learning_rate': 3.751979579038848e-06, 'epoch': 117.5}
+{'loss': 0.0701, 'grad_norm': 33.86052322387695, 'learning_rate': 3.4828062710393327e-06, 'epoch': 118.75}
+{'loss': 0.0611, 'grad_norm': 2.805603504180908, 'learning_rate': 3.2223789581421363e-06, 'epoch': 120.0}
+{'loss': 0.0518, 'grad_norm': 0.20169194042682648, 'learning_rate': 2.9708954051897015e-06, 'epoch': 121.25}
+{'loss': 0.0793, 'grad_norm': 5.496272087097168, 'learning_rate': 2.728546585258813e-06, 'epoch': 122.5}
+{'loss': 0.0668, 'grad_norm': 0.15499810874462128, 'learning_rate': 2.4955165346383483e-06, 'epoch': 123.75}
+{'loss': 0.0619, 'grad_norm': 4.4557366371154785, 'learning_rate': 2.271982213074704e-06, 'epoch': 125.0}
+{'eval_loss': 0.19933849573135376, 'eval_accuracy': 0.59375, 'eval_f1_macro': 0.6497033485010563, 'eval_f1_weighted': 0.5235035631396879, 'eval_profanity_accuracy': 0.9090909090909091, 'eval_profanity_f1': 0.803383135522711, 'eval_f1_เย็ด': 0.7333333333333333, 'eval_f1_กู': 0.6857142857142857, 'eval_f1_มึง': 0.7169811320754716, 'eval_f1_เหี้ย': 0.5, 'eval_f1_ควย': 0.6666666666666666, 'eval_f1_สวะ': 0.7741935483870968, 'eval_f1_หี': 0.6923076923076923, 'eval_f1_แตด': 0.7894736842105263, 'eval_runtime': 1.4922, 'eval_samples_per_second': 130.676, 'eval_steps_per_second': 8.712, 'epoch': 125.0}
+{'loss': 0.0594, 'grad_norm': 0.6937556266784668, 'learning_rate': 2.058113369391038e-06, 'epoch': 126.25}
+{'loss': 0.0717, 'grad_norm': 0.818442165851593, 'learning_rate': 1.8540724125824093e-06, 'epoch': 127.5}
+{'loss': 0.0668, 'grad_norm': 7.641648292541504, 'learning_rate': 1.6600142884846576e-06, 'epoch': 128.75}
+{'loss': 0.071, 'grad_norm': 1.4236034154891968, 'learning_rate': 1.4760863621107267e-06, 'epoch': 130.0}
+{'loss': 0.0644, 'grad_norm': 6.197141647338867, 'learning_rate': 1.302428305743743e-06, 'epoch': 131.25}
+{'loss': 0.0959, 'grad_norm': 0.3155902326107025, 'learning_rate': 1.1391719928718191e-06, 'epoch': 132.5}
+{'loss': 0.077, 'grad_norm': 2.1084890365600586, 'learning_rate': 9.864413980452242e-07, 'epoch': 133.75}
+{'loss': 0.0664, 'grad_norm': 0.15527860820293427, 'learning_rate': 8.443525027318177e-07, 'epoch': 135.0}
+{'eval_loss': 0.19806969165802002, 'eval_accuracy': 0.6041666666666666, 'eval_f1_macro': 0.6616816047505, 'eval_f1_weighted': 0.5367086310482373, 'eval_profanity_accuracy': 0.9181818181818182, 'eval_profanity_f1': 0.8123426944822699, 'eval_f1_เย็ด': 0.7586206896551724, 'eval_f1_กู': 0.7272727272727273, 'eval_f1_มึง': 0.7307692307692307, 'eval_f1_เหี้ย': 0.5454545454545454, 'eval_f1_ควย': 0.6511627906976745, 'eval_f1_สวะ': 0.7741935483870968, 'eval_f1_หี': 0.6923076923076923, 'eval_f1_แตด': 0.7692307692307693, 'eval_runtime': 1.4689, 'eval_samples_per_second': 132.754, 'eval_steps_per_second': 8.85, 'epoch': 135.42}
+{'loss': 0.0608, 'grad_norm': 2.248339891433716, 'learning_rate': 7.130132072423678e-07, 'epoch': 136.25}
+{'loss': 0.053, 'grad_norm': 2.8361034393310547, 'learning_rate': 5.925232487925592e-07, 'epoch': 137.5}
+{'loss': 0.0581, 'grad_norm': 1.195883870124817, 'learning_rate': 4.82974125763968e-07, 'epoch': 138.75}
+{'loss': 0.0856, 'grad_norm': 6.015442371368408, 'learning_rate': 3.8444902822147296e-07, 'epoch': 140.0}
+{'loss': 0.056, 'grad_norm': 3.120911121368408, 'learning_rate': 2.9702277473987296e-07, 'epoch': 141.25}
+{'loss': 0.0601, 'grad_norm': 2.124282121658325, 'learning_rate': 2.2076175558773558e-07, 'epoch': 142.5}
+{'loss': 0.0803, 'grad_norm': 0.11175595968961716, 'learning_rate': 1.5572388231154255e-07, 'epoch': 143.75}
+{'loss': 0.0529, 'grad_norm': 0.6335608959197998, 'learning_rate': 1.0195854375848745e-07, 'epoch': 145.0}
+{'eval_loss': 0.19747059047222137, 'eval_accuracy': 0.6041666666666666, 'eval_f1_macro': 0.6616816047505, 'eval_f1_weighted': 0.5367086310482373, 'eval_profanity_accuracy': 0.9181818181818182, 'eval_profanity_f1': 0.8123426944822699, 'eval_f1_เย็ด': 0.7586206896551724, 'eval_f1_กู': 0.7272727272727273, 'eval_f1_มึง': 0.7307692307692307, 'eval_f1_เหี้ย': 0.5454545454545454, 'eval_f1_ควย': 0.6511627906976745, 'eval_f1_สวะ': 0.7741935483870968, 'eval_f1_หี': 0.6923076923076923, 'eval_f1_แตด': 0.7692307692307693, 'eval_runtime': 1.4494, 'eval_samples_per_second': 134.535, 'eval_steps_per_second': 8.969, 'epoch': 145.83}
+{'loss': 0.0705, 'grad_norm': 7.7663445472717285, 'learning_rate': 5.950656857126702e-08, 'epoch': 146.25}
+{'loss': 0.0534, 'grad_norm': 23.375137329101562, 'learning_rate': 2.8400194183392237e-08, 'epoch': 147.5}
+{'loss': 0.0753, 'grad_norm': 10.238948822021484, 'learning_rate': 8.663042338532546e-09, 'epoch': 148.75}
+{'loss': 0.0577, 'grad_norm': 15.149089813232422, 'learning_rate': 3.101011524930808e-10, 'epoch': 150.0}
+{'train_runtime': 2099.5385, 'train_samples_per_second': 55.655, 'train_steps_per_second': 1.715, 'train_loss': 0.2152704049150149, 'epoch': 150.0}
+Fold 4 Validation Results:
+  Accuracy: 0.5897
+  F1 Macro: 0.6458
+
+==================================================
+TRAINING FOLD 5/5
+==================================================
+Fold 5 - Train: 780, Val: 194
+
+Class weights:
+none: 0.2549
+เย็ด: 1.6049
+กู: 1.3131
+มึง: 1.4689
+เหี้ย: 1.6667
+ควย: 1.6993
+สวะ: 1.5758
+หี: 1.6667
+แตด: 1.6993
+
+Training set class distribution:
+none: 340
+เย็ด: 54
+กู: 66
+มึง: 59
+เหี้ย: 52
+ควย: 51
+สวะ: 55
+หี: 52
+แตด: 51
+  warnings.warn(
+Some weights of Wav2Vec2ForSequenceClassification were not initialized from the model checkpoint at airesearch/wav2vec2-large-xlsr-53-th and are newly initialized: ['classifier.bias', 'classifier.weight', 'projector.bias', 'projector.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+                                                                                                 
+{'loss': 1.3438, 'grad_norm': 2.316164255142212, 'learning_rate': 4.5e-06, 'epoch': 1.25}
+{'loss': 1.3216, 'grad_norm': 0.7740547060966492, 'learning_rate': 9.5e-06, 'epoch': 2.5}
+{'loss': 1.2613, 'grad_norm': 1.0838696956634521, 'learning_rate': 1.45e-05, 'epoch': 3.75}
+{'loss': 1.314, 'grad_norm': 1.2841744422912598, 'learning_rate': 1.95e-05, 'epoch': 5.0}
+{'loss': 1.2585, 'grad_norm': 1.3536102771759033, 'learning_rate': 2.4333333333333333e-05, 'epoch': 6.25}
+{'loss': 1.2207, 'grad_norm': 1.5276440382003784, 'learning_rate': 2.9333333333333333e-05, 'epoch': 7.5}
+{'loss': 1.1345, 'grad_norm': 4.636168479919434, 'learning_rate': 2.999572205843142e-05, 'epoch': 8.75}
+{'loss': 0.9942, 'grad_norm': 5.4980292320251465, 'learning_rate': 2.9980157833974258e-05, 'epoch': 10.0}
+                                                                                                 
+{'eval_loss': 1.0289989709854126, 'eval_accuracy': 0.21875, 'eval_f1_macro': 0.20246288999210926, 'eval_f1_weighted': 0.16611432696909995, 'eval_profanity_accuracy': 0.3559322033898305, 'eval_profanity_f1': 0.2726710241512873, 'eval_f1_เย็ด': 0.14285714285714285, 'eval_f1_กู': 0.391304347826087, 'eval_f1_มึง': 0.5652173913043478, 'eval_f1_เหี้ย': 0.0, 'eval_f1_ควย': 0.125, 'eval_f1_สวะ': 0.2608695652173913, 'eval_f1_หี': 0.1111111111111111, 'eval_f1_แตด': 0.22580645161290322, 'eval_runtime': 1.4916, 'eval_samples_per_second': 130.062, 'eval_steps_per_second': 8.716, 'epoch': 10.42}
+{'loss': 0.8881, 'grad_norm': 7.607136249542236, 'learning_rate': 2.9954298969312294e-05, 'epoch': 11.25}
+{'loss': 0.7934, 'grad_norm': 4.217731475830078, 'learning_rate': 2.99178284305241e-05, 'epoch': 12.5}
+{'loss': 0.7394, 'grad_norm': 8.895853996276855, 'learning_rate': 2.9868961039904628e-05, 'epoch': 13.75}
+{'loss': 0.7094, 'grad_norm': 5.1563873291015625, 'learning_rate': 2.9808802369178914e-05, 'epoch': 15.0}
+{'loss': 0.6467, 'grad_norm': 6.80330228805542, 'learning_rate': 2.973739810199627e-05, 'epoch': 16.25}
+{'loss': 0.5765, 'grad_norm': 8.408445358276367, 'learning_rate': 2.9654802461753992e-05, 'epoch': 17.5}
+{'loss': 0.5319, 'grad_norm': 3.8699703216552734, 'learning_rate': 2.95610781704208e-05, 'epoch': 18.75}
+{'loss': 0.5124, 'grad_norm': 10.621259689331055, 'learning_rate': 2.9456296400906725e-05, 'epoch': 20.0}
+{'eval_loss': 0.4325394928455353, 'eval_accuracy': 0.484375, 'eval_f1_macro': 0.5199652046917269, 'eval_f1_weighted': 0.3646803018174922, 'eval_profanity_accuracy': 0.788135593220339, 'eval_profanity_f1': 0.7832583380512541, 'eval_f1_เย็ด': 0.5555555555555556, 'eval_f1_กู': 0.4117647058823529, 'eval_f1_มึง': 0.7368421052631579, 'eval_f1_เหี้ย': 0.5555555555555556, 'eval_f1_ควย': 0.42424242424242425, 'eval_f1_สวะ': 0.6111111111111112, 'eval_f1_หี': 0.6666666666666666, 'eval_f1_แตด': 0.717948717948718, 'eval_runtime': 1.5063, 'eval_samples_per_second': 128.793, 'eval_steps_per_second': 8.63, 'epoch': 20.83}
+{'loss': 0.4457, 'grad_norm': 15.195868492126465, 'learning_rate': 2.9340536723015367e-05, 'epoch': 21.25}
+{'loss': 0.4423, 'grad_norm': 10.296117782592773, 'learning_rate': 2.921388704301969e-05, 'epoch': 22.5}
+{'loss': 0.3534, 'grad_norm': 1.326738953590393, 'learning_rate': 2.9076443536907283e-05, 'epoch': 23.75}
+{'loss': 0.364, 'grad_norm': 7.906673908233643, 'learning_rate': 2.8928310577345608e-05, 'epoch': 25.0}
+{'loss': 0.3114, 'grad_norm': 61.434234619140625, 'learning_rate': 2.8769600654422906e-05, 'epoch': 26.25}
+{'loss': 0.2966, 'grad_norm': 9.363421440124512, 'learning_rate': 2.8600434290224792e-05, 'epoch': 27.5}
+{'loss': 0.2591, 'grad_norm': 9.726180076599121, 'learning_rate': 2.8420939947311454e-05, 'epoch': 28.75}
+{'loss': 0.2214, 'grad_norm': 9.871827125549316, 'learning_rate': 2.823125393116503e-05, 'epoch': 30.0}
+{'loss': 0.2383, 'grad_norm': 7.315465927124023, 'learning_rate': 2.8031520286681115e-05, 'epoch': 31.25}
+{'eval_loss': 0.2563352584838867, 'eval_accuracy': 0.5104166666666666, 'eval_f1_macro': 0.554049451229085, 'eval_f1_weighted': 0.39162274434898503, 'eval_profanity_accuracy': 0.8305084745762712, 'eval_profanity_f1': 0.8269928499504237, 'eval_f1_เย็ด': 0.5641025641025641, 'eval_f1_กู': 0.4375, 'eval_f1_มึง': 0.84, 'eval_f1_เหี้ย': 0.625, 'eval_f1_ควย': 0.5217391304347826, 'eval_f1_สวะ': 0.5945945945945946, 'eval_f1_หี': 0.6666666666666666, 'eval_f1_แตด': 0.7368421052631579, 'eval_runtime': 1.5097, 'eval_samples_per_second': 128.502, 'eval_steps_per_second': 8.611, 'epoch': 31.25}
+{'loss': 0.2098, 'grad_norm': 1.6665819883346558, 'learning_rate': 2.7821890688783088e-05, 'epoch': 32.5}
+{'loss': 0.2269, 'grad_norm': 8.171008110046387, 'learning_rate': 2.7602524327242317e-05, 'epoch': 33.75}
+{'loss': 0.174, 'grad_norm': 1.6681441068649292, 'learning_rate': 2.7373587785791675e-05, 'epoch': 35.0}
+{'loss': 0.2018, 'grad_norm': 12.35865306854248, 'learning_rate': 2.7135254915624213e-05, 'epoch': 36.25}
+{'loss': 0.2259, 'grad_norm': 3.8250770568847656, 'learning_rate': 2.6887706703372978e-05, 'epoch': 37.5}
+{'loss': 0.1697, 'grad_norm': 12.402363777160645, 'learning_rate': 2.6631131133672324e-05, 'epoch': 38.75}
+{'loss': 0.1892, 'grad_norm': 13.236611366271973, 'learning_rate': 2.6365723046405022e-05, 'epoch': 40.0}
+{'loss': 0.1798, 'grad_norm': 3.1746180057525635, 'learning_rate': 2.6091683988743582e-05, 'epoch': 41.25}
+{'eval_loss': 0.2015029639005661, 'eval_accuracy': 0.5416666666666666, 'eval_f1_macro': 0.5963213022727072, 'eval_f1_weighted': 0.42264056702848735, 'eval_profanity_accuracy': 0.8813559322033898, 'eval_profanity_f1': 0.882747274005677, 'eval_f1_เย็ด': 0.5641025641025641, 'eval_f1_กู': 0.5945945945945946, 'eval_f1_มึง': 0.8627450980392157, 'eval_f1_เหี้ย': 0.7586206896551724, 'eval_f1_ควย': 0.5106382978723404, 'eval_f1_สวะ': 0.6111111111111112, 'eval_f1_หี': 0.7222222222222222, 'eval_f1_แตด': 0.7428571428571429, 'eval_runtime': 1.4792, 'eval_samples_per_second': 131.149, 'eval_steps_per_second': 8.788, 'epoch': 41.67}
+{'loss': 0.1621, 'grad_norm': 9.4276704788208, 'learning_rate': 2.5809222062098174e-05, 'epoch': 42.5}
+{'loss': 0.1509, 'grad_norm': 7.714731693267822, 'learning_rate': 2.551855176408733e-05, 'epoch': 43.75}
+{'loss': 0.1701, 'grad_norm': 9.068800926208496, 'learning_rate': 2.5219893825651467e-05, 'epoch': 45.0}
+{'loss': 0.1383, 'grad_norm': 1.6290581226348877, 'learning_rate': 2.491347504343292e-05, 'epoch': 46.25}
+{'loss': 0.1291, 'grad_norm': 4.037930965423584, 'learning_rate': 2.459952810754975e-05, 'epoch': 47.5}
+{'loss': 0.15, 'grad_norm': 31.616046905517578, 'learning_rate': 2.4278291424894142e-05, 'epoch': 48.75}
+{'loss': 0.1241, 'grad_norm': 6.585891246795654, 'learning_rate': 2.3950008938089563e-05, 'epoch': 50.0}
+{'loss': 0.1316, 'grad_norm': 2.4347238540649414, 'learning_rate': 2.3614929940244155e-05, 'epoch': 51.25}
+{'eval_loss': 0.22611601650714874, 'eval_accuracy': 0.5520833333333334, 'eval_f1_macro': 0.6047248288228296, 'eval_f1_weighted': 0.42875433324272433, 'eval_profanity_accuracy': 0.8983050847457628, 'eval_profanity_f1': 0.8995925831479828, 'eval_f1_เย็ด': 0.6470588235294118, 'eval_f1_กู': 0.7027027027027027, 'eval_f1_มึง': 0.8148148148148148, 'eval_f1_เหี้ย': 0.6666666666666666, 'eval_f1_ควย': 0.5581395348837209, 'eval_f1_สวะ': 0.5789473684210527, 'eval_f1_หี': 0.7, 'eval_f1_แตด': 0.7741935483870968, 'eval_runtime': 1.4718, 'eval_samples_per_second': 131.811, 'eval_steps_per_second': 8.833, 'epoch': 52.08}
+{'loss': 0.1176, 'grad_norm': 32.40814208984375, 'learning_rate': 2.3273308885641053e-05, 'epoch': 52.5}
+{'loss': 0.1167, 'grad_norm': 5.5886664390563965, 'learning_rate': 2.2925405196509387e-05, 'epoch': 53.75}
+{'loss': 0.1037, 'grad_norm': 18.190860748291016, 'learning_rate': 2.257148306602266e-05, 'epoch': 55.0}
+{'loss': 0.1157, 'grad_norm': 9.794432640075684, 'learning_rate': 2.2211811257674192e-05, 'epoch': 56.25}
+{'loss': 0.1355, 'grad_norm': 1.400648832321167, 'learning_rate': 2.1846662901181898e-05, 'epoch': 57.5}
+{'loss': 0.1451, 'grad_norm': 2.6834356784820557, 'learning_rate': 2.1476315285077393e-05, 'epoch': 58.75}
+{'loss': 0.0869, 'grad_norm': 2.0006186962127686, 'learning_rate': 2.1101049646137008e-05, 'epoch': 60.0}
+{'loss': 0.14, 'grad_norm': 13.347016334533691, 'learning_rate': 2.0721150955814492e-05, 'epoch': 61.25}
+{'loss': 0.1045, 'grad_norm': 2.599112033843994, 'learning_rate': 2.033690770383775e-05, 'epoch': 62.5}
+{'eval_loss': 0.24689991772174835, 'eval_accuracy': 0.5625, 'eval_f1_macro': 0.6137364681960826, 'eval_f1_weighted': 0.44058156896599016, 'eval_profanity_accuracy': 0.9067796610169492, 'eval_profanity_f1': 0.9104417623439363, 'eval_f1_เย็ด': 0.6111111111111112, 'eval_f1_กู': 0.6666666666666666, 'eval_f1_มึง': 0.8148148148148148, 'eval_f1_เหี้ย': 0.7096774193548387, 'eval_f1_ควย': 0.6, 'eval_f1_สวะ': 0.6470588235294118, 'eval_f1_หี': 0.6829268292682927, 'eval_f1_แตด': 0.7647058823529411, 'eval_runtime': 1.4989, 'eval_samples_per_second': 129.429, 'eval_steps_per_second': 8.673, 'epoch': 62.5}
+{'loss': 0.0939, 'grad_norm': 6.198968410491943, 'learning_rate': 1.9948611679133742e-05, 'epoch': 63.75}
+{'loss': 0.0831, 'grad_norm': 2.0285592079162598, 'learning_rate': 1.9556557748248117e-05, 'epoch': 65.0}
+{'loss': 0.0795, 'grad_norm': 0.11556322127580643, 'learning_rate': 1.916104363142767e-05, 'epoch': 66.25}
+{'loss': 0.0811, 'grad_norm': 3.412062883377075, 'learning_rate': 1.877570652550772e-05, 'epoch': 67.5}
+{'loss': 0.0866, 'grad_norm': 3.2422282695770264, 'learning_rate': 1.8374265815157978e-05, 'epoch': 68.75}
+{'loss': 0.1118, 'grad_norm': 5.579123020172119, 'learning_rate': 1.7970262734756303e-05, 'epoch': 70.0}
+{'loss': 0.0679, 'grad_norm': 4.724903583526611, 'learning_rate': 1.7564004078565766e-05, 'epoch': 71.25}
+{'loss': 0.0772, 'grad_norm': 0.19849003851413727, 'learning_rate': 1.715579835370197e-05, 'epoch': 72.5}
+{'eval_loss': 0.15734364092350006, 'eval_accuracy': 0.5833333333333334, 'eval_f1_macro': 0.6321294619712233, 'eval_f1_weighted': 0.4652823149896486, 'eval_profanity_accuracy': 0.9322033898305084, 'eval_profanity_f1': 0.9315590303327737, 'eval_f1_เย็ด': 0.6666666666666666, 'eval_f1_กู': 0.75, 'eval_f1_มึง': 0.8518518518518519, 'eval_f1_เหี้ย': 0.6470588235294118, 'eval_f1_ควย': 0.631578947368421, 'eval_f1_สวะ': 0.6285714285714286, 'eval_f1_หี': 0.717948717948718, 'eval_f1_แตด': 0.7428571428571429, 'eval_runtime': 1.4342, 'eval_samples_per_second': 135.263, 'eval_steps_per_second': 9.064, 'epoch': 72.92}
+{'loss': 0.0993, 'grad_norm': 5.8184332847595215, 'learning_rate': 1.6745955545857127e-05, 'epoch': 73.75}
+{'loss': 0.0908, 'grad_norm': 0.4549683630466461, 'learning_rate': 1.6334786883901273e-05, 'epoch': 75.0}
+{'loss': 0.0612, 'grad_norm': 4.582958698272705, 'learning_rate': 1.59226046035394e-05, 'epoch': 76.25}
+{'loss': 0.109, 'grad_norm': 1.978598952293396, 'learning_rate': 1.5509721710204115e-05, 'epoch': 77.5}
+{'loss': 0.0801, 'grad_norm': 6.194026470184326, 'learning_rate': 1.5096451741363637e-05, 'epoch': 78.75}
+{'loss': 0.0987, 'grad_norm': 8.174331665039062, 'learning_rate': 1.4683108528425902e-05, 'epoch': 80.0}
+{'loss': 0.0797, 'grad_norm': 4.22165060043335, 'learning_rate': 1.4270005958419388e-05, 'epoch': 81.25}
+{'loss': 0.0924, 'grad_norm': 7.511934757232666, 'learning_rate': 1.3857457735631706e-05, 'epoch': 82.5}
+{'eval_loss': 0.20342086255550385, 'eval_accuracy': 0.5833333333333334, 'eval_f1_macro': 0.6323490507314037, 'eval_f1_weighted': 0.4789815665849673, 'eval_profanity_accuracy': 0.9152542372881356, 'eval_profanity_f1': 0.917902655209241, 'eval_f1_เย็ด': 0.6470588235294118, 'eval_f1_กู': 0.7, 'eval_f1_มึง': 0.8461538461538461, 'eval_f1_เหี้ย': 0.6875, 'eval_f1_ควย': 0.6, 'eval_f1_สวะ': 0.6470588235294118, 'eval_f1_หี': 0.717948717948718, 'eval_f1_แตด': 0.7428571428571429, 'eval_runtime': 1.4377, 'eval_samples_per_second': 134.94, 'eval_steps_per_second': 9.042, 'epoch': 83.33}
+{'loss': 0.1013, 'grad_norm': 5.449062824249268, 'learning_rate': 1.3445777143386975e-05, 'epoch': 83.75}
+{'loss': 0.0673, 'grad_norm': 1.1350938081741333, 'learning_rate': 1.3035276806142884e-05, 'epoch': 85.0}
+{'loss': 0.0584, 'grad_norm': 0.3484698534011841, 'learning_rate': 1.2626268452088027e-05, 'epoch': 86.25}
+{'loss': 0.0947, 'grad_norm': 3.266472101211548, 'learning_rate': 1.2219062676419965e-05, 'epoch': 87.5}
+{'loss': 0.0825, 'grad_norm': 2.94260311126709, 'learning_rate': 1.1813968705483523e-05, 'epoch': 88.75}
+{'loss': 0.0813, 'grad_norm': 1.3370954990386963, 'learning_rate': 1.141129416194871e-05, 'epoch': 90.0}
+{'loss': 0.0783, 'grad_norm': 0.18744723498821259, 'learning_rate': 1.101134483120635e-05, 'epoch': 91.25}
+{'loss': 0.1026, 'grad_norm': 2.316617488861084, 'learning_rate': 1.061442442915895e-05, 'epoch': 92.5}
+{'loss': 0.0804, 'grad_norm': 0.5787076354026794, 'learning_rate': 1.0220834371583137e-05, 'epoch': 93.75}
+{'eval_loss': 0.23553554713726044, 'eval_accuracy': 0.6041666666666666, 'eval_f1_macro': 0.6512584474556675, 'eval_f1_weighted': 0.5167295238007276, 'eval_profanity_accuracy': 0.9152542372881356, 'eval_profanity_f1': 0.9155178823116683, 'eval_f1_เย็ด': 0.7333333333333333, 'eval_f1_กู': 0.6666666666666666, 'eval_f1_มึง': 0.8363636363636363, 'eval_f1_เหี้ย': 0.7096774193548387, 'eval_f1_ควย': 0.7027027027027027, 'eval_f1_สวะ': 0.6285714285714286, 'eval_f1_หี': 0.6666666666666666, 'eval_f1_แตด': 0.7222222222222222, 'eval_runtime': 1.5329, 'eval_samples_per_second': 126.559, 'eval_steps_per_second': 8.481, 'epoch': 93.75}
+{'loss': 0.0598, 'grad_norm': 6.134981155395508, 'learning_rate': 9.830873545238727e-06, 'epoch': 95.0}
+{'loss': 0.0876, 'grad_norm': 7.829352378845215, 'learning_rate': 9.444838080898345e-06, 'epoch': 96.25}
+{'loss': 0.056, 'grad_norm': 25.82994270324707, 'learning_rate': 9.063021128469841e-06, 'epoch': 97.5}
+{'loss': 0.0621, 'grad_norm': 35.16654968261719, 'learning_rate': 8.685712634382404e-06, 'epoch': 98.75}
+{'loss': 0.0708, 'grad_norm': 0.3928986191749573, 'learning_rate': 8.313199121405286e-06, 'epoch': 100.0}
+{'loss': 0.0355, 'grad_norm': 1.2808220386505127, 'learning_rate': 7.945763471066477e-06, 'epoch': 101.25}
+{'loss': 0.0706, 'grad_norm': 0.32253503799438477, 'learning_rate': 7.5836847088364035e-06, 'epoch': 102.5}
+{'loss': 0.0863, 'grad_norm': 9.317543983459473, 'learning_rate': 7.227237792239924e-06, 'epoch': 103.75}
+{'eval_loss': 0.23402518033981323, 'eval_accuracy': 0.6302083333333334, 'eval_f1_macro': 0.6790318771226732, 'eval_f1_weighted': 0.5497113179154811, 'eval_profanity_accuracy': 0.940677966101695, 'eval_profanity_f1': 0.9435663247629292, 'eval_f1_เย็ด': 0.6666666666666666, 'eval_f1_กู': 0.7142857142857143, 'eval_f1_มึง': 0.8518518518518519, 'eval_f1_เหี้ย': 0.7586206896551724, 'eval_f1_ควย': 0.6842105263157895, 'eval_f1_สวะ': 0.7096774193548387, 'eval_f1_หี': 0.7, 'eval_f1_แตด': 0.7878787878787878, 'eval_runtime': 1.4462, 'eval_samples_per_second': 134.144, 'eval_steps_per_second': 8.989, 'epoch': 104.17}
+{'loss': 0.0899, 'grad_norm': 1.1737028360366821, 'learning_rate': 6.876693402057463e-06, 'epoch': 105.0}
+{'loss': 0.0639, 'grad_norm': 16.667911529541016, 'learning_rate': 6.532317736773819e-06, 'epoch': 106.25}
+{'loss': 0.0734, 'grad_norm': 12.91772747039795, 'learning_rate': 6.1943723104307544e-06, 'epoch': 107.5}
+{'loss': 0.0561, 'grad_norm': 8.080788612365723, 'learning_rate': 5.863113754036931e-06, 'epoch': 108.75}
+{'loss': 0.0686, 'grad_norm': 3.0215134620666504, 'learning_rate': 5.538793620685928e-06, 'epoch': 110.0}
+{'loss': 0.0806, 'grad_norm': 7.03519868850708, 'learning_rate': 5.221658194530351e-06, 'epoch': 111.25}
+{'loss': 0.0628, 'grad_norm': 40.756282806396484, 'learning_rate': 4.911948303757096e-06, 'epoch': 112.5}
+{'loss': 0.0915, 'grad_norm': 0.3945864737033844, 'learning_rate': 4.609899137705817e-06, 'epoch': 113.75}
+{'eval_loss': 0.2348400354385376, 'eval_accuracy': 0.6458333333333334, 'eval_f1_macro': 0.6909403307579931, 'eval_f1_weighted': 0.5821520310837485, 'eval_profanity_accuracy': 0.9322033898305084, 'eval_profanity_f1': 0.9359723659995399, 'eval_f1_เย็ด': 0.6666666666666666, 'eval_f1_กู': 0.7142857142857143, 'eval_f1_มึง': 0.8461538461538461, 'eval_f1_เหี้ย': 0.7586206896551724, 'eval_f1_ควย': 0.7222222222222222, 'eval_f1_สวะ': 0.7096774193548387, 'eval_f1_หี': 0.717948717948718, 'eval_f1_แตด': 0.7647058823529411, 'eval_runtime': 1.502, 'eval_samples_per_second': 129.163, 'eval_steps_per_second': 8.655, 'epoch': 114.58}
+{'loss': 0.0714, 'grad_norm': 1.239998459815979, 'learning_rate': 4.3157400682694565e-06, 'epoch': 115.0}
+{'loss': 0.0451, 'grad_norm': 4.441900253295898, 'learning_rate': 4.029694475712443e-06, 'epoch': 116.25}
+{'loss': 0.0683, 'grad_norm': 0.20127010345458984, 'learning_rate': 3.751979579038848e-06, 'epoch': 117.5}
+{'loss': 0.0809, 'grad_norm': 4.839963436126709, 'learning_rate': 3.4828062710393327e-06, 'epoch': 118.75}
+{'loss': 0.0663, 'grad_norm': 6.44957971572876, 'learning_rate': 3.2223789581421363e-06, 'epoch': 120.0}
+{'loss': 0.0702, 'grad_norm': 0.15884456038475037, 'learning_rate': 2.9708954051897015e-06, 'epoch': 121.25}
+{'loss': 0.0769, 'grad_norm': 9.393143653869629, 'learning_rate': 2.728546585258813e-06, 'epoch': 122.5}
+{'loss': 0.0513, 'grad_norm': 0.5458772778511047, 'learning_rate': 2.4955165346383483e-06, 'epoch': 123.75}
+{'loss': 0.0725, 'grad_norm': 36.33115768432617, 'learning_rate': 2.271982213074704e-06, 'epoch': 125.0}
+{'eval_loss': 0.20052127540111542, 'eval_accuracy': 0.6510416666666666, 'eval_f1_macro': 0.6933071803326949, 'eval_f1_weighted': 0.5906420638049893, 'eval_profanity_accuracy': 0.9322033898305084, 'eval_profanity_f1': 0.9319127230074382, 'eval_f1_เย็ด': 0.7096774193548387, 'eval_f1_กู': 0.7, 'eval_f1_มึง': 0.8679245283018868, 'eval_f1_เหี้ย': 0.7333333333333333, 'eval_f1_ควย': 0.7027027027027027, 'eval_f1_สวะ': 0.6875, 'eval_f1_หี': 0.7368421052631579, 'eval_f1_แตด': 0.7647058823529411, 'eval_runtime': 1.4797, 'eval_samples_per_second': 131.106, 'eval_steps_per_second': 8.785, 'epoch': 125.0}
+{'loss': 0.0517, 'grad_norm': 0.08530314266681671, 'learning_rate': 2.058113369391038e-06, 'epoch': 126.25}
+{'loss': 0.0807, 'grad_norm': 0.48417648673057556, 'learning_rate': 1.8540724125824093e-06, 'epoch': 127.5}
+{'loss': 0.0581, 'grad_norm': 7.375304698944092, 'learning_rate': 1.6600142884846576e-06, 'epoch': 128.75}
+{'loss': 0.0429, 'grad_norm': 2.070913553237915, 'learning_rate': 1.4760863621107267e-06, 'epoch': 130.0}
+{'loss': 0.0693, 'grad_norm': 4.401669502258301, 'learning_rate': 1.302428305743743e-06, 'epoch': 131.25}
+{'loss': 0.087, 'grad_norm': 19.81267547607422, 'learning_rate': 1.1391719928718191e-06, 'epoch': 132.5}
+{'loss': 0.0708, 'grad_norm': 7.035823345184326, 'learning_rate': 9.864413980452242e-07, 'epoch': 133.75}
+{'loss': 0.0594, 'grad_norm': 12.684967994689941, 'learning_rate': 8.443525027318177e-07, 'epoch': 135.0}
+{'eval_loss': 0.20066428184509277, 'eval_accuracy': 0.65625, 'eval_f1_macro': 0.6994049828436968, 'eval_f1_weighted': 0.5954694580849482, 'eval_profanity_accuracy': 0.940677966101695, 'eval_profanity_f1': 0.941128118651862, 'eval_f1_เย็ด': 0.6875, 'eval_f1_กู': 0.7317073170731707, 'eval_f1_มึง': 0.8679245283018868, 'eval_f1_เหี้ย': 0.7333333333333333, 'eval_f1_ควย': 0.7027027027027027, 'eval_f1_สวะ': 0.7096774193548387, 'eval_f1_หี': 0.7368421052631579, 'eval_f1_แตด': 0.7878787878787878, 'eval_runtime': 1.4496, 'eval_samples_per_second': 133.833, 'eval_steps_per_second': 8.968, 'epoch': 135.42}
+{'loss': 0.0485, 'grad_norm': 0.9422739148139954, 'learning_rate': 7.130132072423678e-07, 'epoch': 136.25}
+{'loss': 0.0733, 'grad_norm': 41.37173843383789, 'learning_rate': 5.925232487925592e-07, 'epoch': 137.5}
+{'loss': 0.0548, 'grad_norm': 0.16216929256916046, 'learning_rate': 4.82974125763968e-07, 'epoch': 138.75}
+{'loss': 0.0617, 'grad_norm': 1.9244053363800049, 'learning_rate': 3.8444902822147296e-07, 'epoch': 140.0}
+{'loss': 0.0336, 'grad_norm': 8.665178298950195, 'learning_rate': 2.9702277473987296e-07, 'epoch': 141.25}
+{'loss': 0.0494, 'grad_norm': 0.1343032568693161, 'learning_rate': 2.2076175558773558e-07, 'epoch': 142.5}
+{'loss': 0.0599, 'grad_norm': 0.3942624032497406, 'learning_rate': 1.5572388231154255e-07, 'epoch': 143.75}
+{'loss': 0.0639, 'grad_norm': 4.49864387512207, 'learning_rate': 1.0195854375848745e-07, 'epoch': 145.0}
+{'eval_loss': 0.19959481060504913, 'eval_accuracy': 0.65625, 'eval_f1_macro': 0.6994049828436968, 'eval_f1_weighted': 0.5954694580849482, 'eval_profanity_accuracy': 0.940677966101695, 'eval_profanity_f1': 0.941128118651862, 'eval_f1_เย็ด': 0.6875, 'eval_f1_กู': 0.7317073170731707, 'eval_f1_มึง': 0.8679245283018868, 'eval_f1_เหี้ย': 0.7333333333333333, 'eval_f1_ควย': 0.7027027027027027, 'eval_f1_สวะ': 0.7096774193548387, 'eval_f1_หี': 0.7368421052631579, 'eval_f1_แตด': 0.7878787878787878, 'eval_runtime': 1.4486, 'eval_samples_per_second': 133.919, 'eval_steps_per_second': 8.974, 'epoch': 145.83}
+{'loss': 0.0549, 'grad_norm': 0.09189970046281815, 'learning_rate': 5.950656857126702e-08, 'epoch': 146.25}
+{'loss': 0.0461, 'grad_norm': 5.522226810455322, 'learning_rate': 2.8400194183392237e-08, 'epoch': 147.5}
+{'loss': 0.0643, 'grad_norm': 8.826165199279785, 'learning_rate': 8.663042338532546e-09, 'epoch': 148.75}
+{'loss': 0.0731, 'grad_norm': 1.9471089839935303, 'learning_rate': 3.101011524930808e-10, 'epoch': 150.0}
+{'train_runtime': 1774.8003, 'train_samples_per_second': 65.923, 'train_steps_per_second': 2.028, 'train_loss': 0.22532250295082729, 'epoch': 150.0}
+Fold 5 Validation Results:
+  Accuracy: 0.6443
+  F1 Macro: 0.6874
+
+==================================================
+CROSS-VALIDATION SUMMARY
+==================================================
+Fold 1: Val Acc=0.6000, Val F1=0.6517
+Fold 2: Val Acc=0.6051, Val F1=0.6745
+Fold 3: Val Acc=0.4974, Val F1=0.5792
+Fold 4: Val Acc=0.5897, Val F1=0.6458
+Fold 5: Val Acc=0.6443, Val F1=0.6874
+
+Best fold: 5
+Best model path: ./models/audio_train_enhanced_fold_5
+
+==================================================
+FINAL TEST SET EVALUATION
+==================================================
+Test Set Results (Best Model - Fold 5):
+  Accuracy: 0.5738
+  F1 Macro: 0.6368
+Best model saved to: ./models/audio_train_enhanced_best_model

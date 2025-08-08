@@ -526,7 +526,7 @@ def evaluate_all_folds(test_data, num_folds=5, base_dir='./models/fine_tuned_wav
     return best_model_dir
 
 if __name__ == "__main__":
-    csv_file = './csv/main.csv'
+    csv_file = './csv/balanced_main_train.csv'  # Updated to use balanced training data
     model_name = "airesearch/wav2vec2-large-xlsr-53-th"
     output_dir = './models/audio_train'
     

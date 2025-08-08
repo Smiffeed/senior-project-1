@@ -1,0 +1,56 @@
+  0%|                                                                                       | 0/5200 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 890, in <module>
+    main()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 884, in main
+    model, feature_extractor = trainer.train_model(train_df, val_df)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 542, in train_model
+    return self.train_wav2vec2(train_df, val_df, num_classes)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 597, in train_wav2vec2
+    trainer.train()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2509, in _inner_training_loop
+    batch_samples, num_items_in_batch = self.get_batch_samples(epoch_iterator, num_batches, args.device)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 5263, in get_batch_samples
+    batch_samples.append(next(epoch_iterator))
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\data_loader.py", line 577, in __iter__
+    next_batch = next(dataloader_iter)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\utils\data\dataloader.py", line 733, in __next__
+    data = self._next_data()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\utils\data\dataloader.py", line 789, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\utils\data\_utils\fetch.py", line 52, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\utils\data\_utils\fetch.py", line 52, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 254, in __getitem__
+    'labels': torch.tensor(self.label_map[row['label']], dtype=torch.long)
+KeyError: 'เย็ดแม่'
+Traceback (most recent call last):
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 890, in <module>
+    main()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 884, in main
+    model, feature_extractor = trainer.train_model(train_df, val_df)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 542, in train_model
+    return self.train_wav2vec2(train_df, val_df, num_classes)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 597, in train_wav2vec2
+    trainer.train()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2509, in _inner_training_loop
+    batch_samples, num_items_in_batch = self.get_batch_samples(epoch_iterator, num_batches, args.device)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 5263, in get_batch_samples
+    batch_samples.append(next(epoch_iterator))
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\data_loader.py", line 577, in __iter__
+    next_batch = next(dataloader_iter)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\utils\data\dataloader.py", line 733, in __next__
+    data = self._next_data()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\utils\data\dataloader.py", line 789, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\utils\data\_utils\fetch.py", line 52, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\utils\data\_utils\fetch.py", line 52, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 254, in __getitem__
+    'labels': torch.tensor(self.label_map[row['label']], dtype=torch.long)
+KeyError: 'เย็ดแม่'

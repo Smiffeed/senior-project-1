@@ -1,0 +1,23 @@
+ 10%|████                                     | 147/1470 [00:37<04:40,  4.72it/s]Traceback (most recent call last):
+{'loss': 0.0, 'grad_norm': nan, 'learning_rate': 0.0, 'epoch': 0.34}
+{'loss': 0.0433, 'grad_norm': 0.0, 'learning_rate': 0.0, 'epoch': 0.68}
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\gender_model_training.py", line 284, in <module>
+{'eval_loss': nan, 'eval_f1_macro': 0.024454403921590408, 'eval_runtime': 2.8497, 'eval_samples_per_second': 103.168, 'eval_steps_per_second': 12.984, 'epoch': 1.0}
+    main(config)
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\gender_model_training.py", line 271, in main
+    trainer.train()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2656, in _inner_training_loop
+    self._maybe_log_save_evaluate(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3102, in _maybe_log_save_evaluate
+    self._save_checkpoint(model, trial)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3199, in _save_checkpoint
+    self.save_model(output_dir, _internal_call=True)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3911, in save_model
+    self._save(output_dir)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 4015, in _save
+    self.model.save_pretrained(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\modeling_utils.py", line 3632, in save_pretrained
+    raise RuntimeError(
+RuntimeError: The weights trying to be saved contained shared tensors [{'classifier.0.weight', 'fused_classifier.0.weight'}, {'classifier.0.bias', 'fused_classifier.0.bias'}, {'classifier.3.weight', 'fused_classifier.3.weight'}, {'classifier.3.bias', 'fused_classifier.3.bias'}] that are mismatching the transformers base configuration. Try saving using `safe_serialization=False` or remove this tensor sharing.

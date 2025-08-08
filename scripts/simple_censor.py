@@ -176,7 +176,7 @@ if __name__ == "__main__":
         print("=" * 50)
         
         # Interactive mode
-        model_dir = input("Model directory [./models/simple_censor.py]: ").strip()
+        model_dir = input("Model directory [./models/simplified_advanced_audio_train]: ").strip()
         if not model_dir:
             model_dir = "./models/simplified_advanced_audio_train"
         

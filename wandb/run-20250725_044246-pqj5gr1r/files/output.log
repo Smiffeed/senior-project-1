@@ -1,0 +1,69 @@
+  3%|█                               | 500/14700 [02:44<1:12:54,  3.25it/s]Traceback (most recent call last):
+{'loss': 2.1996, 'grad_norm': 3.1591696739196777, 'learning_rate': 9.591836734693878e-07, 'epoch': 0.6}
+{'loss': 2.1977, 'grad_norm': 2.8602402210235596, 'learning_rate': 1.9795918367346936e-06, 'epoch': 1.2}
+{'loss': 2.1966, 'grad_norm': 2.4531495571136475, 'learning_rate': 3e-06, 'epoch': 1.81}
+{'loss': 2.185, 'grad_norm': 3.254276752471924, 'learning_rate': 4e-06, 'epoch': 2.41}
+{'loss': 2.18, 'grad_norm': 1.7487236261367798, 'learning_rate': 5.020408163265306e-06, 'epoch': 3.01}
+{'loss': 2.1644, 'grad_norm': 6.832032203674316, 'learning_rate': 6.040816326530612e-06, 'epoch': 3.61}
+{'loss': 2.14, 'grad_norm': 3.2248425483703613, 'learning_rate': 7.061224489795918e-06, 'epoch': 4.22}
+{'loss': 2.1258, 'grad_norm': 4.8549957275390625, 'learning_rate': 8.081632653061225e-06, 'epoch': 4.82}
+{'loss': 2.0763, 'grad_norm': 4.4109320640563965, 'learning_rate': 9.081632653061225e-06, 'epoch': 5.42}
+{'loss': 2.0486, 'grad_norm': 7.004213809967041, 'learning_rate': 1.0081632653061224e-05, 'epoch': 6.02}
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\serialization.py", line 965, in save
+{'eval_loss': 1.9506255388259888, 'eval_accuracy': 0.40425533056259155, 'eval_runtime': 4.6774, 'eval_samples_per_second': 70.338, 'eval_steps_per_second': 4.49, 'epoch': 6.02}
+    _save(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\serialization.py", line 1266, in _save
+    zip_file.write_record(name, storage, num_bytes)
+RuntimeError: [enforce fail at inline_container.cc:862] . PytorchStreamWriter failed writing file data/110: file write failed
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 582, in <module>
+    train_wav2vec2_model(csv_file, model_name, output_dir_fold)
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 320, in train_wav2vec2_model
+    trainer.train()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2622, in _inner_training_loop
+    self._maybe_log_save_evaluate(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3102, in _maybe_log_save_evaluate
+    self._save_checkpoint(model, trial)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3210, in _save_checkpoint
+    self._save_optimizer_and_scheduler(output_dir)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3337, in _save_optimizer_and_scheduler
+    torch.save(self.optimizer.state_dict(), os.path.join(output_dir, OPTIMIZER_NAME))
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\serialization.py", line 972, in save
+    return
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\serialization.py", line 798, in __exit__
+    self.file_like.write_end_of_file()
+RuntimeError: [enforce fail at inline_container.cc:659] . unexpected pos 520268800 vs 520268688
+Traceback (most recent call last):
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\serialization.py", line 965, in save
+    _save(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\serialization.py", line 1266, in _save
+    zip_file.write_record(name, storage, num_bytes)
+RuntimeError: [enforce fail at inline_container.cc:862] . PytorchStreamWriter failed writing file data/110: file write failed
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 582, in <module>
+    train_wav2vec2_model(csv_file, model_name, output_dir_fold)
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 320, in train_wav2vec2_model
+    trainer.train()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2622, in _inner_training_loop
+    self._maybe_log_save_evaluate(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3102, in _maybe_log_save_evaluate
+    self._save_checkpoint(model, trial)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3210, in _save_checkpoint
+    self._save_optimizer_and_scheduler(output_dir)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3337, in _save_optimizer_and_scheduler
+    torch.save(self.optimizer.state_dict(), os.path.join(output_dir, OPTIMIZER_NAME))
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\serialization.py", line 972, in save
+    return
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\serialization.py", line 798, in __exit__
+    self.file_like.write_end_of_file()
+RuntimeError: [enforce fail at inline_container.cc:659] . unexpected pos 520268800 vs 520268688

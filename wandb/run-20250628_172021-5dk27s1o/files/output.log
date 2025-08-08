@@ -1,0 +1,9 @@
+100%|█████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:35<00:00,  2.84it/s]
+{'loss': 2.2005, 'grad_norm': 1.939489722251892, 'learning_rate': 1.6800000000000002e-06, 'epoch': 1.0}
+                                                                                                                                    
+{'eval_loss': 2.195434808731079, 'eval_f1': 0.0746927519833279, 'eval_runtime': 1.1886, 'eval_samples_per_second': 160.692, 'eval_steps_per_second': 20.192, 'epoch': 1.0}
+{'loss': 2.193, 'grad_norm': 3.5666277408599854, 'learning_rate': 3.6800000000000003e-06, 'epoch': 2.0}
+{'eval_loss': 2.181272506713867, 'eval_f1': 0.07110134629768138, 'eval_runtime': 1.0181, 'eval_samples_per_second': 187.602, 'eval_steps_per_second': 23.573, 'epoch': 2.0}
+{'train_runtime': 37.2111, 'train_samples_per_second': 42.944, 'train_steps_per_second': 2.687, 'train_loss': 2.1967281341552733, 'epoch': 2.0}
+Training completed!
+Model saved to: models/advanced_training

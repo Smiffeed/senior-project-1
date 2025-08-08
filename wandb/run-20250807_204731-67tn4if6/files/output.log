@@ -1,0 +1,691 @@
+Using EarlyStoppingCallback without load_best_model_at_end=True. Once training is finished, the best model will not be loaded automatically.
+100%|███████████████████████████████████████████████████████████| 1500/1500 [10:11<00:00,  2.45it/s]
+{'loss': 1.2989, 'grad_norm': 1.6862601041793823, 'learning_rate': 1.9989284781388617e-05, 'epoch': 0.97}
+{'loss': 1.2656, 'grad_norm': 3.890777826309204, 'learning_rate': 1.9646300995182955e-05, 'epoch': 1.93}
+{'loss': 1.1906, 'grad_norm': 3.899977922439575, 'learning_rate': 1.884666644312046e-05, 'epoch': 2.89}
+100%|███████████████████████████████████████████████████████████████| 51/51 [00:03<00:00, 16.22it/s]
+{'eval_loss': 1.1315767765045166, 'eval_accuracy': 0.21568627450980393, 'eval_f1_macro': 0.22034883368216698, 'eval_f1_weighted': 0.14231108113461055, 'eval_profanity_accuracy': 0.3793103448275862, 'eval_profanity_f1': 0.32566541967664253, 'eval_f1_เย็ด': 0.24561403508771928, 'eval_f1_กู': 0.0, 'eval_f1_มึง': 0.43243243243243246, 'eval_f1_เหี้ย': 0.08, 'eval_f1_ควย': 0.18181818181818182, 'eval_f1_สวะ': 0.42105263157894735, 'eval_f1_หี': 0.2222222222222222, 'eval_f1_แตด': 0.4, 'eval_runtime': 3.0829, 'eval_samples_per_second': 67.144, 'eval_steps_per_second': 16.867, 'epoch': 2.89}
+{'loss': 1.0264, 'grad_norm': 8.474491119384766, 'learning_rate': 1.7627277402211146e-05, 'epoch': 3.85}
+{'loss': 0.8774, 'grad_norm': 10.163273811340332, 'learning_rate': 1.6045991148623752e-05, 'epoch': 4.81}
+{'loss': 0.7186, 'grad_norm': 3.760287284851074, 'learning_rate': 1.4157795975703987e-05, 'epoch': 5.77}
+{'eval_loss': 0.725197434425354, 'eval_accuracy': 0.2696078431372549, 'eval_f1_macro': 0.2801450445818028, 'eval_f1_weighted': 0.18788319217835095, 'eval_profanity_accuracy': 0.47413793103448276, 'eval_profanity_f1': 0.42872320560939486, 'eval_f1_เย็ด': 0.3225806451612903, 'eval_f1_กู': 0.4375, 'eval_f1_มึง': 0.5531914893617021, 'eval_f1_เหี้ย': 0.1875, 'eval_f1_ควย': 0.10526315789473684, 'eval_f1_สวะ': 0.1935483870967742, 'eval_f1_หี': 0.37037037037037035, 'eval_f1_แตด': 0.35135135135135137, 'eval_runtime': 3.0998, 'eval_samples_per_second': 66.779, 'eval_steps_per_second': 16.775, 'epoch': 5.77}
+{'loss': 0.7103, 'grad_norm': 28.40839195251465, 'learning_rate': 1.2068333396965968e-05, 'epoch': 6.73}
+{'loss': 0.6414, 'grad_norm': 3.1749868392944336, 'learning_rate': 9.900793438320037e-06, 'epoch': 7.7}
+{'loss': 0.5884, 'grad_norm': 2.5367989540100098, 'learning_rate': 7.716491298893443e-06, 'epoch': 8.66}
+{'eval_loss': 0.5830564498901367, 'eval_accuracy': 0.3627450980392157, 'eval_f1_macro': 0.41352928543432493, 'eval_f1_weighted': 0.26690091736720173, 'eval_profanity_accuracy': 0.6379310344827587, 'eval_profanity_f1': 0.6275964490282331, 'eval_f1_เย็ด': 0.6111111111111112, 'eval_f1_กู': 0.45161290322580644, 'eval_f1_มึง': 0.5106382978723404, 'eval_f1_เหี้ย': 0.32653061224489793, 'eval_f1_ควย': 0.46153846153846156, 'eval_f1_สวะ': 0.375, 'eval_f1_หี': 0.5263157894736842, 'eval_f1_แตด': 0.45901639344262296, 'eval_runtime': 3.0462, 'eval_samples_per_second': 67.952, 'eval_steps_per_second': 17.07, 'epoch': 8.66}
+{'loss': 0.5783, 'grad_norm': 3.6794514656066895, 'learning_rate': 5.64272750120386e-06, 'epoch': 9.62}
+{'loss': 0.5381, 'grad_norm': 2.57271671295166, 'learning_rate': 3.7798872162119948e-06, 'epoch': 10.58}
+{'loss': 0.4861, 'grad_norm': 4.915836811065674, 'learning_rate': 2.2181453908861304e-06, 'epoch': 11.54}
+{'eval_loss': 0.49736303091049194, 'eval_accuracy': 0.37745098039215685, 'eval_f1_macro': 0.4198170328220774, 'eval_f1_weighted': 0.27172490373059904, 'eval_profanity_accuracy': 0.6637931034482759, 'eval_profanity_f1': 0.6550437945174787, 'eval_f1_เย็ด': 0.5853658536585366, 'eval_f1_กู': 0.45161290322580644, 'eval_f1_มึง': 0.5490196078431373, 'eval_f1_เหี้ย': 0.34285714285714286, 'eval_f1_ควย': 0.3870967741935484, 'eval_f1_สวะ': 0.5142857142857142, 'eval_f1_หี': 0.43902439024390244, 'eval_f1_แตด': 0.509090909090909, 'eval_runtime': 3.058, 'eval_samples_per_second': 67.692, 'eval_steps_per_second': 17.005, 'epoch': 11.54}
+{'loss': 0.5242, 'grad_norm': 16.621646881103516, 'learning_rate': 1.0331016283761054e-06, 'epoch': 12.5}
+{'loss': 0.4843, 'grad_norm': 12.131956100463867, 'learning_rate': 2.8212062027698995e-07, 'epoch': 13.46}
+{'loss': 0.4968, 'grad_norm': 4.023205280303955, 'learning_rate': 1.9683883760723834e-09, 'epoch': 14.43}
+{'eval_loss': 0.49601393938064575, 'eval_accuracy': 0.37254901960784315, 'eval_f1_macro': 0.41660098896407977, 'eval_f1_weighted': 0.2694096645647769, 'eval_profanity_accuracy': 0.6551724137931034, 'eval_profanity_f1': 0.6467796092796092, 'eval_f1_เย็ด': 0.6153846153846154, 'eval_f1_กู': 0.45161290322580644, 'eval_f1_มึง': 0.52, 'eval_f1_เหี้ย': 0.3333333333333333, 'eval_f1_ควย': 0.3870967741935484, 'eval_f1_สวะ': 0.5142857142857142, 'eval_f1_หี': 0.4186046511627907, 'eval_f1_แตด': 0.509090909090909, 'eval_runtime': 3.0883, 'eval_samples_per_second': 67.026, 'eval_steps_per_second': 16.837, 'epoch': 14.43}
+{'train_runtime': 613.9363, 'train_samples_per_second': 19.546, 'train_steps_per_second': 2.443, 'train_loss': 0.7616965103149415, 'epoch': 14.43}
+Evaluating configuration 1...
+Configuration 1 Results:
+  Val F1 Macro: 0.4166
+  Val Accuracy: 0.3725
+  Test F1 Macro: 0.3489
+  Test Accuracy: 0.3224
+  🧹 Cleaned up model files in ./models/quick_search_results\config_001
+✅ Config 1 completed: Val F1 = 0.4166
+
+============================================================
+QUICK SEARCH: Configuration 2/9
+Key params: LR=3e-05, BS=4, Attn_Drop=0.3, Gamma=3.0
+============================================================
+
+============================================================
+Training Configuration 2
+============================================================
+Config: {
+  "learning_rate": 3e-05,
+  "per_device_train_batch_size": 4,
+  "gradient_accumulation_steps": 2,
+  "num_train_epochs": 50,
+  "max_steps": 1500,
+  "weight_decay": 0.0,
+  "warmup_ratio": 0.05,
+  "attention_dropout": 0.3,
+  "hidden_dropout": 0.5,
+  "save_steps": 10000,
+  "eval_steps": 300,
+  "early_stopping_patience": 10,
+  "lr_scheduler_type": "cosine",
+  "fp16": true,
+  "gradient_checkpointing": false,
+  "gamma": 3.0,
+  "alpha": 0.75,
+  "save_strategy": "no",
+  "logging_steps": 100,
+  "save_total_limit": 1,
+  "load_best_model_at_end": false
+}
+Some weights of Wav2Vec2ForSequenceClassification were not initialized from the model checkpoint at airesearch/wav2vec2-large-xlsr-53-th and are newly initialized: ['classifier.bias', 'classifier.weight', 'projector.bias', 'projector.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Starting training for configuration 2...
+Using EarlyStoppingCallback without load_best_model_at_end=True. Once training is finished, the best model will not be loaded automatically.
+100%|███████████████████████████████████████████████████████████| 1500/1500 [09:49<00:00,  2.54it/s]
+{'loss': 1.2951, 'grad_norm': 2.844351291656494, 'learning_rate': 2.998542122917149e-05, 'epoch': 0.97}
+{'loss': 1.2288, 'grad_norm': 3.024488687515259, 'learning_rate': 2.947813365416023e-05, 'epoch': 1.93}
+{'loss': 1.0773, 'grad_norm': 30.062713623046875, 'learning_rate': 2.8285385153755532e-05, 'epoch': 2.89}
+100%|███████████████████████████████████████████████████████████████| 51/51 [00:02<00:00, 18.59it/s]
+{'eval_loss': 0.9713844060897827, 'eval_accuracy': 0.23529411764705882, 'eval_f1_macro': 0.2263033954404539, 'eval_f1_weighted': 0.14619416415985392, 'eval_profanity_accuracy': 0.41379310344827586, 'eval_profanity_f1': 0.3473415118555784, 'eval_f1_เย็ด': 0.3684210526315789, 'eval_f1_กู': 0.21428571428571427, 'eval_f1_มึง': 0.3880597014925373, 'eval_f1_เหี้ย': 0.3333333333333333, 'eval_f1_ควย': 0.13333333333333333, 'eval_f1_สวะ': 0.17142857142857143, 'eval_f1_หี': 0.1, 'eval_f1_แตด': 0.32786885245901637, 'eval_runtime': 3.1901, 'eval_samples_per_second': 64.889, 'eval_steps_per_second': 16.301, 'epoch': 2.89}
+{'loss': 0.8716, 'grad_norm': 5.2698798179626465, 'learning_rate': 2.6462274913117666e-05, 'epoch': 3.85}
+{'loss': 0.715, 'grad_norm': 7.07082462310791, 'learning_rate': 2.4068986722935625e-05, 'epoch': 4.81}
+{'loss': 0.6084, 'grad_norm': 3.507171630859375, 'learning_rate': 2.126675425486383e-05, 'epoch': 5.77}
+{'eval_loss': 0.5559819936752319, 'eval_accuracy': 0.3627450980392157, 'eval_f1_macro': 0.3794659521143284, 'eval_f1_weighted': 0.2462936356146505, 'eval_profanity_accuracy': 0.6379310344827587, 'eval_profanity_f1': 0.5914438083845979, 'eval_f1_เย็ด': 0.5, 'eval_f1_กู': 0.425531914893617, 'eval_f1_มึง': 0.5172413793103449, 'eval_f1_เหี้ย': 0.2857142857142857, 'eval_f1_ควย': 0.125, 'eval_f1_สวะ': 0.5789473684210527, 'eval_f1_หี': 0.4827586206896552, 'eval_f1_แตด': 0.5, 'eval_runtime': 2.9592, 'eval_samples_per_second': 69.951, 'eval_steps_per_second': 17.572, 'epoch': 5.77}
+{'loss': 0.6219, 'grad_norm': 45.730838775634766, 'learning_rate': 1.8134846839599193e-05, 'epoch': 6.73}
+{'loss': 0.5387, 'grad_norm': 3.094658851623535, 'learning_rate': 1.4851190157480054e-05, 'epoch': 7.7}
+{'loss': 0.4814, 'grad_norm': 3.1287050247192383, 'learning_rate': 1.1574736948340163e-05, 'epoch': 8.66}
+{'eval_loss': 0.42714032530784607, 'eval_accuracy': 0.43137254901960786, 'eval_f1_macro': 0.4950444890524986, 'eval_f1_weighted': 0.31624640112971314, 'eval_profanity_accuracy': 0.7586206896551724, 'eval_profanity_f1': 0.7558598585322723, 'eval_f1_เย็ด': 0.6, 'eval_f1_กู': 0.5142857142857142, 'eval_f1_มึง': 0.5084745762711864, 'eval_f1_เหี้ย': 0.42857142857142855, 'eval_f1_ควย': 0.5, 'eval_f1_สวะ': 0.6842105263157895, 'eval_f1_หี': 0.6666666666666666, 'eval_f1_แตด': 0.5531914893617021, 'eval_runtime': 3.231, 'eval_samples_per_second': 64.066, 'eval_steps_per_second': 16.094, 'epoch': 8.66}
+{'loss': 0.4488, 'grad_norm': 3.679255723953247, 'learning_rate': 8.46409125180579e-06, 'epoch': 9.62}
+{'loss': 0.42, 'grad_norm': 1.8813118934631348, 'learning_rate': 5.669830824317992e-06, 'epoch': 10.58}
+{'loss': 0.3627, 'grad_norm': 1.7923882007598877, 'learning_rate': 3.327218086329196e-06, 'epoch': 11.54}
+{'eval_loss': 0.3614562451839447, 'eval_accuracy': 0.4362745098039216, 'eval_f1_macro': 0.4918702873730867, 'eval_f1_weighted': 0.312808491150353, 'eval_profanity_accuracy': 0.7672413793103449, 'eval_profanity_f1': 0.7640178419488765, 'eval_f1_เย็ด': 0.6829268292682927, 'eval_f1_กู': 0.3870967741935484, 'eval_f1_มึง': 0.5555555555555556, 'eval_f1_เหี้ย': 0.4444444444444444, 'eval_f1_ควย': 0.4888888888888889, 'eval_f1_สวะ': 0.7027027027027027, 'eval_f1_หี': 0.6, 'eval_f1_แตด': 0.5652173913043478, 'eval_runtime': 2.8148, 'eval_samples_per_second': 73.54, 'eval_steps_per_second': 18.474, 'epoch': 11.54}
+{'loss': 0.3744, 'grad_norm': 25.236434936523438, 'learning_rate': 1.5496524425641579e-06, 'epoch': 12.5}
+{'loss': 0.3612, 'grad_norm': 5.280174255371094, 'learning_rate': 4.231809304154849e-07, 'epoch': 13.46}
+{'loss': 0.3389, 'grad_norm': 2.754476308822632, 'learning_rate': 2.3329208054584384e-09, 'epoch': 14.43}
+{'eval_loss': 0.3632645606994629, 'eval_accuracy': 0.43137254901960786, 'eval_f1_macro': 0.48243599857033753, 'eval_f1_weighted': 0.3044813436894023, 'eval_profanity_accuracy': 0.7586206896551724, 'eval_profanity_f1': 0.7538541694911536, 'eval_f1_เย็ด': 0.6829268292682927, 'eval_f1_กู': 0.2962962962962963, 'eval_f1_มึง': 0.5555555555555556, 'eval_f1_เหี้ย': 0.4864864864864865, 'eval_f1_ควย': 0.46808510638297873, 'eval_f1_สวะ': 0.6666666666666666, 'eval_f1_หี': 0.6206896551724138, 'eval_f1_แตด': 0.5652173913043478, 'eval_runtime': 2.7404, 'eval_samples_per_second': 75.536, 'eval_steps_per_second': 18.975, 'epoch': 14.43}
+{'train_runtime': 589.6147, 'train_samples_per_second': 20.352, 'train_steps_per_second': 2.544, 'train_loss': 0.6496154963175456, 'epoch': 14.43}
+Evaluating configuration 2...
+Configuration 2 Results:
+  Val F1 Macro: 0.4824
+  Val Accuracy: 0.4314
+  Test F1 Macro: 0.4812
+  Test Accuracy: 0.4262
+  🧹 Cleaned up model files in ./models/quick_search_results\config_002
+✅ Config 2 completed: Val F1 = 0.4824
+
+============================================================
+QUICK SEARCH: Configuration 3/9
+Key params: LR=5e-05, BS=4, Attn_Drop=0.3, Gamma=3.0
+============================================================
+
+============================================================
+Training Configuration 3
+============================================================
+Config: {
+  "learning_rate": 5e-05,
+  "per_device_train_batch_size": 4,
+  "gradient_accumulation_steps": 2,
+  "num_train_epochs": 50,
+  "max_steps": 1500,
+  "weight_decay": 0.0,
+  "warmup_ratio": 0.05,
+  "attention_dropout": 0.3,
+  "hidden_dropout": 0.5,
+  "save_steps": 10000,
+  "eval_steps": 300,
+  "early_stopping_patience": 10,
+  "lr_scheduler_type": "cosine",
+  "fp16": true,
+  "gradient_checkpointing": false,
+  "gamma": 3.0,
+  "alpha": 0.75,
+  "save_strategy": "no",
+  "logging_steps": 100,
+  "save_total_limit": 1,
+  "load_best_model_at_end": false
+}
+Some weights of Wav2Vec2ForSequenceClassification were not initialized from the model checkpoint at airesearch/wav2vec2-large-xlsr-53-th and are newly initialized: ['classifier.bias', 'classifier.weight', 'projector.bias', 'projector.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Starting training for configuration 3...
+Using EarlyStoppingCallback without load_best_model_at_end=True. Once training is finished, the best model will not be loaded automatically.
+100%|███████████████████████████████████████████████████████████| 1500/1500 [09:49<00:00,  2.54it/s]
+{'loss': 1.2864, 'grad_norm': 2.7526004314422607, 'learning_rate': 4.997321195347154e-05, 'epoch': 0.97}
+{'loss': 1.126, 'grad_norm': 4.73168420791626, 'learning_rate': 4.911575248795738e-05, 'epoch': 1.93}
+{'loss': 0.8228, 'grad_norm': inf, 'learning_rate': 4.7142308589592556e-05, 'epoch': 2.89}
+100%|███████████████████████████████████████████████████████████████| 51/51 [00:03<00:00, 16.42it/s]
+{'eval_loss': 0.6006233096122742, 'eval_accuracy': 0.3284313725490196, 'eval_f1_macro': 0.3564848642143328, 'eval_f1_weighted': 0.22739349818588836, 'eval_profanity_accuracy': 0.5775862068965517, 'eval_profanity_f1': 0.5474093454642653, 'eval_f1_เย็ด': 0.5789473684210527, 'eval_f1_กู': 0.17391304347826086, 'eval_f1_มึง': 0.5769230769230769, 'eval_f1_เหี้ย': 0.37037037037037035, 'eval_f1_ควย': 0.35555555555555557, 'eval_f1_สวะ': 0.30303030303030304, 'eval_f1_หี': 0.42105263157894735, 'eval_f1_แตด': 0.42857142857142855, 'eval_runtime': 2.7314, 'eval_samples_per_second': 75.786, 'eval_steps_per_second': 19.038, 'epoch': 2.89}
+{'loss': 0.6007, 'grad_norm': 1.6648616790771484, 'learning_rate': 4.4103791521862784e-05, 'epoch': 3.85}
+{'loss': 0.5075, 'grad_norm': 22.263286590576172, 'learning_rate': 4.011497787155938e-05, 'epoch': 4.81}
+{'loss': 0.4081, 'grad_norm': 3.5546483993530273, 'learning_rate': 3.5394489939259966e-05, 'epoch': 5.77}
+{'eval_loss': 0.27311232686042786, 'eval_accuracy': 0.44607843137254904, 'eval_f1_macro': 0.5063072784414038, 'eval_f1_weighted': 0.3226989465164498, 'eval_profanity_accuracy': 0.7844827586206896, 'eval_profanity_f1': 0.7828396804250968, 'eval_f1_เย็ด': 0.6842105263157895, 'eval_f1_กู': 0.4166666666666667, 'eval_f1_มึง': 0.5882352941176471, 'eval_f1_เหี้ย': 0.43902439024390244, 'eval_f1_ควย': 0.48148148148148145, 'eval_f1_สวะ': 0.7027027027027027, 'eval_f1_หี': 0.6666666666666666, 'eval_f1_แตด': 0.5777777777777777, 'eval_runtime': 3.6894, 'eval_samples_per_second': 56.106, 'eval_steps_per_second': 14.094, 'epoch': 5.77}
+{'loss': 0.3707, 'grad_norm': 3.5220553874969482, 'learning_rate': 3.017083349241492e-05, 'epoch': 6.73}
+{'loss': 0.3208, 'grad_norm': 10.336700439453125, 'learning_rate': 2.4696871294874573e-05, 'epoch': 7.7}
+{'loss': 0.2547, 'grad_norm': 0.4520662724971771, 'learning_rate': 1.9237582719721223e-05, 'epoch': 8.66}
+{'eval_loss': 0.22162418067455292, 'eval_accuracy': 0.4852941176470588, 'eval_f1_macro': 0.5535179929056778, 'eval_f1_weighted': 0.3556492387488563, 'eval_profanity_accuracy': 0.853448275862069, 'eval_profanity_f1': 0.8501893939393939, 'eval_f1_เย็ด': 0.7, 'eval_f1_กู': 0.5945945945945946, 'eval_f1_มึง': 0.6296296296296297, 'eval_f1_เหี้ย': 0.47368421052631576, 'eval_f1_ควย': 0.5333333333333333, 'eval_f1_สวะ': 0.7647058823529411, 'eval_f1_หี': 0.6666666666666666, 'eval_f1_แตด': 0.6190476190476191, 'eval_runtime': 3.0145, 'eval_samples_per_second': 68.669, 'eval_steps_per_second': 17.25, 'epoch': 8.66}
+{'loss': 0.2409, 'grad_norm': 1.2387598752975464, 'learning_rate': 1.4057236830553704e-05, 'epoch': 9.62}
+{'loss': 0.2441, 'grad_norm': 4.16599702835083, 'learning_rate': 9.406599846889936e-06, 'epoch': 10.58}
+{'loss': 0.177, 'grad_norm': 0.22834838926792145, 'learning_rate': 5.510796244912483e-06, 'epoch': 11.54}
+{'eval_loss': 0.21134334802627563, 'eval_accuracy': 0.5147058823529411, 'eval_f1_macro': 0.5891634770796598, 'eval_f1_weighted': 0.3777953623573883, 'eval_profanity_accuracy': 0.9051724137931034, 'eval_profanity_f1': 0.9032954752782338, 'eval_f1_เย็ด': 0.717948717948718, 'eval_f1_กู': 0.6530612244897959, 'eval_f1_มึง': 0.5925925925925926, 'eval_f1_เหี้ย': 0.4864864864864865, 'eval_f1_ควย': 0.7428571428571429, 'eval_f1_สวะ': 0.7878787878787878, 'eval_f1_หี': 0.6875, 'eval_f1_แตด': 0.6341463414634146, 'eval_runtime': 2.9382, 'eval_samples_per_second': 70.452, 'eval_steps_per_second': 17.698, 'epoch': 11.54}
+{'loss': 0.1787, 'grad_norm': 2.547769784927368, 'learning_rate': 2.558411104103198e-06, 'epoch': 12.5}
+{'loss': 0.1877, 'grad_norm': 7.527738094329834, 'learning_rate': 7.053015506924748e-07, 'epoch': 13.46}
+{'loss': 0.1602, 'grad_norm': 3.6878230571746826, 'learning_rate': 4.920970940180958e-09, 'epoch': 14.43}
+{'eval_loss': 0.21954068541526794, 'eval_accuracy': 0.5049019607843137, 'eval_f1_macro': 0.5777176783177446, 'eval_f1_weighted': 0.36985598523354113, 'eval_profanity_accuracy': 0.8879310344827587, 'eval_profanity_f1': 0.8873874453996158, 'eval_f1_เย็ด': 0.717948717948718, 'eval_f1_กู': 0.6086956521739131, 'eval_f1_มึง': 0.5925925925925926, 'eval_f1_เหี้ย': 0.4864864864864865, 'eval_f1_ควย': 0.6842105263157895, 'eval_f1_สวะ': 0.7878787878787878, 'eval_f1_หี': 0.6875, 'eval_f1_แตด': 0.6341463414634146, 'eval_runtime': 3.0345, 'eval_samples_per_second': 68.216, 'eval_steps_per_second': 17.136, 'epoch': 14.43}
+{'train_runtime': 589.422, 'train_samples_per_second': 20.359, 'train_steps_per_second': 2.545, 'train_loss': 0.45909352620442706, 'epoch': 14.43}
+Evaluating configuration 3...
+Configuration 3 Results:
+  Val F1 Macro: 0.5777
+  Val Accuracy: 0.5049
+  Test F1 Macro: 0.5510
+  Test Accuracy: 0.4863
+  🧹 Cleaned up model files in ./models/quick_search_results\config_003
+✅ Config 3 completed: Val F1 = 0.5777
+
+============================================================
+QUICK SEARCH: Configuration 4/9
+Key params: LR=3e-05, BS=4, Attn_Drop=0.3, Gamma=3.0
+============================================================
+
+============================================================
+Training Configuration 4
+============================================================
+Config: {
+  "learning_rate": 3e-05,
+  "per_device_train_batch_size": 4,
+  "gradient_accumulation_steps": 2,
+  "num_train_epochs": 50,
+  "max_steps": 1500,
+  "weight_decay": 0.0,
+  "warmup_ratio": 0.05,
+  "attention_dropout": 0.3,
+  "hidden_dropout": 0.5,
+  "save_steps": 10000,
+  "eval_steps": 300,
+  "early_stopping_patience": 10,
+  "lr_scheduler_type": "cosine",
+  "fp16": true,
+  "gradient_checkpointing": false,
+  "gamma": 3.0,
+  "alpha": 0.75,
+  "save_strategy": "no",
+  "logging_steps": 100,
+  "save_total_limit": 1,
+  "load_best_model_at_end": false
+}
+Some weights of Wav2Vec2ForSequenceClassification were not initialized from the model checkpoint at airesearch/wav2vec2-large-xlsr-53-th and are newly initialized: ['classifier.bias', 'classifier.weight', 'projector.bias', 'projector.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Starting training for configuration 4...
+Using EarlyStoppingCallback without load_best_model_at_end=True. Once training is finished, the best model will not be loaded automatically.
+100%|███████████████████████████████████████████████████████████| 1500/1500 [09:13<00:00,  2.71it/s]
+{'loss': 1.2951, 'grad_norm': 2.844351291656494, 'learning_rate': 2.998542122917149e-05, 'epoch': 0.97}
+{'loss': 1.2288, 'grad_norm': 3.024488687515259, 'learning_rate': 2.947813365416023e-05, 'epoch': 1.93}
+{'loss': 1.0773, 'grad_norm': 30.062713623046875, 'learning_rate': 2.8285385153755532e-05, 'epoch': 2.89}
+100%|███████████████████████████████████████████████████████████████| 51/51 [00:02<00:00, 17.85it/s]
+{'eval_loss': 0.9713844060897827, 'eval_accuracy': 0.23529411764705882, 'eval_f1_macro': 0.2263033954404539, 'eval_f1_weighted': 0.14619416415985392, 'eval_profanity_accuracy': 0.41379310344827586, 'eval_profanity_f1': 0.3473415118555784, 'eval_f1_เย็ด': 0.3684210526315789, 'eval_f1_กู': 0.21428571428571427, 'eval_f1_มึง': 0.3880597014925373, 'eval_f1_เหี้ย': 0.3333333333333333, 'eval_f1_ควย': 0.13333333333333333, 'eval_f1_สวะ': 0.17142857142857143, 'eval_f1_หี': 0.1, 'eval_f1_แตด': 0.32786885245901637, 'eval_runtime': 2.8053, 'eval_samples_per_second': 73.789, 'eval_steps_per_second': 18.536, 'epoch': 2.89}
+{'loss': 0.8716, 'grad_norm': 5.2698798179626465, 'learning_rate': 2.6462274913117666e-05, 'epoch': 3.85}
+{'loss': 0.715, 'grad_norm': 7.07082462310791, 'learning_rate': 2.4068986722935625e-05, 'epoch': 4.81}
+{'loss': 0.6084, 'grad_norm': 3.507171630859375, 'learning_rate': 2.126675425486383e-05, 'epoch': 5.77}
+{'eval_loss': 0.5559819936752319, 'eval_accuracy': 0.3627450980392157, 'eval_f1_macro': 0.3794659521143284, 'eval_f1_weighted': 0.2462936356146505, 'eval_profanity_accuracy': 0.6379310344827587, 'eval_profanity_f1': 0.5914438083845979, 'eval_f1_เย็ด': 0.5, 'eval_f1_กู': 0.425531914893617, 'eval_f1_มึง': 0.5172413793103449, 'eval_f1_เหี้ย': 0.2857142857142857, 'eval_f1_ควย': 0.125, 'eval_f1_สวะ': 0.5789473684210527, 'eval_f1_หี': 0.4827586206896552, 'eval_f1_แตด': 0.5, 'eval_runtime': 2.8201, 'eval_samples_per_second': 73.401, 'eval_steps_per_second': 18.439, 'epoch': 5.77}
+{'loss': 0.6219, 'grad_norm': 45.730838775634766, 'learning_rate': 1.8134846839599193e-05, 'epoch': 6.73}
+{'loss': 0.5387, 'grad_norm': 3.094658851623535, 'learning_rate': 1.4851190157480054e-05, 'epoch': 7.7}
+{'loss': 0.4814, 'grad_norm': 3.1287050247192383, 'learning_rate': 1.1574736948340163e-05, 'epoch': 8.66}
+{'eval_loss': 0.42714032530784607, 'eval_accuracy': 0.43137254901960786, 'eval_f1_macro': 0.4950444890524986, 'eval_f1_weighted': 0.31624640112971314, 'eval_profanity_accuracy': 0.7586206896551724, 'eval_profanity_f1': 0.7558598585322723, 'eval_f1_เย็ด': 0.6, 'eval_f1_กู': 0.5142857142857142, 'eval_f1_มึง': 0.5084745762711864, 'eval_f1_เหี้ย': 0.42857142857142855, 'eval_f1_ควย': 0.5, 'eval_f1_สวะ': 0.6842105263157895, 'eval_f1_หี': 0.6666666666666666, 'eval_f1_แตด': 0.5531914893617021, 'eval_runtime': 2.7999, 'eval_samples_per_second': 73.93, 'eval_steps_per_second': 18.572, 'epoch': 8.66}
+{'loss': 0.4488, 'grad_norm': 3.679255723953247, 'learning_rate': 8.46409125180579e-06, 'epoch': 9.62}
+{'loss': 0.42, 'grad_norm': 1.8813118934631348, 'learning_rate': 5.669830824317992e-06, 'epoch': 10.58}
+{'loss': 0.3627, 'grad_norm': 1.7923882007598877, 'learning_rate': 3.327218086329196e-06, 'epoch': 11.54}
+{'eval_loss': 0.3614562451839447, 'eval_accuracy': 0.4362745098039216, 'eval_f1_macro': 0.4918702873730867, 'eval_f1_weighted': 0.312808491150353, 'eval_profanity_accuracy': 0.7672413793103449, 'eval_profanity_f1': 0.7640178419488765, 'eval_f1_เย็ด': 0.6829268292682927, 'eval_f1_กู': 0.3870967741935484, 'eval_f1_มึง': 0.5555555555555556, 'eval_f1_เหี้ย': 0.4444444444444444, 'eval_f1_ควย': 0.4888888888888889, 'eval_f1_สวะ': 0.7027027027027027, 'eval_f1_หี': 0.6, 'eval_f1_แตด': 0.5652173913043478, 'eval_runtime': 2.8611, 'eval_samples_per_second': 72.351, 'eval_steps_per_second': 18.175, 'epoch': 11.54}
+{'loss': 0.3744, 'grad_norm': 25.236434936523438, 'learning_rate': 1.5496524425641579e-06, 'epoch': 12.5}
+{'loss': 0.3612, 'grad_norm': 5.280174255371094, 'learning_rate': 4.231809304154849e-07, 'epoch': 13.46}
+{'loss': 0.3389, 'grad_norm': 2.754476308822632, 'learning_rate': 2.3329208054584384e-09, 'epoch': 14.43}
+{'eval_loss': 0.3632645606994629, 'eval_accuracy': 0.43137254901960786, 'eval_f1_macro': 0.48243599857033753, 'eval_f1_weighted': 0.3044813436894023, 'eval_profanity_accuracy': 0.7586206896551724, 'eval_profanity_f1': 0.7538541694911536, 'eval_f1_เย็ด': 0.6829268292682927, 'eval_f1_กู': 0.2962962962962963, 'eval_f1_มึง': 0.5555555555555556, 'eval_f1_เหี้ย': 0.4864864864864865, 'eval_f1_ควย': 0.46808510638297873, 'eval_f1_สวะ': 0.6666666666666666, 'eval_f1_หี': 0.6206896551724138, 'eval_f1_แตด': 0.5652173913043478, 'eval_runtime': 2.9312, 'eval_samples_per_second': 70.62, 'eval_steps_per_second': 17.74, 'epoch': 14.43}
+{'train_runtime': 553.8186, 'train_samples_per_second': 21.668, 'train_steps_per_second': 2.708, 'train_loss': 0.6496154963175456, 'epoch': 14.43}
+Evaluating configuration 4...
+Configuration 4 Results:
+  Val F1 Macro: 0.4824
+  Val Accuracy: 0.4314
+  Test F1 Macro: 0.4812
+  Test Accuracy: 0.4262
+  🧹 Cleaned up model files in ./models/quick_search_results\config_004
+✅ Config 4 completed: Val F1 = 0.4824
+
+============================================================
+QUICK SEARCH: Configuration 5/9
+Key params: LR=3e-05, BS=8, Attn_Drop=0.3, Gamma=3.0
+============================================================
+
+============================================================
+Training Configuration 5
+============================================================
+Config: {
+  "learning_rate": 3e-05,
+  "per_device_train_batch_size": 8,
+  "gradient_accumulation_steps": 1,
+  "num_train_epochs": 50,
+  "max_steps": 1500,
+  "weight_decay": 0.0,
+  "warmup_ratio": 0.05,
+  "attention_dropout": 0.3,
+  "hidden_dropout": 0.5,
+  "save_steps": 10000,
+  "eval_steps": 300,
+  "early_stopping_patience": 10,
+  "lr_scheduler_type": "cosine",
+  "fp16": true,
+  "gradient_checkpointing": false,
+  "gamma": 3.0,
+  "alpha": 0.75,
+  "save_strategy": "no",
+  "logging_steps": 100,
+  "save_total_limit": 1,
+  "load_best_model_at_end": false
+}
+Some weights of Wav2Vec2ForSequenceClassification were not initialized from the model checkpoint at airesearch/wav2vec2-large-xlsr-53-th and are newly initialized: ['classifier.bias', 'classifier.weight', 'projector.bias', 'projector.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Starting training for configuration 5...
+Using EarlyStoppingCallback without load_best_model_at_end=True. Once training is finished, the best model will not be loaded automatically.
+100%|███████████████████████████████████████████████████████████| 1500/1500 [05:53<00:00,  4.24it/s]
+{'loss': 1.2959, 'grad_norm': 1.65453040599823, 'learning_rate': 2.998542122917149e-05, 'epoch': 0.97}
+{'loss': 1.2281, 'grad_norm': 2.519378900527954, 'learning_rate': 2.947813365416023e-05, 'epoch': 1.94}
+{'loss': 1.0377, 'grad_norm': 4.22214412689209, 'learning_rate': 2.8285385153755532e-05, 'epoch': 2.91}
+100%|███████████████████████████████████████████████████████████████| 25/25 [00:01<00:00, 13.04it/s]
+{'eval_loss': 0.9500067234039307, 'eval_accuracy': 0.24, 'eval_f1_macro': 0.24192065007146357, 'eval_f1_weighted': 0.153283679757788, 'eval_profanity_accuracy': 0.41739130434782606, 'eval_profanity_f1': 0.36814901762997165, 'eval_f1_เย็ด': 0.5641025641025641, 'eval_f1_กู': 0.0, 'eval_f1_มึง': 0.4, 'eval_f1_เหี้ย': 0.3, 'eval_f1_ควย': 0.11764705882352941, 'eval_f1_สวะ': 0.2127659574468085, 'eval_f1_หี': 0.3125, 'eval_f1_แตด': 0.2702702702702703, 'eval_runtime': 2.0895, 'eval_samples_per_second': 99.069, 'eval_steps_per_second': 12.443, 'epoch': 2.91}
+{'loss': 0.7926, 'grad_norm': 9.25061321258545, 'learning_rate': 2.6462274913117666e-05, 'epoch': 3.88}
+{'loss': 0.6741, 'grad_norm': 5.555877685546875, 'learning_rate': 2.409530542582324e-05, 'epoch': 4.85}
+{'loss': 0.5645, 'grad_norm': 21.310802459716797, 'learning_rate': 2.126675425486383e-05, 'epoch': 5.83}
+{'eval_loss': 0.5348857641220093, 'eval_accuracy': 0.385, 'eval_f1_macro': 0.4143771474334134, 'eval_f1_weighted': 0.27262065992404866, 'eval_profanity_accuracy': 0.6695652173913044, 'eval_profanity_f1': 0.6295636263378199, 'eval_f1_เย็ด': 0.5, 'eval_f1_กู': 0.5098039215686274, 'eval_f1_มึง': 0.6363636363636364, 'eval_f1_เหี้ย': 0.4166666666666667, 'eval_f1_ควย': 0.17391304347826086, 'eval_f1_สวะ': 0.6470588235294118, 'eval_f1_หี': 0.375, 'eval_f1_แตด': 0.47058823529411764, 'eval_runtime': 1.9929, 'eval_samples_per_second': 103.871, 'eval_steps_per_second': 13.047, 'epoch': 5.83}
+{'loss': 0.5801, 'grad_norm': 26.718076705932617, 'learning_rate': 1.8134846839599193e-05, 'epoch': 6.8}
+{'loss': 0.5128, 'grad_norm': 7.350246906280518, 'learning_rate': 1.488425826130711e-05, 'epoch': 7.77}
+{'loss': 0.4201, 'grad_norm': 4.789080619812012, 'learning_rate': 1.16069409129129e-05, 'epoch': 8.74}
+{'eval_loss': 0.3886714279651642, 'eval_accuracy': 0.4, 'eval_f1_macro': 0.4372747248168052, 'eval_f1_weighted': 0.2783009640601399, 'eval_profanity_accuracy': 0.6956521739130435, 'eval_profanity_f1': 0.6777483451621382, 'eval_f1_เย็ด': 0.5945945945945946, 'eval_f1_กู': 0.18181818181818182, 'eval_f1_มึง': 0.5882352941176471, 'eval_f1_เหี้ย': 0.4444444444444444, 'eval_f1_ควย': 0.4230769230769231, 'eval_f1_สวะ': 0.631578947368421, 'eval_f1_หี': 0.5517241379310345, 'eval_f1_แตด': 0.52, 'eval_runtime': 2.1286, 'eval_samples_per_second': 97.246, 'eval_steps_per_second': 12.215, 'epoch': 8.74}
+{'loss': 0.4187, 'grad_norm': 7.03241491317749, 'learning_rate': 8.493872172251407e-06, 'epoch': 9.71}
+{'loss': 0.3646, 'grad_norm': 5.088570594787598, 'learning_rate': 5.695747088629556e-06, 'epoch': 10.68}
+{'loss': 0.3244, 'grad_norm': 2.4175896644592285, 'learning_rate': 3.3480151598164597e-06, 'epoch': 11.65}
+{'eval_loss': 0.3383520245552063, 'eval_accuracy': 0.445, 'eval_f1_macro': 0.5030007502826975, 'eval_f1_weighted': 0.32220160339998066, 'eval_profanity_accuracy': 0.7739130434782608, 'eval_profanity_f1': 0.771067883266159, 'eval_f1_เย็ด': 0.65, 'eval_f1_กู': 0.41379310344827586, 'eval_f1_มึง': 0.5882352941176471, 'eval_f1_เหี้ย': 0.5454545454545454, 'eval_f1_ควย': 0.5, 'eval_f1_สวะ': 0.6666666666666666, 'eval_f1_หี': 0.6428571428571429, 'eval_f1_แตด': 0.52, 'eval_runtime': 2.0344, 'eval_samples_per_second': 101.751, 'eval_steps_per_second': 12.78, 'epoch': 11.65}
+{'loss': 0.3123, 'grad_norm': 1.5075535774230957, 'learning_rate': 1.5643235964088065e-06, 'epoch': 12.62}
+{'loss': 0.3377, 'grad_norm': 2.5732223987579346, 'learning_rate': 4.3101597462938345e-07, 'epoch': 13.59}
+{'loss': 0.3477, 'grad_norm': 64.9261245727539, 'learning_rate': 2.9525825641085747e-09, 'epoch': 14.56}
+{'eval_loss': 0.3375927209854126, 'eval_accuracy': 0.435, 'eval_f1_macro': 0.48696978424336035, 'eval_f1_weighted': 0.3100828904534787, 'eval_profanity_accuracy': 0.7565217391304347, 'eval_profanity_f1': 0.7504536931807507, 'eval_f1_เย็ด': 0.6666666666666666, 'eval_f1_กู': 0.2962962962962963, 'eval_f1_มึง': 0.5882352941176471, 'eval_f1_เหี้ย': 0.5294117647058824, 'eval_f1_ควย': 0.48, 'eval_f1_สวะ': 0.6486486486486487, 'eval_f1_หี': 0.6428571428571429, 'eval_f1_แตด': 0.5306122448979592, 'eval_runtime': 2.0595, 'eval_samples_per_second': 100.509, 'eval_steps_per_second': 12.624, 'epoch': 14.56}
+{'train_runtime': 353.7851, 'train_samples_per_second': 33.919, 'train_steps_per_second': 4.24, 'train_loss': 0.6140880661010742, 'epoch': 14.56}
+Evaluating configuration 5...
+Configuration 5 Results:
+  Val F1 Macro: 0.4870
+  Val Accuracy: 0.4350
+  Test F1 Macro: 0.4608
+  Test Accuracy: 0.4044
+  🧹 Cleaned up model files in ./models/quick_search_results\config_005
+✅ Config 5 completed: Val F1 = 0.4870
+
+============================================================
+QUICK SEARCH: Configuration 6/9
+Key params: LR=3e-05, BS=4, Attn_Drop=0.2, Gamma=3.0
+============================================================
+
+============================================================
+Training Configuration 6
+============================================================
+Config: {
+  "learning_rate": 3e-05,
+  "per_device_train_batch_size": 4,
+  "gradient_accumulation_steps": 2,
+  "num_train_epochs": 50,
+  "max_steps": 1500,
+  "weight_decay": 0.0,
+  "warmup_ratio": 0.05,
+  "attention_dropout": 0.2,
+  "hidden_dropout": 0.4,
+  "save_steps": 10000,
+  "eval_steps": 300,
+  "early_stopping_patience": 10,
+  "lr_scheduler_type": "cosine",
+  "fp16": true,
+  "gradient_checkpointing": false,
+  "gamma": 3.0,
+  "alpha": 0.75,
+  "save_strategy": "no",
+  "logging_steps": 100,
+  "save_total_limit": 1,
+  "load_best_model_at_end": false
+}
+Some weights of Wav2Vec2ForSequenceClassification were not initialized from the model checkpoint at airesearch/wav2vec2-large-xlsr-53-th and are newly initialized: ['classifier.bias', 'classifier.weight', 'projector.bias', 'projector.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Starting training for configuration 6...
+Using EarlyStoppingCallback without load_best_model_at_end=True. Once training is finished, the best model will not be loaded automatically.
+100%|███████████████████████████████████████████████████████████| 1500/1500 [09:09<00:00,  2.73it/s]
+{'loss': 1.2844, 'grad_norm': 2.511444330215454, 'learning_rate': 2.9983927172082925e-05, 'epoch': 0.97}
+{'loss': 1.1564, 'grad_norm': 4.849596977233887, 'learning_rate': 2.947813365416023e-05, 'epoch': 1.93}
+{'loss': 0.8532, 'grad_norm': inf, 'learning_rate': 2.8285385153755532e-05, 'epoch': 2.89}
+100%|███████████████████████████████████████████████████████████████| 51/51 [00:02<00:00, 18.52it/s]
+{'eval_loss': 0.5591663122177124, 'eval_accuracy': 0.4019607843137255, 'eval_f1_macro': 0.44054464865868376, 'eval_f1_weighted': 0.2846361205300834, 'eval_profanity_accuracy': 0.7068965517241379, 'eval_profanity_f1': 0.6735630836052902, 'eval_f1_เย็ด': 0.4375, 'eval_f1_กู': 0.34782608695652173, 'eval_f1_มึง': 0.6521739130434783, 'eval_f1_เหี้ย': 0.26666666666666666, 'eval_f1_ควย': 0.42105263157894735, 'eval_f1_สวะ': 0.6190476190476191, 'eval_f1_หี': 0.6428571428571429, 'eval_f1_แตด': 0.5777777777777777, 'eval_runtime': 2.8469, 'eval_samples_per_second': 72.711, 'eval_steps_per_second': 18.266, 'epoch': 2.89}
+{'loss': 0.5804, 'grad_norm': 1.8201698064804077, 'learning_rate': 2.6462274913117666e-05, 'epoch': 3.85}
+{'loss': 0.4389, 'grad_norm': 20.256855010986328, 'learning_rate': 2.4068986722935625e-05, 'epoch': 4.81}
+{'loss': 0.342, 'grad_norm': 3.266582727432251, 'learning_rate': 2.123669396355598e-05, 'epoch': 5.77}
+{'eval_loss': 0.23835283517837524, 'eval_accuracy': 0.47549019607843135, 'eval_f1_macro': 0.5477434426362976, 'eval_f1_weighted': 0.35028411842126544, 'eval_profanity_accuracy': 0.8362068965517241, 'eval_profanity_f1': 0.8406147708125395, 'eval_f1_เย็ด': 0.7, 'eval_f1_กู': 0.5405405405405406, 'eval_f1_มึง': 0.6521739130434783, 'eval_f1_เหี้ย': 0.5142857142857142, 'eval_f1_ควย': 0.4528301886792453, 'eval_f1_สวะ': 0.6341463414634146, 'eval_f1_หี': 0.7857142857142857, 'eval_f1_แตด': 0.65, 'eval_runtime': 2.8575, 'eval_samples_per_second': 72.442, 'eval_steps_per_second': 18.198, 'epoch': 5.77}
+{'loss': 0.3256, 'grad_norm': 2.5348570346832275, 'learning_rate': 1.8134846839599193e-05, 'epoch': 6.73}
+{'loss': 0.2832, 'grad_norm': 3.714500665664673, 'learning_rate': 1.4851190157480054e-05, 'epoch': 7.7}
+{'loss': 0.2169, 'grad_norm': 0.4631168246269226, 'learning_rate': 1.1574736948340163e-05, 'epoch': 8.66}
+{'eval_loss': 0.19326388835906982, 'eval_accuracy': 0.5098039215686274, 'eval_f1_macro': 0.5844275709085905, 'eval_f1_weighted': 0.37481573032827603, 'eval_profanity_accuracy': 0.896551724137931, 'eval_profanity_f1': 0.8960912534188397, 'eval_f1_เย็ด': 0.7, 'eval_f1_กู': 0.6511627906976745, 'eval_f1_มึง': 0.6415094339622641, 'eval_f1_เหี้ย': 0.5, 'eval_f1_ควย': 0.5714285714285714, 'eval_f1_สวะ': 0.6666666666666666, 'eval_f1_หี': 0.8461538461538461, 'eval_f1_แตด': 0.6829268292682927, 'eval_runtime': 2.9211, 'eval_samples_per_second': 70.865, 'eval_steps_per_second': 17.802, 'epoch': 8.66}
+{'loss': 0.2381, 'grad_norm': 2.1509783267974854, 'learning_rate': 8.46409125180579e-06, 'epoch': 9.62}
+{'loss': 0.2158, 'grad_norm': 4.857252597808838, 'learning_rate': 5.695747088629556e-06, 'epoch': 10.58}
+{'loss': 0.2038, 'grad_norm': 0.33289921283721924, 'learning_rate': 3.368868866327678e-06, 'epoch': 11.54}
+{'eval_loss': 0.19282978773117065, 'eval_accuracy': 0.5049019607843137, 'eval_f1_macro': 0.5776871683848428, 'eval_f1_weighted': 0.3696135815150863, 'eval_profanity_accuracy': 0.8879310344827587, 'eval_profanity_f1': 0.8865863904657008, 'eval_f1_เย็ด': 0.6511627906976745, 'eval_f1_กู': 0.6363636363636364, 'eval_f1_มึง': 0.6181818181818182, 'eval_f1_เหี้ย': 0.5454545454545454, 'eval_f1_ควย': 0.5581395348837209, 'eval_f1_สวะ': 0.7027027027027027, 'eval_f1_หี': 0.7692307692307693, 'eval_f1_แตด': 0.717948717948718, 'eval_runtime': 2.9654, 'eval_samples_per_second': 69.805, 'eval_steps_per_second': 17.536, 'epoch': 11.54}
+{'loss': 0.1888, 'grad_norm': 23.252458572387695, 'learning_rate': 1.579060052688548e-06, 'epoch': 12.5}
+{'loss': 0.1868, 'grad_norm': 9.37075424194336, 'learning_rate': 4.3892182957920026e-07, 'epoch': 13.46}
+{'loss': 0.1814, 'grad_norm': 5.655460834503174, 'learning_rate': 3.645135607581729e-09, 'epoch': 14.43}
+{'eval_loss': 0.19245076179504395, 'eval_accuracy': 0.5049019607843137, 'eval_f1_macro': 0.5763939789590512, 'eval_f1_weighted': 0.3700918559898907, 'eval_profanity_accuracy': 0.8879310344827587, 'eval_profanity_f1': 0.8865863904657008, 'eval_f1_เย็ด': 0.6829268292682927, 'eval_f1_กู': 0.6666666666666666, 'eval_f1_มึง': 0.6296296296296297, 'eval_f1_เหี้ย': 0.5142857142857142, 'eval_f1_ควย': 0.5581395348837209, 'eval_f1_สวะ': 0.6666666666666666, 'eval_f1_หี': 0.7692307692307693, 'eval_f1_แตด': 0.7, 'eval_runtime': 2.813, 'eval_samples_per_second': 73.586, 'eval_steps_per_second': 18.485, 'epoch': 14.43}
+{'train_runtime': 549.0901, 'train_samples_per_second': 21.854, 'train_steps_per_second': 2.732, 'train_loss': 0.4463802630106608, 'epoch': 14.43}
+Evaluating configuration 6...
+Configuration 6 Results:
+  Val F1 Macro: 0.5764
+  Val Accuracy: 0.5049
+  Test F1 Macro: 0.5587
+  Test Accuracy: 0.4918
+  🧹 Cleaned up model files in ./models/quick_search_results\config_006
+✅ Config 6 completed: Val F1 = 0.5764
+
+============================================================
+QUICK SEARCH: Configuration 7/9
+Key params: LR=3e-05, BS=4, Attn_Drop=0.4, Gamma=3.0
+============================================================
+
+============================================================
+Training Configuration 7
+============================================================
+Config: {
+  "learning_rate": 3e-05,
+  "per_device_train_batch_size": 4,
+  "gradient_accumulation_steps": 2,
+  "num_train_epochs": 50,
+  "max_steps": 1500,
+  "weight_decay": 0.0,
+  "warmup_ratio": 0.05,
+  "attention_dropout": 0.4,
+  "hidden_dropout": 0.6,
+  "save_steps": 10000,
+  "eval_steps": 300,
+  "early_stopping_patience": 10,
+  "lr_scheduler_type": "cosine",
+  "fp16": true,
+  "gradient_checkpointing": false,
+  "gamma": 3.0,
+  "alpha": 0.75,
+  "save_strategy": "no",
+  "logging_steps": 100,
+  "save_total_limit": 1,
+  "load_best_model_at_end": false
+}
+Some weights of Wav2Vec2ForSequenceClassification were not initialized from the model checkpoint at airesearch/wav2vec2-large-xlsr-53-th and are newly initialized: ['classifier.bias', 'classifier.weight', 'projector.bias', 'projector.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Starting training for configuration 7...
+Using EarlyStoppingCallback without load_best_model_at_end=True. Once training is finished, the best model will not be loaded automatically.
+100%|███████████████████████████████████████████████████████████| 1500/1500 [09:50<00:00,  2.54it/s]
+{'loss': 1.3039, 'grad_norm': 1.5263454914093018, 'learning_rate': 2.998542122917149e-05, 'epoch': 0.97}
+{'loss': 1.2805, 'grad_norm': 2.6777684688568115, 'learning_rate': 2.947813365416023e-05, 'epoch': 1.93}
+{'loss': 1.2381, 'grad_norm': 5.495242118835449, 'learning_rate': 2.8285385153755532e-05, 'epoch': 2.89}
+100%|███████████████████████████████████████████████████████████████| 51/51 [00:02<00:00, 19.50it/s]
+{'eval_loss': 1.2054095268249512, 'eval_accuracy': 0.13725490196078433, 'eval_f1_macro': 0.13376581091980289, 'eval_f1_weighted': 0.08756175267501307, 'eval_profanity_accuracy': 0.2413793103448276, 'eval_profanity_f1': 0.1903059933487565, 'eval_f1_เย็ด': 0.15384615384615385, 'eval_f1_กู': 0.08333333333333333, 'eval_f1_มึง': 0.3829787234042553, 'eval_f1_เหี้ย': 0.2857142857142857, 'eval_f1_ควย': 0.0, 'eval_f1_สวะ': 0.1, 'eval_f1_หี': 0.0, 'eval_f1_แตด': 0.19801980198019803, 'eval_runtime': 2.6524, 'eval_samples_per_second': 78.042, 'eval_steps_per_second': 19.605, 'epoch': 2.89}
+{'loss': 1.1498, 'grad_norm': 7.094282150268555, 'learning_rate': 2.6462274913117666e-05, 'epoch': 3.85}
+{'loss': 1.0746, 'grad_norm': 6.735042572021484, 'learning_rate': 2.4068986722935625e-05, 'epoch': 4.81}
+{'loss': 0.8999, 'grad_norm': 2.8584821224212646, 'learning_rate': 2.123669396355598e-05, 'epoch': 5.77}
+{'eval_loss': 1.0065534114837646, 'eval_accuracy': 0.20098039215686275, 'eval_f1_macro': 0.21003448574925992, 'eval_f1_weighted': 0.13662206194744106, 'eval_profanity_accuracy': 0.35344827586206895, 'eval_profanity_f1': 0.32103000556947925, 'eval_f1_เย็ด': 0.2, 'eval_f1_กู': 0.2222222222222222, 'eval_f1_มึง': 0.4230769230769231, 'eval_f1_เหี้ย': 0.3157894736842105, 'eval_f1_ควย': 0.0, 'eval_f1_สวะ': 0.27586206896551724, 'eval_f1_หี': 0.22727272727272727, 'eval_f1_แตด': 0.22608695652173913, 'eval_runtime': 2.6686, 'eval_samples_per_second': 77.569, 'eval_steps_per_second': 19.486, 'epoch': 5.77}
+{'loss': 0.8583, 'grad_norm': 43.442604064941406, 'learning_rate': 1.810250009544895e-05, 'epoch': 6.73}
+{'loss': 0.7653, 'grad_norm': 2.6463658809661865, 'learning_rate': 1.4818122776924742e-05, 'epoch': 7.7}
+{'loss': 0.7249, 'grad_norm': 6.6610541343688965, 'learning_rate': 1.1542549631832734e-05, 'epoch': 8.66}
+{'eval_loss': 0.7428385615348816, 'eval_accuracy': 0.2549019607843137, 'eval_f1_macro': 0.24894623362365298, 'eval_f1_weighted': 0.1608850117151825, 'eval_profanity_accuracy': 0.4482758620689655, 'eval_profanity_f1': 0.38666053441649517, 'eval_f1_เย็ด': 0.4, 'eval_f1_กู': 0.125, 'eval_f1_มึง': 0.45454545454545453, 'eval_f1_เหี้ย': 0.16216216216216217, 'eval_f1_ควย': 0.0, 'eval_f1_สวะ': 0.3333333333333333, 'eval_f1_หี': 0.3783783783783784, 'eval_f1_แตด': 0.3870967741935484, 'eval_runtime': 7.5438, 'eval_samples_per_second': 27.44, 'eval_steps_per_second': 6.893, 'epoch': 8.66}
+{'loss': 0.7017, 'grad_norm': 5.998892784118652, 'learning_rate': 8.434342098332222e-06, 'epoch': 9.62}
+{'loss': 0.6534, 'grad_norm': 2.2812132835388184, 'learning_rate': 5.643959908133961e-06, 'epoch': 10.58}
+{'loss': 0.6028, 'grad_norm': 5.174010276794434, 'learning_rate': 3.3064777469474898e-06, 'epoch': 11.54}
+{'eval_loss': 0.7003852725028992, 'eval_accuracy': 0.2549019607843137, 'eval_f1_macro': 0.2561652712086656, 'eval_f1_weighted': 0.1648517909253062, 'eval_profanity_accuracy': 0.4482758620689655, 'eval_profanity_f1': 0.40195494864612513, 'eval_f1_เย็ด': 0.2857142857142857, 'eval_f1_กู': 0.17647058823529413, 'eval_f1_มึง': 0.4117647058823529, 'eval_f1_เหี้ย': 0.21428571428571427, 'eval_f1_ควย': 0.13333333333333333, 'eval_f1_สวะ': 0.3333333333333333, 'eval_f1_หี': 0.35714285714285715, 'eval_f1_แตด': 0.39344262295081966, 'eval_runtime': 2.7624, 'eval_samples_per_second': 74.935, 'eval_steps_per_second': 18.824, 'epoch': 11.54}
+{'loss': 0.6357, 'grad_norm': 11.840879440307617, 'learning_rate': 1.5350466624619186e-06, 'epoch': 12.5}
+{'loss': 0.5873, 'grad_norm': 21.87421989440918, 'learning_rate': 4.1541673501875766e-07, 'epoch': 13.46}
+{'loss': 0.6024, 'grad_norm': 5.151592254638672, 'learning_rate': 1.7861533434204713e-09, 'epoch': 14.43}
+{'eval_loss': 0.6983261704444885, 'eval_accuracy': 0.25, 'eval_f1_macro': 0.24975164445528225, 'eval_f1_weighted': 0.1600502391348807, 'eval_profanity_accuracy': 0.4396551724137931, 'eval_profanity_f1': 0.3918511152814222, 'eval_f1_เย็ด': 0.32, 'eval_f1_กู': 0.125, 'eval_f1_มึง': 0.4117647058823529, 'eval_f1_เหี้ย': 0.20689655172413793, 'eval_f1_ควย': 0.13333333333333333, 'eval_f1_สวะ': 0.3125, 'eval_f1_หี': 0.3448275862068966, 'eval_f1_แตด': 0.39344262295081966, 'eval_runtime': 2.7972, 'eval_samples_per_second': 74.003, 'eval_steps_per_second': 18.59, 'epoch': 14.43}
+{'train_runtime': 590.1447, 'train_samples_per_second': 20.334, 'train_steps_per_second': 2.542, 'train_loss': 0.8719032897949218, 'epoch': 14.43}
+Evaluating configuration 7...
+Configuration 7 Results:
+  Val F1 Macro: 0.2498
+  Val Accuracy: 0.2500
+  Test F1 Macro: 0.2301
+  Test Accuracy: 0.2350
+  🧹 Cleaned up model files in ./models/quick_search_results\config_007
+✅ Config 7 completed: Val F1 = 0.2498
+
+============================================================
+QUICK SEARCH: Configuration 8/9
+Key params: LR=3e-05, BS=4, Attn_Drop=0.3, Gamma=2.0
+============================================================
+
+============================================================
+Training Configuration 8
+============================================================
+Config: {
+  "learning_rate": 3e-05,
+  "per_device_train_batch_size": 4,
+  "gradient_accumulation_steps": 2,
+  "num_train_epochs": 50,
+  "max_steps": 1500,
+  "weight_decay": 0.0,
+  "warmup_ratio": 0.05,
+  "attention_dropout": 0.3,
+  "hidden_dropout": 0.5,
+  "save_steps": 10000,
+  "eval_steps": 300,
+  "early_stopping_patience": 10,
+  "lr_scheduler_type": "cosine",
+  "fp16": true,
+  "gradient_checkpointing": false,
+  "gamma": 2.0,
+  "alpha": 0.6,
+  "save_strategy": "no",
+  "logging_steps": 100,
+  "save_total_limit": 1,
+  "load_best_model_at_end": false
+}
+Some weights of Wav2Vec2ForSequenceClassification were not initialized from the model checkpoint at airesearch/wav2vec2-large-xlsr-53-th and are newly initialized: ['classifier.bias', 'classifier.weight', 'projector.bias', 'projector.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Starting training for configuration 8...
+Using EarlyStoppingCallback without load_best_model_at_end=True. Once training is finished, the best model will not be loaded automatically.
+100%|███████████████████████████████████████████████████████████| 1500/1500 [08:41<00:00,  2.88it/s]
+{'loss': 1.0922, 'grad_norm': 1.154162883758545, 'learning_rate': 2.9983927172082925e-05, 'epoch': 0.97}
+{'loss': 1.0458, 'grad_norm': 2.81882643699646, 'learning_rate': 2.946945149277443e-05, 'epoch': 1.93}
+{'loss': 0.9204, 'grad_norm': 30.926706314086914, 'learning_rate': 2.8285385153755532e-05, 'epoch': 2.89}
+100%|███████████████████████████████████████████████████████████████| 51/51 [00:02<00:00, 18.47it/s]
+{'eval_loss': 0.8373777866363525, 'eval_accuracy': 0.23039215686274508, 'eval_f1_macro': 0.21637979402595545, 'eval_f1_weighted': 0.14007074648598725, 'eval_profanity_accuracy': 0.4051724137931034, 'eval_profanity_f1': 0.3396712827989837, 'eval_f1_เย็ด': 0.3939393939393939, 'eval_f1_กู': 0.23529411764705882, 'eval_f1_มึง': 0.37681159420289856, 'eval_f1_เหี้ย': 0.3157894736842105, 'eval_f1_ควย': 0.0, 'eval_f1_สวะ': 0.11764705882352941, 'eval_f1_หี': 0.19047619047619047, 'eval_f1_แตด': 0.31746031746031744, 'eval_runtime': 2.8653, 'eval_samples_per_second': 72.244, 'eval_steps_per_second': 18.148, 'epoch': 2.89}
+{'loss': 0.7627, 'grad_norm': 2.026158571243286, 'learning_rate': 2.644091610331672e-05, 'epoch': 3.85}
+{'loss': 0.6559, 'grad_norm': 6.834526538848877, 'learning_rate': 2.404262394136533e-05, 'epoch': 4.81}
+{'loss': 0.5721, 'grad_norm': 4.882645130157471, 'learning_rate': 2.123669396355598e-05, 'epoch': 5.77}
+{'eval_loss': 0.5499356389045715, 'eval_accuracy': 0.35784313725490197, 'eval_f1_macro': 0.38787381677376487, 'eval_f1_weighted': 0.2514609195844853, 'eval_profanity_accuracy': 0.6293103448275862, 'eval_profanity_f1': 0.5990433431572797, 'eval_f1_เย็ด': 0.6486486486486487, 'eval_f1_กู': 0.46511627906976744, 'eval_f1_มึง': 0.5357142857142857, 'eval_f1_เหี้ย': 0.36363636363636365, 'eval_f1_ควย': 0.23529411764705882, 'eval_f1_สวะ': 0.3076923076923077, 'eval_f1_หี': 0.4864864864864865, 'eval_f1_แตด': 0.4482758620689655, 'eval_runtime': 2.879, 'eval_samples_per_second': 71.899, 'eval_steps_per_second': 18.062, 'epoch': 5.77}
+{'loss': 0.5817, 'grad_norm': 46.16392517089844, 'learning_rate': 1.810250009544895e-05, 'epoch': 6.73}
+{'loss': 0.5026, 'grad_norm': 2.449955940246582, 'learning_rate': 1.4818122776924742e-05, 'epoch': 7.7}
+{'loss': 0.4639, 'grad_norm': 2.0135326385498047, 'learning_rate': 1.1574736948340163e-05, 'epoch': 8.66}
+{'eval_loss': 0.4053208827972412, 'eval_accuracy': 0.4411764705882353, 'eval_f1_macro': 0.5059557320863446, 'eval_f1_weighted': 0.3239745898605362, 'eval_profanity_accuracy': 0.7758620689655172, 'eval_profanity_f1': 0.7747326559934319, 'eval_f1_เย็ด': 0.631578947368421, 'eval_f1_กู': 0.55, 'eval_f1_มึง': 0.5172413793103449, 'eval_f1_เหี้ย': 0.42857142857142855, 'eval_f1_ควย': 0.5714285714285714, 'eval_f1_สวะ': 0.6341463414634146, 'eval_f1_หี': 0.6428571428571429, 'eval_f1_แตด': 0.5777777777777777, 'eval_runtime': 2.7422, 'eval_samples_per_second': 75.487, 'eval_steps_per_second': 18.963, 'epoch': 8.66}
+{'loss': 0.4317, 'grad_norm': 2.12951397895813, 'learning_rate': 8.46409125180579e-06, 'epoch': 9.62}
+{'loss': 0.404, 'grad_norm': 2.1602282524108887, 'learning_rate': 5.669830824317992e-06, 'epoch': 10.58}
+{'loss': 0.3629, 'grad_norm': 1.2365862131118774, 'learning_rate': 3.327218086329196e-06, 'epoch': 11.54}
+{'eval_loss': 0.3472738564014435, 'eval_accuracy': 0.4264705882352941, 'eval_f1_macro': 0.47801023118226027, 'eval_f1_weighted': 0.3038924600795957, 'eval_profanity_accuracy': 0.75, 'eval_profanity_f1': 0.7474081876985688, 'eval_f1_เย็ด': 0.6829268292682927, 'eval_f1_กู': 0.4, 'eval_f1_มึง': 0.5454545454545454, 'eval_f1_เหี้ย': 0.48484848484848486, 'eval_f1_ควย': 0.43902439024390244, 'eval_f1_สวะ': 0.6341463414634146, 'eval_f1_หี': 0.5625, 'eval_f1_แตด': 0.5531914893617021, 'eval_runtime': 2.9099, 'eval_samples_per_second': 71.136, 'eval_steps_per_second': 17.87, 'epoch': 11.54}
+{'loss': 0.3745, 'grad_norm': 45.871891021728516, 'learning_rate': 1.5496524425641579e-06, 'epoch': 12.5}
+{'loss': 0.3649, 'grad_norm': 4.66392183303833, 'learning_rate': 4.231809304154849e-07, 'epoch': 13.46}
+{'loss': 0.3432, 'grad_norm': 2.757378101348877, 'learning_rate': 2.3329208054584384e-09, 'epoch': 14.43}
+{'eval_loss': 0.3440517485141754, 'eval_accuracy': 0.4362745098039216, 'eval_f1_macro': 0.49028978319758465, 'eval_f1_weighted': 0.31282217314757993, 'eval_profanity_accuracy': 0.7672413793103449, 'eval_profanity_f1': 0.7626054903958714, 'eval_f1_เย็ด': 0.7, 'eval_f1_กู': 0.42857142857142855, 'eval_f1_มึง': 0.5555555555555556, 'eval_f1_เหี้ย': 0.43243243243243246, 'eval_f1_ควย': 0.5238095238095238, 'eval_f1_สวะ': 0.6190476190476191, 'eval_f1_หี': 0.6, 'eval_f1_แตด': 0.5531914893617021, 'eval_runtime': 2.9066, 'eval_samples_per_second': 71.217, 'eval_steps_per_second': 17.89, 'epoch': 14.43}
+{'train_runtime': 521.7212, 'train_samples_per_second': 23.001, 'train_steps_per_second': 2.875, 'train_loss': 0.5919044647216797, 'epoch': 14.43}
+Evaluating configuration 8...
+Configuration 8 Results:
+  Val F1 Macro: 0.4903
+  Val Accuracy: 0.4363
+  Test F1 Macro: 0.5030
+  Test Accuracy: 0.4426
+  🧹 Cleaned up model files in ./models/quick_search_results\config_008
+✅ Config 8 completed: Val F1 = 0.4903
+
+============================================================
+QUICK SEARCH: Configuration 9/9
+Key params: LR=3e-05, BS=4, Attn_Drop=0.3, Gamma=4.0
+============================================================
+
+============================================================
+Training Configuration 9
+============================================================
+Config: {
+  "learning_rate": 3e-05,
+  "per_device_train_batch_size": 4,
+  "gradient_accumulation_steps": 2,
+  "num_train_epochs": 50,
+  "max_steps": 1500,
+  "weight_decay": 0.0,
+  "warmup_ratio": 0.05,
+  "attention_dropout": 0.3,
+  "hidden_dropout": 0.5,
+  "save_steps": 10000,
+  "eval_steps": 300,
+  "early_stopping_patience": 10,
+  "lr_scheduler_type": "cosine",
+  "fp16": true,
+  "gradient_checkpointing": false,
+  "gamma": 4.0,
+  "alpha": 0.8,
+  "save_strategy": "no",
+  "logging_steps": 100,
+  "save_total_limit": 1,
+  "load_best_model_at_end": false
+}
+Some weights of Wav2Vec2ForSequenceClassification were not initialized from the model checkpoint at airesearch/wav2vec2-large-xlsr-53-th and are newly initialized: ['classifier.bias', 'classifier.weight', 'projector.bias', 'projector.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Starting training for configuration 9...
+Using EarlyStoppingCallback without load_best_model_at_end=True. Once training is finished, the best model will not be loaded automatically.
+100%|███████████████████████████████████████████████████████████| 1500/1500 [12:36<00:00,  1.98it/s]
+{'loss': 1.3302, 'grad_norm': 2.841759443283081, 'learning_rate': 2.998542122917149e-05, 'epoch': 0.97}
+{'loss': 1.2476, 'grad_norm': 3.5330517292022705, 'learning_rate': 2.947813365416023e-05, 'epoch': 1.93}
+{'loss': 1.0668, 'grad_norm': inf, 'learning_rate': 2.8285385153755532e-05, 'epoch': 2.89}
+100%|███████████████████████████████████████████████████████████████| 51/51 [00:02<00:00, 19.49it/s]
+{'eval_loss': 0.9778436422348022, 'eval_accuracy': 0.23039215686274508, 'eval_f1_macro': 0.2148221109118239, 'eval_f1_weighted': 0.13906863004057893, 'eval_profanity_accuracy': 0.4051724137931034, 'eval_profanity_f1': 0.3307086754505403, 'eval_f1_เย็ด': 0.3611111111111111, 'eval_f1_กู': 0.1935483870967742, 'eval_f1_มึง': 0.4230769230769231, 'eval_f1_เหี้ย': 0.35294117647058826, 'eval_f1_ควย': 0.0, 'eval_f1_สวะ': 0.17647058823529413, 'eval_f1_หี': 0.10526315789473684, 'eval_f1_แตด': 0.32098765432098764, 'eval_runtime': 2.7784, 'eval_samples_per_second': 74.503, 'eval_steps_per_second': 18.716, 'epoch': 2.89}
+{'loss': 0.8174, 'grad_norm': 2.7779541015625, 'learning_rate': 2.6462274913117666e-05, 'epoch': 3.85}
+{'loss': 0.6763, 'grad_norm': 9.276771545410156, 'learning_rate': 2.4068986722935625e-05, 'epoch': 4.81}
+{'loss': 0.5677, 'grad_norm': 4.487947463989258, 'learning_rate': 2.126675425486383e-05, 'epoch': 5.77}
+{'eval_loss': 0.5437315106391907, 'eval_accuracy': 0.3431372549019608, 'eval_f1_macro': 0.3839674258614751, 'eval_f1_weighted': 0.2474535635403902, 'eval_profanity_accuracy': 0.603448275862069, 'eval_profanity_f1': 0.5852542413726625, 'eval_f1_เย็ด': 0.5098039215686274, 'eval_f1_กู': 0.3684210526315789, 'eval_f1_มึง': 0.5283018867924528, 'eval_f1_เหี้ย': 0.3225806451612903, 'eval_f1_ควย': 0.4444444444444444, 'eval_f1_สวะ': 0.36363636363636365, 'eval_f1_หี': 0.5185185185185185, 'eval_f1_แตด': 0.4, 'eval_runtime': 2.8484, 'eval_samples_per_second': 72.672, 'eval_steps_per_second': 18.256, 'epoch': 5.77}
+{'loss': 0.5918, 'grad_norm': 9.295713424682617, 'learning_rate': 1.8134846839599193e-05, 'epoch': 6.73}
+{'loss': 0.486, 'grad_norm': 3.18585467338562, 'learning_rate': 1.4851190157480054e-05, 'epoch': 7.7}
+{'loss': 0.4413, 'grad_norm': 1.2741692066192627, 'learning_rate': 1.16069409129129e-05, 'epoch': 8.66}
+{'eval_loss': 0.3963388204574585, 'eval_accuracy': 0.4019607843137255, 'eval_f1_macro': 0.44543502205064783, 'eval_f1_weighted': 0.2798340690915495, 'eval_profanity_accuracy': 0.7068965517241379, 'eval_profanity_f1': 0.6908192453001298, 'eval_f1_เย็ด': 0.5853658536585366, 'eval_f1_กู': 0.18181818181818182, 'eval_f1_มึง': 0.5263157894736842, 'eval_f1_เหี้ย': 0.4186046511627907, 'eval_f1_ควย': 0.425531914893617, 'eval_f1_สวะ': 0.7027027027027027, 'eval_f1_หี': 0.6153846153846154, 'eval_f1_แตด': 0.5531914893617021, 'eval_runtime': 8.3127, 'eval_samples_per_second': 24.902, 'eval_steps_per_second': 6.256, 'epoch': 8.66}
+{'loss': 0.4057, 'grad_norm': 2.853241443634033, 'learning_rate': 8.493872172251407e-06, 'epoch': 9.62}
+{'loss': 0.3878, 'grad_norm': 2.1405246257781982, 'learning_rate': 5.695747088629556e-06, 'epoch': 10.58}
+{'loss': 0.3234, 'grad_norm': 1.4364981651306152, 'learning_rate': 3.3480151598164597e-06, 'epoch': 11.54}
+{'eval_loss': 0.32509028911590576, 'eval_accuracy': 0.4264705882352941, 'eval_f1_macro': 0.47391026936906794, 'eval_f1_weighted': 0.2986282601531733, 'eval_profanity_accuracy': 0.75, 'eval_profanity_f1': 0.7394065318293994, 'eval_f1_เย็ด': 0.6829268292682927, 'eval_f1_กู': 0.2608695652173913, 'eval_f1_มึง': 0.5454545454545454, 'eval_f1_เหี้ย': 0.47058823529411764, 'eval_f1_ควย': 0.43137254901960786, 'eval_f1_สวะ': 0.7027027027027027, 'eval_f1_หี': 0.6060606060606061, 'eval_f1_แตด': 0.5652173913043478, 'eval_runtime': 7.9979, 'eval_samples_per_second': 25.882, 'eval_steps_per_second': 6.502, 'epoch': 11.54}
+{'loss': 0.3425, 'grad_norm': 25.764663696289062, 'learning_rate': 1.5643235964088065e-06, 'epoch': 12.5}
+{'loss': 0.3362, 'grad_norm': 6.198878288269043, 'learning_rate': 4.3101597462938345e-07, 'epoch': 13.46}
+{'loss': 0.3148, 'grad_norm': 2.6198251247406006, 'learning_rate': 2.9525825641085747e-09, 'epoch': 14.43}
+{'eval_loss': 0.3232836127281189, 'eval_accuracy': 0.4362745098039216, 'eval_f1_macro': 0.4896719518005994, 'eval_f1_weighted': 0.31009774723862477, 'eval_profanity_accuracy': 0.7672413793103449, 'eval_profanity_f1': 0.7642518026700935, 'eval_f1_เย็ด': 0.7, 'eval_f1_กู': 0.3333333333333333, 'eval_f1_มึง': 0.5882352941176471, 'eval_f1_เหี้ย': 0.5, 'eval_f1_ควย': 0.4230769230769231, 'eval_f1_สวะ': 0.6842105263157895, 'eval_f1_หี': 0.625, 'eval_f1_แตด': 0.5531914893617021, 'eval_runtime': 7.355, 'eval_samples_per_second': 28.144, 'eval_steps_per_second': 7.07, 'epoch': 14.43}
+{'train_runtime': 756.7842, 'train_samples_per_second': 15.857, 'train_steps_per_second': 1.982, 'train_loss': 0.6223719673156738, 'epoch': 14.43}
+Evaluating configuration 9...
+Configuration 9 Results:
+  Val F1 Macro: 0.4897
+  Val Accuracy: 0.4363
+  Test F1 Macro: 0.4648
+  Test Accuracy: 0.4098
+  🧹 Cleaned up model files in ./models/quick_search_results\config_009
+✅ Config 9 completed: Val F1 = 0.4897
+
+============================================================
+GRID SEARCH ANALYSIS
+============================================================
+Successful runs: 9
+Failed runs: 0
+
+TOP 10 CONFIGURATIONS:
+----------------------------------------------------------------------------------------------------
+Rank  1: Config   3 | Val F1: 0.5777 | Val Acc: 0.5049 | Test F1: 0.5510 | Test Acc: 0.4863
+Rank  2: Config   6 | Val F1: 0.5764 | Val Acc: 0.5049 | Test F1: 0.5587 | Test Acc: 0.4918
+Rank  3: Config   8 | Val F1: 0.4903 | Val Acc: 0.4363 | Test F1: 0.5030 | Test Acc: 0.4426
+Rank  4: Config   9 | Val F1: 0.4897 | Val Acc: 0.4363 | Test F1: 0.4648 | Test Acc: 0.4098
+Rank  5: Config   5 | Val F1: 0.4870 | Val Acc: 0.4350 | Test F1: 0.4608 | Test Acc: 0.4044
+Rank  6: Config   2 | Val F1: 0.4824 | Val Acc: 0.4314 | Test F1: 0.4812 | Test Acc: 0.4262
+Rank  7: Config   4 | Val F1: 0.4824 | Val Acc: 0.4314 | Test F1: 0.4812 | Test Acc: 0.4262
+Rank  8: Config   1 | Val F1: 0.4166 | Val Acc: 0.3725 | Test F1: 0.3489 | Test Acc: 0.3224
+Rank  9: Config   7 | Val F1: 0.2498 | Val Acc: 0.2500 | Test F1: 0.2301 | Test Acc: 0.2350
+
+============================================================
+BEST CONFIGURATION DETAILS:
+============================================================
+Configuration ID: 3
+Validation F1 Macro: 0.5777
+Validation Accuracy: 0.5049
+Test F1 Macro: 0.5510
+Test Accuracy: 0.4863
+Training Time: 589.42 seconds
+
+Hyperparameters:
+  learning_rate: 5e-05
+  per_device_train_batch_size: 4
+  gradient_accumulation_steps: 2
+  num_train_epochs: 50
+  max_steps: 1500
+  weight_decay: 0.0
+  warmup_ratio: 0.05
+  attention_dropout: 0.3
+  hidden_dropout: 0.5
+  save_steps: 10000
+  eval_steps: 300
+  early_stopping_patience: 10
+  lr_scheduler_type: cosine
+  fp16: True
+  gradient_checkpointing: False
+  gamma: 3.0
+  alpha: 0.75
+  save_strategy: no
+  logging_steps: 100
+  save_total_limit: 1
+  load_best_model_at_end: False
+Analysis plots saved to ./models/quick_search_results\quick_search_20250807_204726
+
+============================================================
+HYPERPARAMETER INSIGHTS:
+============================================================
+
+learning_rate:
+  Best value: 5e-05 (F1: 0.5777 ± 0.0000)
+  Worst value: 2e-05 (F1: 0.4166 ± 0.0000)
+  Improvement: 0.1611
+
+per_device_train_batch_size:
+  Best value: 8 (F1: 0.4870 ± 0.0000)
+  Worst value: 4 (F1: 0.4707 ± 0.0971)
+  Improvement: 0.0163
+
+gradient_accumulation_steps:
+  Best value: 1 (F1: 0.4870 ± 0.0000)
+  Worst value: 2 (F1: 0.4707 ± 0.0971)
+  Improvement: 0.0163
+
+attention_dropout:
+  Best value: 0.2 (F1: 0.5764 ± 0.0000)
+  Worst value: 0.4 (F1: 0.2498 ± 0.0000)
+  Improvement: 0.3266
+
+hidden_dropout:
+  Best value: 0.4 (F1: 0.5764 ± 0.0000)
+  Worst value: 0.6 (F1: 0.2498 ± 0.0000)
+  Improvement: 0.3266
+
+gamma:
+  Best value: 2.0 (F1: 0.4903 ± 0.0000)
+  Worst value: 3.0 (F1: 0.4675 ± 0.1034)
+  Improvement: 0.0228
+
+alpha:
+  Best value: 0.6 (F1: 0.4903 ± 0.0000)
+  Worst value: 0.75 (F1: 0.4675 ± 0.1034)
+  Improvement: 0.0228
+
+============================================================
+QUICK SEARCH SUMMARY:
+============================================================
+🏆 Best Validation F1: 0.5777
+   Learning Rate: 5e-05
+   Batch Size: 4
+   Attention Dropout: 0.3
+   Gamma: 3.0
+
+🎯 Best Test F1: 0.5587
+   Learning Rate: 3e-05
+   Batch Size: 4
+   Attention Dropout: 0.2
+   Gamma: 3.0
+
+📊 PARAMETER INSIGHTS:
+Learning Rate Performance:
+  2e-05: 0.4166 avg F1 (1 configs)
+  3e-05: 0.4654 avg F1 (7 configs)
+  5e-05: 0.5777 avg F1 (1 configs)
+Batch Size Performance:
+  4: 0.4707 avg F1 (8 configs)
+  8: 0.4870 avg F1 (1 configs)
+
+============================================================
+QUICK GRID SEARCH COMPLETED!
+============================================================
+Results saved in: ./models/quick_search_results\quick_search_20250807_204726
+Best configuration: Val F1 = 0.5777
+📄 Best config for full training saved to: ./models/quick_search_results\quick_search_20250807_204726\best_config_for_main_training.json
+You can now use these hyperparameters for your full training run!

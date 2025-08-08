@@ -1,0 +1,94 @@
+  2%|█▌                                                                            | 58/2900 [01:29<30:28,  1.55it/s]Traceback (most recent call last):
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 890, in <module>
+{'eval_loss': 2.201751947402954, 'eval_f1': 0.04385991045912231, 'eval_runtime': 3.2391, 'eval_samples_per_second': 70.698, 'eval_steps_per_second': 4.631, 'epoch': 1.0}
+{'loss': 2.1692, 'grad_norm': 2.2487664222717285, 'learning_rate': 1.8400000000000002e-06, 'epoch': 1.74}
+    main()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 884, in main
+    model, feature_extractor = trainer.train_model(train_df, val_df)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 542, in train_model
+    return self.train_wav2vec2(train_df, val_df, num_classes)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 597, in train_wav2vec2
+    trainer.train()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2656, in _inner_training_loop
+    self._maybe_log_save_evaluate(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3095, in _maybe_log_save_evaluate
+    metrics = self._evaluate(trial, ignore_keys_for_eval)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3044, in _evaluate
+    metrics = self.evaluate(ignore_keys=ignore_keys_for_eval)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 4173, in evaluate
+    output = eval_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 4358, in evaluation_loop
+    for step, inputs in enumerate(dataloader):
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\data_loader.py", line 577, in __iter__
+    next_batch = next(dataloader_iter)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\utils\data\dataloader.py", line 733, in __next__
+    data = self._next_data()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\utils\data\dataloader.py", line 789, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\utils\data\_utils\fetch.py", line 52, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\utils\data\_utils\fetch.py", line 52, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 234, in __getitem__
+    audio = self.load_and_preprocess_audio(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 129, in load_and_preprocess_audio
+    audio, sr = torchaudio.load(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torchaudio\_backend\utils.py", line 205, in load
+    return backend.load(uri, frame_offset, num_frames, normalize, channels_first, format, buffer_size)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torchaudio\_backend\soundfile.py", line 27, in load
+    return soundfile_backend.load(uri, frame_offset, num_frames, normalize, channels_first, format)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torchaudio\_backend\soundfile_backend.py", line 221, in load
+    with soundfile.SoundFile(filepath, "r") as file_:
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\soundfile.py", line 690, in __init__
+    self._file = self._open(file, mode_int, closefd)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\soundfile.py", line 1254, in _open
+    file_ptr = openfunction(file, mode_int, self._info)
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 890, in <module>
+    main()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 884, in main
+    model, feature_extractor = trainer.train_model(train_df, val_df)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 542, in train_model
+    return self.train_wav2vec2(train_df, val_df, num_classes)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 597, in train_wav2vec2
+    trainer.train()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2656, in _inner_training_loop
+    self._maybe_log_save_evaluate(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3095, in _maybe_log_save_evaluate
+    metrics = self._evaluate(trial, ignore_keys_for_eval)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3044, in _evaluate
+    metrics = self.evaluate(ignore_keys=ignore_keys_for_eval)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 4173, in evaluate
+    output = eval_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 4358, in evaluation_loop
+    for step, inputs in enumerate(dataloader):
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\data_loader.py", line 577, in __iter__
+    next_batch = next(dataloader_iter)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\utils\data\dataloader.py", line 733, in __next__
+    data = self._next_data()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\utils\data\dataloader.py", line 789, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\utils\data\_utils\fetch.py", line 52, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\utils\data\_utils\fetch.py", line 52, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 234, in __getitem__
+    audio = self.load_and_preprocess_audio(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 129, in load_and_preprocess_audio
+    audio, sr = torchaudio.load(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torchaudio\_backend\utils.py", line 205, in load
+    return backend.load(uri, frame_offset, num_frames, normalize, channels_first, format, buffer_size)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torchaudio\_backend\soundfile.py", line 27, in load
+    return soundfile_backend.load(uri, frame_offset, num_frames, normalize, channels_first, format)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torchaudio\_backend\soundfile_backend.py", line 221, in load
+    with soundfile.SoundFile(filepath, "r") as file_:
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\soundfile.py", line 690, in __init__
+    self._file = self._open(file, mode_int, closefd)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\soundfile.py", line 1254, in _open
+    file_ptr = openfunction(file, mode_int, self._info)
+KeyboardInterrupt

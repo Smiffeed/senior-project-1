@@ -188,13 +188,13 @@ class ProfanityPredictor:
                     'start_time': window_data['start_time'],
                     'end_time': window_data['end_time'],
                     'prediction': prediction,
-                    'predicted_class': self.class_names[prediction],
+                    'predicted_class': CLASS_NAMES[prediction],
                     'confidence': confidence
                 }
                 
                 if return_confidence:
                     window_result['all_confidences'] = {
-                        self.class_names[j]: prob.item() 
+                        CLASS_NAMES[j]: prob.item() 
                         for j, prob in enumerate(probabilities[0])
                     }
                 
@@ -210,7 +210,7 @@ class ProfanityPredictor:
         
         final_result = {
             'overall_prediction': overall_prediction,
-            'overall_class': self.class_names[overall_prediction],
+            'overall_class': CLASS_NAMES[overall_prediction],
             'overall_confidence': overall_confidence,
             'total_windows': len(results),
             'profanity_windows': profanity_windows,
@@ -251,14 +251,14 @@ class ProfanityPredictor:
                 'start_time': window_data['start_time'],
                 'end_time': window_data['end_time'],
                 'prediction': prediction,
-                'predicted_class': self.class_names[prediction],
+                'predicted_class': CLASS_NAMES[prediction],
                 'confidence': confidence,
                 'uncertainty': uncertainty
             }
             
             if return_confidence:
                 window_result['all_confidences'] = {
-                    self.class_names[j]: prob.item() 
+                    CLASS_NAMES[j]: prob.item() 
                     for j, prob in enumerate(probabilities[0])
                 }
             
@@ -275,7 +275,7 @@ class ProfanityPredictor:
         
         final_result = {
             'overall_prediction': overall_prediction,
-            'overall_class': self.class_names[overall_prediction],
+            'overall_class': CLASS_NAMES[overall_prediction],
             'overall_confidence': overall_confidence,
             'overall_uncertainty': overall_uncertainty,
             'total_windows': len(results),

@@ -1,0 +1,151 @@
+  0%|                                                   | 0/5000 [00:00<?, ?it/s]
+Error training fold 1: 'dict' object has no attribute 'logits'
+
+==================================================
+TRAINING FOLD 2/5
+==================================================
+Fold 2 - Train: 779, Val: 195
+
+Class weights:
+none: 0.2599
+เย็ด: 2.0129
+กู: 1.3316
+มึง: 1.1697
+เหี้ย: 1.7664
+ควย: 1.7664
+สวะ: 1.5185
+หี: 1.5456
+แตด: 1.6331
+
+Training set class distribution:
+none: 333
+เย็ด: 43
+กู: 65
+มึง: 74
+เหี้ย: 49
+ควย: 49
+สวะ: 57
+หี: 56
+แตด: 53
+C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\configuration_utils.py:312: UserWarning: Passing `gradient_checkpointing` to a config initialization is deprecated and will be removed in v5 Transformers. Using `model.gradient_checkpointing_enable()` instead, or if you are using the `Trainer` API, pass `gradient_checkpointing=True` in your `TrainingArguments`.
+  warnings.warn(
+Some weights of CustomWav2Vec2ForSequenceClassification were not initialized from the model checkpoint at airesearch/wav2vec2-large-xlsr-53-th and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+  0%|                                                   | 0/5000 [00:00<?, ?it/s]
+Error training fold 2: 'dict' object has no attribute 'logits'
+
+==================================================
+TRAINING FOLD 3/5
+==================================================
+Fold 3 - Train: 779, Val: 195
+
+Class weights:
+none: 0.2748
+เย็ด: 1.5456
+กู: 1.2191
+มึง: 1.2191
+เหี้ย: 1.6972
+ควย: 1.6029
+สวะ: 1.6645
+หี: 1.6645
+แตด: 1.5185
+
+Training set class distribution:
+none: 315
+เย็ด: 56
+กู: 71
+มึง: 71
+เหี้ย: 51
+ควย: 54
+สวะ: 52
+หี: 52
+แตด: 57
+C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\configuration_utils.py:312: UserWarning: Passing `gradient_checkpointing` to a config initialization is deprecated and will be removed in v5 Transformers. Using `model.gradient_checkpointing_enable()` instead, or if you are using the `Trainer` API, pass `gradient_checkpointing=True` in your `TrainingArguments`.
+  warnings.warn(
+Some weights of CustomWav2Vec2ForSequenceClassification were not initialized from the model checkpoint at airesearch/wav2vec2-large-xlsr-53-th and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+  0%|                                                   | 0/5000 [00:00<?, ?it/s]
+Error training fold 3: 'dict' object has no attribute 'logits'
+
+==================================================
+TRAINING FOLD 4/5
+==================================================
+Fold 4 - Train: 779, Val: 195
+
+Class weights:
+none: 0.2607
+เย็ด: 1.6331
+กู: 1.2022
+มึง: 1.3739
+เหี้ย: 1.6972
+ควย: 1.7664
+สวะ: 1.6331
+หี: 1.5456
+แตด: 1.7311
+
+Training set class distribution:
+none: 332
+เย็ด: 53
+กู: 72
+มึง: 63
+เหี้ย: 51
+ควย: 49
+สวะ: 53
+หี: 56
+แตด: 50
+C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\configuration_utils.py:312: UserWarning: Passing `gradient_checkpointing` to a config initialization is deprecated and will be removed in v5 Transformers. Using `model.gradient_checkpointing_enable()` instead, or if you are using the `Trainer` API, pass `gradient_checkpointing=True` in your `TrainingArguments`.
+  warnings.warn(
+Some weights of CustomWav2Vec2ForSequenceClassification were not initialized from the model checkpoint at airesearch/wav2vec2-large-xlsr-53-th and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+  0%|                                                   | 0/5000 [00:00<?, ?it/s]
+Error training fold 4: 'dict' object has no attribute 'logits'
+
+==================================================
+TRAINING FOLD 5/5
+==================================================
+Fold 5 - Train: 780, Val: 194
+
+Class weights:
+none: 0.2549
+เย็ด: 1.6049
+กู: 1.3131
+มึง: 1.4689
+เหี้ย: 1.6667
+ควย: 1.6993
+สวะ: 1.5758
+หี: 1.6667
+แตด: 1.6993
+
+Training set class distribution:
+none: 340
+เย็ด: 54
+กู: 66
+มึง: 59
+เหี้ย: 52
+ควย: 51
+สวะ: 55
+หี: 52
+แตด: 51
+C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\configuration_utils.py:312: UserWarning: Passing `gradient_checkpointing` to a config initialization is deprecated and will be removed in v5 Transformers. Using `model.gradient_checkpointing_enable()` instead, or if you are using the `Trainer` API, pass `gradient_checkpointing=True` in your `TrainingArguments`.
+  warnings.warn(
+Some weights of CustomWav2Vec2ForSequenceClassification were not initialized from the model checkpoint at airesearch/wav2vec2-large-xlsr-53-th and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+  0%|                                                   | 0/5000 [00:00<?, ?it/s]
+Error training fold 5: 'dict' object has no attribute 'logits'
+
+==================================================
+CROSS-VALIDATION SUMMARY
+==================================================
+Fold 1: FAILED - 'dict' object has no attribute 'logits'
+Fold 2: FAILED - 'dict' object has no attribute 'logits'
+Fold 3: FAILED - 'dict' object has no attribute 'logits'
+Fold 4: FAILED - 'dict' object has no attribute 'logits'
+Fold 5: FAILED - 'dict' object has no attribute 'logits'
+
+Best fold: 1
+Best model path: ./models/audio_train_enhanced_fold_1
+
+==================================================
+FINAL TEST SET EVALUATION
+==================================================
+Error evaluating best model: Error no file named pytorch_model.bin, model.safetensors, tf_model.h5, model.ckpt.index or flax_model.msgpack found in directory ./models/audio_train_enhanced_fold_1.

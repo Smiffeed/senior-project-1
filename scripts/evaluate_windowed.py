@@ -156,7 +156,7 @@ def main():
     setup_thai_font()
     
     # Load the model
-    model_path = './models/CW_ham'  # Update this path to your best model
+    model_path = './models/cw_ham_v2'  # Update this path to your best model
     model = Wav2Vec2ForSequenceClassification.from_pretrained(model_path)
     feature_extractor = Wav2Vec2FeatureExtractor.from_pretrained(model_path)
     
@@ -166,7 +166,7 @@ def main():
     model.eval()
     
     # Load the windowed eval data
-    df = pd.read_csv('./csv/eval_windowed.csv')
+    df = pd.read_csv('./csv/eval_windowed_0.25s.csv')
     
     # Create results DataFrame
     results = []
@@ -277,7 +277,7 @@ def main():
     recall = sensitivity  # Same as sensitivity
     f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
     
-    print("\n=== Binary Profanity Detection Metrics ===")
+    print("\n=== Binary Profanity Detection Metrics (Window-level) ===")
     print(f"Balanced Accuracy: {balanced_accuracy:.4f}")
     print(f"Precision: {precision:.4f}")
     print(f"Recall: {recall:.4f}")
@@ -295,6 +295,93 @@ def main():
     print("\nClass Distribution:")
     print(f"Profanity samples: {total_profanity} ({total_profanity/len(all_results):.2%})")
     print(f"None samples: {total_none} ({total_none/len(all_results):.2%})")
+    
+    # Add normalized word-level evaluation
+    print("\n" + "="*60)
+    print("NORMALIZED WORD-LEVEL EVALUATION")
+    print("="*60)
+    
+    # Group consecutive profanity predictions into word-level detections
+    def normalize_to_word_level(df):
+        word_detections = []
+        
+        for file_path in df['file_path'].unique():
+            file_data = df[df['file_path'] == file_path].sort_values('start_time')
+            
+            current_detection = None
+            for _, row in file_data.iterrows():
+                if row['predicted_label'] != 'none':
+                    if (current_detection is None or 
+                        row['predicted_label'] != current_detection['predicted_label'] or
+                        row['start_time'] > current_detection['end_time'] + 0.1):  # Gap > 0.1s = new word
+                        # Save previous detection
+                        if current_detection:
+                            word_detections.append(current_detection)
+                        # Start new detection
+                        current_detection = {
+                            'file_path': file_path,
+                            'start_time': row['start_time'],
+                            'end_time': row['end_time'],
+                            'predicted_label': row['predicted_label'],
+                            'confidence': row['confidence']
+                        }
+                    else:
+                        # Extend current detection
+                        current_detection['end_time'] = row['end_time']
+                        current_detection['confidence'] = max(current_detection['confidence'], row['confidence'])
+            
+            # Don't forget the last detection
+            if current_detection:
+                word_detections.append(current_detection)
+        
+        return pd.DataFrame(word_detections)
+    
+    # Get word-level predictions
+    word_predictions = normalize_to_word_level(all_results[all_results['predicted_label'] != 'none'])
+    
+    # Get word-level ground truth (from original data, need to group true profanity)
+    true_words = normalize_to_word_level(all_results[all_results['true_label'] != 'none'])
+    
+    # Calculate word-level metrics
+    total_true_words = len(true_words)
+    total_pred_words = len(word_predictions)
+    
+    # Count correct word-level detections (overlap-based matching)
+    correct_word_detections = 0
+    for _, pred in word_predictions.iterrows():
+        # Check if this prediction overlaps with any true word
+        overlapping_true = true_words[
+            (true_words['file_path'] == pred['file_path']) &
+            (true_words['start_time'] < pred['end_time']) &
+            (true_words['end_time'] > pred['start_time'])
+        ]
+        
+        # Check if labels match
+        if len(overlapping_true) > 0:
+            if any(overlapping_true['predicted_label'] == pred['predicted_label']):
+                correct_word_detections += 1
+    
+    # Word-level metrics
+    word_precision = correct_word_detections / total_pred_words if total_pred_words > 0 else 0
+    word_recall = correct_word_detections / total_true_words if total_true_words > 0 else 0
+    word_f1 = 2 * (word_precision * word_recall) / (word_precision + word_recall) if (word_precision + word_recall) > 0 else 0
+    
+    print(f"\n=== Word-Level Detection Metrics ===")
+    print(f"Total True Words: {total_true_words}")
+    print(f"Total Predicted Words: {total_pred_words}")
+    print(f"Correct Word Detections: {correct_word_detections}")
+    print(f"Word-Level Precision: {word_precision:.4f}")
+    print(f"Word-Level Recall: {word_recall:.4f}")
+    print(f"Word-Level F1-Score: {word_f1:.4f}")
+    
+    print(f"\n=== Comparison: Window vs Word Level ===")
+    print(f"Window-level F1: {f1:.4f}")
+    print(f"Word-level F1: {word_f1:.4f}")
+    print(f"Difference: {f1 - word_f1:.4f}")
+    
+    if f1 > word_f1:
+        print("⚠️  Window-level metrics are inflated due to overlapping windows")
+        print("📊 Word-level metrics provide more realistic performance assessment")
     
     # Ensure plots directory exists
     os.makedirs('./plots', exist_ok=True)

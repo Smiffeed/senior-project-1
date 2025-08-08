@@ -1,0 +1,50 @@
+  3%|▉                           | 500/14700 [02:54<1:15:19,  3.14it/s]Traceback (most recent call last):
+{'loss': 2.1586, 'grad_norm': 13.71047592163086, 'learning_rate': 9.183673469387755e-07, 'epoch': 0.6}
+{'loss': 2.1158, 'grad_norm': 9.643158912658691, 'learning_rate': 1.9183673469387756e-06, 'epoch': 1.2}
+{'loss': 1.9865, 'grad_norm': 12.97372817993164, 'learning_rate': 2.9183673469387757e-06, 'epoch': 1.81}
+{'loss': 1.8871, 'grad_norm': 11.300164222717285, 'learning_rate': 3.938775510204082e-06, 'epoch': 2.41}
+{'loss': 1.8121, 'grad_norm': 12.500205993652344, 'learning_rate': 4.959183673469388e-06, 'epoch': 3.01}
+{'loss': 1.7517, 'grad_norm': 6.066871643066406, 'learning_rate': 5.9795918367346934e-06, 'epoch': 3.61}
+{'loss': 1.7069, 'grad_norm': 9.053522109985352, 'learning_rate': 7e-06, 'epoch': 4.22}
+{'loss': 1.6531, 'grad_norm': 14.520086288452148, 'learning_rate': 8.020408163265306e-06, 'epoch': 4.82}
+{'loss': 1.5187, 'grad_norm': 36.53255844116211, 'learning_rate': 9.040816326530614e-06, 'epoch': 5.42}
+{'loss': 1.5327, 'grad_norm': 11.861828804016113, 'learning_rate': 1.0040816326530613e-05, 'epoch': 6.02}
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW_max_pooling.py", line 648, in <module>
+    train_wav2vec2_model(csv_file, model_name, output_dir_fold, pooling_mode=mode)
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW_max_pooling.py", line 383, in train_wav2vec2_model
+    trainer.train()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2622, in _inner_training_loop
+    self._maybe_log_save_evaluate(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3095, in _maybe_log_save_evaluate
+    metrics = self._evaluate(trial, ignore_keys_for_eval)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3044, in _evaluate
+    metrics = self.evaluate(ignore_keys=ignore_keys_for_eval)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 4173, in evaluate
+    output = eval_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 4368, in evaluation_loop
+    losses, logits, labels = self.prediction_step(model, inputs, prediction_loss_only, ignore_keys=ignore_keys)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 4584, in prediction_step
+    loss, outputs = self.compute_loss(model, inputs, return_outputs=True)
+ValueError: too many values to unpack (expected 2)
+Traceback (most recent call last):
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW_max_pooling.py", line 648, in <module>
+    train_wav2vec2_model(csv_file, model_name, output_dir_fold, pooling_mode=mode)
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW_max_pooling.py", line 383, in train_wav2vec2_model
+    trainer.train()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2622, in _inner_training_loop
+    self._maybe_log_save_evaluate(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3095, in _maybe_log_save_evaluate
+    metrics = self._evaluate(trial, ignore_keys_for_eval)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3044, in _evaluate
+    metrics = self.evaluate(ignore_keys=ignore_keys_for_eval)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 4173, in evaluate
+    output = eval_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 4368, in evaluation_loop
+    losses, logits, labels = self.prediction_step(model, inputs, prediction_loss_only, ignore_keys=ignore_keys)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 4584, in prediction_step
+    loss, outputs = self.compute_loss(model, inputs, return_outputs=True)
+ValueError: too many values to unpack (expected 2)

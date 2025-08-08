@@ -1,0 +1,58 @@
+  3%|█▌                                                          | 117/4500 [11:19<1:43:46,  1.42s/it]Traceback (most recent call last):
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 891, in <module>
+{'eval_loss': 2.1198081970214844, 'eval_f1': 0.4036770583533173, 'eval_runtime': 22.1956, 'eval_samples_per_second': 8.11, 'eval_steps_per_second': 0.541, 'epoch': 1.0}
+{'loss': 2.1531, 'grad_norm': 3.7047977447509766, 'learning_rate': 1.9600000000000003e-06, 'epoch': 1.11}
+{'eval_loss': 2.0242185592651367, 'eval_f1': 0.4033610122578094, 'eval_runtime': 19.3064, 'eval_samples_per_second': 9.323, 'eval_steps_per_second': 0.622, 'epoch': 2.0}
+{'loss': 2.076, 'grad_norm': 3.5926644802093506, 'learning_rate': 3.96e-06, 'epoch': 2.22}
+    main()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 885, in main
+    model, feature_extractor = trainer.train_model(train_df, val_df)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 543, in train_model
+    return self.train_wav2vec2(train_df, val_df, num_classes)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 598, in train_wav2vec2
+    trainer.train()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2555, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3791, in training_step
+    self.accelerator.backward(loss, **kwargs)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\accelerator.py", line 2473, in backward
+    loss.backward(**kwargs)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\_tensor.py", line 648, in backward
+    torch.autograd.backward(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\autograd\__init__.py", line 353, in backward
+    _engine_run_backward(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\autograd\graph.py", line 824, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 891, in <module>
+    main()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 885, in main
+    model, feature_extractor = trainer.train_model(train_df, val_df)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 543, in train_model
+    return self.train_wav2vec2(train_df, val_df, num_classes)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 598, in train_wav2vec2
+    trainer.train()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2555, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3791, in training_step
+    self.accelerator.backward(loss, **kwargs)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\accelerator.py", line 2473, in backward
+    loss.backward(**kwargs)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\_tensor.py", line 648, in backward
+    torch.autograd.backward(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\autograd\__init__.py", line 353, in backward
+    _engine_run_backward(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\autograd\graph.py", line 824, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt
+Error in atexit._run_exitfuncs:
+Traceback (most recent call last):
+  File "C:\ProgramData\anaconda3\envs\ai\lib\threading.py", line 1080, in _wait_for_tstate_lock
+    if lock.acquire(block, timeout):
+KeyboardInterrupt
+[0m

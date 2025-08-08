@@ -170,12 +170,12 @@ def advanced_preprocess_audio(file_path, start_time, end_time):
         print(f"Error in advanced preprocessing {file_path} ({start_time}-{end_time}): {e}")
         return None
 
-def evaluate_window(model, feature_extractor, file_path, start_time, end_time):
+def evaluate_window(model, feature_extractor, file_path, start_time, end_time, threshold=0.5):
     try:
         # Process audio with advanced preprocessing matching training
         audio = advanced_preprocess_audio(file_path, start_time, end_time)
         if audio is None:
-            return "error", 0.0
+            return "error", 0.0, 0.0
         
         # Apply feature extractor
         inputs = feature_extractor(
@@ -194,14 +194,27 @@ def evaluate_window(model, feature_extractor, file_path, start_time, end_time):
         with torch.no_grad():
             logits = model(**inputs).logits
             predictions = torch.softmax(logits, dim=-1)
-            predicted_label_id = torch.argmax(predictions, dim=-1).item()
-            confidence = predictions[0][predicted_label_id].item()
             
-        return rev_label_map[predicted_label_id], confidence
+            # Calculate profanity probability (sum of all non-'none' classes)
+            profanity_prob = predictions[0][1:].sum().item()  # Skip index 0 which is 'none'
+            
+            # Apply threshold for binary classification
+            if profanity_prob >= threshold:
+                # Find the most likely profanity class
+                profanity_predictions = predictions[0][1:]  # Exclude 'none'
+                predicted_profanity_id = torch.argmax(profanity_predictions).item() + 1  # +1 to account for skipping 'none'
+                predicted_label = rev_label_map[predicted_profanity_id]
+                confidence = predictions[0][predicted_profanity_id].item()
+            else:
+                # Classify as 'none'
+                predicted_label = 'none'
+                confidence = predictions[0][0].item()  # Confidence for 'none'
+            
+        return predicted_label, confidence, profanity_prob
         
     except Exception as e:
         print(f"Error processing window {file_path} ({start_time}-{end_time}): {str(e)}")
-        return "error", 0.0
+        return "error", 0.0, 0.0
 
 def plot_confusion_matrix(true_labels, pred_labels, labels):
     # Setup Thai font before plotting
@@ -238,12 +251,108 @@ def plot_confusion_matrix(true_labels, pred_labels, labels):
         print(f"Error creating confusion matrix: {e}")
         print("Skipping confusion matrix generation due to insufficient data variety")
 
+def plot_binary_confusion_matrix(true_labels, pred_labels, threshold):
+    """Create binary confusion matrix for profane vs non-profane classification"""
+    # Setup Thai font before plotting
+    setup_thai_font()
+    
+    try:
+        # Convert to binary labels
+        binary_true = ['Profane' if label != 'none' else 'Non-Profane' for label in true_labels]
+        binary_pred = ['Profane' if label != 'none' else 'Non-Profane' for label in pred_labels]
+        
+        cm = confusion_matrix(binary_true, binary_pred, labels=['Non-Profane', 'Profane'])
+        plt.figure(figsize=(8, 6))
+        
+        # Create heatmap
+        sns.heatmap(cm, annot=True, fmt='d', 
+                    xticklabels=['Non-Profane', 'Profane'], 
+                    yticklabels=['Non-Profane', 'Profane'],
+                    cmap='Blues')
+        
+        plt.title(f'Binary Confusion Matrix (Threshold: {threshold})', fontsize=14, pad=20)
+        plt.ylabel('True Label', fontsize=12)
+        plt.xlabel('Predicted Label', fontsize=12)
+        
+        # Calculate and display percentages
+        total = cm.sum()
+        for i in range(cm.shape[0]):
+            for j in range(cm.shape[1]):
+                percentage = (cm[i, j] / total) * 100
+                plt.text(j + 0.5, i + 0.7, f'{percentage:.1f}%', 
+                        ha='center', va='center', fontsize=10, color='red')
+        
+        # Adjust layout
+        plt.tight_layout()
+        
+        # Save plot
+        os.makedirs('./plots', exist_ok=True)
+        plt.savefig(f'./plots/binary_confusion_matrix_threshold_{threshold}.png', 
+                    bbox_inches='tight', 
+                    dpi=300)
+        plt.close()
+        
+        print(f"✅ Binary confusion matrix saved to ./plots/binary_confusion_matrix_threshold_{threshold}.png")
+        
+        # Print binary classification metrics
+        tn, fp, fn, tp = cm.ravel()
+        precision = tp / (tp + fp) if (tp + fp) > 0 else 0
+        recall = tp / (tp + fn) if (tp + fn) > 0 else 0
+        f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
+        accuracy = (tp + tn) / (tp + tn + fp + fn)
+        
+        print(f"\n=== Binary Classification Metrics (Threshold: {threshold}) ===")
+        print(f"True Negatives: {tn}")
+        print(f"False Positives: {fp}")
+        print(f"False Negatives: {fn}")
+        print(f"True Positives: {tp}")
+        print(f"Accuracy: {accuracy:.4f}")
+        print(f"Precision: {precision:.4f}")
+        print(f"Recall: {recall:.4f}")
+        print(f"F1-Score: {f1:.4f}")
+        
+        return {'tn': tn, 'fp': fp, 'fn': fn, 'tp': tp, 
+                'accuracy': accuracy, 'precision': precision, 'recall': recall, 'f1': f1}
+        
+    except Exception as e:
+        print(f"Error creating binary confusion matrix: {e}")
+        return None
+
 def main():
     # Setup Thai font
     setup_thai_font()
     
+    # Add threshold parameter for binary classification
+    import argparse
+    import sys
+    
+    # Parse command line arguments if provided, otherwise use defaults
+    threshold = 0.5  # Default threshold
+    if len(sys.argv) > 1:
+        parser = argparse.ArgumentParser(description='Evaluate advanced models with customizable threshold')
+        parser.add_argument('--threshold', type=float, default=0.5, 
+                           help='Threshold for binary profanity classification (default: 0.5)')
+        parser.add_argument('--model_path', type=str, default='./models/audio_train_enhanced_best_model',
+                           help='Path to the trained model')
+        args = parser.parse_args()
+        threshold = args.threshold
+        model_path = args.model_path
+    else:
+        # If no arguments provided, use defaults and allow interactive usage
+        model_path = './models/audio_train_enhanced_best_model'  # Update this path to your best model
+        print("No arguments provided. Using default settings.")
+        print("To specify threshold, run: python evaluate_advanced_models.py --threshold 0.6")
+    
+    print(f"Using binary classification threshold: {threshold}")
+    print(f"📊 This script will generate:")
+    print(f"   • Binary confusion matrix (Profane vs Non-Profane)")
+    print(f"   • Multi-class confusion matrix (specific profanity words)")
+    print(f"   • ROC curve with current threshold marked")
+    print(f"   • Comprehensive performance metrics")
+    print(f"   • Word-level and window-level evaluation")
+    print(f"💡 Try different thresholds: --threshold 0.3, 0.4, 0.5, 0.6, 0.7")
+    
     # Load the model (support for advanced models)
-    model_path = './models/cw_ham_v2'  # Update this path to your best model
 
     # Try to detect model type and load accordingly
     if os.path.exists(f"{model_path}/config.json"):
@@ -266,8 +375,8 @@ def main():
     print("Using ADVANCED preprocessing pipeline matching advanced_model_training.py")
     
     # Load the windowed eval data
-    df = pd.read_csv('./csv/eval_windowed_0.6s.csv')  # Using the 0.3s version for better coverage
-    
+    df = pd.read_csv('./csv/eval_windowed_0.25s.csv')  # Using the 0.3s version for better coverage
+
     print(f"Loaded {len(df)} windowed samples for evaluation")
     
     # Create results DataFrame
@@ -276,12 +385,13 @@ def main():
     # Process each window
     total_windows = len(df)
     for idx, row in df.iterrows():
-        predicted_label, confidence = evaluate_window(
+        predicted_label, confidence, profanity_prob = evaluate_window(
             model,
             feature_extractor,
             row['file_path'],
             row['start_time'],
-            row['end_time']
+            row['end_time'],
+            threshold
         )
         
         results.append({
@@ -290,7 +400,8 @@ def main():
             'end_time': row['end_time'],
             'true_label': row['label'],
             'predicted_label': predicted_label,
-            'confidence': confidence
+            'confidence': confidence,
+            'profanity_prob': profanity_prob
         })
         
         # Print progress
@@ -354,45 +465,55 @@ def main():
         print(f"Total Profanity Windows: {total_predictions}")
         print(f"Correct Predictions: {correct_predictions}")
     
+
     # Binary profanity detection metrics with detailed breakdown
     all_results = pd.DataFrame(results)
-    
-    # For each row, determine if it's a true profanity and if the prediction was c7rrect
+
+    # For each row, determine if it's a true profanity and if the prediction was correct
     all_results['is_true_profanity'] = all_results['true_label'] != 'none'
     all_results['is_predicted_profanity'] = all_results['predicted_label'] != 'none'
     all_results['is_correct_prediction'] = all_results['true_label'] == all_results['predicted_label']
-    
+
     # Calculate True Positives, False Positives, True Negatives, False Negatives
     tp = ((all_results['is_true_profanity']) & 
           (all_results['is_predicted_profanity']) & 
           (all_results['is_correct_prediction'])).sum()
-    
+
     fp = ((all_results['is_predicted_profanity']) & 
           (~all_results['is_correct_prediction'])).sum()
-    
+
     tn = ((~all_results['is_true_profanity']) & 
           (~all_results['is_predicted_profanity'])).sum()
-    
+
     fn = (all_results['is_true_profanity'] & 
           (~all_results['is_predicted_profanity'] | 
            ~all_results['is_correct_prediction'])).sum()
-    
+
     # Calculate balanced accuracy
     sensitivity = tp / (tp + fn) if (tp + fn) > 0 else 0  # True Positive Rate (Recall)
     specificity = tn / (tn + fp) if (tn + fp) > 0 else 0  # True Negative Rate
     balanced_accuracy = (sensitivity + specificity) / 2
-    
+
     # Calculate metrics
     precision = tp / (tp + fp) if (tp + fp) > 0 else 0
     recall = sensitivity  # Same as sensitivity
     f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
-    
+
     # Calculate class-wise proportions FIRST (before using them)
     total_profanity = tp + fn
     total_none = tn + fp
-    
+
     print("\n=== Binary Profanity Detection Metrics (Window-level, Advanced Preprocessing) ===")
+    print(f"Using threshold: {threshold}")
     print(f"Balanced Accuracy: {balanced_accuracy:.4f}")
+    
+    # Generate binary confusion matrix
+    print(f"\n=== Creating Binary Confusion Matrix ===")
+    binary_metrics = plot_binary_confusion_matrix(
+        all_results['true_label'].values,
+        all_results['predicted_label'].values,
+        threshold
+    )
     print(f"Precision: {precision:.4f}")
     print(f"Recall: {recall:.4f}")
     print(f"F1-score: {f1:.4f}")
@@ -402,17 +523,77 @@ def main():
     print(f"True Negatives: {tn}")
     print(f"False Negatives: {fn}")
     print(f"Total Windows: {len(all_results)}")
-    
+
     # ADD: Explicit Binary Classification Accuracy (weighted for imbalance)
     binary_accuracy = (tp + tn) / len(all_results)
     print(f"\n🎯 BINARY CLASSIFICATION ACCURACY:")
     print(f"Simple Binary Accuracy: {binary_accuracy:.4f}")
     print(f"Balanced Binary Accuracy: {balanced_accuracy:.4f}")
     print(f"(Balanced accounts for class imbalance: {total_profanity/len(all_results):.1%} profane vs {total_none/len(all_results):.1%} clean)")
-    
+
     print("\nClass Distribution:")
     print(f"Profanity samples: {total_profanity} ({total_profanity/len(all_results):.2%})")
     print(f"None samples: {total_none} ({total_none/len(all_results):.2%})")
+
+    # ROC/AUC calculation and plot
+    from sklearn.metrics import roc_curve, roc_auc_score
+    # For ROC, need binary ground truth and probability scores for 'profanity' (not 'none')
+    # Use the profanity_prob field which contains the actual probability of being profanity
+    y_true = all_results['is_true_profanity'].astype(int).values
+    y_scores = all_results['profanity_prob'].values
+
+    # Compute ROC curve and AUC
+    try:
+        fpr, tpr, thresholds_roc = roc_curve(y_true, y_scores)
+        auc_score = roc_auc_score(y_true, y_scores)
+        print(f"\n=== ROC/AUC for Binary Profanity Detection ===")
+        print(f"AUC Score: {auc_score:.4f}")
+        print(f"Current threshold: {threshold}")
+
+        # Plot ROC curve
+        plt.figure(figsize=(8, 6))
+        plt.plot(fpr, tpr, label=f'ROC curve (AUC = {auc_score:.2f})')
+        plt.plot([0, 1], [0, 1], 'k--', label='Random')
+        
+        # Mark the current threshold on the ROC curve
+        current_threshold_idx = np.argmin(np.abs(thresholds_roc - threshold))
+        plt.plot(fpr[current_threshold_idx], tpr[current_threshold_idx], 'ro', markersize=8, 
+                label=f'Current threshold ({threshold})')
+        
+        plt.xlabel('False Positive Rate')
+        plt.ylabel('True Positive Rate')
+        plt.title(f'ROC Curve for Binary Profanity Detection (Threshold: {threshold})')
+        plt.legend(loc='lower right')
+        plt.grid(True)
+        os.makedirs('./plots', exist_ok=True)
+        plt.savefig(f'./plots/roc_curve_binary_profanity_threshold_{threshold}.png', dpi=300)
+        plt.close()
+        print(f"✅ ROC curve saved to ./plots/roc_curve_binary_profanity_threshold_{threshold}.png")
+        # DET curve calculation and plot
+        from scipy.stats import norm
+        import matplotlib.ticker as mticker
+        print("\n=== DET Curve for Binary Profanity Detection ===")
+        # Miss rate = 1 - TPR, False alarm rate = FPR
+        miss_rate = 1 - tpr
+        false_alarm_rate = fpr
+        plt.figure(figsize=(8, 6))
+        plt.plot(norm.ppf(false_alarm_rate), norm.ppf(miss_rate), label='DET curve')
+        plt.xlabel('False Alarm Rate (FAR) [norm dev]')
+        plt.ylabel('Miss Rate (MR) [norm dev]')
+        plt.title('DET Curve for Binary Profanity Detection')
+        plt.grid(True)
+        plt.legend(loc='upper right')
+        # Set axis ticks to show rates
+        ticks = [0.001, 0.002, 0.005, 0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 0.8, 0.9, 0.95, 0.99, 0.995, 0.999]
+        tick_labels = [str(t) for t in ticks]
+        plt.xticks(norm.ppf(ticks), tick_labels, rotation=45)
+        plt.yticks(norm.ppf(ticks), tick_labels)
+        plt.tight_layout()
+        plt.savefig('./plots/det_curve_binary_profanity.png', dpi=300)
+        plt.close()
+        print("✅ DET curve saved to ./plots/det_curve_binary_profanity.png")
+    except Exception as e:
+        print(f"⚠️ Could not compute ROC/AUC: {e}")
     
     # ADD: Multi-class Classification Accuracy (for profanity words only)
     print(f"\n=== MULTI-CLASS PROFANITY CLASSIFICATION ACCURACY ===")
@@ -668,6 +849,19 @@ def main():
     print(f"   • Profanity classification handles which word: {weighted_profanity_class_accuracy:.1%}")
     print(f"   • Word-level performance in real scenarios: {original_f1:.1%}")
     print(f"   • Data imbalance: {total_profanity/len(all_results):.1%} profane vs {total_none/len(all_results):.1%} clean")
+    print(f"   • Current threshold: {threshold} (adjust with --threshold parameter)")
+    
+    # Add threshold guidance
+    print(f"\n🎯 THRESHOLD GUIDANCE:")
+    print(f"   • Current threshold: {threshold}")
+    if binary_metrics:
+        print(f"   • Current F1-Score: {binary_metrics['f1']:.3f}")
+        print(f"   • Current Precision: {binary_metrics['precision']:.3f}")
+        print(f"   • Current Recall: {binary_metrics['recall']:.3f}")
+    print(f"   • Lower threshold (e.g., 0.3): Higher recall, more false positives")
+    print(f"   • Higher threshold (e.g., 0.7): Higher precision, more false negatives")
+    print(f"   • Balanced threshold (0.5): Good starting point")
+    print(f"   • Use ROC curve to find optimal threshold for your use case")
     
     # Detailed word/instance statistics as requested
     print(f"\n=== Detailed Word/Instance Statistics ===")
@@ -692,8 +886,8 @@ def main():
     
     # Load windowed data to get windowed ground truth
     try:
-        windowed_df = pd.read_csv('./csv/eval_windowed_0.6s.csv')
-        print("(Showing windowed ground truth from eval_windowed_0.6s.csv)")
+        windowed_df = pd.read_csv('./csv/eval_windowed_0.25s.csv')
+        print("(Showing windowed ground truth from eval_windowed_0.25s.csv)")
     except:
         windowed_df = None
         print("(Could not load windowed eval data)")

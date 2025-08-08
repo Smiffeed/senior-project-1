@@ -540,6 +540,6 @@ def train_custom_cnn(csv_file, output_dir):
     print(f"Best model saved to: {config['model_path']}")
 
 if __name__ == "__main__":
-    csv_file = './csv/main.csv'
+    csv_file = './csv/balanced_main_train.csv'  # Updated to use balanced training data
     output_dir = './models/custom_cnn'
     train_custom_cnn(csv_file, output_dir)

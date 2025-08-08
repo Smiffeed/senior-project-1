@@ -785,7 +785,7 @@ class CurriculumLearningScheduler:
 
 if __name__ == "__main__":
     # Configuration
-    CSV_FILE = './csv/main.csv'
+    CSV_FILE = './csv/balanced_main_train.csv'  # Updated to use balanced training data
     MODEL_NAME = "airesearch/wav2vec2-large-xlsr-53-th"
     BASE_OUTPUT_DIR = './models/audio_train_refactored'
     NUM_FOLDS = 5

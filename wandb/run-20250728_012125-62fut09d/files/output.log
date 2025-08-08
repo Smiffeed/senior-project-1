@@ -1,0 +1,58 @@
+  0%|                                                                        | 0/2300 [00:00<?, ?it/s]W0728 01:23:09.519848 29196 env\Lib\site-packages\torch\_inductor\utils.py:1250] [5/0] Not enough SMs to use max_autotune_gemm mode
+Traceback (most recent call last):
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 901, in <module>
+    main()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 895, in main
+    model, feature_extractor = trainer.train_model(train_df, val_df)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 549, in train_model
+    return self.train_wav2vec2(train_df, val_df, num_classes)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 607, in train_wav2vec2
+    trainer.train()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2555, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3745, in training_step
+    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3810, in compute_loss
+    outputs = model(**inputs)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\nn\modules\module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\nn\modules\module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\_dynamo\eval_frame.py", line 663, in _fn
+    raise e.remove_dynamo_frames() from None  # see TORCHDYNAMO_VERBOSE=1
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\_inductor\scheduler.py", line 3957, in create_backend
+    raise TritonMissing(inspect.currentframe())
+torch._inductor.exc.TritonMissing: Cannot find a working triton installation. Either the package is not installed or it is too old. More information on installing Triton can be found at: https://github.com/triton-lang/triton
+
+Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS="+dynamo"
+
+Traceback (most recent call last):
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 901, in <module>
+    main()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 895, in main
+    model, feature_extractor = trainer.train_model(train_df, val_df)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 549, in train_model
+    return self.train_wav2vec2(train_df, val_df, num_classes)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\advanced_model_training.py", line 607, in train_wav2vec2
+    trainer.train()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2555, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3745, in training_step
+    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3810, in compute_loss
+    outputs = model(**inputs)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\nn\modules\module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\nn\modules\module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\_dynamo\eval_frame.py", line 663, in _fn
+    raise e.remove_dynamo_frames() from None  # see TORCHDYNAMO_VERBOSE=1
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\_inductor\scheduler.py", line 3957, in create_backend
+    raise TritonMissing(inspect.currentframe())
+torch._inductor.exc.TritonMissing: Cannot find a working triton installation. Either the package is not installed or it is too old. More information on installing Triton can be found at: https://github.com/triton-lang/triton
+
+Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS="+dynamo"

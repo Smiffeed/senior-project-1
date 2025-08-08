@@ -325,7 +325,7 @@ class AudioCensor:
 def main():
     """Main function for audio censoring."""
     # Configuration
-    MODEL_DIR = './models/simplified_advanced_audio_train'
+    MODEL_DIR = './models/cnn_bilstm'
     
     # Initialize censoring system
     censor = AudioCensor(MODEL_DIR)

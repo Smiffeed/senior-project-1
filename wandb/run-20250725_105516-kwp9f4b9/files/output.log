@@ -1,0 +1,74 @@
+  3%|▉                         | 500/14700 [06:31<3:50:20,  1.03it/s]Traceback (most recent call last):
+{'loss': 2.3225, 'grad_norm': 11.343297004699707, 'learning_rate': 8.979591836734694e-07, 'epoch': 0.6}
+{'loss': 2.29, 'grad_norm': 13.795504570007324, 'learning_rate': 1.8979591836734693e-06, 'epoch': 1.2}
+{'loss': 2.2909, 'grad_norm': 14.580079078674316, 'learning_rate': 2.8979591836734694e-06, 'epoch': 1.81}
+{'loss': 2.2616, 'grad_norm': 8.908334732055664, 'learning_rate': 3.918367346938776e-06, 'epoch': 2.41}
+{'loss': 2.204, 'grad_norm': 14.077861785888672, 'learning_rate': 4.938775510204082e-06, 'epoch': 3.01}
+{'loss': 2.196, 'grad_norm': 9.396406173706055, 'learning_rate': 5.959183673469388e-06, 'epoch': 3.61}
+{'loss': 2.1498, 'grad_norm': 12.275422096252441, 'learning_rate': 6.979591836734694e-06, 'epoch': 4.22}
+{'loss': 2.1284, 'grad_norm': 10.4654541015625, 'learning_rate': 8e-06, 'epoch': 4.82}
+{'loss': 2.0685, 'grad_norm': 15.12189769744873, 'learning_rate': 9.020408163265305e-06, 'epoch': 5.42}
+{'loss': 2.0359, 'grad_norm': 9.811722755432129, 'learning_rate': 1.0040816326530613e-05, 'epoch': 6.02}
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW_max_pooling.py", line 641, in <module>
+    train_wav2vec2_model(csv_file, model_name, output_dir_fold, pooling_mode=mode)
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW_max_pooling.py", line 376, in train_wav2vec2_model
+    trainer.train()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2622, in _inner_training_loop
+    self._maybe_log_save_evaluate(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3095, in _maybe_log_save_evaluate
+    metrics = self._evaluate(trial, ignore_keys_for_eval)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3044, in _evaluate
+    metrics = self.evaluate(ignore_keys=ignore_keys_for_eval)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 4173, in evaluate
+    output = eval_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 4390, in evaluation_loop
+    logits = self.accelerator.pad_across_processes(logits, dim=1, pad_index=-100)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\accelerator.py", line 2832, in pad_across_processes
+    return pad_across_processes(tensor, dim=dim, pad_index=pad_index, pad_first=pad_first)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\utils\operations.py", line 407, in wrapper
+    return function(*args, **kwargs)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\utils\operations.py", line 677, in pad_across_processes
+    return recursively_apply(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\utils\operations.py", line 107, in recursively_apply
+    return honor_type(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\utils\operations.py", line 81, in honor_type
+    return type(obj)(generator)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\utils\operations.py", line 110, in <genexpr>
+    recursively_apply(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\utils\operations.py", line 128, in recursively_apply
+    raise TypeError(
+TypeError: Unsupported types (<class 'NoneType'>) passed to `_pad_across_processes`. Only nested list/tuple/dicts of objects that are valid for `is_torch_tensor` should be passed.
+Traceback (most recent call last):
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW_max_pooling.py", line 641, in <module>
+    train_wav2vec2_model(csv_file, model_name, output_dir_fold, pooling_mode=mode)
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW_max_pooling.py", line 376, in train_wav2vec2_model
+    trainer.train()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2622, in _inner_training_loop
+    self._maybe_log_save_evaluate(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3095, in _maybe_log_save_evaluate
+    metrics = self._evaluate(trial, ignore_keys_for_eval)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3044, in _evaluate
+    metrics = self.evaluate(ignore_keys=ignore_keys_for_eval)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 4173, in evaluate
+    output = eval_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 4390, in evaluation_loop
+    logits = self.accelerator.pad_across_processes(logits, dim=1, pad_index=-100)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\accelerator.py", line 2832, in pad_across_processes
+    return pad_across_processes(tensor, dim=dim, pad_index=pad_index, pad_first=pad_first)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\utils\operations.py", line 407, in wrapper
+    return function(*args, **kwargs)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\utils\operations.py", line 677, in pad_across_processes
+    return recursively_apply(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\utils\operations.py", line 107, in recursively_apply
+    return honor_type(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\utils\operations.py", line 81, in honor_type
+    return type(obj)(generator)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\utils\operations.py", line 110, in <genexpr>
+    recursively_apply(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\utils\operations.py", line 128, in recursively_apply
+    raise TypeError(
+TypeError: Unsupported types (<class 'NoneType'>) passed to `_pad_across_processes`. Only nested list/tuple/dicts of objects that are valid for `is_torch_tensor` should be passed.

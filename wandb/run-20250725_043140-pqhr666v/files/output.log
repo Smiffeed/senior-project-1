@@ -1,0 +1,64 @@
+  1%|▎                               | 150/14700 [01:13<1:15:32,  3.21it/s]Traceback (most recent call last):
+{'loss': 2.2013, 'grad_norm': 2.00449275970459, 'learning_rate': 9.591836734693878e-07, 'epoch': 0.6}
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\serialization.py", line 965, in save
+{'eval_loss': 2.2012128829956055, 'eval_accuracy': 0.04559270665049553, 'eval_runtime': 4.7549, 'eval_samples_per_second': 69.191, 'eval_steps_per_second': 4.416, 'epoch': 0.6}
+{'loss': 2.1981, 'grad_norm': 1.684483289718628, 'learning_rate': 1.959183673469388e-06, 'epoch': 1.2}
+{'eval_loss': 2.19724702835083, 'eval_accuracy': 0.08206687122583389, 'eval_runtime': 4.7322, 'eval_samples_per_second': 69.523, 'eval_steps_per_second': 4.438, 'epoch': 1.2}
+{'loss': 2.1939, 'grad_norm': 2.0858685970306396, 'learning_rate': 2.979591836734694e-06, 'epoch': 1.81}
+{'eval_loss': 2.19079327583313, 'eval_accuracy': 0.09422492235898972, 'eval_runtime': 4.6823, 'eval_samples_per_second': 70.264, 'eval_steps_per_second': 4.485, 'epoch': 1.81}
+    _save(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\serialization.py", line 1266, in _save
+    zip_file.write_record(name, storage, num_bytes)
+RuntimeError: [enforce fail at inline_container.cc:862] . PytorchStreamWriter failed writing file data/194: file write failed
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 582, in <module>
+    train_wav2vec2_model(csv_file, model_name, output_dir_fold)
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 320, in train_wav2vec2_model
+    trainer.train()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2622, in _inner_training_loop
+    self._maybe_log_save_evaluate(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3102, in _maybe_log_save_evaluate
+    self._save_checkpoint(model, trial)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3210, in _save_checkpoint
+    self._save_optimizer_and_scheduler(output_dir)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3337, in _save_optimizer_and_scheduler
+    torch.save(self.optimizer.state_dict(), os.path.join(output_dir, OPTIMIZER_NAME))
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\serialization.py", line 972, in save
+    return
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\serialization.py", line 798, in __exit__
+    self.file_like.write_end_of_file()
+RuntimeError: [enforce fail at inline_container.cc:659] . unexpected pos 994235904 vs 994235792
+Traceback (most recent call last):
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\serialization.py", line 965, in save
+    _save(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\serialization.py", line 1266, in _save
+    zip_file.write_record(name, storage, num_bytes)
+RuntimeError: [enforce fail at inline_container.cc:862] . PytorchStreamWriter failed writing file data/194: file write failed
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 582, in <module>
+    train_wav2vec2_model(csv_file, model_name, output_dir_fold)
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 320, in train_wav2vec2_model
+    trainer.train()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2622, in _inner_training_loop
+    self._maybe_log_save_evaluate(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3102, in _maybe_log_save_evaluate
+    self._save_checkpoint(model, trial)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3210, in _save_checkpoint
+    self._save_optimizer_and_scheduler(output_dir)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3337, in _save_optimizer_and_scheduler
+    torch.save(self.optimizer.state_dict(), os.path.join(output_dir, OPTIMIZER_NAME))
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\serialization.py", line 972, in save
+    return
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\serialization.py", line 798, in __exit__
+    self.file_like.write_end_of_file()
+RuntimeError: [enforce fail at inline_container.cc:659] . unexpected pos 994235904 vs 994235792

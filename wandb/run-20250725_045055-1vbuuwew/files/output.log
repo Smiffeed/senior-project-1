@@ -1,0 +1,51 @@
+  3%|█                               | 500/14700 [02:42<1:12:35,  3.26it/s]Traceback (most recent call last):
+{'loss': 2.1968, 'grad_norm': 2.7688910961151123, 'learning_rate': 9.387755102040817e-07, 'epoch': 0.6}
+{'loss': 2.1946, 'grad_norm': 2.28226637840271, 'learning_rate': 1.959183673469388e-06, 'epoch': 1.2}
+{'loss': 2.1935, 'grad_norm': 1.9100406169891357, 'learning_rate': 2.979591836734694e-06, 'epoch': 1.81}
+{'loss': 2.1837, 'grad_norm': 1.901734471321106, 'learning_rate': 4e-06, 'epoch': 2.41}
+{'loss': 2.1728, 'grad_norm': 3.1484858989715576, 'learning_rate': 5.020408163265306e-06, 'epoch': 3.01}
+{'loss': 2.1621, 'grad_norm': 2.8494515419006348, 'learning_rate': 6.040816326530612e-06, 'epoch': 3.61}
+{'loss': 2.1394, 'grad_norm': 2.8553121089935303, 'learning_rate': 7.061224489795918e-06, 'epoch': 4.22}
+{'loss': 2.1187, 'grad_norm': 5.208583831787109, 'learning_rate': 8.081632653061225e-06, 'epoch': 4.82}
+{'loss': 2.0736, 'grad_norm': 4.032816410064697, 'learning_rate': 9.081632653061225e-06, 'epoch': 5.42}
+{'loss': 2.0447, 'grad_norm': 4.520654678344727, 'learning_rate': 1.0081632653061224e-05, 'epoch': 6.02}
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 589, in <module>
+{'eval_loss': 1.9369020462036133, 'eval_accuracy': 0.3677811622619629, 'eval_runtime': 4.6375, 'eval_samples_per_second': 70.944, 'eval_steps_per_second': 4.528, 'epoch': 6.02}
+    train_wav2vec2_model(csv_file, model_name, output_dir_fold)
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 327, in train_wav2vec2_model
+    trainer.train()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2622, in _inner_training_loop
+    self._maybe_log_save_evaluate(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3102, in _maybe_log_save_evaluate
+    self._save_checkpoint(model, trial)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3210, in _save_checkpoint
+    self._save_optimizer_and_scheduler(output_dir)
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 70, in _save_optimizer_and_scheduler
+    torch.save(self.optimizer.state_dict(), os.path.join(output_dir, "optimizer.pt"), _use_new_zipfile_serialization=False)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\serialization.py", line 980, in save
+    _legacy_save(obj, opened_file, pickle_module, pickle_protocol)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\serialization.py", line 1136, in _legacy_save
+    storage._write_file(
+RuntimeError: write(): fd 4 failed with No space left on device
+Traceback (most recent call last):
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 589, in <module>
+    train_wav2vec2_model(csv_file, model_name, output_dir_fold)
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 327, in train_wav2vec2_model
+    trainer.train()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2622, in _inner_training_loop
+    self._maybe_log_save_evaluate(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3102, in _maybe_log_save_evaluate
+    self._save_checkpoint(model, trial)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3210, in _save_checkpoint
+    self._save_optimizer_and_scheduler(output_dir)
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 70, in _save_optimizer_and_scheduler
+    torch.save(self.optimizer.state_dict(), os.path.join(output_dir, "optimizer.pt"), _use_new_zipfile_serialization=False)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\serialization.py", line 980, in save
+    _legacy_save(obj, opened_file, pickle_module, pickle_protocol)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\serialization.py", line 1136, in _legacy_save
+    storage._write_file(
+RuntimeError: write(): fd 4 failed with No space left on device
