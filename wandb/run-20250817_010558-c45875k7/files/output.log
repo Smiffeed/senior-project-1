@@ -1,0 +1,54 @@
+  2%|█▍                                                                    | 298/14700 [02:27<2:06:47,  1.89it/s]Traceback (most recent call last):
+{'loss': 0.2077, 'grad_norm': 2.0839006900787354, 'learning_rate': 1.142857142857143e-06, 'epoch': 1.9}
+{'loss': 0.1919, 'grad_norm': 1.8396985530853271, 'learning_rate': 2.36734693877551e-06, 'epoch': 3.77}
+{'loss': 0.1576, 'grad_norm': 0.9198594689369202, 'learning_rate': 3.5918367346938777e-06, 'epoch': 5.65}
+{'loss': 0.1227, 'grad_norm': 0.595934271812439, 'learning_rate': 4.816326530612245e-06, 'epoch': 7.52}
+{'loss': 0.0754, 'grad_norm': 0.34288841485977173, 'learning_rate': 6.040816326530612e-06, 'epoch': 9.39}
+{'loss': 0.0653, 'grad_norm': 0.5521373748779297, 'learning_rate': 7.26530612244898e-06, 'epoch': 11.26}
+{'loss': 0.0599, 'grad_norm': 0.5540756583213806, 'learning_rate': 8.489795918367347e-06, 'epoch': 13.13}
+{'loss': 0.0589, 'grad_norm': 0.311355322599411, 'learning_rate': 9.714285714285715e-06, 'epoch': 15.0}
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 1127, in <module>
+{'eval_loss': 0.06794367730617523, 'eval_accuracy': 0.09821428571428571, 'eval_f1_macro': 0.08943089430894309, 'eval_f1_weighted': 0.01756678281068525, 'eval_profanity_accuracy': 1.0, 'eval_profanity_f1': 1.0, 'eval_f1_เย็ด': 0.17886178861788618, 'eval_f1_กู': 0.0, 'eval_f1_มึง': 0.0, 'eval_f1_เหี้ย': 0.0, 'eval_runtime': 0.8721, 'eval_samples_per_second': 145.633, 'eval_steps_per_second': 9.174, 'epoch': 15.65}
+{'loss': 0.0618, 'grad_norm': 0.9923405647277832, 'learning_rate': 1.0938775510204081e-05, 'epoch': 16.9}
+    cv_results = run_cross_validation(
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 989, in run_cross_validation
+    train_wav2vec2_model_with_data(train_subset, val_subset, model_name, output_dir_fold)
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 598, in train_wav2vec2_model_with_data
+    trainer.train()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2555, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3791, in training_step
+    self.accelerator.backward(loss, **kwargs)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\accelerator.py", line 2469, in backward
+    self.scaler.scale(loss).backward(**kwargs)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\_tensor.py", line 625, in backward
+    torch.autograd.backward(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\autograd\__init__.py", line 354, in backward
+    _engine_run_backward(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\autograd\graph.py", line 829, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 1127, in <module>
+    cv_results = run_cross_validation(
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 989, in run_cross_validation
+    train_wav2vec2_model_with_data(train_subset, val_subset, model_name, output_dir_fold)
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 598, in train_wav2vec2_model_with_data
+    trainer.train()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2555, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3791, in training_step
+    self.accelerator.backward(loss, **kwargs)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\accelerator.py", line 2469, in backward
+    self.scaler.scale(loss).backward(**kwargs)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\_tensor.py", line 625, in backward
+    torch.autograd.backward(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\autograd\__init__.py", line 354, in backward
+    _engine_run_backward(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\autograd\graph.py", line 829, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt

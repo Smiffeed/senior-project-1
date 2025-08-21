@@ -16,11 +16,7 @@ label_map = {
     'เย็ด': 1,
     'กู': 2,
     'มึง': 3,
-    'เหี้ย': 4,
-    'ควย': 5,
-    'สวะ': 6,
-    'หี': 7,
-    'แตด': 8
+    'เหี้ย': 4
 }
 
 # Reverse label mapping for output
@@ -251,6 +247,131 @@ def plot_confusion_matrix(true_labels, pred_labels, labels):
         print(f"Error creating confusion matrix: {e}")
         print("Skipping confusion matrix generation due to insufficient data variety")
 
+def calculate_iou(pred_start, pred_end, true_start, true_end):
+    """
+    Calculate Intersection over Union (IoU) for two time intervals.
+    
+    Args:
+        pred_start, pred_end: Predicted time interval
+        true_start, true_end: Ground truth time interval
+    
+    Returns:
+        IoU score (float between 0 and 1)
+    """
+    # Calculate intersection
+    intersection_start = max(pred_start, true_start)
+    intersection_end = min(pred_end, true_end)
+    
+    # Check if there's actually an intersection
+    if intersection_start >= intersection_end:
+        return 0.0
+    
+    intersection_duration = intersection_end - intersection_start
+    
+    # Calculate union
+    union_start = min(pred_start, true_start)
+    union_end = max(pred_end, true_end)
+    union_duration = union_end - union_start
+    
+    # Calculate IoU
+    if union_duration == 0:
+        return 0.0
+    
+    iou = intersection_duration / union_duration
+    return iou
+
+def evaluate_word_level_iou(predictions_df, ground_truth_df, iou_threshold=0.5):
+    """
+    Evaluate word-level predictions using IoU with a specified threshold.
+    
+    Args:
+        predictions_df: DataFrame with predicted words (columns: file_path, start_time, end_time, predicted_label)
+        ground_truth_df: DataFrame with ground truth words (columns: file_path, start_time, end_time, true_label)
+        iou_threshold: IoU threshold for considering a prediction as correct (default: 0.5)
+    
+    Returns:
+        Dictionary with IoU-based metrics
+    """
+    if len(predictions_df) == 0 or len(ground_truth_df) == 0:
+        return {
+            'iou_precision': 0.0,
+            'iou_recall': 0.0,
+            'iou_f1': 0.0,
+            'total_predictions': len(predictions_df),
+            'total_ground_truth': len(ground_truth_df),
+            'correct_predictions_iou': 0,
+            'mean_iou': 0.0,
+            'iou_threshold': iou_threshold
+        }
+    
+    correct_predictions = 0
+    total_iou_sum = 0.0
+    prediction_matches = []
+    
+    # For each prediction, find the best matching ground truth
+    for pred_idx, pred_row in predictions_df.iterrows():
+        best_iou = 0.0
+        best_match = None
+        
+        # Find ground truth words in the same file
+        same_file_gt = ground_truth_df[ground_truth_df['file_path'] == pred_row['file_path']]
+        
+        for gt_idx, gt_row in same_file_gt.iterrows():
+            # Calculate IoU between prediction and ground truth
+            iou = calculate_iou(
+                pred_row['start_time'], pred_row['end_time'],
+                gt_row['start_time'], gt_row['end_time']
+            )
+            
+            # Check if this is the best match so far
+            if iou > best_iou:
+                best_iou = iou
+                best_match = {
+                    'pred_label': pred_row['predicted_label'],
+                    'true_label': gt_row['true_label'],
+                    'iou': iou,
+                    'pred_idx': pred_idx,
+                    'gt_idx': gt_idx
+                }
+        
+        # Record the match information
+        prediction_matches.append({
+            'pred_idx': pred_idx,
+            'best_iou': best_iou,
+            'best_match': best_match,
+            'file_path': pred_row['file_path'],
+            'pred_start': pred_row['start_time'],
+            'pred_end': pred_row['end_time'],
+            'pred_label': pred_row['predicted_label']
+        })
+        
+        total_iou_sum += best_iou
+        
+        # Check if prediction is correct (IoU >= threshold AND labels match)
+        if best_match and best_iou >= iou_threshold and best_match['pred_label'] == best_match['true_label']:
+            correct_predictions += 1
+    
+    # Calculate metrics
+    total_predictions = len(predictions_df)
+    total_ground_truth = len(ground_truth_df)
+    
+    iou_precision = correct_predictions / total_predictions if total_predictions > 0 else 0.0
+    iou_recall = correct_predictions / total_ground_truth if total_ground_truth > 0 else 0.0
+    iou_f1 = 2 * (iou_precision * iou_recall) / (iou_precision + iou_recall) if (iou_precision + iou_recall) > 0 else 0.0
+    mean_iou = total_iou_sum / total_predictions if total_predictions > 0 else 0.0
+    
+    return {
+        'iou_precision': iou_precision,
+        'iou_recall': iou_recall,
+        'iou_f1': iou_f1,
+        'total_predictions': total_predictions,
+        'total_ground_truth': total_ground_truth,
+        'correct_predictions_iou': correct_predictions,
+        'mean_iou': mean_iou,
+        'iou_threshold': iou_threshold,
+        'prediction_matches': prediction_matches
+    }
+
 def plot_binary_confusion_matrix(true_labels, pred_labels, threshold):
     """Create binary confusion matrix for profane vs non-profane classification"""
     # Setup Thai font before plotting
@@ -328,29 +449,37 @@ def main():
     
     # Parse command line arguments if provided, otherwise use defaults
     threshold = 0.5  # Default threshold
+    csv_file = './csv/eval_windowed_0.25s.csv'  # Default CSV file
     if len(sys.argv) > 1:
         parser = argparse.ArgumentParser(description='Evaluate advanced models with customizable threshold')
         parser.add_argument('--threshold', type=float, default=0.5, 
                            help='Threshold for binary profanity classification (default: 0.5)')
         parser.add_argument('--model_path', type=str, default='./models/audio_train_enhanced_best_model',
                            help='Path to the trained model')
+        parser.add_argument('--csv_file', type=str, default='./csv/eval_windowed_0.25s.csv',
+                           help='Path to the CSV file with windowed evaluation data (default: ./csv/eval_windowed_0.25s.csv)')
         args = parser.parse_args()
         threshold = args.threshold
         model_path = args.model_path
+        csv_file = args.csv_file
     else:
         # If no arguments provided, use defaults and allow interactive usage
-        model_path = './models/audio_train_enhanced_best_model'  # Update this path to your best model
+        model_path = './models/4_classes_max_steps'  # Update this path to your best model
         print("No arguments provided. Using default settings.")
-        print("To specify threshold, run: python evaluate_advanced_models.py --threshold 0.6")
+        print("To specify options, run: python evaluate_advanced_models.py --threshold 0.6 --csv_file csv/your_file.csv")
     
     print(f"Using binary classification threshold: {threshold}")
+    print(f"Using CSV file: {csv_file}")
     print(f"📊 This script will generate:")
     print(f"   • Binary confusion matrix (Profane vs Non-Profane)")
     print(f"   • Multi-class confusion matrix (specific profanity words)")
     print(f"   • ROC curve with current threshold marked")
     print(f"   • Comprehensive performance metrics")
     print(f"   • Word-level and window-level evaluation")
-    print(f"💡 Try different thresholds: --threshold 0.3, 0.4, 0.5, 0.6, 0.7")
+    print(f"💡 Try different options:")
+    print(f"   --threshold 0.3, 0.4, 0.5, 0.6, 0.7")
+    print(f"   --csv_file csv/eval_windowed_0.3s.csv")
+    print(f"   --csv_file csv/eval_0.5s/stride_0.25s.csv")
     
     # Load the model (support for advanced models)
 
@@ -375,9 +504,39 @@ def main():
     print("Using ADVANCED preprocessing pipeline matching advanced_model_training.py")
     
     # Load the windowed eval data
-    df = pd.read_csv('./csv/eval_windowed_0.25s.csv')  # Using the 0.3s version for better coverage
+    print(f"Loading evaluation data from: {csv_file}")
+    
+    # Check if the CSV file exists
+    if not os.path.exists(csv_file):
+        print(f"❌ CSV file not found: {csv_file}")
+        print("Available CSV files in ./csv/:")
+        csv_dir = "./csv/"
+        if os.path.exists(csv_dir):
+            csv_files = [f for f in os.listdir(csv_dir) if f.endswith('.csv')]
+            for f in sorted(csv_files):
+                print(f"   {csv_dir}{f}")
+        print("\nExample usage:")
+        print(f"   python evaluate_advanced_models.py --csv_file csv/eval_windowed_0.3s.csv")
+        return
+    
+    df = pd.read_csv(csv_file)
 
-    print(f"Loaded {len(df)} windowed samples for evaluation")
+    # Extract window information from filename for reporting
+    import re
+    window_info = "unknown"
+    if "windowed" in csv_file:
+        # Extract window size from filename like "eval_windowed_0.25s.csv"
+        match = re.search(r'windowed_(\d+\.?\d*)s', csv_file)
+        if match:
+            window_info = f"{match.group(1)}s windows"
+    elif "stride" in csv_file:
+        # Extract stride info from filename like "stride_0.25s.csv"
+        stride_match = re.search(r'stride_(\d+\.?\d*)s', csv_file)
+        if stride_match:
+            window_info = f"0.5s windows with {stride_match.group(1)}s stride"
+
+    print(f"✅ Loaded {len(df)} windowed samples for evaluation")
+    print(f"📏 Window configuration: {window_info}")
     
     # Create results DataFrame
     results = []
@@ -433,16 +592,15 @@ def main():
             print(f"... and {len(none_misclassifications) - 10} more cases")
             break
     
-    # For classification report and confusion matrix, replace 'none' predictions 
-    # with a special label 'missed_profanity' to include in metrics
-    profanity_results.loc[profanity_results['predicted_label'] == 'none', 'predicted_label'] = 'missed_profanity'
+    # Filter out 'none' predictions from profanity results for classification report
+    profanity_results_filtered = profanity_results[profanity_results['predicted_label'] != 'none'].copy()
     
-    # Generate classification report with modified labels
-    if len(profanity_results) > 0:
+    # Generate classification report with profanity labels only
+    if len(profanity_results_filtered) > 0:
         report = classification_report(
-            profanity_results['true_label'],
-            profanity_results['predicted_label'],
-            labels=profanity_labels + ['missed_profanity'],
+            profanity_results_filtered['true_label'],
+            profanity_results_filtered['predicted_label'],
+            labels=profanity_labels,
             digits=4,
             zero_division=0
         )
@@ -456,14 +614,19 @@ def main():
         print("\n=== Classification Report (Advanced Preprocessing) ===")
         print(report)
         
-        # Calculate overall accuracy (excluding 'none')
-        correct_predictions = (profanity_results['true_label'] == profanity_results['predicted_label']).sum()
-        total_predictions = len(profanity_results)
+        # Calculate overall accuracy (excluding 'none' predictions)
+        correct_predictions = (profanity_results_filtered['true_label'] == profanity_results_filtered['predicted_label']).sum()
+        total_predictions = len(profanity_results_filtered)
         accuracy = correct_predictions / total_predictions if total_predictions > 0 else 0
         
-        print(f"\nOverall Accuracy (excluding 'none'): {accuracy:.4f}")
-        print(f"Total Profanity Windows: {total_predictions}")
+        print(f"\nOverall Accuracy (excluding 'none' predictions): {accuracy:.4f}")
+        print(f"Total Profanity Windows with Profanity Predictions: {total_predictions}")
         print(f"Correct Predictions: {correct_predictions}")
+        
+        # Also report missed profanity (for information only)
+        missed_profanity = len(profanity_results[profanity_results['predicted_label'] == 'none'])
+        total_profanity_windows = len(profanity_results)
+        print(f"Missed Profanity (predicted as 'none'): {missed_profanity}/{total_profanity_windows}")
     
 
     # Binary profanity detection metrics with detailed breakdown
@@ -731,12 +894,58 @@ def main():
     print(f"Word-Level Recall: {word_recall:.4f}")
     print(f"Word-Level F1-Score: {word_f1:.4f}")
     
+    # ADD: IoU-based Word-Level Evaluation with 0.5 threshold
+    print(f"\n=== IoU-based Word-Level Evaluation (Threshold: 0.5) ===")
+    
+    # Prepare DataFrames for IoU evaluation
+    if total_pred_words > 0 and total_true_words > 0:
+        # Ensure column names are consistent
+        predictions_for_iou = word_predictions.copy()
+        if 'predicted_label' not in predictions_for_iou.columns:
+            predictions_for_iou = predictions_for_iou.rename(columns={'predicted_label': 'predicted_label'})
+        
+        ground_truth_for_iou = true_words.copy()  
+        if 'true_label' not in ground_truth_for_iou.columns:
+            ground_truth_for_iou = ground_truth_for_iou.rename(columns={'true_label': 'true_label'})
+        
+        # Evaluate with IoU threshold of 0.5
+        iou_results = evaluate_word_level_iou(predictions_for_iou, ground_truth_for_iou, iou_threshold=0.5)
+        
+        print(f"IoU Threshold: {iou_results['iou_threshold']}")
+        print(f"Total Predicted Words: {iou_results['total_predictions']}")
+        print(f"Total Ground Truth Words: {iou_results['total_ground_truth']}")
+        print(f"Correct Predictions (IoU ≥ 0.5 + Label Match): {iou_results['correct_predictions_iou']}")
+        print(f"IoU-based Precision: {iou_results['iou_precision']:.4f}")
+        print(f"IoU-based Recall: {iou_results['iou_recall']:.4f}")
+        print(f"IoU-based F1-Score: {iou_results['iou_f1']:.4f}")
+        print(f"Mean IoU: {iou_results['mean_iou']:.4f}")
+        
+        # Additional IoU analysis - different thresholds
+        print(f"\n=== IoU Analysis with Different Thresholds ===")
+        iou_thresholds = [0.3, 0.4, 0.5, 0.6, 0.7]
+        
+        for iou_thresh in iou_thresholds:
+            iou_results_thresh = evaluate_word_level_iou(predictions_for_iou, ground_truth_for_iou, iou_threshold=iou_thresh)
+            print(f"IoU ≥ {iou_thresh}: Precision={iou_results_thresh['iou_precision']:.3f}, "
+                  f"Recall={iou_results_thresh['iou_recall']:.3f}, "
+                  f"F1={iou_results_thresh['iou_f1']:.3f}")
+        
+        # Save IoU results for further analysis
+        iou_matches_df = pd.DataFrame(iou_results['prediction_matches'])
+        os.makedirs('./evaluation_results', exist_ok=True)
+        iou_matches_df.to_csv('./evaluation_results/iou_analysis_results.csv', index=False)
+        print(f"✅ IoU analysis results saved to ./evaluation_results/iou_analysis_results.csv")
+        
+    else:
+        print("No predictions or ground truth words available for IoU evaluation")
+        iou_results = None
+    
     # ADD NEW: Word-level accuracy against ORIGINAL ground truth
     print(f"\n=== Word-Level vs Original Ground Truth Accuracy ===")
     
     # Load original ground truth words
     try:
-        original_df = pd.read_csv('./csv/eval.csv')
+        original_df = pd.read_csv('./csv/eval_5labels.csv')
         # Convert original ground truth to word format (already individual words)
         original_gt_words = original_df[original_df['label'] != 'none'].copy()
         
@@ -770,9 +979,38 @@ def main():
         print(f"Recall vs Original GT: {original_recall:.4f}")
         print(f"F1-Score vs Original GT: {original_f1:.4f}")
         
+        # ADD: IoU evaluation against original ground truth
+        print(f"\n=== IoU-based Evaluation vs Original Ground Truth ===")
+        if total_pred_words > 0:
+            # Prepare original ground truth for IoU evaluation  
+            original_gt_for_iou = original_gt_words.copy()
+            if 'label' in original_gt_for_iou.columns:
+                original_gt_for_iou = original_gt_for_iou.rename(columns={'label': 'true_label'})
+            
+            # Evaluate IoU against original ground truth
+            iou_vs_original = evaluate_word_level_iou(predictions_for_iou, original_gt_for_iou, iou_threshold=0.5)
+            
+            print(f"IoU vs Original GT (threshold=0.5):")
+            print(f"  Precision: {iou_vs_original['iou_precision']:.4f}")
+            print(f"  Recall: {iou_vs_original['iou_recall']:.4f}")
+            print(f"  F1-Score: {iou_vs_original['iou_f1']:.4f}")
+            print(f"  Mean IoU: {iou_vs_original['mean_iou']:.4f}")
+            print(f"  Correct Predictions: {iou_vs_original['correct_predictions_iou']}/{iou_vs_original['total_predictions']}")
+            
+            # Save IoU vs original results
+            iou_original_matches_df = pd.DataFrame(iou_vs_original['prediction_matches'])
+            iou_original_matches_df.to_csv('./evaluation_results/iou_vs_original_analysis.csv', index=False)
+            print(f"✅ IoU vs original GT results saved to ./evaluation_results/iou_vs_original_analysis.csv")
+        else:
+            iou_vs_original = None
+        
         print(f"\n🎯 ACCURACY COMPARISON:")
         print(f"Windowed-based Word F1: {word_f1:.4f}")
         print(f"Original GT-based Word F1: {original_f1:.4f}")
+        if 'iou_results' in locals() and iou_results:
+            print(f"IoU-based F1 (vs windowed GT): {iou_results['iou_f1']:.4f}")
+        if 'iou_vs_original' in locals() and iou_vs_original:
+            print(f"IoU-based F1 (vs original GT): {iou_vs_original['iou_f1']:.4f}")
         print(f"Difference: {word_f1 - original_f1:.4f}")
         
         if original_f1 < word_f1:
@@ -843,11 +1081,16 @@ def main():
     print(f"\n3️⃣ WORD-LEVEL ACCURACY (Realistic performance):")
     print(f"   Word-level F1 (vs windowed GT): {word_f1:.4f}")
     print(f"   Word-level F1 (vs original GT): {original_f1:.4f} ⭐ (Most realistic)")
+    if 'iou_results' in locals() and iou_results:
+        print(f"   IoU-based F1 (threshold=0.5): {iou_results['iou_f1']:.4f} ⭐ (Temporal overlap)")
+        print(f"   Mean IoU score: {iou_results['mean_iou']:.4f}")
     
     print(f"\n📊 KEY INSIGHTS:")
     print(f"   • Binary detection handles profane vs clean: {balanced_accuracy:.1%}")
     print(f"   • Profanity classification handles which word: {weighted_profanity_class_accuracy:.1%}")
     print(f"   • Word-level performance in real scenarios: {original_f1:.1%}")
+    if 'iou_results' in locals() and iou_results:
+        print(f"   • IoU-based word localization accuracy: {iou_results['iou_f1']:.1%}")
     print(f"   • Data imbalance: {total_profanity/len(all_results):.1%} profane vs {total_none/len(all_results):.1%} clean")
     print(f"   • Current threshold: {threshold} (adjust with --threshold parameter)")
     
@@ -878,19 +1121,20 @@ def main():
     
     # Load original eval.csv to get true ground truth counts
     try:
-        original_df = pd.read_csv('./csv/eval.csv')
+        original_df = pd.read_csv('./csv/eval_5labels.csv')
         print("(Showing original ground truth from eval.csv)")
     except:
         original_df = None
         print("(Could not load original eval.csv)")
     
-    # Load windowed data to get windowed ground truth
+    # Load windowed data to get windowed ground truth (use the same file being evaluated)
     try:
-        windowed_df = pd.read_csv('./csv/eval_windowed_0.25s.csv')
-        print("(Showing windowed ground truth from eval_windowed_0.25s.csv)")
+        windowed_df = pd.read_csv(csv_file)
+        csv_filename = os.path.basename(csv_file)
+        print(f"(Showing windowed ground truth from {csv_filename})")
     except:
         windowed_df = None
-        print("(Could not load windowed eval data)")
+        print(f"(Could not load windowed eval data from {csv_file})")
     
     for label in profanity_labels:
         # Original ground truth count
@@ -977,28 +1221,19 @@ def main():
                 word_level_pred.append(pred_word['predicted_label'])
         
         # For ground truth words that weren't detected, add as missed
-        for _, true_word in true_words.iterrows():
-            # Check if this true word was detected by any prediction
-            overlapping_pred = word_predictions[
-                (word_predictions['file_path'] == true_word['file_path']) &
-                (word_predictions['start_time'] < true_word['end_time']) &
-                (word_predictions['end_time'] > true_word['start_time'])
-            ]
-            
-            if len(overlapping_pred) == 0:
-                # This true word was not detected
-                word_level_true.append(true_word['true_label'])
-                word_level_pred.append('missed_profanity')
+        # For ground truth words that weren't detected, we'll skip them in confusion matrix
+        # (since we only want to show confusion among actual predictions)
         
-        # Create confusion matrix for word-level predictions
+        # Create confusion matrix for word-level predictions (only detected words)
         if len(word_level_true) > 0:
             print(f"Creating word-level confusion matrix with {len(word_level_true)} word comparisons")
+            print(f"Note: Only showing detected words, not missed detections")
             
             # Plot word-level confusion matrix
             plot_confusion_matrix(
                 word_level_true,
                 word_level_pred,
-                profanity_labels + ['missed_profanity']
+                profanity_labels
             )
             print("✅ Word-level confusion matrix saved to ./plots/confusion_matrix_advanced.png")
         else:
@@ -1007,7 +1242,7 @@ def main():
         print("⚠️ No word predictions or true words found for confusion matrix")
     
     # Also create window-level confusion matrix for comparison
-    if len(profanity_results) > 0:
+    if len(profanity_results_filtered) > 0:
         print(f"\n=== Generating Window-Level Confusion Matrix (for comparison) ===")
         
         # Modify plot function to save with different name
@@ -1041,9 +1276,9 @@ def main():
                 print(f"Error creating window-level confusion matrix: {e}")
         
         plot_window_confusion_matrix(
-            profanity_results['true_label'].values,
-            profanity_results['predicted_label'].values,
-            profanity_labels + ['missed_profanity']
+            profanity_results_filtered['true_label'].values,
+            profanity_results_filtered['predicted_label'].values,
+            profanity_labels
         )
         print("✅ Window-level confusion matrix saved to ./plots/confusion_matrix_window_level.png")
 

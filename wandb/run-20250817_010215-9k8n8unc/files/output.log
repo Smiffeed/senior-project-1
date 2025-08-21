@@ -1,0 +1,85 @@
+  3%|█▌                                                            | 369/14700 [03:00<1:57:40,  2.03it/s]Traceback (most recent call last):
+{'loss': 0.2352, 'grad_norm': 1.868186354637146, 'learning_rate': 1.1020408163265308e-06, 'epoch': 1.9}
+{'loss': 0.2213, 'grad_norm': 1.5439668893814087, 'learning_rate': 2.326530612244898e-06, 'epoch': 3.77}
+{'loss': 0.1879, 'grad_norm': 1.0378724336624146, 'learning_rate': 3.5510204081632655e-06, 'epoch': 5.65}
+{'loss': 0.1613, 'grad_norm': 1.0510579347610474, 'learning_rate': 4.73469387755102e-06, 'epoch': 7.52}
+{'loss': 0.1134, 'grad_norm': 0.7641182541847229, 'learning_rate': 5.959183673469388e-06, 'epoch': 9.39}
+{'loss': 0.0915, 'grad_norm': 1.9482619762420654, 'learning_rate': 7.183673469387755e-06, 'epoch': 11.26}
+{'loss': 0.063, 'grad_norm': 0.7357532382011414, 'learning_rate': 8.408163265306122e-06, 'epoch': 13.13}
+{'loss': 0.0612, 'grad_norm': 0.41979333758354187, 'learning_rate': 9.63265306122449e-06, 'epoch': 15.0}
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 1127, in <module>
+{'eval_loss': 0.07140759378671646, 'eval_accuracy': 0.09821428571428571, 'eval_f1_macro': 0.08943089430894309, 'eval_f1_weighted': 0.01756678281068525, 'eval_profanity_accuracy': 1.0, 'eval_profanity_f1': 1.0, 'eval_f1_เย็ด': 0.17886178861788618, 'eval_f1_กู': 0.0, 'eval_f1_มึง': 0.0, 'eval_f1_เหี้ย': 0.0, 'eval_runtime': 1.0155, 'eval_samples_per_second': 125.059, 'eval_steps_per_second': 7.878, 'epoch': 15.65}
+{'loss': 0.0641, 'grad_norm': 0.4124159812927246, 'learning_rate': 1.0857142857142858e-05, 'epoch': 16.9}
+{'loss': 0.0613, 'grad_norm': 1.4506129026412964, 'learning_rate': 1.2040816326530612e-05, 'epoch': 18.77}
+{'loss': 0.0602, 'grad_norm': 0.5080052614212036, 'learning_rate': 1.326530612244898e-05, 'epoch': 20.65}
+{'loss': 0.0596, 'grad_norm': 0.2198026031255722, 'learning_rate': 1.4489795918367348e-05, 'epoch': 22.52}
+    cv_results = run_cross_validation(
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 989, in run_cross_validation
+    train_wav2vec2_model_with_data(train_subset, val_subset, model_name, output_dir_fold)
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 598, in train_wav2vec2_model_with_data
+    trainer.train()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2509, in _inner_training_loop
+    batch_samples, num_items_in_batch = self.get_batch_samples(epoch_iterator, num_batches, args.device)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 5263, in get_batch_samples
+    batch_samples.append(next(epoch_iterator))
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\data_loader.py", line 577, in __iter__
+    next_batch = next(dataloader_iter)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\utils\data\dataloader.py", line 734, in __next__
+    data = self._next_data()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\utils\data\dataloader.py", line 790, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\utils\data\_utils\fetch.py", line 50, in fetch
+    data = self.dataset.__getitems__(possibly_batched_index)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\datasets\arrow_dataset.py", line 2781, in __getitems__
+    batch = self.__getitem__(keys)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\datasets\arrow_dataset.py", line 2777, in __getitem__
+    return self._getitem(key)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\datasets\arrow_dataset.py", line 2762, in _getitem
+    formatted_output = format_table(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\datasets\formatting\formatting.py", line 653, in format_table
+    return formatter(pa_table, query_type=query_type)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\datasets\formatting\formatting.py", line 410, in __call__
+    return self.format_batch(pa_table)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\datasets\formatting\formatting.py", line 466, in format_batch
+    batch = self.python_arrow_extractor().extract_batch(pa_table)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\datasets\formatting\formatting.py", line 149, in extract_batch
+    return pa_table.to_pydict()
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 1127, in <module>
+    cv_results = run_cross_validation(
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 989, in run_cross_validation
+    train_wav2vec2_model_with_data(train_subset, val_subset, model_name, output_dir_fold)
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 598, in train_wav2vec2_model_with_data
+    trainer.train()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2509, in _inner_training_loop
+    batch_samples, num_items_in_batch = self.get_batch_samples(epoch_iterator, num_batches, args.device)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 5263, in get_batch_samples
+    batch_samples.append(next(epoch_iterator))
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\data_loader.py", line 577, in __iter__
+    next_batch = next(dataloader_iter)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\utils\data\dataloader.py", line 734, in __next__
+    data = self._next_data()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\utils\data\dataloader.py", line 790, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\utils\data\_utils\fetch.py", line 50, in fetch
+    data = self.dataset.__getitems__(possibly_batched_index)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\datasets\arrow_dataset.py", line 2781, in __getitems__
+    batch = self.__getitem__(keys)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\datasets\arrow_dataset.py", line 2777, in __getitem__
+    return self._getitem(key)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\datasets\arrow_dataset.py", line 2762, in _getitem
+    formatted_output = format_table(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\datasets\formatting\formatting.py", line 653, in format_table
+    return formatter(pa_table, query_type=query_type)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\datasets\formatting\formatting.py", line 410, in __call__
+    return self.format_batch(pa_table)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\datasets\formatting\formatting.py", line 466, in format_batch
+    batch = self.python_arrow_extractor().extract_batch(pa_table)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\datasets\formatting\formatting.py", line 149, in extract_batch
+    return pa_table.to_pydict()
+KeyboardInterrupt

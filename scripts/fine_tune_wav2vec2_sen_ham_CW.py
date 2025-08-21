@@ -36,17 +36,13 @@ os.environ["TRANSFORMERS_VERBOSITY"] = "info"
 os.environ["DATASETS_VERBOSITY"] = "info"
 os.environ["PYTHONPATH"] = "."
 
-# Define label mapping
+# Define label mapping (5 classes: none + 4 profanity words)
 label_map = {
     'none': 0,
     'เย็ด': 1,
     'กู': 2,
     'มึง': 3,
-    'เหี้ย': 4,
-    'ควย': 5,
-    'สวะ': 6,
-    'หี': 7,
-    'แตด': 8
+    'เหี้ย': 4
 }
 
 # Define the number of labels
@@ -148,15 +144,11 @@ def compute_metrics(eval_pred):
         "f1_weighted": f1_weighted,
         "profanity_accuracy": profanity_accuracy,
         "profanity_f1": profanity_f1,
-        # Add per-class F1 scores for monitoring
+        # Add per-class F1 scores for 5-class model
         "f1_เย็ด": f1[1] if len(f1) > 1 else 0.0,
         "f1_กู": f1[2] if len(f1) > 2 else 0.0,
         "f1_มึง": f1[3] if len(f1) > 3 else 0.0,
         "f1_เหี้ย": f1[4] if len(f1) > 4 else 0.0,
-        "f1_ควย": f1[5] if len(f1) > 5 else 0.0,
-        "f1_สวะ": f1[6] if len(f1) > 6 else 0.0,
-        "f1_หี": f1[7] if len(f1) > 7 else 0.0,
-        "f1_แตด": f1[8] if len(f1) > 8 else 0.0,
     }
 
 # Load and preprocess the dataset
@@ -581,6 +573,7 @@ def train_wav2vec2_model_with_data(train_dataset, val_dataset, model_name, outpu
         save_on_each_node=False,
         disable_tqdm=False,
         remove_unused_columns=True,
+        max_steps=14700,
         # Additional parameters for better convergence
         adam_epsilon=1e-6,
         max_grad_norm=1.0,
@@ -691,7 +684,6 @@ def train_wav2vec2_model(csv_file, model_name, output_dir):
         push_to_hub=False,
         save_on_each_node=False,
         disable_tqdm=False,
-        max_steps=5000,                  # Best: 5000 max steps
         remove_unused_columns=True,
         # Additional parameters for better convergence
         adam_epsilon=1e-6,
@@ -779,9 +771,9 @@ def augment_audio(audio):
 
 def augment_short_words(audio, label):
     """
-    Enhanced augmentation specifically for short words
+    Enhanced augmentation for 5-class profanity words
     """
-    if label in ['กู', 'มึง']:
+    if label in ['เย็ด', 'กู', 'มึง', 'เหี้ย']:  # Only the 4 profanity classes we're keeping
         augmented = []
         # Create multiple variations
         for _ in range(3):
@@ -1123,14 +1115,21 @@ def evaluate_dataset(model, feature_extractor, dataset):
     }
 
 if __name__ == "__main__":
-    csv_file = './csv/train_with_augmentation.csv'  # Use the new balanced dataset
+    csv_file = './csv/balanced_train_original_profanity.csv'  # Use the original training dataset
     model_name = "airesearch/wav2vec2-large-xlsr-53-th"
-    output_dir = './models/audio_train_enhanced'
+    output_dir = './models/5_class_profanity'  # Updated for 5-class model
+    
+    print("🎯 5-CLASS PROFANITY DETECTION TRAINING")
+    print(f"📁 Dataset: {csv_file}")
+    print(f"🏗️ Model: {model_name}")
+    print(f"💾 Output: {output_dir}")
+    print(f"🏷️ Classes: {list(label_map.keys())} (Total: {num_labels})")
+    print()
     
     # Run proper cross-validation
     cv_results = run_cross_validation(
         csv_file=csv_file,
         model_name=model_name,
         output_dir=output_dir,
-        n_splits=5  # Using 3 folds for faster training
+        n_splits=5  # Using 5 folds for robust evaluation
     )

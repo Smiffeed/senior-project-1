@@ -1,0 +1,54 @@
+  2%|█                                                      | 296/14700 [02:10<1:53:05,  2.12it/s]Traceback (most recent call last):
+{'loss': 0.7547, 'grad_norm': 1.0176208019256592, 'learning_rate': 1.142857142857143e-06, 'epoch': 2.76}
+{'loss': 0.7342, 'grad_norm': 1.3273959159851074, 'learning_rate': 2.36734693877551e-06, 'epoch': 5.48}
+{'loss': 0.7076, 'grad_norm': 1.425920844078064, 'learning_rate': 3.5918367346938777e-06, 'epoch': 8.19}
+{'loss': 0.7044, 'grad_norm': 0.7860477566719055, 'learning_rate': 4.775510204081632e-06, 'epoch': 10.95}
+{'loss': 0.6999, 'grad_norm': 0.9081948399543762, 'learning_rate': 6e-06, 'epoch': 13.67}
+{'loss': 0.6625, 'grad_norm': 0.5080060958862305, 'learning_rate': 7.224489795918368e-06, 'epoch': 16.38}
+{'loss': 0.652, 'grad_norm': 1.180827021598816, 'learning_rate': 8.448979591836734e-06, 'epoch': 19.1}
+{'loss': 0.6503, 'grad_norm': 0.7305229902267456, 'learning_rate': 9.63265306122449e-06, 'epoch': 21.86}
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 1130, in <module>
+{'eval_loss': 0.5936452150344849, 'eval_accuracy': 0.1125, 'eval_f1_macro': 0.1906615450277422, 'eval_f1_weighted': 0.1341357234314981, 'eval_profanity_accuracy': 0.23684210526315788, 'eval_profanity_f1': 0.26696428571428577, 'eval_f1_เย็ด': 0.056338028169014086, 'eval_f1_กู': 0.13333333333333333, 'eval_f1_มึง': 0.36363636363636365, 'eval_f1_เหี้ย': 0.4, 'eval_runtime': 0.5897, 'eval_samples_per_second': 147.531, 'eval_steps_per_second': 10.175, 'epoch': 22.76}
+{'loss': 0.5875, 'grad_norm': 1.0983587503433228, 'learning_rate': 1.0857142857142858e-05, 'epoch': 24.57}
+    cv_results = run_cross_validation(
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 992, in run_cross_validation
+    train_wav2vec2_model_with_data(train_subset, val_subset, model_name, output_dir_fold)
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 601, in train_wav2vec2_model_with_data
+    trainer.train()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2509, in _inner_training_loop
+    batch_samples, num_items_in_batch = self.get_batch_samples(epoch_iterator, num_batches, args.device)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 5263, in get_batch_samples
+    batch_samples.append(next(epoch_iterator))
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\data_loader.py", line 575, in __iter__
+    current_batch = send_to_device(current_batch, self.device, non_blocking=self._non_blocking)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\utils\operations.py", line 178, in send_to_device
+    {
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\utils\operations.py", line 179, in <dictcomp>
+    k: t if k in skip_keys else send_to_device(t, device, non_blocking=non_blocking, skip_keys=skip_keys)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\utils\operations.py", line 153, in send_to_device
+    return tensor.to(device, non_blocking=non_blocking)
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 1130, in <module>
+    cv_results = run_cross_validation(
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 992, in run_cross_validation
+    train_wav2vec2_model_with_data(train_subset, val_subset, model_name, output_dir_fold)
+  File "c:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\fine_tune_wav2vec2_sen_ham_CW.py", line 601, in train_wav2vec2_model_with_data
+    trainer.train()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2509, in _inner_training_loop
+    batch_samples, num_items_in_batch = self.get_batch_samples(epoch_iterator, num_batches, args.device)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 5263, in get_batch_samples
+    batch_samples.append(next(epoch_iterator))
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\data_loader.py", line 575, in __iter__
+    current_batch = send_to_device(current_batch, self.device, non_blocking=self._non_blocking)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\utils\operations.py", line 178, in send_to_device
+    {
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\utils\operations.py", line 179, in <dictcomp>
+    k: t if k in skip_keys else send_to_device(t, device, non_blocking=non_blocking, skip_keys=skip_keys)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\utils\operations.py", line 153, in send_to_device
+    return tensor.to(device, non_blocking=non_blocking)
+KeyboardInterrupt

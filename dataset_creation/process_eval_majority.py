@@ -1,7 +1,32 @@
 import pandas as pd
 import numpy as np
 
-def process_windows_majority(df, window_size=0.5, step_size=0.7):
+def label_window_hybrid(window_start, window_end, profanity_segments):
+    """
+    Hybrid labeling approach:
+    1. If any profanity word is COMPLETELY contained in window → profanity
+    2. If profanity overlap >= 50% of profanity word length → profanity  
+    3. Otherwise → none
+    """
+    for segment in profanity_segments:
+        prof_start, prof_end = segment['start_time'], segment['end_time']
+        prof_length = prof_end - prof_start
+        
+        # Check if profanity word is completely contained
+        if prof_start >= window_start and prof_end <= window_end:
+            return segment['label']  # Complete word in window
+        
+        # Check overlap percentage relative to profanity word length
+        overlap_start = max(window_start, prof_start)
+        overlap_end = min(window_end, prof_end)
+        overlap_duration = max(0, overlap_end - overlap_start)
+        
+        if overlap_duration >= 0.5 * prof_length:  # >=50% of WORD captured
+            return segment['label']
+    
+    return 'none'
+
+def process_windows_majority(df, window_size=0.5, step_size=0.25):
     windows = []
     for file_path in df['file_path'].unique():
         file_segments = df[df['file_path'] == file_path]
@@ -11,28 +36,29 @@ def process_windows_majority(df, window_size=0.5, step_size=0.7):
             end = start + window_size
             if start >= audio_end:
                 break
+            
             # Find all segments that overlap with this window
             overlapping = file_segments[
                 ~((file_segments['end_time'] <= start) | 
                   (file_segments['start_time'] >= end))
             ]
-            # Calculate overlap duration for each label
-            label_durations = {}
-            for _, segment in overlapping.iterrows():
-                overlap_start = max(start, segment['start_time'])
-                overlap_end = min(end, segment['end_time'])
-                overlap_duration = max(0, overlap_end - overlap_start)
-                if overlap_duration > 0:
-                    label = segment['label']
-                    if label not in label_durations:
-                        label_durations[label] = 0
-                    label_durations[label] += overlap_duration
-            # Assign label if any profanity label covers >= 50% of window
-            label = 'none'
-            for lbl, dur in label_durations.items():
-                if lbl != 'none' and dur >= 0.5 * window_size:
-                    label = lbl
-                    break
+            
+            # Get profanity segments only
+            profanity_segments = overlapping[overlapping['label'] != 'none']
+            
+            # Use hybrid labeling approach
+            if len(profanity_segments) > 0:
+                profanity_list = []
+                for _, segment in profanity_segments.iterrows():
+                    profanity_list.append({
+                        'start_time': segment['start_time'],
+                        'end_time': segment['end_time'],
+                        'label': segment['label']
+                    })
+                label = label_window_hybrid(start, end, profanity_list)
+            else:
+                label = 'none'
+            
             windows.append({
                 'file_path': file_path,
                 'start_time': round(start, 3),
@@ -43,13 +69,45 @@ def process_windows_majority(df, window_size=0.5, step_size=0.7):
     return pd.DataFrame(windows)
 
 # Read the original CSV
-df = pd.read_csv('./csv/eval.csv')
+df = pd.read_csv('./csv/eval_5labels.csv')
 
-# Example usage for one stride (repeat for 0.25 to 0.7)
-for stride in [0.25, 0.3, 0.4, 0.5, 0.6, 0.7]:
-    windowed_df = process_windows_majority(df, window_size=0.5, step_size=stride)
-    windowed_df = windowed_df.drop_duplicates(subset=['file_path', 'start_time', 'end_time'], keep='first')
-    windowed_df = windowed_df.sort_values(['file_path', 'start_time']).reset_index(drop=True)
-    windowed_df.to_csv(f'./csv/eval_windowed_majority_{stride}s.csv', index=False)
+# Test with one stride first to verify hybrid approach works
+print("Testing hybrid labeling approach...")
+print(f"Original data: {len(df)} rows")
+print(f"Original profanity instances:")
+for label in ['เย็ด', 'กู', 'มึง', 'เหี้ย']:
+    count = len(df[df['label'] == label])
+    print(f"  {label}: {count}")
 
-print("Majority overlap window labeling complete for strides 0.25 to 0.7.")
+# Test with stride 0.25s
+windowed_df = process_windows_majority(df, window_size=0.5, step_size=0.25)
+windowed_df = windowed_df.drop_duplicates(subset=['file_path', 'start_time', 'end_time'], keep='first')
+windowed_df = windowed_df.sort_values(['file_path', 'start_time']).reset_index(drop=True)
+
+print(f"\nHybrid windowed data: {len(windowed_df)} rows")
+print(f"Hybrid windowed profanity instances:")
+for label in ['เย็ด', 'กู', 'มึง', 'เหี้ย']:
+    count = len(windowed_df[windowed_df['label'] == label])
+    print(f"  {label}: {count}")
+
+# Save test result
+windowed_df.to_csv(f'./csv/eval_0.5s/stride_0.25s_hybrid.csv', index=False)
+
+print(f"\n✅ Hybrid approach test saved to: ./csv/eval_0.5s/stride_0.25s_hybrid.csv")
+
+# Generate all strides if test looks good
+generate_all = input("\nGenerate all stride files? (y/n): ").lower().strip()
+if generate_all == 'y':
+    print("Generating all stride files with hybrid approach...")
+    for stride in [0.15]:
+        windowed_df = process_windows_majority(df, window_size=0.3, step_size=stride)
+        windowed_df = windowed_df.drop_duplicates(subset=['file_path', 'start_time', 'end_time'], keep='first')
+        windowed_df = windowed_df.sort_values(['file_path', 'start_time']).reset_index(drop=True)
+        windowed_df.to_csv(f'./csv/eval_0.3s/stride_{stride}s.csv', index=False)
+        print(f"  Generated: stride_{stride}s.csv")
+
+print("Hybrid windowing approach complete.")
+print("Hybrid approach:")
+print("1. Complete profanity words in window → labeled as profanity")
+print("2. ≥50% of profanity word captured → labeled as profanity")
+print("3. Otherwise → labeled as 'none'")

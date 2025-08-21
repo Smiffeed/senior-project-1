@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-def process_windows(df, window_size=0.5, step_size=0.7):
+def process_windows(df, window_size=0.5, step_size=0.25):
     windows = []
     
     # Process each audio file separately

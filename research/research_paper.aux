@@ -42,11 +42,83 @@
 \newlabel{tab:evaluation-results}{{5}{12}{\xpg@aux {\xpg@current@opts }{\languagename }Evaluation results for different preprocessing and modeling strategies by finetuning Wav2Vec2 Model. All values are percentages (\%). Headers are abbreviated: Rect. (Rectangular), Hamm. (Hamming), CW (Class-Weighted), avg (Average). Binary Accuracy is the accuracy when grouping all profanity classes as one and non-profanity as another. Classify accuracy is the percentage of correctly classified windows across all classes}{table.5}{}}
 \newlabel{tab:stride-comparison}{{4.1}{12}{Evaluation Metrics and Results}{table.5}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces \xpg@aux {}{english}Comparison of window stride (hop length) for 0.5s window length. Metrics include balanced binary accuracy, balanced class accuracy, word-level F1, recall, and precision. All values are percentages (\%).}}{12}{table.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Discussion of Results}{13}{subsection.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Gap Between Binary and Multi-Class Accuracy}{13}{section*.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Impact of Windowing Function}{13}{section*.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion and Future Work}{13}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Conclusion}{13}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Comprehensive Windowing Strategy Analysis}{13}{subsection.4.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces \xpg@aux {}{english}Comprehensive windowing strategy performance analysis from 80+ configurations. All values are percentages (\%).}}{13}{table.7}\protected@file@percent }
+\newlabel{tab:windowing-performance}{{7}{13}{\xpg@aux {\xpg@current@opts }{\languagename }Comprehensive windowing strategy performance analysis from 80+ configurations. All values are percentages (\%)}{table.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Detailed Classification Performance Analysis}{13}{subsection.4.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces \xpg@aux {}{english}Detailed classification report from optimal configuration (0.3s window, 0.2s stride). All values are percentages (\%).}}{14}{table.8}\protected@file@percent }
+\newlabel{tab:detailed-classification}{{8}{14}{\xpg@aux {\xpg@current@opts }{\languagename }Detailed classification report from optimal configuration (0.3s window, 0.2s stride). All values are percentages (\%)}{table.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Binary Classification Performance Metrics}{14}{subsection.4.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces \xpg@aux {}{english}Binary classification performance across key metrics showing the precision-recall trade-off.}}{14}{table.9}\protected@file@percent }
+\newlabel{tab:binary-performance}{{9}{14}{\xpg@aux {\xpg@current@opts }{\languagename }Binary classification performance across key metrics showing the precision-recall trade-off}{table.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}IoU-Based Temporal Evaluation}{14}{subsection.4.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces \xpg@aux {}{english}IoU-based evaluation results showing temporal localization accuracy across different thresholds.}}{15}{table.10}\protected@file@percent }
+\newlabel{tab:iou-evaluation}{{10}{15}{\xpg@aux {\xpg@current@opts }{\languagename }IoU-based evaluation results showing temporal localization accuracy across different thresholds}{table.10}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {11}{\ignorespaces \xpg@aux {}{english}Comprehensive IoU threshold analysis across all windowing configurations showing performance sensitivity.}}{15}{table.11}\protected@file@percent }
+\newlabel{tab:comprehensive-iou-analysis}{{11}{15}{\xpg@aux {\xpg@current@opts }{\languagename }Comprehensive IoU threshold analysis across all windowing configurations showing performance sensitivity}{table.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Word-Level Performance Analysis}{16}{subsection.4.6}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {12}{\ignorespaces \xpg@aux {}{english}Word-level performance comparison between controlled binary classification and realistic ground truth evaluation.}}{16}{table.12}\protected@file@percent }
+\newlabel{tab:word-level-performance}{{12}{16}{\xpg@aux {\xpg@current@opts }{\languagename }Word-level performance comparison between controlled binary classification and realistic ground truth evaluation}{table.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7}Multi-Class Classification Analysis}{16}{subsection.4.7}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {13}{\ignorespaces \xpg@aux {}{english}Multi-class classification performance against original ground truth showing class-wise metrics.}}{16}{table.13}\protected@file@percent }
+\newlabel{tab:multiclass-performance}{{13}{16}{\xpg@aux {\xpg@current@opts }{\languagename }Multi-class classification performance against original ground truth showing class-wise metrics}{table.13}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.8}Discussion of Results}{17}{subsection.4.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Realistic vs. Controlled Evaluation}{17}{section*.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Class-Specific Performance Analysis}{17}{section*.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {14}{\ignorespaces \xpg@aux {}{english}Summary of class-wise performance statistics across all configurations.}}{18}{table.14}\protected@file@percent }
+\newlabel{tab:class-performance-summary}{{14}{18}{\xpg@aux {\xpg@current@opts }{\languagename }Summary of class-wise performance statistics across all configurations}{table.14}{}}
+\@writefile{toc}{\contentsline {paragraph}{Gap Between Binary and Multi-Class Accuracy}{18}{section*.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Impact of Windowing Function}{18}{section*.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Temporal Fragmentation Challenge}{19}{section*.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Real-World Deployment Implications}{19}{section*.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.9}Comprehensive Performance Summary}{19}{subsection.4.9}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {15}{\ignorespaces \xpg@aux {}{english}Comprehensive performance summary across all evaluation methodologies and configurations.}}{20}{table.15}\protected@file@percent }
+\newlabel{tab:comprehensive-summary}{{15}{20}{\xpg@aux {\xpg@current@opts }{\languagename }Comprehensive performance summary across all evaluation methodologies and configurations}{table.15}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.10}Detailed Window/Stride Configuration Analysis}{20}{subsection.4.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.10.1}Small Window Configurations (0.3s - 0.5s)}{21}{subsubsection.4.10.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {16}{\ignorespaces \xpg@aux {}{english}Performance analysis for small window configurations (0.3s - 0.5s). All values are percentages (\%).}}{21}{table.16}\protected@file@percent }
+\newlabel{tab:small-window-configs}{{16}{21}{\xpg@aux {\xpg@current@opts }{\languagename }Performance analysis for small window configurations (0.3s - 0.5s). All values are percentages (\%)}{table.16}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.10.2}Medium Window Configurations (0.6s - 0.7s)}{22}{subsubsection.4.10.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {17}{\ignorespaces \xpg@aux {}{english}Performance analysis for medium window configurations (0.6s - 0.7s). All values are percentages (\%).}}{22}{table.17}\protected@file@percent }
+\newlabel{tab:medium-window-configs}{{17}{22}{\xpg@aux {\xpg@current@opts }{\languagename }Performance analysis for medium window configurations (0.6s - 0.7s). All values are percentages (\%)}{table.17}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.10.3}Large Window Configurations (0.8s - 1.0s)}{23}{subsubsection.4.10.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {18}{\ignorespaces \xpg@aux {}{english}Performance analysis for large window configurations (0.8s - 1.0s). All values are percentages (\%).}}{23}{table.18}\protected@file@percent }
+\newlabel{tab:large-window-configs}{{18}{23}{\xpg@aux {\xpg@current@opts }{\languagename }Performance analysis for large window configurations (0.8s - 1.0s). All values are percentages (\%)}{table.18}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.10.4}Comprehensive Class-wise Performance Analysis}{23}{subsubsection.4.10.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {19}{\ignorespaces \xpg@aux {}{english}Class-wise performance for 0.3s and 0.4s window configurations. All values are percentages (\%).}}{24}{table.19}\protected@file@percent }
+\newlabel{tab:class-performance-0.3-0.4}{{19}{24}{\xpg@aux {\xpg@current@opts }{\languagename }Class-wise performance for 0.3s and 0.4s window configurations. All values are percentages (\%)}{table.19}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {20}{\ignorespaces \xpg@aux {}{english}Class-wise performance for 0.5s and 0.6s window configurations. All values are percentages (\%).}}{25}{table.20}\protected@file@percent }
+\newlabel{tab:class-performance-0.5-0.6}{{20}{25}{\xpg@aux {\xpg@current@opts }{\languagename }Class-wise performance for 0.5s and 0.6s window configurations. All values are percentages (\%)}{table.20}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {21}{\ignorespaces \xpg@aux {}{english}Class-wise performance for 0.7s and 0.8s window configurations. All values are percentages (\%).}}{26}{table.21}\protected@file@percent }
+\newlabel{tab:class-performance-0.7-0.8}{{21}{26}{\xpg@aux {\xpg@current@opts }{\languagename }Class-wise performance for 0.7s and 0.8s window configurations. All values are percentages (\%)}{table.21}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {22}{\ignorespaces \xpg@aux {}{english}Class-wise performance for 0.9s and 1.0s window configurations. All values are percentages (\%).}}{27}{table.22}\protected@file@percent }
+\newlabel{tab:class-performance-0.9-1.0}{{22}{27}{\xpg@aux {\xpg@current@opts }{\languagename }Class-wise performance for 0.9s and 1.0s window configurations. All values are percentages (\%)}{table.22}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.11}Binary Classification Performance Analysis}{28}{subsection.4.11}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {23}{\ignorespaces \xpg@aux {}{english}Binary classification performance for 0.3s and 0.4s window configurations. All values are percentages (\%).}}{28}{table.23}\protected@file@percent }
+\newlabel{tab:binary-performance-0.3-0.4}{{23}{28}{\xpg@aux {\xpg@current@opts }{\languagename }Binary classification performance for 0.3s and 0.4s window configurations. All values are percentages (\%)}{table.23}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {24}{\ignorespaces \xpg@aux {}{english}Binary classification performance for 0.5s and 0.6s window configurations. All values are percentages (\%).}}{29}{table.24}\protected@file@percent }
+\newlabel{tab:binary-performance-0.5-0.6}{{24}{29}{\xpg@aux {\xpg@current@opts }{\languagename }Binary classification performance for 0.5s and 0.6s window configurations. All values are percentages (\%)}{table.24}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {25}{\ignorespaces \xpg@aux {}{english}Binary classification performance for 0.7s and 0.8s window configurations. All values are percentages (\%).}}{29}{table.25}\protected@file@percent }
+\newlabel{tab:binary-performance-0.7-0.8}{{25}{29}{\xpg@aux {\xpg@current@opts }{\languagename }Binary classification performance for 0.7s and 0.8s window configurations. All values are percentages (\%)}{table.25}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {26}{\ignorespaces \xpg@aux {}{english}Binary classification performance for 0.9s and 1.0s window configurations. All values are percentages (\%).}}{30}{table.26}\protected@file@percent }
+\newlabel{tab:binary-performance-0.9-1.0}{{26}{30}{\xpg@aux {\xpg@current@opts }{\languagename }Binary classification performance for 0.9s and 1.0s window configurations. All values are percentages (\%)}{table.26}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.12}Detailed Classification Reports by Configuration}{31}{subsection.4.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.12.1}Window 0.3s, Stride 0.125s Configuration}{31}{subsubsection.4.12.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {27}{\ignorespaces \xpg@aux {}{english}Classification Report for 0.3s Window, 0.125s Stride Configuration}}{31}{table.27}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {28}{\ignorespaces \xpg@aux {}{english}Performance Summary for 0.3s Window, 0.125s Stride Configuration}}{31}{table.28}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.12.2}Window 0.5s, Stride 0.25s Configuration}{32}{subsubsection.4.12.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {29}{\ignorespaces \xpg@aux {}{english}Classification Report for 0.5s Window, 0.25s Stride Configuration}}{32}{table.29}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {30}{\ignorespaces \xpg@aux {}{english}Performance Summary for 0.5s Window, 0.25s Stride Configuration}}{32}{table.30}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.12.3}Window 0.6s, Stride 0.3s Configuration}{32}{subsubsection.4.12.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {31}{\ignorespaces \xpg@aux {}{english}Classification Report for 0.6s Window, 0.3s Stride Configuration}}{32}{table.31}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {32}{\ignorespaces \xpg@aux {}{english}Performance Summary for 0.6s Window, 0.3s Stride Configuration}}{33}{table.32}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.12.4}Window 1.0s, Stride 0.5s Configuration}{33}{subsubsection.4.12.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {33}{\ignorespaces \xpg@aux {}{english}Classification Report for 1.0s Window, 0.5s Stride Configuration}}{33}{table.33}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {34}{\ignorespaces \xpg@aux {}{english}Performance Summary for 1.0s Window, 0.5s Stride Configuration}}{33}{table.34}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion and Future Work}{34}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Conclusion}{34}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Research Contributions}{35}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Future Work}{35}{subsection.5.3}\protected@file@percent }
 \bibstyle{plain}
 \bibdata{references}
 \bibcite{baath2024offline}{1}
@@ -54,11 +126,10 @@
 \bibcite{bain2023whisperx}{3}
 \bibcite{davidson2017automated}{4}
 \bibcite{vistec-depa_ai_research_institute_of_thailand_2023}{5}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Future Work}{14}{subsection.5.2}\protected@file@percent }
 \bibcite{mcfee2015librosa}{6}
 \bibcite{phatthiyaphaibun2022thai}{7}
 \bibcite{waseem2017understanding}{8}
 \bibcite{wazir2022deep}{9}
 \bibcite{wutiwiwatchai2007thai}{10}
 \bibcite{yeh2021streaming}{11}
-\gdef \@abspage@last{15}
+\gdef \@abspage@last{37}
