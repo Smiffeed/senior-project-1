@@ -1,0 +1,32 @@
+=== BATCH EVALUATION REPORT ===
+Generated at: 2025-09-12 05:23:09
+
+=== SUMMARY STATISTICS ===
+Total Evaluations: 1
+Successful: 0 (0.0%)
+Failed: 1 (100.0%)
+Total Processing Time: 10.9 seconds (0.2 minutes)
+Average Time per Evaluation: 10.9 seconds
+
+=== EVAL_BY_0.05 RESULTS ===
+Total: 1
+Successful: 0 (0.0%)
+Failed: 1
+
+  ❌ window_0.3s/stride_0.125s - 10.9s
+      Error: Traceback (most recent call last):
+  File "C:\Users\muldi\Documents\Playground\University\senior-pro...
+
+=== FAILED EVALUATIONS DETAILS ===
+❌ eval_by_0.05/window_0.3s/stride_0.125s
+   CSV: csv\eval_by_0.05\window_0.3s\stride_0.125s.csv
+   Error: Traceback (most recent call last):
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\comprehensive_evaluation_processor.py", line 2224, in <module>
+    main()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\comprehensive_evaluation_processor.py", line 2193, in main
+    print("Remaining classes:", ground_truth_df['label'].value_counts().to_dict())
+  File "C:\ProgramData\anaconda3\envs\ai\lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 15-16: character maps to <undefined>
+
+

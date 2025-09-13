@@ -1,0 +1,861 @@
+=== IoU ANALYSIS RESULTS ===
+Generated at: 2025-09-12 12:37:05
+
+Combined IoU Analysis:
+Multiple predictions within the same ground truth word are combined as one area.
+This provides higher IoU values by treating overlapping predictions as unified detection.
+
+Combined Mean IoU: 0.1312
+(Average IoU when multiple predictions per ground truth word are combined)
+
+Individual Mean IoU: 0.2386
+(Average IoU for individual predictions - reference only)
+
+=== MEAN IoU BY WORD CLASS ===
+  เหี้ย: 0.1822
+  มึง: 0.1376
+  กู: 0.1158
+  เย็ด: 0.1031
+
+=== IoU THRESHOLDS PERFORMANCE ===
+
+--- IoU Threshold 0.1 ---
+Binary Classification (Profane vs Non-Profane):
+  Accuracy: 0.2613
+  Balanced Accuracy: 0.4883
+  Precision: 0.0266
+  Recall: 0.3083
+  F1-Score: 0.0489
+
+Multiclass Classification (All Classes):
+  Accuracy: 0.3865
+  Balanced Accuracy: 0.4684
+
+  Classification Report:
+  precision    recall  f1-score   support
+  
+          เย็ด       0.20      0.46      0.28        26
+            กู       0.44      0.45      0.45       157
+           มึง       0.47      0.62      0.53       117
+         เหี้ย       0.36      0.63      0.46        78
+          none       0.34      0.18      0.24       287
+  
+      accuracy                           0.39       665
+     micro avg       0.39      0.39      0.39     665
+     macro avg       0.36      0.47      0.39       665
+  weighted avg       0.38      0.39      0.37       665
+
+=== DETAILED CLASSIFICATION ANALYSIS (IoU >= 0.1) ===
+--- Binary Classification Report (IoU >= 0.1) ---
+Accuracy: 0.3188
+Precision: 0.4245
+Recall: 0.5582
+F1-Score: 0.4823
+
+Binary Classification Report:
+              precision    recall  f1-score   support
+
+        none       0.01      0.00      0.00       287
+     profane       0.42      0.56      0.48       378
+
+    accuracy                           0.32       665
+   macro avg       0.22      0.28      0.24       665
+weighted avg       0.24      0.32      0.28       665
+
+--- Multiclass Classification Report (IoU >= 0.1) ---
+Accuracy: 0.2992
+Balanced Accuracy: 0.4079
+
+Multiclass Classification Report:
+              precision    recall  f1-score   support
+
+        none       0.01      0.00      0.00       287
+     profane       0.00      0.00      0.00         0
+          กู       1.00      0.41      0.58       157
+         มึง       1.00      0.59      0.74       117
+        เย็ด       1.00      0.31      0.47        26
+       เหี้ย       1.00      0.73      0.84        78
+
+    accuracy                           0.30       665
+   macro avg       0.67      0.34      0.44       665
+weighted avg       0.57      0.30      0.39       665
+
+--- Confusion Matrix Analysis (IoU >= 0.1) ---
+IoU Threshold: 0.1
+Detections with IoU >= 0.1: 211/378 (55.8%)
+Binary Confusion Matrix:
+                    Predicted
+                    No-Prof  Profanity
+  Actual No-Prof          1        286
+  Actual Profanity      167        211
+  
+Binary Metrics Summary:
+  Precision: 0.4245
+  Recall: 0.5582
+  F1-Score: 0.4823
+  Accuracy: 0.3188
+
+
+--- IoU Threshold 0.2 ---
+Binary Classification (Profane vs Non-Profane):
+  Accuracy: 0.0919
+  Balanced Accuracy: 0.4448
+  Precision: 0.0097
+  Recall: 0.1128
+  F1-Score: 0.0179
+
+Multiclass Classification (All Classes):
+  Accuracy: 0.2677
+  Balanced Accuracy: 0.2390
+
+  Classification Report:
+  precision    recall  f1-score   support
+  
+          เย็ด       0.11      0.15      0.12        26
+            กู       0.21      0.11      0.15       157
+           มึง       0.28      0.21      0.24       117
+         เหี้ย       0.29      0.36      0.32        78
+          none       0.29      0.36      0.32       287
+  
+      accuracy                           0.27       665
+     micro avg       0.27      0.27      0.27     665
+     macro avg       0.24      0.24      0.23       665
+  weighted avg       0.26      0.27      0.26       665
+
+=== DETAILED CLASSIFICATION ANALYSIS (IoU >= 0.2) ===
+--- Binary Classification Report (IoU >= 0.2) ---
+Accuracy: 0.0947
+Precision: 0.1782
+Recall: 0.1640
+F1-Score: 0.1708
+
+Binary Classification Report:
+              precision    recall  f1-score   support
+
+        none       0.00      0.00      0.00       287
+     profane       0.18      0.16      0.17       378
+
+    accuracy                           0.09       665
+   macro avg       0.09      0.08      0.09       665
+weighted avg       0.10      0.09      0.10       665
+
+--- Multiclass Classification Report (IoU >= 0.2) ---
+Accuracy: 0.0902
+Balanced Accuracy: 0.1228
+
+Multiclass Classification Report:
+              precision    recall  f1-score   support
+
+        none       0.00      0.00      0.00       287
+     profane       0.00      0.00      0.00         0
+          กู       1.00      0.09      0.16       157
+         มึง       1.00      0.16      0.28       117
+        เย็ด       1.00      0.04      0.07        26
+       เหี้ย       1.00      0.32      0.49        78
+
+    accuracy                           0.09       665
+   macro avg       0.67      0.10      0.17       665
+weighted avg       0.57      0.09      0.15       665
+
+--- Confusion Matrix Analysis (IoU >= 0.2) ---
+IoU Threshold: 0.2
+Detections with IoU >= 0.2: 62/378 (16.4%)
+Binary Confusion Matrix:
+                    Predicted
+                    No-Prof  Profanity
+  Actual No-Prof          1        286
+  Actual Profanity      316         62
+  
+Binary Metrics Summary:
+  Precision: 0.1782
+  Recall: 0.1640
+  F1-Score: 0.1708
+  Accuracy: 0.0947
+
+
+--- IoU Threshold 0.3 ---
+Binary Classification (Profane vs Non-Profane):
+  Accuracy: 0.0476
+  Balanced Accuracy: 0.4501
+  Precision: 0.0044
+  Recall: 0.0511
+  F1-Score: 0.0081
+
+Multiclass Classification (All Classes):
+  Accuracy: 0.2767
+  Balanced Accuracy: 0.1812
+
+  Classification Report:
+  precision    recall  f1-score   support
+  
+          เย็ด       0.04      0.04      0.04        26
+            กู       0.12      0.04      0.06       157
+           มึง       0.14      0.06      0.08       117
+         เหี้ย       0.27      0.24      0.26        78
+          none       0.32      0.53      0.40       287
+  
+      accuracy                           0.28       665
+     micro avg       0.28      0.28      0.28     665
+     macro avg       0.18      0.18      0.17       665
+  weighted avg       0.22      0.28      0.23       665
+
+=== DETAILED CLASSIFICATION ANALYSIS (IoU >= 0.3) ===
+--- Binary Classification Report (IoU >= 0.3) ---
+Accuracy: 0.0316
+Precision: 0.0654
+Recall: 0.0529
+F1-Score: 0.0585
+
+Binary Classification Report:
+              precision    recall  f1-score   support
+
+        none       0.00      0.00      0.00       287
+     profane       0.07      0.05      0.06       378
+
+    accuracy                           0.03       665
+   macro avg       0.03      0.03      0.03       665
+weighted avg       0.04      0.03      0.03       665
+
+--- Multiclass Classification Report (IoU >= 0.3) ---
+Accuracy: 0.0301
+Balanced Accuracy: 0.0400
+
+Multiclass Classification Report:
+              precision    recall  f1-score   support
+
+        none       0.00      0.00      0.00       287
+     profane       0.00      0.00      0.00         0
+          กู       1.00      0.03      0.05       157
+         มึง       1.00      0.04      0.08       117
+        เย็ด       0.00      0.00      0.00        26
+       เหี้ย       1.00      0.13      0.23        78
+
+    accuracy                           0.03       665
+   macro avg       0.50      0.03      0.06       665
+weighted avg       0.53      0.03      0.05       665
+
+--- Confusion Matrix Analysis (IoU >= 0.3) ---
+IoU Threshold: 0.3
+Detections with IoU >= 0.3: 20/378 (5.3%)
+Binary Confusion Matrix:
+                    Predicted
+                    No-Prof  Profanity
+  Actual No-Prof          1        286
+  Actual Profanity      358         20
+  
+Binary Metrics Summary:
+  Precision: 0.0654
+  Recall: 0.0529
+  F1-Score: 0.0585
+  Accuracy: 0.0316
+
+
+--- IoU Threshold 0.4 ---
+Binary Classification (Profane vs Non-Profane):
+  Accuracy: 0.0262
+  Balanced Accuracy: 0.2506
+  Precision: 0.0017
+  Recall: 0.0195
+  F1-Score: 0.0031
+
+Multiclass Classification (All Classes):
+  Accuracy: 0.3143
+  Balanced Accuracy: 0.1646
+
+  Classification Report:
+  precision    recall  f1-score   support
+  
+          เย็ด       0.00      0.00      0.00        26
+            กู       0.07      0.01      0.02       157
+           มึง       0.04      0.01      0.01       117
+         เหี้ย       0.21      0.12      0.15        78
+          none       0.36      0.69      0.47       287
+  
+      accuracy                           0.31       665
+     micro avg       0.31      0.31      0.31     665
+     macro avg       0.13      0.16      0.13       665
+  weighted avg       0.20      0.31      0.23       665
+
+=== DETAILED CLASSIFICATION ANALYSIS (IoU >= 0.4) ===
+--- Binary Classification Report (IoU >= 0.4) ---
+Accuracy: 0.0120
+Precision: 0.0239
+Recall: 0.0185
+F1-Score: 0.0209
+
+Binary Classification Report:
+              precision    recall  f1-score   support
+
+        none       0.00      0.00      0.00       287
+     profane       0.02      0.02      0.02       378
+
+    accuracy                           0.01       665
+   macro avg       0.01      0.01      0.01       665
+weighted avg       0.01      0.01      0.01       665
+
+--- Multiclass Classification Report (IoU >= 0.4) ---
+Accuracy: 0.0105
+Balanced Accuracy: 0.0131
+
+Multiclass Classification Report:
+              precision    recall  f1-score   support
+
+        none       0.00      0.00      0.00       287
+     profane       0.00      0.00      0.00         0
+          กู       1.00      0.01      0.01       157
+         มึง       1.00      0.02      0.03       117
+        เย็ด       0.00      0.00      0.00        26
+       เหี้ย       1.00      0.04      0.07        78
+
+    accuracy                           0.01       665
+   macro avg       0.50      0.01      0.02       665
+weighted avg       0.53      0.01      0.02       665
+
+--- Confusion Matrix Analysis (IoU >= 0.4) ---
+IoU Threshold: 0.4
+Detections with IoU >= 0.4: 7/378 (1.9%)
+Binary Confusion Matrix:
+                    Predicted
+                    No-Prof  Profanity
+  Actual No-Prof          1        286
+  Actual Profanity      371          7
+  
+Binary Metrics Summary:
+  Precision: 0.0239
+  Recall: 0.0185
+  F1-Score: 0.0209
+  Accuracy: 0.0120
+
+
+--- IoU Threshold 0.5 ---
+Binary Classification (Profane vs Non-Profane):
+  Accuracy: 0.0193
+  Balanced Accuracy: 0.2903
+  Precision: 0.0008
+  Recall: 0.0090
+  F1-Score: 0.0014
+
+Multiclass Classification (All Classes):
+  Accuracy: 0.3549
+  Balanced Accuracy: 0.1712
+
+  Classification Report:
+  precision    recall  f1-score   support
+  
+          เย็ด       0.00      0.00      0.00        26
+            กู       0.10      0.01      0.02       157
+           มึง       0.00      0.00      0.00       117
+         เหี้ย       0.12      0.04      0.06        78
+          none       0.39      0.80      0.52       287
+  
+      accuracy                           0.35       665
+     micro avg       0.35      0.35      0.35     665
+     macro avg       0.12      0.17      0.12       665
+  weighted avg       0.20      0.35      0.24       665
+
+=== DETAILED CLASSIFICATION ANALYSIS (IoU >= 0.5) ===
+--- Binary Classification Report (IoU >= 0.5) ---
+Accuracy: 0.0045
+Precision: 0.0069
+Recall: 0.0053
+F1-Score: 0.0060
+
+Binary Classification Report:
+              precision    recall  f1-score   support
+
+        none       0.00      0.00      0.00       287
+     profane       0.01      0.01      0.01       378
+
+    accuracy                           0.00       665
+   macro avg       0.00      0.00      0.00       665
+weighted avg       0.01      0.00      0.00       665
+
+--- Multiclass Classification Report (IoU >= 0.5) ---
+Accuracy: 0.0045
+Balanced Accuracy: 0.0045
+
+Multiclass Classification Report:
+              precision    recall  f1-score   support
+
+        none       0.00      0.00      0.00       287
+     profane       0.00      0.00      0.00         0
+          กู       1.00      0.01      0.01       157
+         มึง       0.00      0.00      0.00       117
+        เย็ด       0.00      0.00      0.00        26
+       เหี้ย       1.00      0.01      0.03        78
+
+    accuracy                           0.00       665
+   macro avg       0.33      0.00      0.01       665
+weighted avg       0.35      0.00      0.01       665
+
+--- Confusion Matrix Analysis (IoU >= 0.5) ---
+IoU Threshold: 0.5
+Detections with IoU >= 0.5: 2/378 (0.5%)
+Binary Confusion Matrix:
+                    Predicted
+                    No-Prof  Profanity
+  Actual No-Prof          1        286
+  Actual Profanity      376          2
+  
+Binary Metrics Summary:
+  Precision: 0.0069
+  Recall: 0.0053
+  F1-Score: 0.0060
+  Accuracy: 0.0045
+
+
+--- IoU Threshold 0.6 ---
+Binary Classification (Profane vs Non-Profane):
+  Accuracy: 0.0173
+  Balanced Accuracy: 0.3379
+  Precision: 0.0005
+  Recall: 0.0060
+  F1-Score: 0.0010
+
+Multiclass Classification (All Classes):
+  Accuracy: 0.3925
+  Balanced Accuracy: 0.1862
+
+  Classification Report:
+  precision    recall  f1-score   support
+  
+          เย็ด       0.00      0.00      0.00        26
+            กู       0.08      0.01      0.01       157
+           มึง       0.00      0.00      0.00       117
+         เหี้ย       0.17      0.03      0.04        78
+          none       0.41      0.90      0.56       287
+  
+      accuracy                           0.39       665
+     micro avg       0.39      0.39      0.39     665
+     macro avg       0.13      0.19      0.12       665
+  weighted avg       0.21      0.39      0.25       665
+
+=== DETAILED CLASSIFICATION ANALYSIS (IoU >= 0.6) ===
+--- Binary Classification Report (IoU >= 0.6) ---
+Accuracy: 0.0030
+Precision: 0.0035
+Recall: 0.0026
+F1-Score: 0.0030
+
+Binary Classification Report:
+              precision    recall  f1-score   support
+
+        none       0.00      0.00      0.00       287
+     profane       0.00      0.00      0.00       378
+
+    accuracy                           0.00       665
+   macro avg       0.00      0.00      0.00       665
+weighted avg       0.00      0.00      0.00       665
+
+--- Multiclass Classification Report (IoU >= 0.6) ---
+Accuracy: 0.0030
+Balanced Accuracy: 0.0020
+
+Multiclass Classification Report:
+              precision    recall  f1-score   support
+
+        none       0.00      0.00      0.00       287
+     profane       0.00      0.00      0.00         0
+          กู       1.00      0.01      0.01       157
+         มึง       0.00      0.00      0.00       117
+        เย็ด       0.00      0.00      0.00        26
+       เหี้ย       0.00      0.00      0.00        78
+
+    accuracy                           0.00       665
+   macro avg       0.17      0.00      0.00       665
+weighted avg       0.24      0.00      0.00       665
+
+--- Confusion Matrix Analysis (IoU >= 0.6) ---
+IoU Threshold: 0.6
+Detections with IoU >= 0.6: 1/378 (0.3%)
+Binary Confusion Matrix:
+                    Predicted
+                    No-Prof  Profanity
+  Actual No-Prof          1        286
+  Actual Profanity      377          1
+  
+Binary Metrics Summary:
+  Precision: 0.0035
+  Recall: 0.0026
+  F1-Score: 0.0030
+  Accuracy: 0.0030
+
+
+--- IoU Threshold 0.7 ---
+Binary Classification (Profane vs Non-Profane):
+  Accuracy: 0.0163
+  Balanced Accuracy: 0.3045
+  Precision: 0.0004
+  Recall: 0.0045
+  F1-Score: 0.0007
+
+Multiclass Classification (All Classes):
+  Accuracy: 0.4120
+  Balanced Accuracy: 0.1934
+
+  Classification Report:
+  precision    recall  f1-score   support
+  
+          เย็ด       0.00      0.00      0.00        26
+            กู       0.14      0.01      0.01       157
+           มึง       0.00      0.00      0.00       117
+         เหี้ย       0.14      0.01      0.02        78
+          none       0.42      0.95      0.58       287
+  
+      accuracy                           0.41       665
+     micro avg       0.41      0.41      0.41     665
+     macro avg       0.14      0.19      0.12       665
+  weighted avg       0.23      0.41      0.26       665
+
+=== DETAILED CLASSIFICATION ANALYSIS (IoU >= 0.7) ===
+--- Binary Classification Report (IoU >= 0.7) ---
+Accuracy: 0.0030
+Precision: 0.0035
+Recall: 0.0026
+F1-Score: 0.0030
+
+Binary Classification Report:
+              precision    recall  f1-score   support
+
+        none       0.00      0.00      0.00       287
+     profane       0.00      0.00      0.00       378
+
+    accuracy                           0.00       665
+   macro avg       0.00      0.00      0.00       665
+weighted avg       0.00      0.00      0.00       665
+
+--- Multiclass Classification Report (IoU >= 0.7) ---
+Accuracy: 0.0030
+Balanced Accuracy: 0.0020
+
+Multiclass Classification Report:
+              precision    recall  f1-score   support
+
+        none       0.00      0.00      0.00       287
+     profane       0.00      0.00      0.00         0
+          กู       1.00      0.01      0.01       157
+         มึง       0.00      0.00      0.00       117
+        เย็ด       0.00      0.00      0.00        26
+       เหี้ย       0.00      0.00      0.00        78
+
+    accuracy                           0.00       665
+   macro avg       0.17      0.00      0.00       665
+weighted avg       0.24      0.00      0.00       665
+
+--- Confusion Matrix Analysis (IoU >= 0.7) ---
+IoU Threshold: 0.7
+Detections with IoU >= 0.7: 1/378 (0.3%)
+Binary Confusion Matrix:
+                    Predicted
+                    No-Prof  Profanity
+  Actual No-Prof          1        286
+  Actual Profanity      377          1
+  
+Binary Metrics Summary:
+  Precision: 0.0035
+  Recall: 0.0026
+  F1-Score: 0.0030
+  Accuracy: 0.0030
+
+
+--- IoU Threshold 0.8 ---
+Binary Classification (Profane vs Non-Profane):
+  Accuracy: 0.0154
+  Balanced Accuracy: 0.1307
+  Precision: 0.0003
+  Recall: 0.0030
+  F1-Score: 0.0005
+
+Multiclass Classification (All Classes):
+  Accuracy: 0.4211
+  Balanced Accuracy: 0.1970
+
+  Classification Report:
+  precision    recall  f1-score   support
+  
+          เย็ด       0.00      0.00      0.00        26
+            กู       0.00      0.00      0.00       157
+           มึง       0.00      0.00      0.00       117
+         เหี้ย       0.25      0.01      0.02        78
+          none       0.43      0.97      0.59       287
+  
+      accuracy                           0.42       665
+     micro avg       0.42      0.42      0.42     665
+     macro avg       0.14      0.20      0.12       665
+  weighted avg       0.21      0.42      0.26       665
+
+=== DETAILED CLASSIFICATION ANALYSIS (IoU >= 0.8) ===
+--- Binary Classification Report (IoU >= 0.8) ---
+Accuracy: 0.0030
+Precision: 0.0035
+Recall: 0.0026
+F1-Score: 0.0030
+
+Binary Classification Report:
+              precision    recall  f1-score   support
+
+        none       0.00      0.00      0.00       287
+     profane       0.00      0.00      0.00       378
+
+    accuracy                           0.00       665
+   macro avg       0.00      0.00      0.00       665
+weighted avg       0.00      0.00      0.00       665
+
+--- Multiclass Classification Report (IoU >= 0.8) ---
+Accuracy: 0.0030
+Balanced Accuracy: 0.0020
+
+Multiclass Classification Report:
+              precision    recall  f1-score   support
+
+        none       0.00      0.00      0.00       287
+     profane       0.00      0.00      0.00         0
+          กู       1.00      0.01      0.01       157
+         มึง       0.00      0.00      0.00       117
+        เย็ด       0.00      0.00      0.00        26
+       เหี้ย       0.00      0.00      0.00        78
+
+    accuracy                           0.00       665
+   macro avg       0.17      0.00      0.00       665
+weighted avg       0.24      0.00      0.00       665
+
+--- Confusion Matrix Analysis (IoU >= 0.8) ---
+IoU Threshold: 0.8
+Detections with IoU >= 0.8: 1/378 (0.3%)
+Binary Confusion Matrix:
+                    Predicted
+                    No-Prof  Profanity
+  Actual No-Prof          1        286
+  Actual Profanity      377          1
+  
+Binary Metrics Summary:
+  Precision: 0.0035
+  Recall: 0.0026
+  F1-Score: 0.0030
+  Accuracy: 0.0030
+
+
+--- IoU Threshold 0.9 ---
+Binary Classification (Profane vs Non-Profane):
+  Accuracy: 0.0144
+  Balanced Accuracy: 0.0075
+  Precision: 0.0001
+  Recall: 0.0015
+  F1-Score: 0.0002
+
+Multiclass Classification (All Classes):
+  Accuracy: 0.4286
+  Balanced Accuracy: 0.1986
+
+  Classification Report:
+  precision    recall  f1-score   support
+  
+          เย็ด       0.00      0.00      0.00        26
+            กู       0.00      0.00      0.00       157
+           มึง       0.00      0.00      0.00       117
+         เหี้ย       0.00      0.00      0.00        78
+          none       0.43      0.99      0.60       287
+  
+      accuracy                           0.43       665
+     micro avg       0.43      0.43      0.43     665
+     macro avg       0.09      0.20      0.12       665
+  weighted avg       0.19      0.43      0.26       665
+
+=== DETAILED CLASSIFICATION ANALYSIS (IoU >= 0.9) ===
+--- Binary Classification Report (IoU >= 0.9) ---
+Accuracy: 0.0015
+Precision: 0.0000
+Recall: 0.0000
+F1-Score: 0.0000
+
+Binary Classification Report:
+              precision    recall  f1-score   support
+
+        none       0.00      0.00      0.00       287
+     profane       0.00      0.00      0.00       378
+
+    accuracy                           0.00       665
+   macro avg       0.00      0.00      0.00       665
+weighted avg       0.00      0.00      0.00       665
+
+--- Multiclass Classification Report (IoU >= 0.9) ---
+Accuracy: 0.0015
+Balanced Accuracy: 0.0007
+
+Multiclass Classification Report:
+              precision    recall  f1-score   support
+
+        none       0.00      0.00      0.00       287
+     profane       0.00      0.00      0.00         0
+          กู       0.00      0.00      0.00       157
+         มึง       0.00      0.00      0.00       117
+        เย็ด       0.00      0.00      0.00        26
+       เหี้ย       0.00      0.00      0.00        78
+
+    accuracy                           0.00       665
+   macro avg       0.00      0.00      0.00       665
+weighted avg       0.00      0.00      0.00       665
+
+--- Confusion Matrix Analysis (IoU >= 0.9) ---
+IoU Threshold: 0.9
+Detections with IoU >= 0.9: 0/378 (0.0%)
+Binary Confusion Matrix:
+                    Predicted
+                    No-Prof  Profanity
+  Actual No-Prof          1        286
+  Actual Profanity      378          0
+  
+Binary Metrics Summary:
+  Precision: 0.0000
+  Recall: 0.0000
+  F1-Score: 0.0000
+  Accuracy: 0.0015
+
+
+=== GROUND TRUTH vs PREDICTION BREAKDOWN BY CLASS ===
+Detailed analysis of each class: ground truth count vs correct/incorrect predictions
+
+Class Analysis:
+----------------------------------------------------------------------
+Class        GT Count   Correct    Incorrect    Accuracy  
+----------------------------------------------------------------------
+กู           157        134        23           85.4     %
+มึง          117        106        11           90.6     %
+เย็ด         26         16         10           61.5     %
+เหี้ย        78         75         3            96.2     %
+none         287        1          286          0.3      %
+----------------------------------------------------------------------
+TOTAL        665        332        333          49.9     %
+----------------------------------------------------------------------
+
+Detailed Explanation:
+• กู: 157 words in ground truth
+  - 134 correctly predicted (sufficient IoU + correct label)
+  - 23 incorrectly predicted (insufficient IoU or wrong label)
+• มึง: 117 words in ground truth
+  - 106 correctly predicted (sufficient IoU + correct label)
+  - 11 incorrectly predicted (insufficient IoU or wrong label)
+• เย็ด: 26 words in ground truth
+  - 16 correctly predicted (sufficient IoU + correct label)
+  - 10 incorrectly predicted (insufficient IoU or wrong label)
+• เหี้ย: 78 words in ground truth
+  - 75 correctly predicted (sufficient IoU + correct label)
+  - 3 incorrectly predicted (insufficient IoU or wrong label)
+• none: 287 regions in ground truth
+  - 1 correctly identified (no profanity predictions overlap)
+  - 286 incorrectly identified (profanity predictions overlap)
+
+=== CLASSIFICATION EVALUATION (IoU-based) ===
+Classification performance based on combined IoU predictions
+
+=== 1. BINARY CLASSIFICATION (Profane vs None) ===
+Accuracy: 0.5489
+Precision: 0.5600
+Recall: 0.9630
+F1-Score: 0.7082
+
+Binary Classification Report:
+precision    recall  f1-score   support
+
+        none       0.07      0.00      0.01       287
+     profane       0.56      0.96      0.71       378
+
+    accuracy                           0.55       665
+   micro avg       0.55      0.55      0.55     665
+   macro avg       0.31      0.48      0.36       665
+weighted avg       0.35      0.55      0.41       665
+
+=== 2. MULTICLASS CLASSIFICATION (All Classes Including None) ===
+Accuracy: 0.4992
+Precision (profanity): 0.5092
+Recall (profanity): 0.8757
+F1-Score (profanity): 0.6440
+
+Multiclass Classification Report (All Classes Including None):
+precision    recall  f1-score   support
+
+        เย็ด       0.67      0.62      0.64        26
+          กู       0.34      0.85      0.48       157
+         มึง       0.76      0.91      0.83       117
+       เหี้ย       0.85      0.96      0.90        78
+        none       0.07      0.00      0.01       287
+
+    accuracy                           0.50       665
+   micro avg       0.50      0.50      0.50     665
+   macro avg       0.54      0.67      0.57       665
+weighted avg       0.37      0.50      0.39       665
+
+=== 3. MULTICLASS CLASSIFICATION (Profanity Words Only) ===
+Accuracy (profanity words only): 0.8757
+
+Multiclass Classification Report (Profanity Words Only - Excluding None):
+precision    recall  f1-score   support
+
+        เย็ด       0.89      0.62      0.73        26
+          กู       0.91      0.85      0.88       157
+         มึง       0.94      0.91      0.92       117
+       เหี้ย       0.88      0.96      0.92        78
+
+   micro avg       0.91      0.88      0.89       378
+    accuracy                           0.88     378
+   macro avg       0.90      0.83      0.86       378
+weighted avg       0.91      0.88      0.89       378
+
+=== IoU THRESHOLD ANALYSIS ===
+Percentage of ground truth words that achieve different IoU thresholds:
+
+Overall IoU Distribution:
+  IoU >= 0.1: 211/665 (31.7%)
+  IoU >= 0.2: 62/665 (9.3%)
+  IoU >= 0.3: 20/665 (3.0%)
+  IoU >= 0.4: 7/665 (1.1%)
+  IoU >= 0.5: 2/665 (0.3%)
+  IoU >= 0.6: 1/665 (0.2%)
+  IoU >= 0.7: 1/665 (0.2%)
+  IoU >= 0.8: 1/665 (0.2%)
+  IoU >= 0.9: 0/665 (0.0%)
+
+Profanity Words IoU Distribution:
+  IoU >= 0.1: 211/378 (55.8%)
+  IoU >= 0.2: 62/378 (16.4%)
+  IoU >= 0.3: 20/378 (5.3%)
+  IoU >= 0.4: 7/378 (1.9%)
+  IoU >= 0.5: 2/378 (0.5%)
+  IoU >= 0.6: 1/378 (0.3%)
+  IoU >= 0.7: 1/378 (0.3%)
+  IoU >= 0.8: 1/378 (0.3%)
+  IoU >= 0.9: 0/378 (0.0%)
+
+IoU Range Distribution (Profanity Words Only):
+  IoU 0.0-0.1: 167/378 (44.2%)
+  IoU 0.1-0.3: 191/378 (50.5%)
+  IoU 0.3-0.5: 18/378 (4.8%)
+  IoU 0.5-0.7: 1/378 (0.3%)
+  IoU 0.7-0.9: 1/378 (0.3%)
+  IoU 0.9-1.0: 0/378 (0.0%)
+
+Binary Detection Summary (Profanity vs None):
+  IoU >= 0.1: Detected 211/378 profanity, Correct 1/287 none (Accuracy: 31.9%)
+  IoU >= 0.3: Detected 20/378 profanity, Correct 1/287 none (Accuracy: 3.2%)
+  IoU >= 0.5: Detected 2/378 profanity, Correct 1/287 none (Accuracy: 0.5%)
+  IoU >= 0.7: Detected 1/378 profanity, Correct 1/287 none (Accuracy: 0.3%)
+  IoU >= 0.9: Detected 0/378 profanity, Correct 1/287 none (Accuracy: 0.2%)
+
+=== ANALYSIS FILES ===
+- combined_iou_analysis.csv: Combined predictions per ground truth word
+- individual_predictions_iou.csv: Individual prediction IoU values
+- mean_iou_by_word_class.csv: IoU statistics by profanity word class
+- window_stride_iou_summary.csv: Summary for finding best window/stride configurations
+
+=== DATASET STATISTICS ===
+Total Ground Truth Words: 378
+Total Predicted Words (after merging): 7719
+
+=== ROC AND DET CURVE ANALYSIS ===
+Binary ROC AUC (IoU-based): 0.9202
+Multiclass Average ROC AUC (IoU-based): 0.3851
+
+ROC and DET curve plots saved as PNG files in the output directory.
+
+Note: Combined IoU provides better temporal overlap measurement by treating
+multiple predictions within the same ground truth word as unified detection areas.

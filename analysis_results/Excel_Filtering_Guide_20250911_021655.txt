@@ -1,0 +1,76 @@
+
+=======================================================================
+HOW TO FILTER HIGHEST BINARY F1 IN EACH WINDOW USING EXCEL
+=======================================================================
+
+STEP-BY-STEP INSTRUCTIONS:
+
+1. OPEN THE CSV FILES IN EXCEL
+   • Open "Highest_F1_by_Window_[timestamp].csv" - This shows best F1 for each window
+   • OR open "All_Configurations_[timestamp].csv" - This shows all configurations
+
+2. ENABLE EXCEL FILTERING
+   • Click on any cell in the data
+   • Go to Data tab in Excel ribbon
+   • Click "Filter" button
+   • You'll see dropdown arrows in the header row
+
+3. TO FILTER BY SPECIFIC WINDOW SIZES:
+   • Click the dropdown arrow in "Window_Size_seconds" column
+   • Uncheck "Select All"
+   • Check only the window sizes you want (e.g., 0.7, 1.5, 2.0)
+   • Click OK
+
+4. TO SORT BY HIGHEST F1 SCORES:
+   • Click the dropdown arrow in "BEST_Binary_F1_Score" column (or "Binary_F1_Score")
+   • Choose "Sort Largest to Smallest"
+   • The highest F1 scores will appear at the top
+
+5. TO FIND BEST CONFIGURATION FOR A SPECIFIC WINDOW:
+   • Filter "Window_Size_seconds" to show only your desired window (e.g., 1.5)
+   • Sort by "Binary_F1_Score" (largest to smallest)
+   • The top row shows the best configuration for that window
+
+WHAT EACH FILE CONTAINS:
+========================
+
+"Highest_F1_by_Window_[timestamp].csv":
+   • Shows the single best F1 score for each window size
+   • Includes the method and stride that achieved that score
+   • Perfect for quick comparison across window sizes
+
+"All_Configurations_[timestamp].csv":
+   • Shows every single configuration tested
+   • Allows detailed filtering and analysis
+   • Use this to find alternative good configurations
+
+KEY COLUMNS TO FOCUS ON:
+========================
+• Window_Size_seconds: The analysis window duration
+• BEST_Binary_F1_Score: The highest binary F1 score achieved
+• Binary_Evaluation_Method: Which method (IOU, WINDOW, WORD) achieved it
+• Binary_Best_Stride: The stride value that achieved the best score
+
+EXAMPLE FILTERING SCENARIOS:
+============================
+
+Scenario 1: "Show me the best F1 scores for windows 1.0s to 2.0s"
+→ Filter Window_Size_seconds: Select 1.0, 1.1, 1.2, ... 2.0
+→ Sort by BEST_Binary_F1_Score (descending)
+
+Scenario 2: "What's the best configuration for 1.5s window?"
+→ Filter Window_Size_seconds: Select only 1.5
+→ Sort by Binary_F1_Score (descending)
+→ Top row = best configuration
+
+Scenario 3: "Compare IOU vs WINDOW methods"
+→ Filter Binary_Evaluation_Method: Select IOU and WINDOW only
+→ Sort by BEST_Binary_F1_Score (descending)
+
+TIPS:
+=====
+• Use Excel's "Sort & Filter" for multiple criteria
+• Create pivot tables for advanced analysis
+• Use conditional formatting to highlight high scores
+• All decimal values are rounded to 4 places for readability
+

@@ -1,0 +1,11 @@
+rank,eval_type,window,stride,window_numeric,stride_numeric,individual_mean_iou_percent,iou_f1_0.3,iou_f1_0.5,iou_f1_0.9
+1,eval_by_0.05,window_0.3s,stride_0.125s,0.3,0.125,24.75,0.0189,0.0051,0.0
+2,eval_by_0.05,window_0.3s,stride_0.15s,0.3,0.15,24.27,0.0243,0.005,0.0005
+3,eval_by_0.05,window_0.3s,stride_0.2s,0.3,0.2,23.83,0.0295,0.0117,0.002
+4,eval_by_0.05,window_0.3s,stride_0.25s,0.3,0.25,23.16,0.0356,0.0115,0.0017
+5,eval_by_0.05,window_0.4s,stride_0.2s,0.4,0.2,21.83,0.026,0.0057,0.002
+6,eval_by_0.05,window_0.3s,stride_0.3s,0.3,0.3,21.56,0.0392,0.0115,0.0038
+7,eval_by_0.05,window_0.4s,stride_0.25s,0.4,0.25,21.22,0.033,0.0108,0.0039
+8,eval_by_0.05,window_0.4s,stride_0.3s,0.4,0.3,20.61,0.0398,0.0133,0.0043
+9,eval_by_0.05,window_0.4s,stride_0.35s,0.4,0.35,19.4,0.0443,0.0181,0.0082
+10,eval_by_0.05,window_0.5s,stride_0.25s,0.5,0.25,19.22,0.0231,0.0091,0.0045

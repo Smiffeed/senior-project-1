@@ -1,0 +1,10 @@
+eval_type,window,stride,csv_path,success,duration_seconds,error
+eval_by_0.05,window_0.3s,stride_0.125s,csv\eval_by_0.05\window_0.3s\stride_0.125s.csv,False,10.944475412368774,"Traceback (most recent call last):
+  File ""C:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\comprehensive_evaluation_processor.py"", line 2224, in <module>
+    main()
+  File ""C:\Users\muldi\Documents\Playground\University\senior-project-1\scripts\comprehensive_evaluation_processor.py"", line 2193, in main
+    print(""Remaining classes:"", ground_truth_df['label'].value_counts().to_dict())
+  File ""C:\ProgramData\anaconda3\envs\ai\lib\encodings\cp1252.py"", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 15-16: character maps to <undefined>
+"

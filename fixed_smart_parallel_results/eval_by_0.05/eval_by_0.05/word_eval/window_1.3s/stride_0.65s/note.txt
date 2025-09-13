@@ -1,0 +1,69 @@
+=== WORD-LEVEL MERGED EVALUATION RESULTS ===
+Generated at: 2025-09-12 08:14:29
+
+=== BINARY CLASSIFICATION (Profane vs Non-Profane) ===
+  Accuracy: 0.3836
+  Balanced Accuracy: 0.3836
+  Precision: 1.0000
+  Recall: 0.3836
+  F1-Score: 0.5545
+
+Binary Classification Report:
+precision    recall  f1-score   support
+
+        none       0.00      0.00      0.00         0
+     profane       1.00      0.38      0.55       378
+
+    accuracy                           0.38       378
+   micro avg       0.38      0.38      0.38     378
+   macro avg       0.50      0.19      0.28       378
+weighted avg       1.00      0.38      0.55       378
+
+=== MULTICLASS CLASSIFICATION (All Classes Including None) ===
+  Accuracy: 0.3069
+  Precision: 0.8000
+  Recall: 0.3069
+  F1-Score: 0.4436
+
+Multiclass Classification Report (All Classes):
+precision    recall  f1-score   support
+
+        เย็ด       0.29      0.08      0.12        26
+          กู       0.83      0.25      0.39       157
+         มึง       0.95      0.15      0.26       117
+       เหี้ย       0.79      0.72      0.75        78
+        none       0.00      0.00      0.00         0
+
+    accuracy                           0.31       378
+   micro avg       0.31      0.31      0.31     378
+   macro avg       0.57      0.24      0.31       378
+weighted avg       0.82      0.31      0.41       378
+
+=== MULTICLASS CLASSIFICATION (Profanity Words Only) ===
+  Accuracy: 0.3069
+  Precision: 0.8218
+  Recall: 0.3069
+  F1-Score: 0.4075
+
+Multiclass Classification Report (Profanity Only):
+precision    recall  f1-score   support
+
+        เย็ด       0.29      0.08      0.12        26
+          กู       0.83      0.25      0.39       157
+         มึง       0.95      0.15      0.26       117
+       เหี้ย       0.79      0.72      0.75        78
+
+   micro avg       0.80      0.31      0.44       378
+    accuracy                           0.31     378
+   macro avg       0.71      0.30      0.38       378
+weighted avg       0.82      0.31      0.41       378
+
+=== DATASET STATISTICS ===
+Total Ground Truth Words: 378
+Total Predicted Words (after merging): 701
+
+=== ROC AND DET CURVE ANALYSIS ===
+Binary ROC AUC: nan
+Multiclass Average ROC AUC: 1.0000
+
+ROC and DET curve plots saved as PNG files in the output directory.

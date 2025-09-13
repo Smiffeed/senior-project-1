@@ -1,0 +1,41 @@
+=== COMPREHENSIVE F1 SCORE ANALYSIS (EXCLUDING WINDOW F1) ===
+
+=== WORD EVALUATION ===
+--------------------------------------------------
+Binary F1:
+  Best Window: 0.3s
+  Best Score: 0.7778
+  Correlation: -0.984 (Strong Negative)
+
+Multiclass F1:
+  Best Window: 0.3s
+  Best Score: 0.7802
+  Correlation: -0.983 (Strong Negative)
+
+
+=== WORD-IOU EVALUATION ===
+--------------------------------------------------
+Binary F1 Iou 0.5:
+  Best Window: 0.3s
+  Best Score: 0.1677
+  Correlation: -0.740 (Strong Negative)
+
+Multiclass F1 Iou 0.5:
+  Best Window: 0.3s
+  Best Score: 0.1155
+  Correlation: -0.766 (Strong Negative)
+
+
+=== IOU EVALUATION ===
+--------------------------------------------------
+Iou Binary F1 0.5:
+  Best Window: 2.0s
+  Best Score: 0.3368
+  Correlation: 0.987 (Strong Positive)
+
+Iou Multiclass F1 0.5:
+  Best Window: 0.3s
+  Best Score: 0.3160
+  Correlation: -0.639 (Moderate Negative)
+
+

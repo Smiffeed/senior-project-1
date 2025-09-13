@@ -1,0 +1,216 @@
+Window-Based Evaluation Results (v4)
+=====================================
+CSV File: csv\eval_by_0.05\window_1.9s\stride_1.1s.csv
+Model Path: ./models/4_classes_max_steps
+Threshold: 0.5
+Output Directory: evaluation_results\eval_by_0.05\window_1.9s\stride_1.1s
+Evaluation Method: Window-based (evaluate_advanced_models_window.py)
+Timestamp: 2025-09-05 18:05:54
+Command: C:/Users/muldi/Documents/Playground/University/senior-project-1/env/Scripts/python.exe scripts/evaluate_advanced_models_window.py --csv_file csv\eval_by_0.05\window_1.9s\stride_1.1s.csv --model_path ./models/4_classes_max_steps --threshold 0.5
+
+================================================================================
+
+  metadata = torchaudio.info(file_path)
+  return AudioMetaData(
+  metadata = torchaudio.info(file_path)
+  return AudioMetaData(
+[INFO] This script will generate:
+   • Binary confusion matrix (Profane vs Non-Profane)
+   • Multi-class confusion matrix (specific profanity words)
+   • ROC curve with current threshold marked
+   • Comprehensive performance metrics
+   • Window-level evaluation only
+[TIP] Try different options:
+   --threshold 0.3, 0.4, 0.5, 0.6, 0.7
+   --csv_file csv/eval_windowed_0.3s.csv
+   --csv_file csv/eval_0.5s/stride_0.25s.csv
+Loaded 4465 windowed samples for evaluation
+Saved detailed results to ./csv/eval_results_advanced.csv
+
+=== Profanity Words Misclassified as 'none' (178 cases) ===
+File: Horror movie for WOKE!!!!!.wav
+Time: 19.80-21.70
+True label: กู
+Confidence: 0.6613
+
+File: Horror movie for WOKE!!!!!.wav
+Time: 20.90-22.80
+True label: มึง
+Confidence: 0.5122
+
+File: Horror movie for WOKE!!!!!.wav
+Time: 31.90-33.80
+True label: เหี้ย
+Confidence: 0.5147
+
+File: Horror movie for WOKE!!!!!.wav
+Time: 73.70-75.60
+True label: กู
+Confidence: 0.7105
+
+File: Horror movie for WOKE!!!!!.wav
+Time: 96.80-98.70
+True label: เหี้ย
+Confidence: 0.6876
+
+File: Horror movie for WOKE!!!!!.wav
+Time: 97.90-99.80
+True label: เหี้ย
+Confidence: 0.6271
+
+File: Horror movie for WOKE!!!!!.wav
+Time: 99.00-100.90
+True label: กู
+Confidence: 0.7575
+
+File: Horror movie for WOKE!!!!!.wav
+Time: 150.70-152.60
+True label: กู
+Confidence: 0.8085
+
+File: Horror movie for WOKE!!!!!.wav
+Time: 184.80-186.70
+True label: เหี้ย
+Confidence: 0.6642
+
+File: Horror movie for WOKE!!!!!.wav
+Time: 390.50-392.40
+True label: กู
+Confidence: 0.5050
+
+... and 168 more cases
+
+=== Classification Report (Advanced Preprocessing) ===
+              precision    recall  f1-score   support
+
+        เย็ด     0.0462    0.1500    0.0706        20
+          กู     0.4596    0.7152    0.5596       151
+         มึง     0.4667    0.1321    0.2059       106
+       เหี้ย     0.6154    0.2025    0.3048        79
+
+    accuracy                         0.3961       356
+   macro avg     0.3969    0.3000    0.2852       356
+weighted avg     0.4730    0.3961    0.3702       356
+
+Overall Accuracy (excluding 'none'): 0.3961
+Total Profanity Windows: 534
+Correct Predictions: 141
+
+=== Binary Profanity Detection Metrics (Window-level, Advanced Preprocessing) ===
+Using threshold: 0.5
+
+=== Creating Binary Confusion Matrix ===
+✅ Binary confusion matrix saved to plots_worker_3_1757070354/binary_confusion_matrix_threshold_0.5.png
+
+=== Binary Classification Metrics (Threshold: 0.5) ===
+True Negatives: 1200
+False Positives: 2731
+False Negatives: 178
+True Positives: 356
+Accuracy: 0.3485
+Precision: 0.1153
+Recall: 0.6667
+F1-Score: 0.1966
+Precision: 0.0457
+Recall: 0.2640
+F1-score: 0.0779
+
+Detailed Counts:
+True Positives: 141
+False Positives: 2946
+True Negatives: 1200
+False Negatives: 393
+Total Windows: 4465
+
+🎯 BINARY CLASSIFICATION ACCURACY:
+Simple Binary Accuracy: 0.3003
+Balanced Binary Accuracy: 0.2767
+(Balanced accounts for class imbalance: 12.0% profane vs 92.9% clean)
+
+Class Distribution:
+Profanity samples: 534 (11.96%)
+None samples: 4146 (92.86%)
+
+=== ROC/AUC for Binary Profanity Detection ===
+AUC Score: 0.4913
+Current threshold: 0.5
+✅ ROC curve saved to plots_worker_3_1757070354/roc_curve_binary_profanity_threshold_0.5.png
+
+=== DET Curve for Binary Profanity Detection ===
+✅ DET curve saved to plots_worker_3_1757070354/det_curve_binary_profanity.png
+
+=== MULTI-CLASS PROFANITY CLASSIFICATION ACCURACY ===
+Total Profanity Samples: 534
+Correct Profanity Classifications: 141
+Simple Profanity Classification Accuracy: 0.2640
+
+Per-Class Profanity Accuracy:
+  เย็ด: 3/31 = 0.097 (weight: 0.058)
+  กู: 108/220 = 0.491 (weight: 0.412)
+  มึง: 14/164 = 0.085 (weight: 0.307)
+  เหี้ย: 16/119 = 0.134 (weight: 0.223)
+
+Balanced Profanity Classification Accuracy: 0.2019
+
+======================================================================
+🎯 COMPREHENSIVE WINDOW-LEVEL ACCURACY SUMMARY
+======================================================================
+
+1️⃣ BINARY CLASSIFICATION ACCURACY (Profane vs Non-Profane):
+   Simple Binary Accuracy: 0.3003
+   Balanced Binary Accuracy: 0.2767 ⭐ (Recommended for imbalanced data)
+   Binary F1-Score: 0.0779
+
+2️⃣ MULTI-CLASS CLASSIFICATION ACCURACY (Which profanity word?):
+   Simple Profanity Class Accuracy: 0.2640
+   Balanced Profanity Class Accuracy: 0.2019 ⭐ (Accounts for class imbalance)
+
+📊 KEY INSIGHTS (Window-Level Analysis):
+   • Binary detection handles profane vs clean: 27.7%
+   • Profanity classification handles which word: 20.2%
+   • Window-level binary F1-score: 7.8%
+   • Data imbalance: 12.0% profane vs 92.9% clean
+   • Current threshold: 0.5 (adjust with --threshold parameter)
+
+🎯 THRESHOLD GUIDANCE:
+   • Current threshold: 0.5
+   • Current F1-Score: 0.197
+   • Current Precision: 0.115
+   • Current Recall: 0.667
+   • Lower threshold (e.g., 0.3): Higher recall, more false positives
+   • Higher threshold (e.g., 0.7): Higher precision, more false negatives
+   • Balanced threshold (0.5): Good starting point
+   • Use ROC curve to find optimal threshold for your use case
+
+=== Window-Level Statistics Summary ===
+Total Windows Evaluated: 4465
+Profane Windows: 534 (12.0%)
+Clean Windows: 3931 (88.0%)
+
+=== Per-Class Window Statistics ===
+เย็ด: True=31, Pred=639, Correct=3, P=0.005, R=0.097, F1=0.009
+กู: True=220, Pred=1999, Correct=108, P=0.054, R=0.491, F1=0.097
+มึง: True=164, Pred=221, Correct=14, P=0.063, R=0.085, F1=0.073
+เหี้ย: True=119, Pred=228, Correct=16, P=0.070, R=0.134, F1=0.092
+
+📊 Advanced Preprocessing Benefits:
+✅ Enhanced noise reduction using spectral subtraction
+✅ RMS normalization for consistent signal levels
+✅ Dynamic range compression for robust feature extraction
+✅ High-pass filtering for low-frequency noise removal
+✅ Consistent preprocessing pipeline matching training
+
+=== Generating Window-Level Confusion Matrix ===
+✅ Window-level confusion matrix saved to plots_worker_3_1757070354\confusion_matrix_advanced.png
+
+
+=== Window-based evaluation completed successfully ===
+Completed at: 2025-09-05 18:09:56
+
+=== File Organization Summary ===
+Output Directory: evaluation_results\eval_by_0.05\window_1.9s\stride_1.1s
+Moved Plot Files: 4
+  - binary_confusion_matrix_threshold_0.5.png
+  - confusion_matrix_advanced.png
+  - det_curve_binary_profanity.png
+  - roc_curve_binary_profanity_threshold_0.5.png

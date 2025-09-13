@@ -1,0 +1,5 @@
+evaluation_method,total_configurations,window_range,stride_range,best_binary_f1_score,best_binary_window,best_binary_stride,best_word_f1_score,best_word_window,best_word_stride,best_iou_f1_score,best_iou_window,best_iou_stride,best_multiclass_f1_score,best_multiclass_window,best_multiclass_stride
+iou,405,0.3 - 2.0s,0.100 - 2.000,0.2333,2.0,1.7,0.1947,2.0,30.0%,0.0884,1.5,1.35,,,
+iou_word_sep,404,0.3 - 2.0s,0.100 - 2.000,0.2333,2.0,1.7,0.1947,2.0,30.0%,0.0916,1.5,1.35,,,
+window,405,0.3 - 2.0s,0.100 - 2.000,0.2333,2.0,1.7,,,,,,,0.4626,0.7,0.7
+word,405,0.3 - 2.0s,0.100 - 2.000,0.2333,2.0,1.7,0.1947,2.0,30.0%,,,,,,

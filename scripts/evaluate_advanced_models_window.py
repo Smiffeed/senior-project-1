@@ -1,0 +1,897 @@
+import torch
+import torch.nn as nn
+import torchaudio
+from transformers import Wav2Vec2ForSequenceClassification, Wav2Vec2FeatureExtractor
+import pandas as pd
+import numpy as np
+import os
+import librosa
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.metrics import confusion_matrix, classification_report, roc_curve, auc
+import matplotlib.font_manager as fm
+from scipy.stats import norm
+import matplotlib.ticker as mticker
+import argparse
+import re
+import sys
+import json
+from tqdm import tqdm
+from typing import Optional, Tuple, List
+
+# Define label mapping (same as in fine-tuning)
+label_map = {
+    'none': 0,
+    'เย็ด': 1,
+    'กู': 2,
+    'มึง': 3,
+    'เหี้ย': 4,
+}
+
+# Reverse label mapping for output
+rev_label_map = {v: k for k, v in label_map.items()}
+
+# Check device
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+print(f"Using device: {device}")
+
+def get_plots_directory():
+    """Get plots directory from environment variable or use default"""
+    return os.environ.get('WORKER_PLOTS_DIR', './plots')
+
+def setup_thai_font():
+    """Setup Thai font for matplotlib"""
+    try:
+        font_path = './fonts/THSarabunNew.ttf'  # Adjust path as needed
+        font_prop = fm.FontProperties(fname=font_path)
+        plt.rcParams['font.family'] = 'Cordia New'
+    except:
+        pass
+
+
+
+
+
+def plot_binary_confusion_matrix(true_binary, pred_binary, output_path=None):
+    """Plot binary confusion matrix for None vs Profanity classification."""
+    if output_path is None:
+        plots_dir = get_plots_directory()
+        output_path = f"{plots_dir}/binary_confusion_matrix.png"
+    setup_thai_font()
+    
+    # Create binary labels
+    binary_labels = ['None', 'Profanity']
+    
+    # Generate confusion matrix
+    cm = confusion_matrix(true_binary, pred_binary, labels=[0, 1])
+    
+    # Create figure
+    plt.figure(figsize=(8, 6))
+    
+    # Create heatmap with percentage annotations
+    total_samples = cm.sum()
+    cm_percent = cm / total_samples * 100
+    
+    # Create annotations with both count and percentage
+    annotations = []
+    for i in range(cm.shape[0]):
+        row = []
+        for j in range(cm.shape[1]):
+            count = cm[i, j]
+            percent = cm_percent[i, j]
+            row.append(f'{count}\n({percent:.1f}%)')
+        annotations.append(row)
+    
+    # Plot heatmap
+    sns.heatmap(cm, annot=annotations, fmt='', 
+                xticklabels=binary_labels, 
+                yticklabels=binary_labels,
+                cmap='Blues', cbar_kws={'label': 'Count'})
+    
+    plt.title('Binary Classification: None vs Profanity', fontsize=14, pad=15)
+    plt.ylabel('True Label', fontsize=12)
+    plt.xlabel('Predicted Label', fontsize=12)
+    
+    # Add performance metrics as text
+    tn, fp, fn, tp = cm.ravel()
+    accuracy = (tp + tn) / total_samples
+    precision = tp / (tp + fp) if (tp + fp) > 0 else 0
+    recall = tp / (tp + fn) if (tp + fn) > 0 else 0
+    f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
+    specificity = tn / (tn + fp) if (tn + fp) > 0 else 0
+    
+    # Add metrics text box
+    metrics_text = f'Accuracy: {accuracy:.3f}\nPrecision: {precision:.3f}\nRecall: {recall:.3f}\nF1-Score: {f1:.3f}\nSpecificity: {specificity:.3f}'
+    plt.text(2.2, 1, metrics_text, fontsize=10, 
+             bbox=dict(boxstyle="round,pad=0.3", facecolor="lightgray", alpha=0.7))
+    
+    # Adjust layout
+    plt.tight_layout()
+    
+    # Ensure directory exists
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    
+    # Save plot
+    plt.savefig(output_path, bbox_inches='tight', dpi=300)
+    plt.close()
+    
+    print(f"📊 Binary confusion matrix saved to: {output_path}")
+    
+    return {
+        'tn': int(tn), 'fp': int(fp), 'fn': int(fn), 'tp': int(tp),
+        'accuracy': accuracy, 'precision': precision, 'recall': recall, 
+        'f1': f1, 'specificity': specificity
+    }
+
+def setup_thai_font():
+    """Setup Thai font for matplotlib"""
+    try:
+        font_path = './fonts/THSarabunNew.ttf'  # Adjust path as needed
+        font_prop = fm.FontProperties(fname=font_path)
+        plt.rcParams['font.family'] = 'Cordia New'
+    except:
+        pass
+
+def advanced_preprocess_audio(file_path, start_time, end_time):
+    """
+    Advanced audio preprocessing that matches advanced_model_training.py preprocessing.
+    Includes enhanced noise reduction, spectral processing, and normalization.
+    """
+    try:
+        file_path = file_path.replace('\\', '/')
+        if not os.path.exists(file_path):
+            print(f"File not found: {file_path}")
+            return None
+
+        # Load audio metadata
+        metadata = torchaudio.info(file_path)
+        sr = metadata.sample_rate
+        audio_length_sec = metadata.num_frames / sr
+
+        # Add padding around the segment (matching training)
+        padding = 0.2
+        start_time = max(0, start_time - padding)
+        end_time = min(end_time + padding, audio_length_sec)
+
+        if end_time <= start_time:
+            return None
+
+        # Load audio segment
+        audio, sr = torchaudio.load(
+            file_path,
+            frame_offset=int(start_time * sr),
+            num_frames=int((end_time - start_time) * sr)
+        )
+
+        # Convert to mono if stereo
+        if audio.shape[0] > 1:
+            audio = torch.mean(audio, dim=0, keepdim=True)
+
+        # Resample to 16kHz if needed
+        if sr != 16000:
+            audio = torchaudio.functional.resample(audio, sr, 16000)
+
+        audio_np = audio.squeeze().numpy()
+
+        if len(audio_np) == 0:
+            return None
+
+        # ADVANCED PREPROCESSING PIPELINE (matching advanced_model_training.py)
+        
+        # 1. Pre-emphasis filter (same as training)
+        audio_np = librosa.effects.preemphasis(audio_np, coef=0.97)
+        
+        # 2. Advanced noise reduction using spectral subtraction
+        if len(audio_np) > 1024:
+            # Estimate noise from first and last 10% of signal
+            noise_start = audio_np[:len(audio_np)//10]
+            noise_end = audio_np[-len(audio_np)//10:]
+            noise_estimate = np.concatenate([noise_start, noise_end])
+            noise_power = np.var(noise_estimate)
+            
+            # Apply spectral subtraction
+            stft = librosa.stft(audio_np, n_fft=512, hop_length=256)
+            magnitude = np.abs(stft)
+            phase = np.angle(stft)
+            
+            # Estimate noise spectrum
+            noise_magnitude = np.mean(magnitude[:, :magnitude.shape[1]//10], axis=1, keepdims=True)
+            
+            # Spectral subtraction
+            alpha = 2.0  # Over-subtraction factor
+            beta = 0.01  # Spectral floor
+            enhanced_magnitude = magnitude - alpha * noise_magnitude
+            enhanced_magnitude = np.maximum(enhanced_magnitude, beta * magnitude)
+            
+            # Reconstruct audio
+            enhanced_stft = enhanced_magnitude * np.exp(1j * phase)
+            audio_np = librosa.istft(enhanced_stft, hop_length=256)
+        
+        # 3. Apply Hamming window for spectral shaping
+        if len(audio_np) > 1:
+            audio_np = audio_np * np.hamming(len(audio_np))
+        
+        # 4. Advanced noise gate (threshold-based noise reduction)
+        noise_threshold = 0.005
+        rms_window = 512
+        for i in range(0, len(audio_np) - rms_window, rms_window // 2):
+            window = audio_np[i:i + rms_window]
+            rms = np.sqrt(np.mean(window ** 2))
+            if rms < noise_threshold:
+                audio_np[i:i + rms_window] *= 0.1  # Reduce noise instead of zeroing
+        
+        # 5. RMS normalization (matching training)
+        rms = np.sqrt(np.mean(audio_np ** 2))
+        if rms > 0:
+            target_rms = 0.1  # Target RMS level
+            audio_np = audio_np * (target_rms / rms)
+        
+        # 6. Dynamic range compression
+        # Apply soft compression to reduce dynamic range
+        threshold = 0.5
+        ratio = 4.0
+        audio_abs = np.abs(audio_np)
+        mask = audio_abs > threshold
+        compressed = np.copy(audio_np)
+        compressed[mask] = np.sign(audio_np[mask]) * (
+            threshold + (audio_abs[mask] - threshold) / ratio
+        )
+        audio_np = compressed
+        
+        # 7. High-pass filter to remove low-frequency noise
+        if len(audio_np) > 100:
+            # Simple high-pass filter using difference
+            audio_np = librosa.effects.preemphasis(audio_np, coef=0.95)
+        
+        # 8. Z-score normalization (final step, matching training)
+        mean = np.mean(audio_np)
+        std = np.std(audio_np)
+        if std > 1e-8:
+            audio_np = (audio_np - mean) / std
+        else:
+            audio_np = audio_np - mean
+        
+        # 9. Ensure consistent length (pad or truncate to reasonable length)
+        target_length = 16000  # 1 second at 16kHz
+        if len(audio_np) < target_length:
+            # Zero-pad
+            audio_np = np.pad(audio_np, (0, target_length - len(audio_np)), 'constant')
+        elif len(audio_np) > target_length:
+            # Truncate from center to preserve most important part
+            start_idx = (len(audio_np) - target_length) // 2
+            audio_np = audio_np[start_idx:start_idx + target_length]
+
+        return audio_np
+        
+    except Exception as e:
+        print(f"Error in advanced preprocessing {file_path} ({start_time}-{end_time}): {e}")
+        return None
+
+def evaluate_window(model, feature_extractor, file_path, start_time, end_time, threshold=0.5):
+    try:
+        # Process audio with advanced preprocessing matching training
+        audio = advanced_preprocess_audio(file_path, start_time, end_time)
+        if audio is None:
+            return "error", 0.0, 0.0
+        
+        # Apply feature extractor
+        inputs = feature_extractor(
+            audio, 
+            sampling_rate=16000, 
+            return_tensors="pt", 
+            padding="max_length",
+            truncation=True,
+            max_length=16000
+        )
+        
+        # Move inputs to the same device as model
+        inputs = {k: v.to(model.device) for k, v in inputs.items()}
+        
+        # Get prediction
+        with torch.no_grad():
+            logits = model(**inputs).logits
+            predictions = torch.softmax(logits, dim=-1)
+            
+            # Calculate profanity probability (sum of all non-'none' classes)
+            profanity_prob = predictions[0][1:].sum().item()  # Skip index 0 which is 'none'
+            
+            # Apply threshold for binary classification
+            if profanity_prob >= threshold:
+                # Find the most likely profanity class
+                profanity_predictions = predictions[0][1:]  # Exclude 'none'
+                predicted_profanity_id = torch.argmax(profanity_predictions).item() + 1  # +1 to account for skipping 'none'
+                predicted_label = rev_label_map[predicted_profanity_id]
+                confidence = predictions[0][predicted_profanity_id].item()
+            else:
+                # Classify as 'none'
+                predicted_label = 'none'
+                confidence = predictions[0][0].item()  # Confidence for 'none'
+            
+        return predicted_label, confidence, profanity_prob
+        
+    except Exception as e:
+        print(f"Error processing window {file_path} ({start_time}-{end_time}): {str(e)}")
+        return "error", 0.0, 0.0
+
+def plot_confusion_matrix(true_labels, pred_labels, labels):
+    # Setup Thai font before plotting
+    setup_thai_font()
+    
+    try:
+        cm = confusion_matrix(true_labels, pred_labels, labels=labels)
+        plt.figure(figsize=(12, 10))
+        
+        # Create heatmap with Thai labels
+        sns.heatmap(cm, annot=True, fmt='d', 
+                    xticklabels=labels, 
+                    yticklabels=labels,
+                    cmap='YlOrRd')
+        
+        plt.title('Window-Level Confusion Matrix (Advanced Preprocessing)', fontsize=16, pad=20)
+        plt.ylabel('True Label', fontsize=12)
+        plt.xlabel('Predicted Label', fontsize=12)
+        
+        # Rotate labels for better readability
+        plt.xticks(rotation=45, ha='right')
+        plt.yticks(rotation=45)
+        
+        # Adjust layout to prevent label cutoff
+        plt.tight_layout()
+        
+        # Create plots directory if it doesn't exist
+        plots_dir = get_plots_directory()
+        os.makedirs(plots_dir, exist_ok=True)
+        
+        # Save plot
+        confusion_matrix_path = os.path.join(plots_dir, 'confusion_matrix_advanced.png')
+        plt.savefig(confusion_matrix_path, 
+                    bbox_inches='tight', 
+                    dpi=300)
+        plt.close()
+        
+        print(f"✅ Window-level confusion matrix saved to {confusion_matrix_path}")
+        
+    except Exception as e:
+        print(f"Error creating confusion matrix: {e}")
+        print("Skipping confusion matrix generation due to insufficient data variety")
+
+
+
+
+
+def plot_binary_confusion_matrix(true_labels, pred_labels, threshold):
+    """Create binary confusion matrix for profane vs non-profane classification"""
+    # Setup Thai font before plotting
+    setup_thai_font()
+    
+    try:
+        # Convert to binary labels
+        binary_true = ['Profane' if label != 'none' else 'Non-Profane' for label in true_labels]
+        binary_pred = ['Profane' if label != 'none' else 'Non-Profane' for label in pred_labels]
+        
+        cm = confusion_matrix(binary_true, binary_pred, labels=['Non-Profane', 'Profane'])
+        plt.figure(figsize=(8, 6))
+        
+        # Create heatmap
+        sns.heatmap(cm, annot=True, fmt='d', 
+                    xticklabels=['Non-Profane', 'Profane'], 
+                    yticklabels=['Non-Profane', 'Profane'],
+                    cmap='Blues')
+        
+        plt.title(f'Binary Confusion Matrix (Threshold: {threshold})', fontsize=14, pad=20)
+        plt.ylabel('True Label', fontsize=12)
+        plt.xlabel('Predicted Label', fontsize=12)
+        
+        # Calculate and display percentages
+        total = cm.sum()
+        for i in range(cm.shape[0]):
+            for j in range(cm.shape[1]):
+                percentage = (cm[i, j] / total) * 100
+                plt.text(j + 0.5, i + 0.7, f'{percentage:.1f}%', 
+                        ha='center', va='center', fontsize=10, color='red')
+        
+        # Adjust layout
+        plt.tight_layout()
+        
+        # Save plot
+        plots_dir = get_plots_directory()
+        os.makedirs(plots_dir, exist_ok=True)
+        plt.savefig(f'{plots_dir}/binary_confusion_matrix_threshold_{threshold}.png', 
+                    bbox_inches='tight', 
+                    dpi=300)
+        plt.close()
+        
+        print(f"✅ Binary confusion matrix saved to {plots_dir}/binary_confusion_matrix_threshold_{threshold}.png")
+        
+        # Print binary classification metrics
+        tn, fp, fn, tp = cm.ravel()
+        precision = tp / (tp + fp) if (tp + fp) > 0 else 0
+        recall = tp / (tp + fn) if (tp + fn) > 0 else 0
+        f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
+        accuracy = (tp + tn) / (tp + tn + fp + fn)
+        
+        print(f"\n=== Binary Classification Metrics (Threshold: {threshold}) ===")
+        print(f"True Negatives: {tn}")
+        print(f"False Positives: {fp}")
+        print(f"False Negatives: {fn}")
+        print(f"True Positives: {tp}")
+        print(f"Accuracy: {accuracy:.4f}")
+        print(f"Precision: {precision:.4f}")
+        print(f"Recall: {recall:.4f}")
+        print(f"F1-Score: {f1:.4f}")
+        
+        return {'tn': tn, 'fp': fp, 'fn': fn, 'tp': tp, 
+                'accuracy': accuracy, 'precision': precision, 'recall': recall, 'f1': f1}
+        
+    except Exception as e:
+        print(f"Error creating binary confusion matrix: {e}")
+        return None
+
+def main():
+    # Setup Thai font
+    setup_thai_font()
+    
+    # Add threshold parameter for binary classification
+    # Parse command line arguments if provided, otherwise use defaults
+    threshold = 0.5  # Default threshold
+    csv_file = './csv/eval_windowed.csv'  # Default CSV file
+    if len(sys.argv) > 1:
+        parser = argparse.ArgumentParser(description='Evaluate advanced models with customizable threshold')
+        parser.add_argument('--threshold', type=float, default=0.5, 
+                           help='Threshold for binary profanity classification (default: 0.5)')
+        parser.add_argument('--model_path', type=str, default='./models/4_classes_max_steps',
+                           help='Path to the trained model')
+        parser.add_argument('--csv_file', type=str, default='./csv/eval_windowed.csv',
+                           help='Path to the CSV file with windowed evaluation data (default: ./csv/eval_windowed.csv)')
+        parser.add_argument("--eval-data", type=str, default="./csv/eval_windowed.csv", 
+                           help="Path to windowed evaluation CSV file")
+        parser.add_argument("--model-path", type=str, default="./models/4_classes_max_steps", 
+                           help="Path to the trained model")
+        parser.add_argument("--single-threshold", type=float, default=0.5, 
+                           help="Single threshold for binary classification")
+
+        args = parser.parse_args()
+        threshold = getattr(args, 'threshold', getattr(args, 'single_threshold', 0.5))
+        model_path = getattr(args, 'model_path', getattr(args, 'model_path', './models/4_classes_max_steps'))
+        csv_file = getattr(args, 'csv_file', getattr(args, 'eval_data', './csv/eval_windowed.csv'))
+    else:
+        # If no arguments provided, use defaults and allow interactive usage
+        model_path = './models/4_classes_max_steps'  # Update this path to your best model
+        print("No arguments provided. Using default settings.")
+        print("To specify options, run: python evaluate_advanced_models.py --threshold 0.6 --csv_file csv/your_file.csv")
+    
+    print(f"Using binary classification threshold: {threshold}")
+    print(f"Using CSV file: {csv_file}")
+    print(f"[INFO] This script will generate:")
+    print(f"   • Binary confusion matrix (Profane vs Non-Profane)")
+    print(f"   • Multi-class confusion matrix (specific profanity words)")
+    print(f"   • ROC curve with current threshold marked")
+    print(f"   • Comprehensive performance metrics")
+    print(f"   • Window-level evaluation only")
+    print(f"[TIP] Try different options:")
+    print(f"   --threshold 0.3, 0.4, 0.5, 0.6, 0.7")
+    print(f"   --csv_file csv/eval_windowed_0.3s.csv")
+    print(f"   --csv_file csv/eval_0.5s/stride_0.25s.csv")
+    
+    # Load the model (support for advanced models)
+    # Try to detect model type and load accordingly
+    if os.path.exists(f"{model_path}/config.json"):
+        # Load as HuggingFace model
+        model = Wav2Vec2ForSequenceClassification.from_pretrained(model_path)
+        feature_extractor = Wav2Vec2FeatureExtractor.from_pretrained(model_path)
+        print(f"Loaded HuggingFace Wav2Vec2 model from {model_path}")
+    else:
+        # Try to load as PyTorch model (for CNN-LSTM, Transformer, etc.)
+        print(f"Model path {model_path} not found or not a HuggingFace model")
+        print("Please update model_path to point to your trained model")
+        return
+    
+    # Move model to GPU if available
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model = model.to(device)
+    model.eval()
+    
+    print(f"Using device: {device}")
+    print("Using ADVANCED preprocessing pipeline matching advanced_model_training.py")
+    
+    # Load the windowed eval data
+    print(f"Loading evaluation data from: {csv_file}")
+    
+    # Check if the CSV file exists
+    if not os.path.exists(csv_file):
+        print(f"❌ CSV file not found: {csv_file}")
+        print("Available CSV files in ./csv/:")
+        csv_dir = "./csv/"
+        if os.path.exists(csv_dir):
+            csv_files = [f for f in os.listdir(csv_dir) if f.endswith('.csv')]
+            for f in sorted(csv_files):
+                print(f"   {csv_dir}{f}")
+        print("\nExample usage:")
+        print(f"   python evaluate_advanced_models.py --csv_file csv/eval_windowed_0.3s.csv")
+        return
+    
+    df = pd.read_csv(csv_file)
+
+    # Extract window information from filename for reporting
+    window_info = "unknown"
+    if "windowed" in csv_file:
+        # Extract window size from filename like "eval_windowed_0.25s.csv"
+        match = re.search(r'windowed_(\d+\.?\d*)s', csv_file)
+        if match:
+            window_info = f"{match.group(1)}s windows"
+    elif "stride" in csv_file:
+        # Extract stride info from filename like "stride_0.25s.csv"
+        stride_match = re.search(r'stride_(\d+\.?\d*)s', csv_file)
+        if stride_match:
+            window_info = f"0.5s windows with {stride_match.group(1)}s stride"
+
+    print(f"✅ Loaded {len(df)} windowed samples for evaluation")
+    print(f"📏 Window configuration: {window_info}")
+    
+    print(f"Loaded {len(df)} windowed samples for evaluation")
+    
+    # Create results DataFrame
+    results = []
+    
+    # Process each window
+    total_windows = len(df)
+    for idx, row in df.iterrows():
+        predicted_label, confidence, profanity_prob = evaluate_window(
+            model,
+            feature_extractor,
+            row['file_path'],
+            row['start_time'],
+            row['end_time'],
+            threshold
+        )
+        
+        results.append({
+            'file_path': row['file_path'],
+            'start_time': row['start_time'],
+            'end_time': row['end_time'],
+            'true_label': row['label'],
+            'predicted_label': predicted_label,
+            'confidence': confidence,
+            'profanity_prob': profanity_prob
+        })
+        
+        # Print progress
+        if (idx + 1) % 100 == 0:
+            print(f"Processed {idx + 1}/{total_windows} windows ({(idx + 1)/total_windows*100:.1f}%)")
+    
+    # Convert results to DataFrame and save
+    results_df = pd.DataFrame(results)
+    
+    # Save CSV results to csv directory (like seperate.py)
+    csv_output_path = './csv/eval_results_advanced.csv'
+    results_df.to_csv(csv_output_path, index=False)
+    
+    print(f"Saved detailed results to {csv_output_path}")
+    
+    # Modified filtering: Include cases where true label is profanity, regardless of prediction
+    profanity_results = results_df[results_df['true_label'] != 'none'].copy()
+    
+    # Get unique profanity labels (excluding 'none')
+    profanity_labels = [label for label in label_map.keys() if label != 'none']
+    
+    # Print misclassified cases where profanity was detected as 'none'
+    none_misclassifications = profanity_results[profanity_results['predicted_label'] == 'none']
+    print(f"\n=== Profanity Words Misclassified as 'none' ({len(none_misclassifications)} cases) ===")
+    for i, (_, row) in enumerate(none_misclassifications.iterrows()):
+        if i < 10:  # Show first 10 cases
+            print(f"File: {os.path.basename(row['file_path'])}")
+            print(f"Time: {row['start_time']:.2f}-{row['end_time']:.2f}")
+            print(f"True label: {row['true_label']}")
+            print(f"Confidence: {row['confidence']:.4f}\n")
+        elif i == 10:
+            print(f"... and {len(none_misclassifications) - 10} more cases")
+            break
+    
+    # Generate classification report (only include actual profanity predictions)
+    profanity_predictions = profanity_results[profanity_results['predicted_label'] != 'none'].copy()
+    
+    if len(profanity_predictions) > 0:
+        report = classification_report(
+            profanity_predictions['true_label'],
+            profanity_predictions['predicted_label'],
+            labels=profanity_labels,
+            digits=4,
+            zero_division=0
+        )
+        
+        # Save and print classification report
+        os.makedirs('./evaluation_results', exist_ok=True)
+        with open('./evaluation_results/classification_report_advanced.txt', 'w', encoding='utf-8') as f:
+            f.write("Classification Report (Advanced Preprocessing):\n")
+            f.write(report)
+        
+        print("\n=== Classification Report (Advanced Preprocessing) ===")
+        print(report)
+        
+        # Calculate overall accuracy (excluding 'none' predictions)
+        correct_predictions = (profanity_predictions['true_label'] == profanity_predictions['predicted_label']).sum()
+        total_predictions = len(profanity_predictions)
+        accuracy = correct_predictions / total_predictions if total_predictions > 0 else 0
+        
+        print(f"\nOverall Accuracy (excluding 'none'): {accuracy:.4f}")
+        print(f"Total Profanity Windows: {len(profanity_results)}")
+        print(f"Correct Predictions: {correct_predictions}")
+    else:
+        print("\n=== No profanity predictions found for classification report ===")
+        accuracy = 0.0
+    
+    # Binary profanity detection metrics with detailed breakdown
+    all_results = pd.DataFrame(results)
+    
+    # For each row, determine if it's a true profanity and if the prediction was c7rrect
+    all_results['is_true_profanity'] = all_results['true_label'] != 'none'
+    all_results['is_predicted_profanity'] = all_results['predicted_label'] != 'none'
+    all_results['is_correct_prediction'] = all_results['true_label'] == all_results['predicted_label']
+    
+    # Calculate True Positives, False Positives, True Negatives, False Negatives
+    tp = ((all_results['is_true_profanity']) & 
+          (all_results['is_predicted_profanity']) & 
+          (all_results['is_correct_prediction'])).sum()
+    
+    fp = ((all_results['is_predicted_profanity']) & 
+          (~all_results['is_correct_prediction'])).sum()
+    
+    tn = ((~all_results['is_true_profanity']) & 
+          (~all_results['is_predicted_profanity'])).sum()
+    
+    fn = (all_results['is_true_profanity'] & 
+          (~all_results['is_predicted_profanity'] | 
+           ~all_results['is_correct_prediction'])).sum()
+    
+    # Calculate balanced accuracy
+    sensitivity = tp / (tp + fn) if (tp + fn) > 0 else 0  # True Positive Rate (Recall)
+    specificity = tn / (tn + fp) if (tn + fp) > 0 else 0  # True Negative Rate
+    balanced_accuracy = (sensitivity + specificity) / 2
+    
+    # Calculate metrics
+    precision = tp / (tp + fp) if (tp + fp) > 0 else 0
+    recall = sensitivity  # Same as sensitivity
+    f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
+    
+    # Calculate class-wise proportions FIRST (before using them)
+    total_profanity = tp + fn
+    total_none = tn + fp
+    
+    print("\n=== Binary Profanity Detection Metrics (Window-level, Advanced Preprocessing) ===")
+    print(f"Using threshold: {threshold}")
+    print(f"Balanced Accuracy: {balanced_accuracy:.4f}")
+    
+    # Generate binary confusion matrix
+    print(f"\n=== Creating Binary Confusion Matrix ===")
+    binary_metrics = plot_binary_confusion_matrix(
+        all_results['true_label'].values,
+        all_results['predicted_label'].values,
+        threshold
+    )
+    print(f"Precision: {precision:.4f}")
+    print(f"Recall: {recall:.4f}")
+    print(f"F1-score: {f1:.4f}")
+    print("\nDetailed Counts:")
+    print(f"True Positives: {tp}")
+    print(f"False Positives: {fp}")
+    print(f"True Negatives: {tn}")
+    print(f"False Negatives: {fn}")
+    print(f"Total Windows: {len(all_results)}")
+
+    # ADD: Explicit Binary Classification Accuracy (weighted for imbalance)
+    binary_accuracy = (tp + tn) / len(all_results)
+    print(f"\n🎯 BINARY CLASSIFICATION ACCURACY:")
+    print(f"Simple Binary Accuracy: {binary_accuracy:.4f}")
+    print(f"Balanced Binary Accuracy: {balanced_accuracy:.4f}")
+    print(f"(Balanced accounts for class imbalance: {total_profanity/len(all_results):.1%} profane vs {total_none/len(all_results):.1%} clean)")
+
+    print("\nClass Distribution:")
+    print(f"Profanity samples: {total_profanity} ({total_profanity/len(all_results):.2%})")
+    print(f"None samples: {total_none} ({total_none/len(all_results):.2%})")
+
+    # ROC/AUC calculation and plot
+    from sklearn.metrics import roc_curve, roc_auc_score
+    # For ROC, need binary ground truth and probability scores for 'profanity' (not 'none')
+    # Use the profanity_prob field which contains the actual probability of being profanity
+    y_true = all_results['is_true_profanity'].astype(int).values
+    y_scores = all_results['profanity_prob'].values
+
+    # Compute ROC curve and AUC
+    try:
+        fpr, tpr, thresholds_roc = roc_curve(y_true, y_scores)
+        auc_score = roc_auc_score(y_true, y_scores)
+        print(f"\n=== ROC/AUC for Binary Profanity Detection ===")
+        print(f"AUC Score: {auc_score:.4f}")
+        print(f"Current threshold: {threshold}")
+
+        # Plot ROC curve
+        plt.figure(figsize=(8, 6))
+        plt.plot(fpr, tpr, label=f'ROC curve (AUC = {auc_score:.2f})')
+        plt.plot([0, 1], [0, 1], 'k--', label='Random')
+        
+        # Mark the current threshold on the ROC curve
+        current_threshold_idx = np.argmin(np.abs(thresholds_roc - threshold))
+        plt.plot(fpr[current_threshold_idx], tpr[current_threshold_idx], 'ro', markersize=8, 
+                label=f'Current threshold ({threshold})')
+        
+        plt.xlabel('False Positive Rate')
+        plt.ylabel('True Positive Rate')
+        plt.title(f'ROC Curve for Binary Profanity Detection (Threshold: {threshold})')
+        plt.legend(loc='lower right')
+        plt.grid(True)
+        plots_dir = get_plots_directory()
+        os.makedirs(plots_dir, exist_ok=True)
+        plt.savefig(f'{plots_dir}/roc_curve_binary_profanity_threshold_{threshold}.png', dpi=300)
+        plt.close()
+        print(f"✅ ROC curve saved to {plots_dir}/roc_curve_binary_profanity_threshold_{threshold}.png")
+        
+        # DET curve calculation and plot
+        from scipy.stats import norm
+        import matplotlib.ticker as mticker
+        print("\n=== DET Curve for Binary Profanity Detection ===")
+        # Miss rate = 1 - TPR, False alarm rate = FPR
+        miss_rate = 1 - tpr
+        false_alarm_rate = fpr
+        plt.figure(figsize=(8, 6))
+        plt.plot(norm.ppf(false_alarm_rate), norm.ppf(miss_rate), label='DET curve')
+        plt.xlabel('False Alarm Rate (FAR) [norm dev]')
+        plt.ylabel('Miss Rate (MR) [norm dev]')
+        plt.title('DET Curve for Binary Profanity Detection')
+        plt.grid(True)
+        plt.legend(loc='upper right')
+        # Set axis ticks to show rates
+        ticks = [0.001, 0.002, 0.005, 0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 0.8, 0.9, 0.95, 0.99, 0.995, 0.999]
+        tick_labels = [str(t) for t in ticks]
+        plt.xticks(norm.ppf(ticks), tick_labels, rotation=45)
+        plt.yticks(norm.ppf(ticks), tick_labels)
+        plt.tight_layout()
+        plt.savefig(f'{get_plots_directory()}/det_curve_binary_profanity.png', dpi=300)
+        plt.close()
+        print(f"✅ DET curve saved to {get_plots_directory()}/det_curve_binary_profanity.png")
+    except Exception as e:
+        print(f"⚠️ Could not compute ROC/AUC: {e}")
+    
+    # ADD: Multi-class Classification Accuracy (for profanity words only)
+    print(f"\n=== MULTI-CLASS PROFANITY CLASSIFICATION ACCURACY ===")
+    profanity_only = all_results[all_results['true_label'] != 'none'].copy()
+    
+    if len(profanity_only) > 0:
+        # Simple accuracy for profanity classification
+        correct_profanity_class = (profanity_only['true_label'] == profanity_only['predicted_label']).sum()
+        profanity_class_accuracy = correct_profanity_class / len(profanity_only)
+        
+        # Weighted accuracy for profanity classification (accounts for class imbalance within profanity)
+        from sklearn.metrics import accuracy_score
+        weighted_profanity_accuracy = accuracy_score(
+            profanity_only['true_label'], 
+            profanity_only['predicted_label'],
+            sample_weight=None  # Will calculate class weights manually
+        )
+        
+        # Calculate class weights for profanity types
+        profanity_class_counts = profanity_only['true_label'].value_counts()
+        total_profanity_samples = len(profanity_only)
+        
+        print(f"Total Profanity Samples: {total_profanity_samples}")
+        print(f"Correct Profanity Classifications: {correct_profanity_class}")
+        print(f"Simple Profanity Classification Accuracy: {profanity_class_accuracy:.4f}")
+        
+        # Calculate balanced accuracy for each profanity class
+        profanity_class_balanced_scores = []
+        print(f"\nPer-Class Profanity Accuracy:")
+        for label in profanity_labels:
+            if label in profanity_class_counts:
+                # True positives for this specific class
+                class_tp = ((profanity_only['true_label'] == label) & 
+                           (profanity_only['predicted_label'] == label)).sum()
+                # Total instances of this class
+                class_total = (profanity_only['true_label'] == label).sum()
+                # Class accuracy
+                class_acc = class_tp / class_total if class_total > 0 else 0
+                class_weight = class_total / total_profanity_samples
+                profanity_class_balanced_scores.append(class_acc)
+                
+                print(f"  {label}: {class_tp}/{class_total} = {class_acc:.3f} (weight: {class_weight:.3f})")
+        
+        # Weighted profanity classification accuracy
+        if profanity_class_balanced_scores:
+            weighted_profanity_class_accuracy = np.mean(profanity_class_balanced_scores)
+            print(f"\nBalanced Profanity Classification Accuracy: {weighted_profanity_class_accuracy:.4f}")
+        else:
+            weighted_profanity_class_accuracy = 0.0
+    else:
+        profanity_class_accuracy = 0.0
+        weighted_profanity_class_accuracy = 0.0
+        print("No profanity samples found for classification accuracy")
+    
+    # Window-level evaluation completed
+    
+    # COMPREHENSIVE ACCURACY SUMMARY
+    print(f"\n" + "="*70)
+    print("🎯 COMPREHENSIVE WINDOW-LEVEL ACCURACY SUMMARY")
+    print("="*70)
+    
+    print(f"\n1️⃣ BINARY CLASSIFICATION ACCURACY (Profane vs Non-Profane):")
+    print(f"   Simple Binary Accuracy: {binary_accuracy:.4f}")
+    print(f"   Balanced Binary Accuracy: {balanced_accuracy:.4f} ⭐ (Recommended for imbalanced data)")
+    print(f"   Binary F1-Score: {f1:.4f}")
+    
+    print(f"\n2️⃣ MULTI-CLASS CLASSIFICATION ACCURACY (Which profanity word?):")
+    print(f"   Simple Profanity Class Accuracy: {profanity_class_accuracy:.4f}")
+    print(f"   Balanced Profanity Class Accuracy: {weighted_profanity_class_accuracy:.4f} ⭐ (Accounts for class imbalance)")
+    
+    print(f"\n📊 KEY INSIGHTS (Window-Level Analysis):")
+    print(f"   • Binary detection handles profane vs clean: {balanced_accuracy:.1%}")
+    print(f"   • Profanity classification handles which word: {weighted_profanity_class_accuracy:.1%}")
+    print(f"   • Window-level binary F1-score: {f1:.1%}")
+    print(f"   • Data imbalance: {total_profanity/len(all_results):.1%} profane vs {total_none/len(all_results):.1%} clean")
+    print(f"   • Current threshold: {threshold} (adjust with --threshold parameter)")
+    
+    # Add threshold guidance
+    print(f"\n🎯 THRESHOLD GUIDANCE:")
+    print(f"   • Current threshold: {threshold}")
+    if binary_metrics:
+        print(f"   • Current F1-Score: {binary_metrics['f1']:.3f}")
+        print(f"   • Current Precision: {binary_metrics['precision']:.3f}")
+        print(f"   • Current Recall: {binary_metrics['recall']:.3f}")
+    print(f"   • Lower threshold (e.g., 0.3): Higher recall, more false positives")
+    print(f"   • Higher threshold (e.g., 0.7): Higher precision, more false negatives")
+    print(f"   • Balanced threshold (0.5): Good starting point")
+    print(f"   • Use ROC curve to find optimal threshold for your use case")
+    
+    # Window-level statistics summary
+    print(f"\n=== Window-Level Statistics Summary ===")
+    total_windows = len(all_results)
+    total_profane_windows = len(all_results[all_results['true_label'] != 'none'])
+    total_clean_windows = len(all_results[all_results['true_label'] == 'none'])
+    
+    print(f"Total Windows Evaluated: {total_windows}")
+    print(f"Profane Windows: {total_profane_windows} ({total_profane_windows/total_windows:.1%})")
+    print(f"Clean Windows: {total_clean_windows} ({total_clean_windows/total_windows:.1%})")
+    
+    # Per-class window statistics
+    print(f"\n=== Per-Class Window Statistics ===")
+    for label in profanity_labels:
+        true_count = len(all_results[all_results['true_label'] == label])
+        pred_count = len(all_results[all_results['predicted_label'] == label])
+        correct_count = len(all_results[(all_results['true_label'] == label) & (all_results['predicted_label'] == label)])
+        
+        if true_count > 0:
+            recall = correct_count / true_count
+            precision = correct_count / pred_count if pred_count > 0 else 0
+            f1_score = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
+            
+            print(f"{label}: True={true_count}, Pred={pred_count}, Correct={correct_count}, P={precision:.3f}, R={recall:.3f}, F1={f1_score:.3f}")
+    
+    print(f"\n📊 Advanced Preprocessing Benefits:")
+    print("✅ Enhanced noise reduction using spectral subtraction")
+    print("✅ RMS normalization for consistent signal levels")
+    print("✅ Dynamic range compression for robust feature extraction")
+    print("✅ High-pass filtering for low-frequency noise removal")
+    print("✅ Consistent preprocessing pipeline matching training")
+    
+    # Ensure plots directory exists
+    plots_dir = get_plots_directory()
+    os.makedirs(plots_dir, exist_ok=True)
+    
+    # Create window-level confusion matrix
+    if len(profanity_results) > 0:
+        print(f"\n=== Generating Window-Level Confusion Matrix ===")
+        
+        # Plot window-level confusion matrix (only include actual profanity predictions)
+        if len(profanity_predictions) > 0:
+            plot_confusion_matrix(
+                profanity_predictions['true_label'].values,
+                profanity_predictions['predicted_label'].values,
+                profanity_labels
+            )
+        else:
+            print("No profanity predictions found for confusion matrix")
+    
+    # Ensure plots directory exists
+    plots_dir = get_plots_directory()
+    os.makedirs(plots_dir, exist_ok=True)
+
+
+if __name__ == "__main__":
+    main()

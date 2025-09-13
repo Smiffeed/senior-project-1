@@ -1,0 +1,81 @@
+=== FRESH CORRELATION ANALYSIS RESULTS ===
+
+DATA OVERVIEW:
+----------------------------------------
+Original Data Configurations: 406
+Comprehensive Data Configurations: 1215
+Methods Found: word_eval, word_iou_eval, iou_eval
+Evaluation Types: eval_by_0.05, eval_percent
+Total Unique Correlations Calculated: 42
+
+CORRELATION COEFFICIENTS:
+----------------------------------------
+word_iou_eval_word_iou_binary_f1_0_1_vs_window: -0.959 (Strong Negative)
+iou_eval_iou_binary_f1_0_1_vs_stride: +0.958 (Strong Positive)
+word_iou_eval_word_iou_multiclass_f1_0_1_vs_window: -0.957 (Strong Negative)
+word_eval_word_multiclass_f1_vs_window: -0.933 (Strong Negative)
+iou_eval_iou_binary_f1_0_3_vs_stride: +0.933 (Strong Positive)
+word_eval_word_binary_f1_vs_window: -0.927 (Strong Negative)
+iou_eval_iou_binary_f1_0_9_vs_window: +0.924 (Strong Positive)
+iou_eval_iou_binary_f1_0_5_vs_stride: +0.924 (Strong Positive)
+iou_eval_iou_binary_f1_0_7_vs_stride: +0.923 (Strong Positive)
+iou_eval_iou_binary_f1_0_7_vs_window: +0.923 (Strong Positive)
+iou_eval_iou_binary_f1_0_9_vs_stride: +0.922 (Strong Positive)
+iou_eval_iou_binary_f1_0_5_vs_window: +0.921 (Strong Positive)
+word_f1_vs_stride: -0.917 (Strong Negative)
+iou_eval_iou_binary_f1_0_3_vs_window: +0.910 (Strong Positive)
+word_f1_vs_window: -0.901 (Strong Negative)
+iou_eval_iou_binary_f1_0_1_vs_window: +0.888 (Strong Positive)
+combined_iou_vs_window: -0.887 (Strong Negative)
+word_eval_word_binary_f1_vs_stride: -0.887 (Strong Negative)
+iou_eval_combined_mean_iou_vs_window: -0.887 (Strong Negative)
+word_eval_word_multiclass_f1_vs_stride: -0.874 (Strong Negative)
+word_iou_eval_word_iou_multiclass_f1_0_3_vs_window: -0.792 (Strong Negative)
+word_iou_eval_word_iou_binary_f1_0_3_vs_window: -0.791 (Strong Negative)
+word_iou_eval_word_iou_multiclass_f1_0_1_vs_stride: -0.731 (Strong Negative)
+word_iou_eval_word_iou_binary_f1_0_1_vs_stride: -0.730 (Strong Negative)
+word_iou_eval_word_iou_multiclass_f1_0_5_vs_window: -0.685 (Moderate Negative)
+word_iou_eval_word_iou_binary_f1_0_5_vs_window: -0.683 (Moderate Negative)
+combined_iou_vs_stride: -0.676 (Moderate Negative)
+iou_eval_combined_mean_iou_vs_stride: -0.675 (Moderate Negative)
+word_iou_eval_word_iou_binary_f1_0_7_vs_window: -0.612 (Moderate Negative)
+window_f1_vs_window: +0.609 (Moderate Positive)
+word_iou_eval_word_iou_multiclass_f1_0_7_vs_window: -0.581 (Moderate Negative)
+word_iou_eval_word_iou_binary_f1_0_3_vs_stride: -0.556 (Moderate Negative)
+word_iou_eval_word_iou_multiclass_f1_0_3_vs_stride: -0.548 (Moderate Negative)
+word_iou_eval_word_iou_binary_f1_0_5_vs_stride: -0.473 (Moderate Negative)
+word_iou_eval_word_iou_multiclass_f1_0_5_vs_stride: -0.465 (Moderate Negative)
+window_f1_vs_stride: +0.442 (Moderate Positive)
+word_iou_eval_word_iou_binary_f1_0_9_vs_window: -0.360 (Moderate Negative)
+word_iou_eval_word_iou_binary_f1_0_7_vs_stride: -0.356 (Moderate Negative)
+word_iou_eval_word_iou_multiclass_f1_0_7_vs_stride: -0.296 (Weak Negative)
+word_iou_eval_word_iou_multiclass_f1_0_9_vs_window: -0.282 (Weak Negative)
+word_iou_eval_word_iou_binary_f1_0_9_vs_stride: -0.111 (Weak Negative)
+word_iou_eval_word_iou_multiclass_f1_0_9_vs_stride: -0.045 (Weak Negative)
+
+STRONG CORRELATIONS (|r| >= 0.7):
+----------------------------------------
+word_f1_vs_window: -0.901
+word_f1_vs_stride: -0.917
+combined_iou_vs_window: -0.887
+word_eval_word_binary_f1_vs_window: -0.927
+word_eval_word_binary_f1_vs_stride: -0.887
+word_eval_word_multiclass_f1_vs_window: -0.933
+word_eval_word_multiclass_f1_vs_stride: -0.874
+word_iou_eval_word_iou_binary_f1_0_1_vs_window: -0.959
+word_iou_eval_word_iou_binary_f1_0_1_vs_stride: -0.730
+word_iou_eval_word_iou_multiclass_f1_0_1_vs_window: -0.957
+word_iou_eval_word_iou_multiclass_f1_0_1_vs_stride: -0.731
+word_iou_eval_word_iou_binary_f1_0_3_vs_window: -0.791
+word_iou_eval_word_iou_multiclass_f1_0_3_vs_window: -0.792
+iou_eval_combined_mean_iou_vs_window: -0.887
+iou_eval_iou_binary_f1_0_1_vs_window: +0.888
+iou_eval_iou_binary_f1_0_1_vs_stride: +0.958
+iou_eval_iou_binary_f1_0_3_vs_window: +0.910
+iou_eval_iou_binary_f1_0_3_vs_stride: +0.933
+iou_eval_iou_binary_f1_0_5_vs_window: +0.921
+iou_eval_iou_binary_f1_0_5_vs_stride: +0.924
+iou_eval_iou_binary_f1_0_7_vs_window: +0.923
+iou_eval_iou_binary_f1_0_7_vs_stride: +0.923
+iou_eval_iou_binary_f1_0_9_vs_window: +0.924
+iou_eval_iou_binary_f1_0_9_vs_stride: +0.922

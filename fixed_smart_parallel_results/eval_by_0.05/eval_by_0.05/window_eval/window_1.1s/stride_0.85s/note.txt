@@ -1,0 +1,70 @@
+=== WINDOW-LEVEL EVALUATION RESULTS ===
+Generated at: 2025-09-12 07:51:42
+
+=== BINARY CLASSIFICATION (Profane vs Non-Profane) ===
+  Accuracy: 0.8128
+  Balanced Accuracy: 0.5856
+  Precision: 0.1523
+  Recall: 0.3175
+  F1-Score: 0.2059
+
+Binary Classification Report:
+precision    recall  f1-score   support
+
+        none       0.94      0.85      0.89      5329
+     profane       0.15      0.32      0.21       441
+
+    accuracy                           0.81      5770
+   micro avg       0.81      0.81      0.81     5770
+   macro avg       0.55      0.59      0.55      5770
+weighted avg       0.88      0.81      0.84      5770
+
+=== MULTICLASS CLASSIFICATION (All Classes Including None) ===
+  Accuracy: 0.8095
+  Precision: 0.1317
+  Recall: 0.2744
+  F1-Score: 0.1779
+
+Multiclass Classification Report (All Classes):
+precision    recall  f1-score   support
+
+        เย็ด       0.01      0.04      0.02        27
+          กู       0.17      0.21      0.19       187
+         มึง       0.14      0.21      0.17       131
+       เหี้ย       0.13      0.54      0.21        96
+        none       0.94      0.85      0.89      5329
+
+    accuracy                           0.81      5770
+   micro avg       0.81      0.81      0.81     5770
+   macro avg       0.28      0.37      0.30      5770
+weighted avg       0.88      0.81      0.84      5770
+
+=== MULTICLASS CLASSIFICATION (Profanity Words Only) ===
+  Accuracy: 0.2744
+  Precision: 0.8466
+  Recall: 0.2744
+  F1-Score: 0.3975
+
+Multiclass Classification Report (Profanity Only):
+precision    recall  f1-score   support
+
+        เย็ด       0.33      0.04      0.07        27
+          กู       0.91      0.21      0.35       187
+         มึง       0.85      0.21      0.34       131
+       เหี้ย       0.87      0.54      0.67        96
+
+   micro avg       0.86      0.27      0.42       441
+    accuracy                           0.27     441
+   macro avg       0.74      0.25      0.36       441
+weighted avg       0.85      0.27      0.40       441
+
+=== DATASET STATISTICS ===
+Total Windows: 5770
+Profanity Windows: 919
+Non-Profanity Windows: 4851
+
+=== ROC AND DET CURVE ANALYSIS ===
+Binary ROC AUC: 0.5856
+Multiclass Average ROC AUC: 1.0000
+
+ROC and DET curve plots saved as PNG files in the output directory.

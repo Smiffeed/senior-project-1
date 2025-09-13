@@ -1,0 +1,11 @@
+evaluation_method,score_type,window,stride,stride_numeric,f1_score,accuracy,precision,recall,mean_iou
+iou,binary_f1,2.0,1.7,1.7,0.2333,0.3756,0.1382,0.7493,
+iou,word_f1,2.0,30.0%,0.3,0.1947,,0.1074,1.0412,
+iou,iou_f1,1.5,1.35,1.35,0.0884,,0.052,0.2964,28.0
+iou_word_sep,binary_f1,2.0,1.7,1.7,0.2333,0.3756,0.1382,0.7493,
+iou_word_sep,word_f1,2.0,30.0%,0.3,0.1947,,0.1074,1.0412,
+iou_word_sep,iou_f1,1.5,1.35,1.35,0.0916,,0.0539,0.3071,
+window,binary_f1,2.0,1.7,1.7,0.2333,0.3756,0.1382,0.7493,
+window,multiclass_f1,0.7,0.7,0.7,0.4626,0.5364,0.611,0.4893,
+word,binary_f1,2.0,1.7,1.7,0.2333,0.3756,0.1382,0.7493,
+word,word_f1,2.0,30.0%,0.3,0.1947,,0.1074,1.0412,

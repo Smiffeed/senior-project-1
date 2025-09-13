@@ -1,0 +1,11 @@
+eval_type,window,stride,success,duration_seconds,worker_id,window_f1,word_f1,combined_iou,window_numeric,stride_numeric,stride_percentage
+eval_by_0.05,window_1.2s,stride_0.85s,True,0.0,0,0.2126,0.2126,0.0,1.2,0.85,70.83333333333334
+eval_by_0.05,window_1.5s,stride_1.25s,True,0.0,0,0.211,0.211,0.0,1.5,1.25,83.33333333333334
+eval_by_0.05,window_1.6s,stride_1.5s,True,0.0,0,0.2102,0.2102,0.0,1.6,1.5,93.75
+eval_by_0.05,window_1.6s,stride_0.9s,True,0.0,0,0.2097,0.2097,0.0,1.6,0.9,56.25
+eval_by_0.05,window_1.6s,stride_1.2s,True,0.0,0,0.2093,0.2093,0.0,1.6,1.2,74.99999999999999
+eval_by_0.05,window_1.5s,stride_0.75s,True,0.0,0,0.2089,0.2089,0.0,1.5,0.75,50.0
+eval_percent,window_1.5s,stride_50.0%,True,0.0,0,0.2089,0.2089,0.0,1.5,0.75,50.0
+eval_by_0.05,window_1.2s,stride_1.05s,True,0.0,0,0.2078,0.2078,0.0,1.2,1.05,87.50000000000001
+eval_by_0.05,window_1.5s,stride_1.5s,True,0.0,0,0.2074,0.2074,0.0,1.5,1.5,100.0
+eval_percent,window_1.5s,stride_100.0%,True,0.0,0,0.2074,0.2074,0.0,1.5,1.5,100.0

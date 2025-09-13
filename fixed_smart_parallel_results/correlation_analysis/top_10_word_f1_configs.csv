@@ -1,0 +1,11 @@
+eval_type,window,stride,success,duration_seconds,worker_id,window_f1,word_f1,combined_iou,window_numeric,stride_numeric,stride_percentage
+eval_percent,window_0.3s,stride_10.0%,True,5012.726710796356,4,0.0729,0.996,0.1328,0.3,0.03,10.0
+eval_percent,window_0.3s,stride_20.0%,True,2808.8418843746185,2,0.0717,0.992,0.1711,0.3,0.06,20.0
+eval_percent,window_0.3s,stride_30.0%,True,2035.396013021469,3,0.0727,0.9825,0.1856,0.3,0.09,30.0
+eval_percent,window_0.3s,stride_40.0%,True,1550.9394354820251,4,0.0723,0.9811,0.2108,0.3,0.12,40.0
+eval_percent,window_0.4s,stride_10.0%,True,4362.038256883621,2,0.0994,0.9811,0.1312,0.4,0.04000000000000001,10.0
+eval_percent,window_0.4s,stride_20.0%,True,2345.0159454345703,4,0.1003,0.977,0.1454,0.4,0.08000000000000002,20.0
+eval_by_0.05,window_0.3s,stride_0.125s,True,1383.845859527588,1,0.0739,0.9742,0.2094,0.3,0.125,41.66666666666667
+eval_percent,window_0.5s,stride_10.0%,True,3130.798814535141,3,0.1255,0.9714,0.1145,0.5,0.05,10.0
+eval_by_0.05,window_0.3s,stride_0.15s,True,1221.400998353958,2,0.0736,0.9686,0.2286,0.3,0.15,50.0
+eval_percent,window_0.3s,stride_50.0%,True,1194.9433398246765,1,0.0736,0.9686,0.2286,0.3,0.15,50.0

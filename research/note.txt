@@ -1,0 +1,11 @@
+      Method    Score Type F1 Score  Window (s) Stride Stride (numeric)
+         IOU     Binary F1   0.2333         2.0    1.7            1.700
+         IOU       Word F1   0.1947         2.0  30.0%            0.300
+         IOU        Iou F1   0.0884         1.5   1.35            1.350
+IOU WORD SEP     Binary F1   0.2333         2.0    1.7            1.700
+IOU WORD SEP       Word F1   0.1947         2.0  30.0%            0.300
+IOU WORD SEP        Iou F1   0.0916         1.5   1.35            1.350
+      WINDOW     Binary F1   0.2333         2.0    1.7            1.700
+      WINDOW Multiclass F1   0.4626         0.7    0.7            0.700
+        WORD     Binary F1   0.2333         2.0    1.7            1.700
+        WORD       Word F1   0.1947         2.0  30.0%            0.300

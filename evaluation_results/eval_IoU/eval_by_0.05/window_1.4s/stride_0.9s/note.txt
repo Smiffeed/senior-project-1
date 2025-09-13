@@ -1,0 +1,333 @@
+Evaluation Results
+==================
+CSV File: csv\eval_by_0.05\window_1.4s\stride_0.9s.csv
+Model Path: ./models/4_classes_max_steps
+Threshold: 0.5
+Timestamp: 2025-09-10 04:08:26
+Command: C:/Users/muldi/Documents/Playground/University/senior-project-1/env/Scripts/python.exe scripts/evaluate_advanced_models_IoU.py --csv_file csv\eval_by_0.05\window_1.4s\stride_0.9s.csv --model_path ./models/4_classes_max_steps --threshold 0.5
+
+================================================================================
+
+  metadata = torchaudio.info(file_path)
+  return AudioMetaData(
+  metadata = torchaudio.info(file_path)
+  return AudioMetaData(
+   • Binary confusion matrix (Profane vs Non-Profane)
+   • Multi-class confusion matrix (specific profanity words)
+   • ROC curve with current threshold marked
+   • Comprehensive performance metrics
+   • Word-level and window-level evaluation
+   --threshold 0.3, 0.4, 0.5, 0.6, 0.7
+   --csv_file csv/eval_windowed_0.3s.csv
+   --csv_file csv/eval_0.5s/stride_0.25s.csv
+Saved detailed results to ./csv/eval_results_advanced.csv
+
+=== Profanity Words Misclassified as 'none' (152 cases) ===
+File: Horror movie for WOKE!!!!!.wav
+Time: 19.80-21.20
+True label: กู
+Confidence: 0.7869
+
+File: Horror movie for WOKE!!!!!.wav
+Time: 22.50-23.90
+True label: มึง
+Confidence: 0.5153
+
+File: Horror movie for WOKE!!!!!.wav
+Time: 25.20-26.60
+True label: กู
+Confidence: 0.7081
+
+File: Horror movie for WOKE!!!!!.wav
+Time: 81.00-82.40
+True label: เหี้ย
+Confidence: 0.6646
+
+File: Horror movie for WOKE!!!!!.wav
+Time: 99.00-100.40
+True label: กู
+Confidence: 0.7182
+
+File: Horror movie for WOKE!!!!!.wav
+Time: 151.20-152.60
+True label: มึง
+Confidence: 0.8425
+
+File: Horror movie for WOKE!!!!!.wav
+Time: 152.10-153.50
+True label: เย็ด
+Confidence: 0.7977
+
+File: Horror movie for WOKE!!!!!.wav
+Time: 185.40-186.80
+True label: เหี้ย
+Confidence: 0.7098
+
+File: Horror movie for WOKE!!!!!.wav
+Time: 393.30-394.70
+True label: มึง
+Confidence: 0.6746
+
+File: Horror movie for WOKE!!!!!.wav
+Time: 400.50-401.90
+True label: มึง
+Confidence: 0.6750
+
+... and 142 more cases
+
+=== Classification Report (Advanced Preprocessing) ===
+              precision    recall  f1-score   support
+
+        เย็ด     0.0847    0.2778    0.1299        18
+          กู     0.5063    0.7547    0.6061       159
+         มึง     0.6207    0.1667    0.2628       108
+       เหี้ย     0.6222    0.3294    0.4308        85
+
+    accuracy                         0.4622       370
+   macro avg     0.4585    0.3821    0.3574       370
+weighted avg     0.5458    0.4622    0.4424       370
+
+Overall Accuracy (excluding 'none' predictions): 0.4622
+Total Profanity Windows with Profanity Predictions: 370
+Correct Predictions: 171
+Missed Profanity (predicted as 'none'): 152/522
+
+=== Binary Profanity Detection Metrics (Window-level, Advanced Preprocessing) ===
+Using threshold: 0.5
+Balanced Accuracy: 0.3113
+
+=== Creating Binary Confusion Matrix ===
+✅ Binary confusion matrix saved to ./plots_worker_2_1757452105/binary_confusion_matrix_threshold_0.5.png
+
+=== Binary Classification Metrics (Threshold: 0.5) ===
+True Negatives: 1513
+False Positives: 3415
+False Negatives: 152
+True Positives: 370
+Accuracy: 0.3455
+Precision: 0.0978
+Recall: 0.7088
+F1-Score: 0.1718
+Precision: 0.0452
+Recall: 0.3276
+F1-score: 0.0794
+
+Detailed Counts:
+True Positives: 171
+False Positives: 3614
+True Negatives: 1513
+False Negatives: 351
+Total Windows: 5450
+
+🎯 BINARY CLASSIFICATION ACCURACY:
+Simple Binary Accuracy: 0.3090
+Balanced Binary Accuracy: 0.3113
+(Balanced accounts for class imbalance: 9.6% profane vs 94.1% clean)
+
+Class Distribution:
+Profanity samples: 522 (9.58%)
+None samples: 5127 (94.07%)
+
+=== ROC/AUC for Binary Profanity Detection ===
+AUC Score: 0.5088
+Current threshold: 0.5
+✅ ROC curve saved to ./plots_worker_2_1757452105/roc_curve_binary_profanity_threshold_0.5.png
+
+=== DET Curve for Binary Profanity Detection ===
+✅ DET curve saved to ./plots_worker_2_1757452105/det_curve_binary_profanity.png
+
+=== MULTI-CLASS PROFANITY CLASSIFICATION ACCURACY ===
+Total Profanity Samples: 522
+Correct Profanity Classifications: 171
+Simple Profanity Classification Accuracy: 0.3276
+
+Per-Class Profanity Accuracy:
+  เย็ด: 5/33 = 0.152 (weight: 0.063)
+  กู: 120/213 = 0.563 (weight: 0.408)
+  มึง: 18/162 = 0.111 (weight: 0.310)
+  เหี้ย: 28/114 = 0.246 (weight: 0.218)
+
+Balanced Profanity Classification Accuracy: 0.2679
+
+============================================================
+NORMALIZED WORD-LEVEL EVALUATION (Advanced Preprocessing)
+============================================================
+
+=== Word-Level Detection Metrics (Advanced Preprocessing) ===
+Total True Words: 301
+Total Predicted Words: 2420
+Correct Word Detections: 193
+Word-Level Precision: 0.0798
+Word-Level Recall: 0.6412
+Word-Level F1-Score: 0.1419
+
+=== IoU-based Word-Level Evaluation (Threshold: 0.5) ===
+IoU Threshold: 0.5
+Total Predicted Words: 2420
+Total Ground Truth Words: 301
+Correct Predictions (IoU ≥ 0.5 + Label Match): 100
+IoU-based Precision: 0.0413
+IoU-based Recall: 0.3322
+IoU-based F1-Score: 0.0735
+Mean IoU Percentage: 31.42%
+
+   Per-Class Mean IoU Percentage:
+     - กู: 49.72%
+     - มึง: 11.71%
+     - เหี้ย: 30.21%
+     - เย็ด: 11.66%
+
+=== IoU Analysis with Different Thresholds ===
+IoU ≥ 0.1: Precision=0.070, Recall=0.561, F1=0.124
+IoU ≥ 0.2: Precision=0.064, Recall=0.512, F1=0.113
+IoU ≥ 0.3: Precision=0.055, Recall=0.439, F1=0.097
+IoU ≥ 0.4: Precision=0.049, Recall=0.395, F1=0.087
+IoU ≥ 0.5: Precision=0.041, Recall=0.332, F1=0.074
+IoU ≥ 0.6: Precision=0.036, Recall=0.292, F1=0.065
+IoU ≥ 0.7: Precision=0.016, Recall=0.126, F1=0.028
+IoU ≥ 0.8: Precision=0.014, Recall=0.113, F1=0.025
+IoU ≥ 0.9: Precision=0.014, Recall=0.110, F1=0.024
+✅ IoU analysis results saved to ./evaluation_results/iou_analysis_results.csv
+
+=== Binary Profanity IoU Evaluation (Threshold: 0.5) ===
+Binary IoU Precision: 0.0798
+Binary IoU Recall: 0.6412
+Binary IoU F1-Score: 0.1419
+Mean Binary IoU: 0.5756
+
+=== Word-Level vs Original Ground Truth Accuracy ===
+Total Original GT Words: 378
+Total Predicted Words: 2420
+Correct vs Original GT: 153
+Precision vs Original GT: 0.0632
+Recall vs Original GT: 0.4048
+F1-Score vs Original GT: 0.1094
+
+=== IoU-based Evaluation vs Original Ground Truth ===
+IoU vs Original GT (threshold=0.5):
+  Precision: 0.0004
+  Recall: 0.0026
+  F1-Score: 0.0007
+  Mean IoU: 0.0406
+  Correct Predictions: 1/2420
+✅ IoU vs original GT results saved to ./evaluation_results/iou_vs_original_analysis.csv
+
+🎯 ACCURACY COMPARISON:
+Windowed-based Word F1: 0.1419
+Original GT-based Word F1: 0.1094 ⭐ (Most realistic)
+IoU-based F1 (vs windowed GT): 0.0735
+IoU-based F1 (vs original GT): 0.0007
+Difference: 0.0325
+⚠️  Original GT-based metrics are more realistic
+📊 This shows true performance against actual labeled data
+
+=== Class-wise Performance vs Original Ground Truth ===
+เย็ด: 4/26 recall=0.154, 4/664 precision=0.006, F1=0.012
+กู: 100/157 recall=0.637, 100/1290 precision=0.078, F1=0.138
+มึง: 19/117 recall=0.162, 19/226 precision=0.084, F1=0.111
+เหี้ย: 30/78 recall=0.385, 30/240 precision=0.125, F1=0.189
+
+=== Comparison: Window vs Word Level (Advanced Preprocessing) ===
+Window-level F1: 0.0794
+Word-level F1: 0.1419
+Original GT Word F1: 0.1094
+Window vs Word difference: -0.0625
+Word vs Original GT difference: 0.0325
+⚠️  Windowed GT metrics may be inflated due to data augmentation
+📊 Original GT-based metrics provide the most realistic performance assessment
+
+======================================================================
+🎯 COMPREHENSIVE ACCURACY SUMMARY
+======================================================================
+
+1️⃣ BINARY CLASSIFICATION ACCURACY (Profane vs Non-Profane):
+   Simple Binary Accuracy: 0.3090
+   Balanced Binary Accuracy: 0.3113 ⭐ (Recommended for imbalanced data)
+   Binary F1-Score: 0.0794
+   Binary IoU F1-Score: 0.1419
+   Mean Binary IoU Percentage: 57.56%
+
+2️⃣ MULTI-CLASS CLASSIFICATION ACCURACY (Which profanity word?):
+   Simple Profanity Class Accuracy: 0.3276
+   Balanced Profanity Class Accuracy: 0.2679 ⭐ (Accounts for class imbalance)
+
+3️⃣ WORD-LEVEL ACCURACY (Realistic performance):
+   Word-level F1 (vs windowed GT): 0.1419
+   Word-level F1 (vs original GT): 0.1094 ⭐ (Most realistic)
+   IoU-based F1 (threshold=0.5): 0.0735 ⭐ (Temporal overlap)
+   Mean IoU score: 0.3142
+   Mean IoU Percentage: 31.42%
+
+📊 KEY INSIGHTS:
+   • Binary detection handles profane vs clean: 31.1%
+   • Profanity classification handles which word: 26.8%
+   • Word-level performance in real scenarios: 10.9%
+   • IoU-based word localization accuracy: 7.4%
+   • Data imbalance: 9.6% profane vs 94.1% clean
+   • Current threshold: 0.5 (adjust with --threshold parameter)
+
+🎯 THRESHOLD GUIDANCE:
+   • Current threshold: 0.5
+   • Current F1-Score: 0.172
+   • Current Precision: 0.098
+   • Current Recall: 0.709
+   • Lower threshold (e.g., 0.3): Higher recall, more false positives
+   • Higher threshold (e.g., 0.7): Higher precision, more false negatives
+   • Balanced threshold (0.5): Good starting point
+   • Use ROC curve to find optimal threshold for your use case
+
+=== Detailed Word/Instance Statistics ===
+Total Label Instances (segments): 522
+Total Real Words (after merge overlap): 301
+Reduction ratio: 1.73x
+
+=== Breakdown by Class ===
+Format: [Original Ground Truth] → [Windowed Ground Truth] → [Predicted Instances] → [Merged Words]
+(Showing original ground truth from eval.csv)
+(Showing windowed ground truth from stride_0.9s.csv)
+เย็ด: [26] → [33] → 850 predicted → 16 words
+กู: [157] → [213] → 2393 predicted → 122 words
+มึง: [117] → [162] → 243 predicted → 93 words
+เหี้ย: [78] → [114] → 299 predicted → 70 words
+
+📊 SUMMARY COMPARISON:
+Original Ground Truth: 378 profanity instances
+Windowed Ground Truth: 522 profanity instances
+Predicted Instances: 3785 profanity instances
+Merged Words: 301 profanity words
+Original → Windowed GT: 1.38x increase
+Windowed GT → Predicted: 7.25x ratio
+Original → Merged: 0.80x ratio
+
+=== Prediction Statistics ===
+Total Predicted Instances (segments): 3785
+Total Predicted Words (after merge): 2420
+Prediction reduction ratio: 1.56x
+
+=== Advanced Preprocessing Benefits ===
+✅ Enhanced noise reduction using spectral subtraction
+✅ RMS normalization for consistent signal levels
+✅ Dynamic range compression for robust feature extraction
+✅ High-pass filtering for low-frequency noise removal
+✅ Consistent preprocessing pipeline matching training
+
+=== Generating Word-Level Confusion Matrix ===
+Creating word-level confusion matrix with 502 word comparisons
+Note: Only showing detected words, not missed detections
+✅ Word-level confusion matrix saved to ./plots_worker_2_1757452105/confusion_matrix_advanced.png
+
+=== Generating Window-Level Confusion Matrix (for comparison) ===
+✅ Window-level confusion matrix saved to ./plots_worker_2_1757452105/confusion_matrix_window_level.png
+
+
+=== Evaluation completed successfully ===
+Completed at: 2025-09-10 04:13:50
+
+=== File Organization Summary ===
+Output Directory: evaluation_results\eval_by_0.05\window_1.4s\stride_0.9s
+Moved Plot Files: 5
+  - binary_confusion_matrix_threshold_0.5.png
+  - confusion_matrix_advanced.png
+  - confusion_matrix_window_level.png
+  - det_curve_binary_profanity.png
+  - roc_curve_binary_profanity_threshold_0.5.png

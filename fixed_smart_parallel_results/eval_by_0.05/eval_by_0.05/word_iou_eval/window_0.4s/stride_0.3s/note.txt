@@ -1,0 +1,601 @@
+=== WORD-LEVEL IoU EVALUATION RESULTS ===
+Generated at: 2025-09-12 06:15:18
+
+Word-level evaluation using IoU thresholds for classification.
+Same as word_eval but uses IoU criteria to determine valid predictions.
+
+=== IoU THRESHOLDS PERFORMANCE ===
+
+--- IoU Threshold 0.1 ---
+Binary Classification (Profane vs Non-Profane):
+  Accuracy: 0.8391
+  Balanced Accuracy: 0.8585
+  Precision: 1.0000
+  Recall: 0.7169
+  F1-Score: 0.8351
+
+Multiclass Classification (Profanity Words Only):
+  Accuracy: 0.6058
+  Precision: 0.8549
+  Recall: 0.6058
+  F1-Score: 0.7087
+
+=== 1. BINARY CLASSIFICATION (Profane vs None) ===
+Binary Classification Report:
+precision    recall  f1-score   support
+
+        none       0.73      1.00      0.84       287
+     profane       1.00      0.72      0.84       378
+
+    accuracy                           0.84       665
+   micro avg       0.84      0.84      0.84     665
+   macro avg       0.86      0.86      0.84       665
+weighted avg       0.88      0.84      0.84       665
+
+=== 2. MULTICLASS CLASSIFICATION (All Classes Including None) ===
+Accuracy: 0.7759
+Precision (profanity): 0.8450
+Recall (profanity): 0.6058
+F1-Score (profanity): 0.7057
+
+Multiclass Classification Report (All Classes Including None):
+precision    recall  f1-score   support
+
+        เย็ด       0.38      0.35      0.36        26
+          กู       0.85      0.59      0.70       157
+         มึง       0.93      0.66      0.77       117
+       เหี้ย       0.91      0.64      0.75        78
+        none       0.73      1.00      0.84       287
+
+    accuracy                           0.78       665
+   micro avg       0.78      0.78      0.78     665
+   macro avg       0.76      0.65      0.68       665
+weighted avg       0.80      0.78      0.77       665
+
+=== 3. MULTICLASS CLASSIFICATION (Profanity Words Only) ===
+Accuracy (profanity words only): 0.6058
+
+Multiclass Classification Report (Profanity Words Only - Excluding None):
+precision    recall  f1-score   support
+
+        เย็ด       0.38      0.35      0.36        26
+          กู       0.85      0.59      0.70       157
+         มึง       0.93      0.66      0.77       117
+       เหี้ย       0.91      0.64      0.75        78
+
+   micro avg       0.85      0.61      0.71       378
+    accuracy                           0.61     378
+   macro avg       0.77      0.56      0.65       378
+weighted avg       0.85      0.61      0.71       378
+
+
+--- IoU Threshold 0.2 ---
+Binary Classification (Profane vs Non-Profane):
+  Accuracy: 0.7083
+  Balanced Accuracy: 0.7434
+  Precision: 1.0000
+  Recall: 0.4868
+  F1-Score: 0.6548
+
+Multiclass Classification (Profanity Words Only):
+  Accuracy: 0.4259
+  Precision: 0.8741
+  Recall: 0.4259
+  F1-Score: 0.5680
+
+=== 1. BINARY CLASSIFICATION (Profane vs None) ===
+Binary Classification Report:
+precision    recall  f1-score   support
+
+        none       0.60      1.00      0.75       287
+     profane       1.00      0.49      0.65       378
+
+    accuracy                           0.71       665
+   micro avg       0.71      0.71      0.71     665
+   macro avg       0.80      0.74      0.70       665
+weighted avg       0.83      0.71      0.69       665
+
+=== 2. MULTICLASS CLASSIFICATION (All Classes Including None) ===
+Accuracy: 0.6737
+Precision (profanity): 0.8750
+Recall (profanity): 0.4259
+F1-Score (profanity): 0.5730
+
+Multiclass Classification Report (All Classes Including None):
+precision    recall  f1-score   support
+
+        เย็ด       0.44      0.27      0.33        26
+          กู       0.85      0.32      0.47       157
+         มึง       0.93      0.48      0.63       117
+       เหี้ย       0.98      0.60      0.75        78
+        none       0.60      1.00      0.75       287
+
+    accuracy                           0.67       665
+   micro avg       0.67      0.67      0.67     665
+   macro avg       0.76      0.54      0.59       665
+weighted avg       0.75      0.67      0.65       665
+
+=== 3. MULTICLASS CLASSIFICATION (Profanity Words Only) ===
+Accuracy (profanity words only): 0.4259
+
+Multiclass Classification Report (Profanity Words Only - Excluding None):
+precision    recall  f1-score   support
+
+        เย็ด       0.44      0.27      0.33        26
+          กู       0.85      0.32      0.47       157
+         มึง       0.93      0.48      0.63       117
+       เหี้ย       0.98      0.60      0.75        78
+
+   micro avg       0.88      0.43      0.57       378
+    accuracy                           0.43     378
+   macro avg       0.80      0.42      0.55       378
+weighted avg       0.87      0.43      0.57       378
+
+
+--- IoU Threshold 0.3 ---
+Binary Classification (Profane vs Non-Profane):
+  Accuracy: 0.5940
+  Balanced Accuracy: 0.6429
+  Precision: 1.0000
+  Recall: 0.2857
+  F1-Score: 0.4444
+
+Multiclass Classification (Profanity Words Only):
+  Accuracy: 0.2407
+  Precision: 0.8134
+  Recall: 0.2407
+  F1-Score: 0.3651
+
+=== 1. BINARY CLASSIFICATION (Profane vs None) ===
+Binary Classification Report:
+precision    recall  f1-score   support
+
+        none       0.52      1.00      0.68       287
+     profane       1.00      0.29      0.44       378
+
+    accuracy                           0.59       665
+   micro avg       0.59      0.59      0.59     665
+   macro avg       0.76      0.64      0.56       665
+weighted avg       0.79      0.59      0.55       665
+
+=== 2. MULTICLASS CLASSIFICATION (All Classes Including None) ===
+Accuracy: 0.5684
+Precision (profanity): 0.8426
+Recall (profanity): 0.2407
+F1-Score (profanity): 0.3745
+
+Multiclass Classification Report (All Classes Including None):
+precision    recall  f1-score   support
+
+        เย็ด       0.14      0.04      0.06        26
+          กู       0.77      0.15      0.25       157
+         มึง       0.92      0.30      0.45       117
+       เหี้ย       0.97      0.41      0.58        78
+        none       0.52      1.00      0.68       287
+
+    accuracy                           0.57       665
+   micro avg       0.57      0.57      0.57     665
+   macro avg       0.66      0.38      0.40       665
+weighted avg       0.68      0.57      0.50       665
+
+=== 3. MULTICLASS CLASSIFICATION (Profanity Words Only) ===
+Accuracy (profanity words only): 0.2407
+
+Multiclass Classification Report (Profanity Words Only - Excluding None):
+precision    recall  f1-score   support
+
+        เย็ด       0.14      0.04      0.06        26
+          กู       0.77      0.15      0.25       157
+         มึง       0.92      0.30      0.45       117
+       เหี้ย       0.97      0.41      0.58        78
+
+   micro avg       0.84      0.24      0.37       378
+    accuracy                           0.24     378
+   macro avg       0.70      0.22      0.33       378
+weighted avg       0.81      0.24      0.37       378
+
+
+--- IoU Threshold 0.4 ---
+Binary Classification (Profane vs Non-Profane):
+  Accuracy: 0.5098
+  Balanced Accuracy: 0.5688
+  Precision: 1.0000
+  Recall: 0.1376
+  F1-Score: 0.2419
+
+Multiclass Classification (Profanity Words Only):
+  Accuracy: 0.1164
+  Precision: 0.8371
+  Recall: 0.1164
+  F1-Score: 0.1972
+
+=== 1. BINARY CLASSIFICATION (Profane vs None) ===
+Binary Classification Report:
+precision    recall  f1-score   support
+
+        none       0.47      1.00      0.64       287
+     profane       1.00      0.14      0.24       378
+
+    accuracy                           0.51       665
+   micro avg       0.51      0.51      0.51     665
+   macro avg       0.73      0.57      0.44       665
+weighted avg       0.77      0.51      0.41       665
+
+=== 2. MULTICLASS CLASSIFICATION (All Classes Including None) ===
+Accuracy: 0.4977
+Precision (profanity): 0.8462
+Recall (profanity): 0.1164
+F1-Score (profanity): 0.2047
+
+Multiclass Classification Report (All Classes Including None):
+precision    recall  f1-score   support
+
+        เย็ด       0.00      0.00      0.00        26
+          กู       0.88      0.04      0.08       157
+         มึง       0.86      0.16      0.27       117
+       เหี้ย       1.00      0.23      0.38        78
+        none       0.47      1.00      0.64       287
+
+    accuracy                           0.50       665
+   micro avg       0.50      0.50      0.50     665
+   macro avg       0.64      0.29      0.27       665
+weighted avg       0.68      0.50      0.39       665
+
+=== 3. MULTICLASS CLASSIFICATION (Profanity Words Only) ===
+Accuracy (profanity words only): 0.1164
+
+Multiclass Classification Report (Profanity Words Only - Excluding None):
+precision    recall  f1-score   support
+
+        เย็ด       0.00      0.00      0.00        26
+          กู       0.88      0.04      0.08       157
+         มึง       0.86      0.16      0.27       117
+       เหี้ย       1.00      0.23      0.38        78
+
+   micro avg       0.85      0.12      0.20       378
+    accuracy                           0.12     378
+   macro avg       0.68      0.11      0.18       378
+weighted avg       0.84      0.12      0.20       378
+
+
+--- IoU Threshold 0.5 ---
+Binary Classification (Profane vs Non-Profane):
+  Accuracy: 0.4722
+  Balanced Accuracy: 0.5357
+  Precision: 1.0000
+  Recall: 0.0714
+  F1-Score: 0.1333
+
+Multiclass Classification (Profanity Words Only):
+  Accuracy: 0.0608
+  Precision: 0.8001
+  Recall: 0.0608
+  F1-Score: 0.1114
+
+=== 1. BINARY CLASSIFICATION (Profane vs None) ===
+Binary Classification Report:
+precision    recall  f1-score   support
+
+        none       0.45      1.00      0.62       287
+     profane       1.00      0.07      0.13       378
+
+    accuracy                           0.47       665
+   micro avg       0.47      0.47      0.47     665
+   macro avg       0.72      0.54      0.38       665
+weighted avg       0.76      0.47      0.34       665
+
+=== 2. MULTICLASS CLASSIFICATION (All Classes Including None) ===
+Accuracy: 0.4662
+Precision (profanity): 0.8519
+Recall (profanity): 0.0608
+F1-Score (profanity): 0.1136
+
+Multiclass Classification Report (All Classes Including None):
+precision    recall  f1-score   support
+
+        เย็ด       0.00      0.00      0.00        26
+          กู       0.83      0.03      0.06       157
+         มึง       0.80      0.07      0.13       117
+       เหี้ย       1.00      0.13      0.23        78
+        none       0.45      1.00      0.62       287
+
+    accuracy                           0.47       665
+   micro avg       0.47      0.47      0.47     665
+   macro avg       0.62      0.25      0.21       665
+weighted avg       0.65      0.47      0.33       665
+
+=== 3. MULTICLASS CLASSIFICATION (Profanity Words Only) ===
+Accuracy (profanity words only): 0.0608
+
+Multiclass Classification Report (Profanity Words Only - Excluding None):
+precision    recall  f1-score   support
+
+        เย็ด       0.00      0.00      0.00        26
+          กู       0.83      0.03      0.06       157
+         มึง       0.80      0.07      0.13       117
+       เหี้ย       1.00      0.13      0.23        78
+
+   micro avg       0.85      0.06      0.11       378
+    accuracy                           0.06     378
+   macro avg       0.66      0.06      0.10       378
+weighted avg       0.80      0.06      0.11       378
+
+
+--- IoU Threshold 0.6 ---
+Binary Classification (Profane vs Non-Profane):
+  Accuracy: 0.4526
+  Balanced Accuracy: 0.5185
+  Precision: 1.0000
+  Recall: 0.0370
+  F1-Score: 0.0714
+
+Multiclass Classification (Profanity Words Only):
+  Accuracy: 0.0291
+  Precision: 0.6726
+  Recall: 0.0291
+  F1-Score: 0.0552
+
+=== 1. BINARY CLASSIFICATION (Profane vs None) ===
+Binary Classification Report:
+precision    recall  f1-score   support
+
+        none       0.44      1.00      0.61       287
+     profane       1.00      0.04      0.07       378
+
+    accuracy                           0.45       665
+   micro avg       0.45      0.45      0.45     665
+   macro avg       0.72      0.52      0.34       665
+weighted avg       0.76      0.45      0.30       665
+
+=== 2. MULTICLASS CLASSIFICATION (All Classes Including None) ===
+Accuracy: 0.4481
+Precision (profanity): 0.7857
+Recall (profanity): 0.0291
+F1-Score (profanity): 0.0561
+
+Multiclass Classification Report (All Classes Including None):
+precision    recall  f1-score   support
+
+        เย็ด       0.00      0.00      0.00        26
+          กู       0.75      0.02      0.04       157
+         มึง       0.50      0.02      0.03       117
+       เหี้ย       1.00      0.08      0.14        78
+        none       0.44      1.00      0.61       287
+
+    accuracy                           0.45       665
+   micro avg       0.45      0.45      0.45     665
+   macro avg       0.54      0.22      0.17       665
+weighted avg       0.57      0.45      0.30       665
+
+=== 3. MULTICLASS CLASSIFICATION (Profanity Words Only) ===
+Accuracy (profanity words only): 0.0291
+
+Multiclass Classification Report (Profanity Words Only - Excluding None):
+precision    recall  f1-score   support
+
+        เย็ด       0.00      0.00      0.00        26
+          กู       0.75      0.02      0.04       157
+         มึง       0.50      0.02      0.03       117
+       เหี้ย       1.00      0.08      0.14        78
+
+   micro avg       0.79      0.03      0.06       378
+    accuracy                           0.03     378
+   macro avg       0.56      0.03      0.05       378
+weighted avg       0.67      0.03      0.06       378
+
+
+--- IoU Threshold 0.7 ---
+Binary Classification (Profane vs Non-Profane):
+  Accuracy: 0.4451
+  Balanced Accuracy: 0.5119
+  Precision: 1.0000
+  Recall: 0.0238
+  F1-Score: 0.0465
+
+Multiclass Classification (Profanity Words Only):
+  Accuracy: 0.0212
+  Precision: 0.7765
+  Recall: 0.0212
+  F1-Score: 0.0405
+
+=== 1. BINARY CLASSIFICATION (Profane vs None) ===
+Binary Classification Report:
+precision    recall  f1-score   support
+
+        none       0.44      1.00      0.61       287
+     profane       1.00      0.02      0.05       378
+
+    accuracy                           0.45       665
+   micro avg       0.45      0.45      0.45     665
+   macro avg       0.72      0.51      0.33       665
+weighted avg       0.76      0.45      0.29       665
+
+=== 2. MULTICLASS CLASSIFICATION (All Classes Including None) ===
+Accuracy: 0.4436
+Precision (profanity): 0.8889
+Recall (profanity): 0.0212
+F1-Score (profanity): 0.0413
+
+Multiclass Classification Report (All Classes Including None):
+precision    recall  f1-score   support
+
+        เย็ด       0.00      0.00      0.00        26
+          กู       1.00      0.01      0.03       157
+         มึง       0.50      0.01      0.02       117
+       เหี้ย       1.00      0.06      0.12        78
+        none       0.44      1.00      0.61       287
+
+    accuracy                           0.44       665
+   micro avg       0.44      0.44      0.44     665
+   macro avg       0.59      0.22      0.15       665
+weighted avg       0.63      0.44      0.29       665
+
+=== 3. MULTICLASS CLASSIFICATION (Profanity Words Only) ===
+Accuracy (profanity words only): 0.0212
+
+Multiclass Classification Report (Profanity Words Only - Excluding None):
+precision    recall  f1-score   support
+
+        เย็ด       0.00      0.00      0.00        26
+          กู       1.00      0.01      0.03       157
+         มึง       0.50      0.01      0.02       117
+       เหี้ย       1.00      0.06      0.12        78
+
+   micro avg       0.89      0.02      0.04       378
+    accuracy                           0.02     378
+   macro avg       0.62      0.02      0.04       378
+weighted avg       0.78      0.02      0.04       378
+
+
+--- IoU Threshold 0.8 ---
+Binary Classification (Profane vs Non-Profane):
+  Accuracy: 0.4361
+  Balanced Accuracy: 0.5040
+  Precision: 1.0000
+  Recall: 0.0079
+  F1-Score: 0.0157
+
+Multiclass Classification (Profanity Words Only):
+  Accuracy: 0.0079
+  Precision: 0.6217
+  Recall: 0.0079
+  F1-Score: 0.0156
+
+=== 1. BINARY CLASSIFICATION (Profane vs None) ===
+Binary Classification Report:
+precision    recall  f1-score   support
+
+        none       0.43      1.00      0.60       287
+     profane       1.00      0.01      0.02       378
+
+    accuracy                           0.44       665
+   micro avg       0.44      0.44      0.44     665
+   macro avg       0.72      0.50      0.31       665
+weighted avg       0.76      0.44      0.27       665
+
+=== 2. MULTICLASS CLASSIFICATION (All Classes Including None) ===
+Accuracy: 0.4361
+Precision (profanity): 1.0000
+Recall (profanity): 0.0079
+F1-Score (profanity): 0.0157
+
+Multiclass Classification Report (All Classes Including None):
+precision    recall  f1-score   support
+
+        เย็ด       0.00      0.00      0.00        26
+          กู       1.00      0.01      0.01       157
+         มึง       0.00      0.00      0.00       117
+       เหี้ย       1.00      0.03      0.05        78
+        none       0.43      1.00      0.60       287
+
+    accuracy                           0.44       665
+   micro avg       0.44      0.44      0.44     665
+   macro avg       0.49      0.21      0.13       665
+weighted avg       0.54      0.44      0.27       665
+
+=== 3. MULTICLASS CLASSIFICATION (Profanity Words Only) ===
+Accuracy (profanity words only): 0.0079
+
+Multiclass Classification Report (Profanity Words Only - Excluding None):
+precision    recall  f1-score   support
+
+        เย็ด       0.00      0.00      0.00        26
+          กู       1.00      0.01      0.01       157
+         มึง       0.00      0.00      0.00       117
+       เหี้ย       1.00      0.03      0.05        78
+
+   micro avg       1.00      0.01      0.02       378
+    accuracy                           0.01     378
+   macro avg       0.50      0.01      0.02       378
+weighted avg       0.62      0.01      0.02       378
+
+
+--- IoU Threshold 0.9 ---
+Binary Classification (Profane vs Non-Profane):
+  Accuracy: 0.4316
+  Balanced Accuracy: 0.5000
+  Precision: 0.0000
+  Recall: 0.0000
+  F1-Score: 0.0000
+
+Multiclass Classification (Profanity Words Only):
+  Accuracy: 0.0000
+  Precision: 0.0000
+  Recall: 0.0000
+  F1-Score: 0.0000
+
+=== 1. BINARY CLASSIFICATION (Profane vs None) ===
+Binary Classification Report:
+precision    recall  f1-score   support
+
+        none       0.43      1.00      0.60       287
+     profane       0.00      0.00      0.00       378
+
+    accuracy                           0.43       665
+   micro avg       0.43      0.43      0.43     665
+   macro avg       0.22      0.50      0.30       665
+weighted avg       0.19      0.43      0.26       665
+
+=== 2. MULTICLASS CLASSIFICATION (All Classes Including None) ===
+Accuracy: 0.4316
+Precision (profanity): 0.0000
+Recall (profanity): 0.0000
+F1-Score (profanity): 0.0000
+
+Multiclass Classification Report (All Classes Including None):
+precision    recall  f1-score   support
+
+        เย็ด       0.00      0.00      0.00        26
+          กู       0.00      0.00      0.00       157
+         มึง       0.00      0.00      0.00       117
+       เหี้ย       0.00      0.00      0.00        78
+        none       0.43      1.00      0.60       287
+
+    accuracy                           0.43       665
+   micro avg       0.43      0.43      0.43     665
+   macro avg       0.09      0.20      0.12       665
+weighted avg       0.19      0.43      0.26       665
+
+=== 3. MULTICLASS CLASSIFICATION (Profanity Words Only) ===
+Accuracy (profanity words only): 0.0000
+
+Multiclass Classification Report (Profanity Words Only - Excluding None):
+precision    recall  f1-score   support
+
+        เย็ด       0.00      0.00      0.00      26.0
+          กู       0.00      0.00      0.00     157.0
+         มึง       0.00      0.00      0.00     117.0
+       เหี้ย       0.00      0.00      0.00      78.0
+
+   micro avg       0.00      0.00      0.00     378.0
+    accuracy                           0.00     378
+   macro avg       0.00      0.00      0.00     378.0
+weighted avg       0.00      0.00      0.00     378.0
+
+=== DATASET STATISTICS ===
+Total Ground Truth Words: 378
+Total Predicted Words (after merging): 4461
+
+=== ROC AND DET CURVE ANALYSIS ===
+
+--- ROC/DET Analysis for IoU Threshold 0.1 ---
+Binary ROC AUC (IoU 0.1): 0.8585
+Multiclass Average ROC AUC (IoU 0.1): 1.0000
+
+--- ROC/DET Analysis for IoU Threshold 0.3 ---
+Binary ROC AUC (IoU 0.3): 0.6429
+Multiclass Average ROC AUC (IoU 0.3): 1.0000
+
+--- ROC/DET Analysis for IoU Threshold 0.5 ---
+Binary ROC AUC (IoU 0.5): 0.5357
+Multiclass Average ROC AUC (IoU 0.5): 1.0000
+
+--- ROC/DET Analysis for IoU Threshold 0.7 ---
+Binary ROC AUC (IoU 0.7): 0.5119
+Multiclass Average ROC AUC (IoU 0.7): 1.0000
+
+--- ROC/DET Analysis for IoU Threshold 0.9 ---
+Binary ROC AUC (IoU 0.9): 0.5000
+Multiclass Average ROC AUC (IoU 0.9): 1.0000
+
+ROC and DET curve plots saved as PNG files in the output directory.

@@ -1,0 +1,4 @@
+Method,Type,Best F1,Mean F1,Std F1,Best Window,Best Stride,Configurations
+Word Eval (New),Word-based,0.9742,0.5022053097345133,0.1676931736916568,0.3,0.125,226
+Word IoU Eval (F1@0.3),Word+IoU-based,0.5545,0.45389,0.06343576987788513,0.3,0.25,10
+IoU Eval (Combined Mean IoU),IoU-based,24.86,5.2378318584070795,4.647387808302096,0.3,0.25,226
