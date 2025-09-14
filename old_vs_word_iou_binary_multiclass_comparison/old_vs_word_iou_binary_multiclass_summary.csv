@@ -1,0 +1,4 @@
+Method,Type,Metric,Best Score,Mean Score,Std Score,Best Window,Configurations
+eval_IoU_word_eval_sep (Old),Traditional,F1 Score,0.2333,0.1649137777777778,0.04461646813642082,2.0,225
+word_iou_eval (New),Word+IoU-based,Binary F1 (IoU@0.3),0.5544933078393881,0.06031673204501056,0.10318125545318046,0.3,226
+word_iou_eval (New),Word+IoU-based,Multiclass F1 (IoU@0.3),0.4638078858933657,0.05299573847882155,0.08517001760128026,0.3,226

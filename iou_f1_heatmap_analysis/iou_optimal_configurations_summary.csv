@@ -1,0 +1,5 @@
+eval_type,metric_type,optimal_window_size,optimal_stride_value,stride_type,optimal_f1_score,window_config,stride_config
+eval_by_0.05,binary_f1,2.0,1.9,seconds,0.4705,window_2.0s,stride_1.9s
+eval_by_0.05,multiclass_f1,0.3,0.15,seconds,0.6049,window_0.3s,stride_0.15s
+eval_percent,binary_f1,2.0,90.0,percent,0.4554,window_2.0s,stride_90.0%
+eval_percent,multiclass_f1,0.3,80.0,percent,0.6221,window_0.3s,stride_80.0%

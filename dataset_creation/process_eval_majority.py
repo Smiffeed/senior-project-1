@@ -91,17 +91,17 @@ for label in ['เย็ด', 'กู', 'มึง', 'เหี้ย']:
     print(f"  {label}: {count}")
 
 # Save test result
-windowed_df.to_csv(f'./csv/eval_by_0.05/eval_0.5s/stride_0.25s_hybrid.csv', index=False)
+windowed_df.to_csv(f'./csv/stride_0.25s_hybrid.csv', index=False)
 
 print(f"\n✅ Hybrid approach test saved to: ./csv/eval_0.5s/stride_0.25s_hybrid.csv")
 
 # Generate all strides if test looks good
 print("Generating all stride files with hybrid approach...")
-for stride in [0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0]:
+for stride in [0.36]:
     windowed_df = process_windows_majority(df, window_size=2.0, step_size=stride)
     windowed_df = windowed_df.drop_duplicates(subset=['file_path', 'start_time', 'end_time'], keep='first')
     windowed_df = windowed_df.sort_values(['file_path', 'start_time']).reset_index(drop=True)
-    windowed_df.to_csv(f'./csv/eval_percent/window_2.0s/stride_{(stride/2.0)*100}%.csv', index=False)
+    windowed_df.to_csv(f'./csv/eval_percent/window_0.4s/stride_{(stride/0.4)*100}%.csv', index=False)
     print(f"  Generated: stride_{stride}s.csv")
 
 print("Hybrid windowing approach complete.")

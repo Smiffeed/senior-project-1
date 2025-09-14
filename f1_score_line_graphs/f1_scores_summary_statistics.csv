@@ -1,0 +1,17 @@
+eval_type,method,metric_type,mean_value,std_value,min_value,max_value,median_value,best_window,best_stride,best_value,total_configs
+eval_by_0.05,window_eval,Binary_F1,0.1778,0.0263,0.0715,0.2126,0.1836,window_1.2s,stride_0.85s,0.2126,226
+eval_by_0.05,window_eval,Multiclass_F1,0.1552,0.0235,0.0589,0.1883,0.1616,window_1.5s,stride_1.5s,0.1883,226
+eval_by_0.05,word_eval,Binary_F1,0.5022,0.1681,0.2621,0.9742,0.4556,window_0.3s,stride_0.125s,0.9742,226
+eval_by_0.05,word_eval,Multiclass_F1,0.4113,0.1449,0.1972,0.8168,0.3726,window_0.3s,stride_0.125s,0.8168,226
+eval_by_0.05,iou_eval,Binary_F1,0.2837,0.0983,0.0586,0.4705,0.2952,window_2.0s,stride_1.9s,0.4705,226
+eval_by_0.05,iou_eval,Multiclass_F1,0.2732,0.091,0.1853,0.6049,0.2317,window_0.3s,stride_0.15s,0.6049,226
+eval_by_0.05,word_iou_eval,Binary_F1,0.1649,0.0446,0.0456,0.2333,0.1732,window_2.0s,stride_1.7s,0.2333,225
+eval_by_0.05,word_iou_eval,Multiclass_F1,0.0833,0.0164,0.029,0.109,0.088,window_1.8s,stride_1.35s,0.109,225
+eval_percent,window_eval,Binary_F1,0.1694,0.0349,0.0712,0.2089,0.1821,window_1.5s,stride_50.0%,0.2089,179
+eval_percent,window_eval,Multiclass_F1,0.1475,0.0312,0.0601,0.1883,0.1597,window_1.5s,stride_100.0%,0.1883,179
+eval_percent,word_eval,Binary_F1,0.639,0.1991,0.27,0.996,0.6204,window_0.3s,stride_10.0%,0.996,179
+eval_percent,word_eval,Multiclass_F1,0.5166,0.1671,0.2172,0.8156,0.4927,window_0.3s,stride_30.0%,0.8156,179
+eval_percent,iou_eval,Binary_F1,0.2072,0.1042,0.0342,0.4554,0.1923,window_2.0s,stride_90.0%,0.4554,179
+eval_percent,iou_eval,Multiclass_F1,0.3055,0.1203,0.1501,0.6221,0.2498,window_0.3s,stride_80.0%,0.6221,179
+eval_percent,word_iou_eval,Binary_F1,0.1442,0.0516,0.0446,0.2223,0.156,window_2.0s,stride_50.0%,0.2223,179
+eval_percent,word_iou_eval,Multiclass_F1,0.0748,0.0215,0.026,0.113,0.08,window_1.8s,stride_40.0%,0.113,179

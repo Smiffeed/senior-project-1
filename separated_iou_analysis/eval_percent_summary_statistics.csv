@@ -1,0 +1,6 @@
+eval_type,method,metric_type,mean_value,std_value,min_value,max_value,median_value,best_window,best_stride,best_value,total_configs
+eval_percent,iou_eval,Combined_Mean_IoU_Percent,7.2201,5.5943,1.68,25.34,4.78,window_0.3s,stride_70.0%,25.34,179
+eval_percent,iou_eval,Individual_Mean_IoU_Percent,11.6956,5.628,4.16,26.38,9.98,window_0.3s,stride_10.0%,26.38,179
+eval_percent,word_iou_eval,F1_IoU_0.3,0.0932,0.1295,0.0053,0.5545,0.0312,window_0.3s,stride_90.0%,0.5545,179
+eval_percent,word_iou_eval,F1_IoU_0.5,0.0262,0.0414,0.0,0.2,0.0053,window_0.3s,stride_70.0%,0.2,179
+eval_percent,word_iou_eval,F1_IoU_0.9,0.0014,0.0026,0.0,0.0157,0.0,window_0.3s,stride_100.0%,0.0157,179
