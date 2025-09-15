@@ -246,7 +246,7 @@ def main():
     parser.add_argument("--eval_dir", default="./csv/eval_by_0.05", help="Path to evaluation directory")
     parser.add_argument("--eval_type", default="eval_by_0.05", help="Evaluation type name")
     parser.add_argument("--model_path", default="./models/4_classes_max_steps", help="Model path")
-    parser.add_argument("--ground_truth", default="./csv/eval.csv", help="Ground truth CSV file")
+    parser.add_argument("--ground_truth", default="./csv/eval_5labels.csv", help="Ground truth CSV file")
     parser.add_argument("--output_dir", default="./new_evaluation_results", help="Output directory")
     parser.add_argument("--processor_script", default="scripts/comprehensive_evaluation_processor.py", help="Processor script to use")
     parser.add_argument("--window", help="Process only specific window (e.g., 'window_0.3s')")

@@ -100,6 +100,115 @@ def find_csv_files(base_dir):
     
     return sorted(csv_files, key=lambda x: (x['window'], x['stride']))
 
+def filter_configurations(csv_files, args):
+    """Filter configurations based on command line arguments"""
+    filtered_files = csv_files.copy()
+    
+    # Filter by specific windows
+    if args.specific_windows:
+        window_set = set(f"window_{w}" if not w.startswith('window_') else w for w in args.specific_windows)
+        filtered_files = [f for f in filtered_files if f['window'] in window_set]
+        print(f"🔍 Filtered by windows {args.specific_windows}: {len(filtered_files)} configs")
+    
+    # Filter by specific strides
+    if args.specific_strides:
+        stride_set = set(f"stride_{s}" if not s.startswith('stride_') else s for s in args.specific_strides)
+        filtered_files = [f for f in filtered_files if f['stride'] in stride_set]
+        print(f"🔍 Filtered by strides {args.specific_strides}: {len(filtered_files)} configs")
+    
+    # Filter by specific window-stride pairs
+    if args.window_stride_pairs:
+        valid_pairs = set()
+        for pair in args.window_stride_pairs:
+            if ',' in pair:
+                window_part, stride_part = pair.split(',', 1)
+                window_part = window_part.strip()
+                stride_part = stride_part.strip()
+                
+                # Ensure proper formatting
+                if not window_part.startswith('window_'):
+                    window_part = f"window_{window_part}"
+                if not stride_part.startswith('stride_'):
+                    stride_part = f"stride_{stride_part}"
+                
+                valid_pairs.add((window_part, stride_part))
+        
+        if valid_pairs:
+            filtered_files = [f for f in filtered_files if (f['window'], f['stride']) in valid_pairs]
+            print(f"🔍 Filtered by pairs {args.window_stride_pairs}: {len(filtered_files)} configs")
+    
+    # Use optimal configurations from analysis
+    if args.optimal_configs:
+        optimal_configs = get_optimal_configurations(args.optimal_configs)
+        if optimal_configs:
+            valid_pairs = set((f"window_{config['window']}", f"stride_{config['stride']}") 
+                            for config in optimal_configs)
+            filtered_files = [f for f in filtered_files if (f['window'], f['stride']) in valid_pairs]
+            print(f"🔍 Using optimal {args.optimal_configs} configurations: {len(filtered_files)} configs")
+    
+    return filtered_files
+
+def get_optimal_configurations(config_type):
+    """Get optimal configurations based on heatmap analysis results"""
+    optimal_configs = []
+    
+    if config_type in ['binary', 'both']:
+        # Optimal binary configurations from heatmap analysis
+        optimal_configs.extend([
+            {'window': '2.0s', 'stride': '1.9s', 'type': 'binary_eval_by_0.05'},
+            {'window': '2.0s', 'stride': '90%', 'type': 'binary_eval_percent'}
+        ])
+    
+    if config_type in ['multiclass', 'both']:
+        # Optimal multiclass configurations from heatmap analysis
+        optimal_configs.extend([
+            {'window': '0.3s', 'stride': '0.15s', 'type': 'multiclass_eval_by_0.05'},
+            {'window': '0.3s', 'stride': '80%', 'type': 'multiclass_eval_percent'}
+        ])
+    
+    return optimal_configs
+
+def list_available_configurations(datasets):
+    """List all available configurations"""
+    print("=== AVAILABLE CONFIGURATIONS ===\n")
+    
+    for dataset_dir in datasets:
+        csv_files = find_csv_files(dataset_dir)
+        dataset_path = Path(dataset_dir)
+        eval_type = dataset_path.name
+        
+        print(f"📁 {eval_type} ({len(csv_files)} configurations):")
+        
+        # Group by window for better display
+        windows_dict = {}
+        for config in csv_files:
+            window = config['window']
+            if window not in windows_dict:
+                windows_dict[window] = []
+            windows_dict[window].append(config['stride'])
+        
+        for window in sorted(windows_dict.keys()):
+            strides = ', '.join(sorted(windows_dict[window]))
+            print(f"   {window}: {strides}")
+        
+        print()
+    
+    print("USAGE EXAMPLES:")
+    print("  # Specific windows:")
+    print("  --specific_windows 0.3s 2.0s")
+    print()
+    print("  # Specific strides:")
+    print("  --specific_strides 0.15s 1.9s 80%")
+    print()
+    print("  # Specific pairs:")
+    print("  --window_stride_pairs 'window_0.3s,stride_0.15s' 'window_2.0s,stride_1.9s'")
+    print()
+    print("  # Optimal configurations:")
+    print("  --optimal_configs binary    # Best for binary F1")
+    print("  --optimal_configs multiclass # Best for multiclass F1")
+    print("  --optimal_configs both      # Both binary and multiclass optimal")
+    print()
+
 def run_single_evaluation_thread_safe(task_info):
     """Run evaluation in a thread-safe manner"""
     csv_file_info, model_path, ground_truth, output_base_dir, eval_type, worker_id, gpu_mode = task_info
@@ -214,7 +323,7 @@ def main():
     parser = argparse.ArgumentParser(description="Fixed smart parallel evaluation processor")
     parser.add_argument("--datasets", nargs='+', default=["csv/eval_by_0.05", "csv/eval_percent"])
     parser.add_argument("--model_path", default="./models/4_classes_max_steps")
-    parser.add_argument("--ground_truth", default="./csv/eval.csv")
+    parser.add_argument("--ground_truth", default="./csv/eval_5labels.csv")
     parser.add_argument("--output_dir", default="./fixed_smart_parallel_results")
     parser.add_argument("--workers", type=int, default=None, help="Number of workers (auto-detect if not specified)")
     parser.add_argument("--gpu_mode", choices=['shared', 'exclusive'], default='shared',
@@ -222,6 +331,18 @@ def main():
     parser.add_argument("--max_configs", type=int, default=None)
     parser.add_argument("--test_mode", action="store_true", help="Run with only 5 configs for testing")
     parser.add_argument("--analyze_system", action="store_true", help="Show system analysis and exit")
+    
+    # Specific window and stride configuration arguments
+    parser.add_argument("--specific_windows", nargs='+', type=str, 
+                       help="Specific window sizes to evaluate (e.g., --specific_windows 0.3s 2.0s)")
+    parser.add_argument("--specific_strides", nargs='+', type=str,
+                       help="Specific stride values to evaluate (e.g., --specific_strides 0.15s 1.9s 80%)")
+    parser.add_argument("--window_stride_pairs", nargs='+', type=str,
+                       help="Specific window-stride pairs (e.g., --window_stride_pairs 'window_0.3s,stride_0.15s' 'window_2.0s,stride_1.9s')")
+    parser.add_argument("--optimal_configs", choices=['binary', 'multiclass', 'both'], 
+                       help="Use optimal configurations from heatmap analysis")
+    parser.add_argument("--list_configs", action="store_true", 
+                       help="List all available configurations and exit")
     
     args = parser.parse_args()
     
@@ -248,6 +369,10 @@ def main():
         print(f"  • Recommended workers: {system_info['recommended_workers']}")
         return
     
+    if args.list_configs:
+        list_available_configurations(args.datasets)
+        return
+    
     # Determine number of workers
     if args.workers is None:
         args.workers = system_info['recommended_workers']
@@ -266,23 +391,50 @@ def main():
     
     # Collect tasks
     all_tasks = []
+    total_available = 0
+    
     for dataset_dir in args.datasets:
         csv_files = find_csv_files(dataset_dir)
+        total_available += len(csv_files)
         dataset_path = Path(dataset_dir)
         eval_type = dataset_path.name
         
-        print(f"📁 {eval_type}: {len(csv_files)} configurations")
+        print(f"📁 {eval_type}: {len(csv_files)} configurations found")
+        
+        # Apply filtering
+        csv_files = filter_configurations(csv_files, args)
         
         if args.max_configs:
             csv_files = csv_files[:args.max_configs]
             print(f"   Limited to {len(csv_files)} for testing")
         
+        print(f"   Processing {len(csv_files)} configurations")
+        
         for csv_file_info in csv_files:
             all_tasks.append((csv_file_info, args.model_path, args.ground_truth, 
                             args.output_dir, eval_type))
     
+    print(f"\n📊 Total configurations: {len(all_tasks)} selected from {total_available} available")
+    
+    # Show specific configurations if filtering is applied
+    if (args.specific_windows or args.specific_strides or args.window_stride_pairs or args.optimal_configs) and len(all_tasks) <= 20:
+        print("\n🎯 SELECTED CONFIGURATIONS:")
+        for task in all_tasks:
+            csv_file_info, _, _, _, eval_type = task
+            print(f"   {eval_type}: {csv_file_info['window']} + {csv_file_info['stride']}")
+        print()
+    elif len(all_tasks) > 20:
+        print(f"   (Too many to display - showing first 5)")
+        for i, task in enumerate(all_tasks[:5]):
+            csv_file_info, _, _, _, eval_type = task
+            print(f"   {eval_type}: {csv_file_info['window']} + {csv_file_info['stride']}")
+        print(f"   ... and {len(all_tasks) - 5} more")
+        print()
+    
     if not all_tasks:
         print("❌ No tasks to process!")
+        print("💡 Use --list_configs to see available configurations")
+        print("💡 Use --optimal_configs binary/multiclass/both for optimal settings")
         return
     
     print(f"\n🚀 Processing {len(all_tasks)} configurations with {args.workers} workers...")
