@@ -1,66 +1,66 @@
 === WORD-LEVEL MERGED EVALUATION RESULTS ===
-Generated at: 2025-09-15 05:40:34
+Generated at: 2025-09-15 17:14:55
 
 === BINARY CLASSIFICATION (Profane vs Non-Profane) ===
-  Accuracy: 0.3492
-  Balanced Accuracy: 0.3492
+  Accuracy: 0.7619
+  Balanced Accuracy: 0.7619
   Precision: 1.0000
-  Recall: 0.3492
-  F1-Score: 0.5176
+  Recall: 0.7619
+  F1-Score: 0.8649
 
 Binary Classification Report:
 precision    recall  f1-score   support
 
         none       0.00      0.00      0.00         0
-     profane       1.00      0.35      0.52       378
+     profane       1.00      0.76      0.86       378
 
-    accuracy                           0.35       378
-   micro avg       0.35      0.35      0.35     378
-   macro avg       0.50      0.17      0.26       378
-weighted avg       1.00      0.35      0.52       378
+    accuracy                           0.76       378
+   micro avg       0.76      0.76      0.76     378
+   macro avg       0.50      0.38      0.43       378
+weighted avg       1.00      0.76      0.86       378
 
 === MULTICLASS CLASSIFICATION (All Classes Including None) ===
-  Accuracy: 0.2646
-  Precision: 0.7576
-  Recall: 0.2646
-  F1-Score: 0.3922
+  Accuracy: 0.6349
+  Precision: 0.8333
+  Recall: 0.6349
+  F1-Score: 0.7207
 
 Multiclass Classification Report (All Classes):
 precision    recall  f1-score   support
 
-        เย็ด       0.33      0.04      0.07        26
-          กู       0.86      0.15      0.26       157
-         มึง       0.75      0.18      0.29       117
-       เหี้ย       0.74      0.69      0.72        78
+        เย็ด       0.38      0.38      0.38        26
+          กู       0.88      0.66      0.75       157
+         มึง       0.91      0.67      0.77       117
+       เหี้ย       0.83      0.63      0.72        78
         none       0.00      0.00      0.00         0
 
-    accuracy                           0.26       378
-   micro avg       0.26      0.26      0.26     378
-   macro avg       0.54      0.21      0.27       378
-weighted avg       0.76      0.26      0.35       378
+    accuracy                           0.63       378
+   micro avg       0.63      0.63      0.63     378
+   macro avg       0.60      0.47      0.52       378
+weighted avg       0.84      0.63      0.72       378
 
 === MULTICLASS CLASSIFICATION (Profanity Words Only) ===
-  Accuracy: 0.2646
-  Precision: 0.7637
-  Recall: 0.2646
-  F1-Score: 0.3498
+  Accuracy: 0.6349
+  Precision: 0.8442
+  Recall: 0.6349
+  F1-Score: 0.7242
 
 Multiclass Classification Report (Profanity Only):
 precision    recall  f1-score   support
 
-        เย็ด       0.33      0.04      0.07        26
-          กู       0.86      0.15      0.26       157
-         มึง       0.75      0.18      0.29       117
-       เหี้ย       0.74      0.69      0.72        78
+        เย็ด       0.38      0.38      0.38        26
+          กู       0.88      0.66      0.75       157
+         มึง       0.91      0.67      0.77       117
+       เหี้ย       0.83      0.63      0.72        78
 
-   micro avg       0.76      0.26      0.39       378
-    accuracy                           0.26     378
-   macro avg       0.67      0.27      0.33       378
-weighted avg       0.76      0.26      0.35       378
+   micro avg       0.83      0.63      0.72       378
+    accuracy                           0.63     378
+   macro avg       0.75      0.58      0.66       378
+weighted avg       0.84      0.63      0.72       378
 
 === DATASET STATISTICS ===
 Total Ground Truth Words: 378
-Total Predicted Words (after merging): 445
+Total Predicted Words (after merging): 3863
 
 === ROC AND DET CURVE ANALYSIS ===
 Binary ROC AUC: nan

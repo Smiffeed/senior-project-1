@@ -1,70 +1,70 @@
 === WINDOW-LEVEL EVALUATION RESULTS ===
-Generated at: 2025-09-15 05:40:33
+Generated at: 2025-09-15 17:14:54
 
 === BINARY CLASSIFICATION (Profane vs Non-Profane) ===
-  Accuracy: 0.8218
-  Balanced Accuracy: 0.5341
-  Precision: 0.2092
-  Recall: 0.1495
-  F1-Score: 0.1744
+  Accuracy: 0.6554
+  Balanced Accuracy: 0.6597
+  Precision: 0.0574
+  Recall: 0.6643
+  F1-Score: 0.1057
 
 Binary Classification Report:
 precision    recall  f1-score   support
 
-        none       0.88      0.92      0.90     11893
-     profane       0.21      0.15      0.17      1712
+        none       0.98      0.66      0.79     13188
+     profane       0.06      0.66      0.11       417
 
-    accuracy                           0.82     13605
-   micro avg       0.82      0.82      0.82     13605
-   macro avg       0.55      0.53      0.54     13605
-weighted avg       0.80      0.82      0.81     13605
+    accuracy                           0.66     13605
+   micro avg       0.66      0.66      0.66     13605
+   macro avg       0.52      0.66      0.45     13605
+weighted avg       0.96      0.66      0.77     13605
 
 === MULTICLASS CLASSIFICATION (All Classes Including None) ===
-  Accuracy: 0.8197
-  Precision: 0.1855
-  Recall: 0.1326
-  F1-Score: 0.1546
+  Accuracy: 0.6526
+  Precision: 0.0493
+  Recall: 0.5707
+  F1-Score: 0.0908
 
 Multiclass Classification Report (All Classes):
 precision    recall  f1-score   support
 
-        เย็ด       0.01      0.01      0.01        98
-          กู       0.21      0.07      0.11       694
-         มึง       0.11      0.05      0.07       532
-       เหี้ย       0.23      0.38      0.29       388
-        none       0.88      0.92      0.90     11893
+        เย็ด       0.02      0.36      0.04        28
+          กู       0.07      0.60      0.13       169
+         มึง       0.06      0.62      0.10       128
+       เหี้ย       0.03      0.52      0.06        92
+        none       0.98      0.66      0.79     13188
 
-    accuracy                           0.82     13605
-   micro avg       0.82      0.82      0.82     13605
-   macro avg       0.29      0.29      0.28     13605
-weighted avg       0.79      0.82      0.80     13605
+    accuracy                           0.65     13605
+   micro avg       0.65      0.65      0.65     13605
+   macro avg       0.23      0.55      0.22     13605
+weighted avg       0.96      0.65      0.77     13605
 
 === MULTICLASS CLASSIFICATION (Profanity Words Only) ===
-  Accuracy: 0.1326
-  Precision: 0.8287
-  Recall: 0.1326
-  F1-Score: 0.2082
+  Accuracy: 0.5707
+  Precision: 0.8628
+  Recall: 0.5707
+  F1-Score: 0.6863
 
 Multiclass Classification Report (Profanity Only):
 precision    recall  f1-score   support
 
-        เย็ด       0.33      0.01      0.02        98
-          กู       0.94      0.07      0.13       694
-         มึง       0.70      0.05      0.10       532
-       เหี้ย       0.93      0.38      0.54       388
+        เย็ด       0.48      0.36      0.41        28
+          กู       0.88      0.60      0.71       169
+         มึง       0.91      0.62      0.73       128
+       เหี้ย       0.89      0.52      0.66        92
 
-   micro avg       0.89      0.13      0.23      1712
-    accuracy                           0.13     1712
-   macro avg       0.73      0.13      0.20      1712
-weighted avg       0.83      0.13      0.21      1712
+   micro avg       0.86      0.57      0.69       417
+    accuracy                           0.57     417
+   macro avg       0.79      0.52      0.63       417
+weighted avg       0.86      0.57      0.69       417
 
 === DATASET STATISTICS ===
 Total Windows: 13605
-Profanity Windows: 1224
-Non-Profanity Windows: 12381
+Profanity Windows: 4825
+Non-Profanity Windows: 8780
 
 === ROC AND DET CURVE ANALYSIS ===
-Binary ROC AUC: 0.5341
+Binary ROC AUC: 0.6597
 Multiclass Average ROC AUC: 1.0000
 
 ROC and DET curve plots saved as PNG files in the output directory.

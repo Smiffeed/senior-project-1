@@ -1,5 +1,5 @@
 === WORD-LEVEL IoU EVALUATION RESULTS ===
-Generated at: 2025-09-12 05:54:10
+Generated at: 2025-09-15 16:17:28
 
 Word-level evaluation using IoU thresholds for classification.
 Same as word_eval but uses IoU criteria to determine valid predictions.
@@ -8,7 +8,7 @@ Same as word_eval but uses IoU criteria to determine valid predictions.
 
 --- IoU Threshold 0.1 ---
 Binary Classification (Profane vs Non-Profane):
-  Accuracy: 0.8872
+  Accuracy: 0.8891
   Balanced Accuracy: 0.9008
   Precision: 1.0000
   Recall: 0.8016
@@ -24,16 +24,16 @@ Multiclass Classification (Profanity Words Only):
 Binary Classification Report:
 precision    recall  f1-score   support
 
-        none       0.79      1.00      0.88       287
+        none       0.80      1.00      0.89       298
      profane       1.00      0.80      0.89       378
 
-    accuracy                           0.89       665
-   micro avg       0.89      0.89      0.89     665
-   macro avg       0.90      0.90      0.89       665
-weighted avg       0.91      0.89      0.89       665
+    accuracy                           0.89       676
+   micro avg       0.89      0.89      0.89     676
+   macro avg       0.90      0.90      0.89       676
+weighted avg       0.91      0.89      0.89       676
 
 === 2. MULTICLASS CLASSIFICATION (All Classes Including None) ===
-Accuracy: 0.8030
+Accuracy: 0.8062
 Precision (profanity): 0.8152
 Recall (profanity): 0.6534
 F1-Score (profanity): 0.7254
@@ -45,12 +45,12 @@ precision    recall  f1-score   support
           กู       0.85      0.69      0.76       157
          มึง       0.88      0.68      0.76       117
        เหี้ย       0.86      0.63      0.73        78
-        none       0.79      1.00      0.88       287
+        none       0.80      1.00      0.89       298
 
-    accuracy                           0.80       665
-   micro avg       0.80      0.80      0.80     665
-   macro avg       0.75      0.68      0.71       665
-weighted avg       0.81      0.80      0.80       665
+    accuracy                           0.81       676
+   micro avg       0.81      0.81      0.81     676
+   macro avg       0.75      0.68      0.71       676
+weighted avg       0.82      0.81      0.80       676
 
 === 3. MULTICLASS CLASSIFICATION (Profanity Words Only) ===
 Accuracy (profanity words only): 0.6534
@@ -71,7 +71,7 @@ weighted avg       0.83      0.65      0.73       378
 
 --- IoU Threshold 0.2 ---
 Binary Classification (Profane vs Non-Profane):
-  Accuracy: 0.7654
+  Accuracy: 0.7692
   Balanced Accuracy: 0.7937
   Precision: 1.0000
   Recall: 0.5873
@@ -87,16 +87,16 @@ Multiclass Classification (Profanity Words Only):
 Binary Classification Report:
 precision    recall  f1-score   support
 
-        none       0.65      1.00      0.79       287
+        none       0.66      1.00      0.79       298
      profane       1.00      0.59      0.74       378
 
-    accuracy                           0.77       665
-   micro avg       0.77      0.77      0.77     665
-   macro avg       0.82      0.79      0.76       665
-weighted avg       0.85      0.77      0.76       665
+    accuracy                           0.77       676
+   micro avg       0.77      0.77      0.77     676
+   macro avg       0.83      0.79      0.77       676
+weighted avg       0.85      0.77      0.76       676
 
 === 2. MULTICLASS CLASSIFICATION (All Classes Including None) ===
-Accuracy: 0.7098
+Accuracy: 0.7145
 Precision (profanity): 0.8333
 Recall (profanity): 0.4894
 F1-Score (profanity): 0.6167
@@ -108,12 +108,12 @@ precision    recall  f1-score   support
           กู       0.83      0.45      0.58       157
          มึง       0.89      0.53      0.66       117
        เหี้ย       0.92      0.56      0.70        78
-        none       0.65      1.00      0.79       287
+        none       0.66      1.00      0.79       298
 
-    accuracy                           0.71       665
-   micro avg       0.71      0.71      0.71     665
-   macro avg       0.75      0.58      0.62       665
-weighted avg       0.76      0.71      0.69       665
+    accuracy                           0.71       676
+   micro avg       0.71      0.71      0.71     676
+   macro avg       0.75      0.58      0.63       676
+weighted avg       0.76      0.71      0.69       676
 
 === 3. MULTICLASS CLASSIFICATION (Profanity Words Only) ===
 Accuracy (profanity words only): 0.4894
@@ -134,7 +134,7 @@ weighted avg       0.84      0.49      0.62       378
 
 --- IoU Threshold 0.3 ---
 Binary Classification (Profane vs Non-Profane):
-  Accuracy: 0.6496
+  Accuracy: 0.6553
   Balanced Accuracy: 0.6918
   Precision: 1.0000
   Recall: 0.3836
@@ -150,16 +150,16 @@ Multiclass Classification (Profanity Words Only):
 Binary Classification Report:
 precision    recall  f1-score   support
 
-        none       0.55      1.00      0.71       287
+        none       0.56      1.00      0.72       298
      profane       1.00      0.38      0.55       378
 
-    accuracy                           0.65       665
-   micro avg       0.65      0.65      0.65     665
-   macro avg       0.78      0.69      0.63       665
-weighted avg       0.81      0.65      0.62       665
+    accuracy                           0.66       676
+   micro avg       0.66      0.66      0.66     676
+   macro avg       0.78      0.69      0.64       676
+weighted avg       0.81      0.66      0.63       676
 
 === 2. MULTICLASS CLASSIFICATION (All Classes Including None) ===
-Accuracy: 0.6150
+Accuracy: 0.6213
 Precision (profanity): 0.8414
 Recall (profanity): 0.3228
 F1-Score (profanity): 0.4665
@@ -171,12 +171,12 @@ precision    recall  f1-score   support
           กู       0.82      0.27      0.40       157
          มึง       0.89      0.33      0.48       117
        เหี้ย       0.97      0.47      0.64        78
-        none       0.55      1.00      0.71       287
+        none       0.56      1.00      0.72       298
 
-    accuracy                           0.62       665
-   micro avg       0.62      0.62      0.62     665
-   macro avg       0.71      0.45      0.49       665
-weighted avg       0.72      0.62      0.57       665
+    accuracy                           0.62       676
+   micro avg       0.62      0.62      0.62     676
+   macro avg       0.72      0.45      0.49       676
+weighted avg       0.72      0.62      0.58       676
 
 === 3. MULTICLASS CLASSIFICATION (Profanity Words Only) ===
 Accuracy (profanity words only): 0.3228
@@ -197,7 +197,7 @@ weighted avg       0.84      0.32      0.46       378
 
 --- IoU Threshold 0.4 ---
 Binary Classification (Profane vs Non-Profane):
-  Accuracy: 0.5669
+  Accuracy: 0.5740
   Balanced Accuracy: 0.6190
   Precision: 1.0000
   Recall: 0.2381
@@ -213,16 +213,16 @@ Multiclass Classification (Profanity Words Only):
 Binary Classification Report:
 precision    recall  f1-score   support
 
-        none       0.50      1.00      0.67       287
+        none       0.51      1.00      0.67       298
      profane       1.00      0.24      0.38       378
 
-    accuracy                           0.57       665
-   micro avg       0.57      0.57      0.57     665
-   macro avg       0.75      0.62      0.53       665
-weighted avg       0.78      0.57      0.51       665
+    accuracy                           0.57       676
+   micro avg       0.57      0.57      0.57     676
+   macro avg       0.75      0.62      0.53       676
+weighted avg       0.78      0.57      0.51       676
 
 === 2. MULTICLASS CLASSIFICATION (All Classes Including None) ===
-Accuracy: 0.5398
+Accuracy: 0.5473
 Precision (profanity): 0.8000
 Recall (profanity): 0.1905
 F1-Score (profanity): 0.3077
@@ -234,12 +234,12 @@ precision    recall  f1-score   support
           กู       0.72      0.13      0.23       157
          มึง       0.88      0.20      0.32       117
        เหี้ย       0.96      0.35      0.51        78
-        none       0.50      1.00      0.67       287
+        none       0.51      1.00      0.67       298
 
-    accuracy                           0.54       665
-   micro avg       0.54      0.54      0.54     665
-   macro avg       0.64      0.34      0.36       665
-weighted avg       0.66      0.54      0.46       665
+    accuracy                           0.55       676
+   micro avg       0.55      0.55      0.55     676
+   macro avg       0.64      0.34      0.36       676
+weighted avg       0.66      0.55      0.47       676
 
 === 3. MULTICLASS CLASSIFICATION (Profanity Words Only) ===
 Accuracy (profanity words only): 0.1905
@@ -260,7 +260,7 @@ weighted avg       0.78      0.19      0.30       378
 
 --- IoU Threshold 0.5 ---
 Binary Classification (Profane vs Non-Profane):
-  Accuracy: 0.4977
+  Accuracy: 0.5059
   Balanced Accuracy: 0.5582
   Precision: 1.0000
   Recall: 0.1164
@@ -276,16 +276,16 @@ Multiclass Classification (Profanity Words Only):
 Binary Classification Report:
 precision    recall  f1-score   support
 
-        none       0.46      1.00      0.63       287
+        none       0.47      1.00      0.64       298
      profane       1.00      0.12      0.21       378
 
-    accuracy                           0.50       665
-   micro avg       0.50      0.50      0.50     665
-   macro avg       0.73      0.56      0.42       665
-weighted avg       0.77      0.50      0.39       665
+    accuracy                           0.51       676
+   micro avg       0.51      0.51      0.51     676
+   macro avg       0.74      0.56      0.42       676
+weighted avg       0.77      0.51      0.40       676
 
 === 2. MULTICLASS CLASSIFICATION (All Classes Including None) ===
-Accuracy: 0.4857
+Accuracy: 0.4941
 Precision (profanity): 0.8182
 Recall (profanity): 0.0952
 F1-Score (profanity): 0.1706
@@ -297,12 +297,12 @@ precision    recall  f1-score   support
           กู       0.75      0.04      0.07       157
          มึง       0.92      0.09      0.17       117
        เหี้ย       0.95      0.23      0.37        78
-        none       0.46      1.00      0.63       287
+        none       0.47      1.00      0.64       298
 
-    accuracy                           0.49       665
-   micro avg       0.49      0.49      0.49     665
-   macro avg       0.66      0.28      0.26       665
-weighted avg       0.66      0.49      0.37       665
+    accuracy                           0.49       676
+   micro avg       0.49      0.49      0.49     676
+   macro avg       0.66      0.28      0.26       676
+weighted avg       0.66      0.49      0.37       676
 
 === 3. MULTICLASS CLASSIFICATION (Profanity Words Only) ===
 Accuracy (profanity words only): 0.0952
@@ -323,7 +323,7 @@ weighted avg       0.80      0.10      0.16       378
 
 --- IoU Threshold 0.6 ---
 Binary Classification (Profane vs Non-Profane):
-  Accuracy: 0.4692
+  Accuracy: 0.4778
   Balanced Accuracy: 0.5331
   Precision: 1.0000
   Recall: 0.0661
@@ -339,16 +339,16 @@ Multiclass Classification (Profanity Words Only):
 Binary Classification Report:
 precision    recall  f1-score   support
 
-        none       0.45      1.00      0.62       287
+        none       0.46      1.00      0.63       298
      profane       1.00      0.07      0.12       378
 
-    accuracy                           0.47       665
-   micro avg       0.47      0.47      0.47     665
-   macro avg       0.72      0.53      0.37       665
-weighted avg       0.76      0.47      0.34       665
+    accuracy                           0.48       676
+   micro avg       0.48      0.48      0.48     676
+   macro avg       0.73      0.53      0.38       676
+weighted avg       0.76      0.48      0.35       676
 
 === 2. MULTICLASS CLASSIFICATION (All Classes Including None) ===
-Accuracy: 0.4602
+Accuracy: 0.4689
 Precision (profanity): 0.7600
 Recall (profanity): 0.0503
 F1-Score (profanity): 0.0943
@@ -360,12 +360,12 @@ precision    recall  f1-score   support
           กู       0.33      0.01      0.01       157
          มึง       1.00      0.05      0.10       117
        เหี้ย       0.92      0.15      0.26        78
-        none       0.45      1.00      0.62       287
+        none       0.46      1.00      0.63       298
 
-    accuracy                           0.46       665
-   micro avg       0.46      0.46      0.46     665
-   macro avg       0.54      0.24      0.20       665
-weighted avg       0.56      0.46      0.32       665
+    accuracy                           0.47       676
+   micro avg       0.47      0.47      0.47     676
+   macro avg       0.54      0.24      0.20       676
+weighted avg       0.56      0.47      0.33       676
 
 === 3. MULTICLASS CLASSIFICATION (Profanity Words Only) ===
 Accuracy (profanity words only): 0.0503
@@ -386,7 +386,7 @@ weighted avg       0.64      0.05      0.09       378
 
 --- IoU Threshold 0.7 ---
 Binary Classification (Profane vs Non-Profane):
-  Accuracy: 0.4541
+  Accuracy: 0.4630
   Balanced Accuracy: 0.5198
   Precision: 1.0000
   Recall: 0.0397
@@ -402,16 +402,16 @@ Multiclass Classification (Profanity Words Only):
 Binary Classification Report:
 precision    recall  f1-score   support
 
-        none       0.44      1.00      0.61       287
+        none       0.45      1.00      0.62       298
      profane       1.00      0.04      0.08       378
 
-    accuracy                           0.45       665
-   micro avg       0.45      0.45      0.45     665
-   macro avg       0.72      0.52      0.34       665
-weighted avg       0.76      0.45      0.31       665
+    accuracy                           0.46       676
+   micro avg       0.46      0.46      0.46     676
+   macro avg       0.73      0.52      0.35       676
+weighted avg       0.76      0.46      0.32       676
 
 === 2. MULTICLASS CLASSIFICATION (All Classes Including None) ===
-Accuracy: 0.4511
+Accuracy: 0.4601
 Precision (profanity): 0.8667
 Recall (profanity): 0.0344
 F1-Score (profanity): 0.0662
@@ -423,12 +423,12 @@ precision    recall  f1-score   support
           กู       0.00      0.00      0.00       157
          มึง       1.00      0.03      0.05       117
        เหี้ย       0.91      0.13      0.22        78
-        none       0.44      1.00      0.61       287
+        none       0.45      1.00      0.62       298
 
-    accuracy                           0.45       665
-   micro avg       0.45      0.45      0.45     665
-   macro avg       0.47      0.23      0.18       665
-weighted avg       0.47      0.45      0.30       665
+    accuracy                           0.46       676
+   micro avg       0.46      0.46      0.46     676
+   macro avg       0.47      0.23      0.18       676
+weighted avg       0.48      0.46      0.31       676
 
 === 3. MULTICLASS CLASSIFICATION (Profanity Words Only) ===
 Accuracy (profanity words only): 0.0344
@@ -449,7 +449,7 @@ weighted avg       0.50      0.03      0.06       378
 
 --- IoU Threshold 0.8 ---
 Binary Classification (Profane vs Non-Profane):
-  Accuracy: 0.4391
+  Accuracy: 0.4482
   Balanced Accuracy: 0.5066
   Precision: 1.0000
   Recall: 0.0132
@@ -465,16 +465,16 @@ Multiclass Classification (Profanity Words Only):
 Binary Classification Report:
 precision    recall  f1-score   support
 
-        none       0.43      1.00      0.61       287
+        none       0.44      1.00      0.62       298
      profane       1.00      0.01      0.03       378
 
-    accuracy                           0.44       665
-   micro avg       0.44      0.44      0.44     665
-   macro avg       0.72      0.51      0.32       665
-weighted avg       0.76      0.44      0.28       665
+    accuracy                           0.45       676
+   micro avg       0.45      0.45      0.45     676
+   macro avg       0.72      0.51      0.32       676
+weighted avg       0.75      0.45      0.29       676
 
 === 2. MULTICLASS CLASSIFICATION (All Classes Including None) ===
-Accuracy: 0.4376
+Accuracy: 0.4467
 Precision (profanity): 0.8000
 Recall (profanity): 0.0106
 F1-Score (profanity): 0.0209
@@ -486,12 +486,12 @@ precision    recall  f1-score   support
           กู       0.00      0.00      0.00       157
          มึง       0.00      0.00      0.00       117
        เหี้ย       0.80      0.05      0.10        78
-        none       0.43      1.00      0.61       287
+        none       0.44      1.00      0.62       298
 
-    accuracy                           0.44       665
-   micro avg       0.44      0.44      0.44     665
-   macro avg       0.25      0.21      0.14       665
-weighted avg       0.28      0.44      0.27       665
+    accuracy                           0.45       676
+   micro avg       0.45      0.45      0.45     676
+   macro avg       0.25      0.21      0.14       676
+weighted avg       0.29      0.45      0.28       676
 
 === 3. MULTICLASS CLASSIFICATION (Profanity Words Only) ===
 Accuracy (profanity words only): 0.0106
@@ -512,7 +512,7 @@ weighted avg       0.17      0.01      0.02       378
 
 --- IoU Threshold 0.9 ---
 Binary Classification (Profane vs Non-Profane):
-  Accuracy: 0.4331
+  Accuracy: 0.4423
   Balanced Accuracy: 0.5013
   Precision: 1.0000
   Recall: 0.0026
@@ -528,16 +528,16 @@ Multiclass Classification (Profanity Words Only):
 Binary Classification Report:
 precision    recall  f1-score   support
 
-        none       0.43      1.00      0.60       287
+        none       0.44      1.00      0.61       298
      profane       1.00      0.00      0.01       378
 
-    accuracy                           0.43       665
-   micro avg       0.43      0.43      0.43     665
-   macro avg       0.72      0.50      0.30       665
-weighted avg       0.75      0.43      0.26       665
+    accuracy                           0.44       676
+   micro avg       0.44      0.44      0.44     676
+   macro avg       0.72      0.50      0.31       676
+weighted avg       0.75      0.44      0.27       676
 
 === 2. MULTICLASS CLASSIFICATION (All Classes Including None) ===
-Accuracy: 0.4331
+Accuracy: 0.4423
 Precision (profanity): 1.0000
 Recall (profanity): 0.0026
 F1-Score (profanity): 0.0053
@@ -549,12 +549,12 @@ precision    recall  f1-score   support
           กู       0.00      0.00      0.00       157
          มึง       0.00      0.00      0.00       117
        เหี้ย       1.00      0.01      0.03        78
-        none       0.43      1.00      0.60       287
+        none       0.44      1.00      0.61       298
 
-    accuracy                           0.43       665
-   micro avg       0.43      0.43      0.43     665
-   macro avg       0.29      0.20      0.13       665
-weighted avg       0.30      0.43      0.26       665
+    accuracy                           0.44       676
+   micro avg       0.44      0.44      0.44     676
+   macro avg       0.29      0.20      0.13       676
+weighted avg       0.31      0.44      0.27       676
 
 === 3. MULTICLASS CLASSIFICATION (Profanity Words Only) ===
 Accuracy (profanity words only): 0.0026
