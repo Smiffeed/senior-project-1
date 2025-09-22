@@ -1,0 +1,34 @@
+  0%|                                                                                                            | 0/2355 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\train_optimized.py", line 401, in <module>
+    main()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\train_optimized.py", line 389, in main
+    trainer.train_fast_pipeline()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\train_optimized.py", line 358, in train_fast_pipeline
+    binary_model = self.train_stage_fast("binary", max_samples=10000)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\train_optimized.py", line 325, in train_stage_fast
+    trainer.train()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2509, in _inner_training_loop
+    batch_samples, num_items_in_batch = self.get_batch_samples(epoch_iterator, num_batches, args.device)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 5263, in get_batch_samples
+    batch_samples.append(next(epoch_iterator))
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\accelerate\data_loader.py", line 563, in __iter__
+    dataloader_iter = self.base_dataloader.__iter__()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\utils\data\dataloader.py", line 494, in __iter__
+    return self._get_iterator()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\utils\data\dataloader.py", line 427, in _get_iterator
+    return _MultiProcessingDataLoaderIter(self)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\utils\data\dataloader.py", line 1172, in __init__
+    w.start()
+  File "C:\ProgramData\anaconda3\envs\ai\lib\multiprocessing\process.py", line 121, in start
+    self._popen = self._Popen(self)
+  File "C:\ProgramData\anaconda3\envs\ai\lib\multiprocessing\context.py", line 224, in _Popen
+    return _default_context.get_context().Process._Popen(process_obj)
+  File "C:\ProgramData\anaconda3\envs\ai\lib\multiprocessing\context.py", line 327, in _Popen
+    return Popen(process_obj)
+  File "C:\ProgramData\anaconda3\envs\ai\lib\multiprocessing\popen_spawn_win32.py", line 93, in __init__
+    reduction.dump(process_obj, to_child)
+  File "C:\ProgramData\anaconda3\envs\ai\lib\multiprocessing\reduction.py", line 60, in dump
+    ForkingPickler(file, protocol).dump(obj)
+AttributeError: Can't pickle local object 'OptimizedTrainer.train_stage_fast.<locals>.fast_data_collator'

@@ -187,13 +187,39 @@ rev_label_map = {v: k for k, v in label_map.items()}
 def create_consistent_classification_report(y_true, y_pred, target_names=None, labels=None):
     """Create a classification report that shows both accuracy and micro avg consistently"""
     from sklearn.metrics import classification_report, accuracy_score
+    import numpy as np
     
-    # Get the base report
-    report = classification_report(y_true, y_pred, target_names=target_names, labels=labels, 
-                                 zero_division=0, output_dict=False)
+    # Handle edge cases
+    if len(y_true) == 0 or len(y_pred) == 0:
+        return "No data available for classification report"
     
-    # Calculate accuracy manually
-    accuracy = accuracy_score(y_true, y_pred)
+    try:
+        # Handle case where target_names is provided but not all classes are present
+        if target_names is not None and labels is None:
+            # Get unique classes in predictions
+            unique_classes = sorted(list(set(y_true + y_pred)))
+            
+            # If we have fewer unique classes than target names, adjust
+            if len(unique_classes) < len(target_names):
+                # Only use target names for classes that actually appear
+                labels = unique_classes
+                target_names = [target_names[i] if i < len(target_names) else f'class_{i}' 
+                              for i in range(len(unique_classes))]
+        
+        # Get the base report
+        report = classification_report(y_true, y_pred, target_names=target_names, labels=labels, 
+                                     zero_division=0, output_dict=False)
+        
+        # Calculate accuracy manually
+        accuracy = accuracy_score(y_true, y_pred)
+        
+    except Exception as e:
+        # Fallback: create a simple report without target names
+        try:
+            report = classification_report(y_true, y_pred, zero_division=0, output_dict=False)
+            accuracy = accuracy_score(y_true, y_pred)
+        except Exception as e2:
+            return f"Unable to generate classification report: {str(e2)}"
     
     # For binary classification, add micro avg line
     # For multiclass classification, add accuracy line
@@ -215,16 +241,18 @@ def create_consistent_classification_report(y_true, y_pred, target_names=None, l
     
     new_lines = lines[:]
     
-    if not has_accuracy:
-        # Add accuracy line for multiclass
-        accuracy_line = f"    accuracy                           {accuracy:.2f}     {len(y_true)}"
-        new_lines.insert(insert_idx, accuracy_line)
-        insert_idx += 1
-    
-    if not has_micro_avg:
-        # Add micro avg line for binary (micro avg = accuracy in multiclass)
-        micro_line = f"   micro avg       {accuracy:.2f}      {accuracy:.2f}      {accuracy:.2f}     {len(y_true)}"
-        new_lines.insert(insert_idx, micro_line)
+    # Only add lines if we have meaningful data
+    if len(y_true) > 0 and len(set(y_true + y_pred)) > 0:
+        if not has_accuracy:
+            # Add accuracy line for multiclass
+            accuracy_line = f"    accuracy                           {accuracy:.2f}     {len(y_true)}"
+            new_lines.insert(insert_idx, accuracy_line)
+            insert_idx += 1
+        
+        if not has_micro_avg and len(set(y_true + y_pred)) <= 2:
+            # Add micro avg line for binary (micro avg = accuracy in multiclass)
+            micro_line = f"   micro avg       {accuracy:.2f}      {accuracy:.2f}      {accuracy:.2f}     {len(y_true)}"
+            new_lines.insert(insert_idx, micro_line)
     
     return '\n'.join(new_lines)
 
@@ -2146,14 +2174,58 @@ def process_single_configuration(model, feature_extractor, device, config, groun
     return results_dict
 
 def main():
-    parser = argparse.ArgumentParser(description="Comprehensive evaluation processor")
-    parser.add_argument("--csv_file", required=True, help="Path to CSV file to evaluate")
-    parser.add_argument("--model_path", default="./models/4_classes_max_steps", help="Model path")
-    parser.add_argument("--ground_truth", default="./csv/eval.csv", help="Ground truth CSV file")
+    parser = argparse.ArgumentParser(
+        description="Comprehensive evaluation processor - evaluate a single window/stride configuration",
+        epilog="""
+Examples:
+  # Evaluate using window and stride arguments
+  python comprehensive_evaluation_processor.py --window 0.3s --stride 0.05s
+  
+  # Evaluate using direct CSV file path
+  python comprehensive_evaluation_processor.py --csv_file csv/eval_by_0.05/window_0.3s/stride_0.05s.csv
+  
+  # Evaluate with custom model and output directory
+  python comprehensive_evaluation_processor.py --window 2.0s --stride 0.25s --model_path models/my_model --output_dir results
+        """,
+        formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    parser.add_argument("--csv_file", help="Path to CSV file to evaluate (alternative to --window and --stride)")
+    parser.add_argument("--window", help="Window size (e.g., '0.3s', '1.0s', '2.0s')")
+    parser.add_argument("--stride", help="Stride size (e.g., '0.05s', '0.125s', '0.25s')")
+    parser.add_argument("--model_path", default="./models/4_classes_max_steps", help="Model path (recommended: 4_classes_max_steps)")
+    parser.add_argument("--ground_truth", default="./csv/eval_5labels.csv", help="Ground truth CSV file")
     parser.add_argument("--output_dir", default="./new_evaluation_results", help="Output directory")
     parser.add_argument("--eval_type", default="eval_by_0.05", help="Evaluation type (eval_by_0.05 or eval_percent)")
     
     args = parser.parse_args()
+    
+    # Validate arguments
+    if not args.csv_file and not (args.window and args.stride):
+        parser.error("Either --csv_file OR both --window and --stride must be provided")
+    
+    if args.csv_file and (args.window or args.stride):
+        parser.error("Cannot use --csv_file together with --window/--stride. Choose one approach.")
+    
+    # Determine CSV file path and window/stride configuration
+    if args.csv_file:
+        # Use provided CSV file and extract window/stride from path
+        csv_path = Path(args.csv_file)
+        window_name = csv_path.parent.name  # e.g., "window_0.3s"
+        stride_name = csv_path.stem  # e.g., "stride_0.125s"
+        csv_file_path = args.csv_file
+    else:
+        # Build CSV file path from window and stride
+        window_name = f"window_{args.window}"
+        stride_name = f"stride_{args.stride}"
+        
+        # Construct the expected CSV file path
+        csv_file_path = f"csv/{args.eval_type}/{window_name}/{stride_name}.csv"
+        
+        # Check if the CSV file exists
+        if not Path(csv_file_path).exists():
+            print(f"Error: CSV file not found at expected path: {csv_file_path}")
+            print(f"Please ensure the CSV file exists or use --csv_file to specify the exact path")
+            return
     
     print("=== COMPREHENSIVE EVALUATION PROCESSOR ===")
     print(f"Model: {args.model_path}")
@@ -2161,17 +2233,70 @@ def main():
     print(f"Output Directory: {args.output_dir}")
     print(f"Evaluation Type: {args.eval_type}")
     
+    if args.csv_file:
+        print(f"CSV File: {args.csv_file}")
+    else:
+        print(f"Window: {args.window}")
+        print(f"Stride: {args.stride}")
+        print(f"Expected CSV: {csv_file_path}")
+    print(f"Window Name: {window_name}")
+    print(f"Stride Name: {stride_name}")
+    
     # Load model
     print("\nLoading model...")
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
     try:
+        # Try loading as Hugging Face model (works for models with preprocessor_config.json)
         model = Wav2Vec2ForSequenceClassification.from_pretrained(args.model_path)
         feature_extractor = Wav2Vec2FeatureExtractor.from_pretrained(args.model_path)
-    except:
-        print("Error loading model from pretrained. Trying alternative loading...")
-        model = torch.load(f"{args.model_path}/model.pth", map_location=device)
-        feature_extractor = Wav2Vec2FeatureExtractor.from_pretrained("facebook/wav2vec2-base")
+        print(f"Successfully loaded model and feature extractor from {args.model_path}")
+    except Exception as e1:
+        print(f"Error loading model from pretrained: {e1}")
+        try:
+            # Try loading model with safetensors but use base feature extractor
+            print("Trying to load model with safetensors and base feature extractor...")
+            model = Wav2Vec2ForSequenceClassification.from_pretrained(args.model_path)
+            feature_extractor = Wav2Vec2FeatureExtractor.from_pretrained("facebook/wav2vec2-base")
+            print("Successfully loaded model with base feature extractor")
+        except Exception as e2:
+            print(f"Error with safetensors approach: {e2}")
+            try:
+                # Manual loading approach
+                print("Trying manual model loading...")
+                from transformers import Wav2Vec2Config
+                
+                # Load config
+                if os.path.exists(f"{args.model_path}/config.json"):
+                    config = Wav2Vec2Config.from_pretrained(args.model_path)
+                else:
+                    config = Wav2Vec2Config.from_pretrained("facebook/wav2vec2-base")
+                    config.num_labels = 5  # Ensure 5 classes
+                
+                model = Wav2Vec2ForSequenceClassification(config)
+                
+                # Load weights manually
+                if os.path.exists(f"{args.model_path}/model.safetensors"):
+                    from safetensors.torch import load_file
+                    state_dict = load_file(f"{args.model_path}/model.safetensors")
+                    model.load_state_dict(state_dict)
+                    print("Loaded weights from model.safetensors")
+                elif os.path.exists(f"{args.model_path}/pytorch_model.bin"):
+                    state_dict = torch.load(f"{args.model_path}/pytorch_model.bin", map_location=device)
+                    model.load_state_dict(state_dict)
+                    print("Loaded weights from pytorch_model.bin")
+                elif os.path.exists(f"{args.model_path}/model.pth"):
+                    # For backward compatibility
+                    model = torch.load(f"{args.model_path}/model.pth", map_location=device)
+                    print("Loaded model from model.pth")
+                else:
+                    raise Exception("No model weights found")
+                
+                feature_extractor = Wav2Vec2FeatureExtractor.from_pretrained("facebook/wav2vec2-base")
+                print("Successfully loaded model manually with base feature extractor")
+                
+            except Exception as e3:
+                raise Exception(f"Failed to load model: {e1}, {e2}, {e3}")
     
     model = model.to(device)
     model.eval()
@@ -2198,13 +2323,8 @@ def main():
     else:
         print("All ground truth entries match 4-class model classes")
     
-    # Parse CSV file path to extract window and stride info
-    csv_path = Path(args.csv_file)
-    window_name = csv_path.parent.name  # e.g., "window_0.3s"
-    stride_name = csv_path.stem  # e.g., "stride_0.125s"
-    
     config = {
-        'csv_path': args.csv_file,
+        'csv_path': csv_file_path,
         'window': window_name,
         'stride': stride_name
     }

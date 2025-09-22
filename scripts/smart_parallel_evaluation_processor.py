@@ -201,8 +201,8 @@ def main():
     parser = argparse.ArgumentParser(description="Smart parallel evaluation with resource management")
     parser.add_argument("--datasets", nargs='+', default=["csv/eval_by_0.05", "csv/eval_percent"])
     parser.add_argument("--model_path", default="./models/4_classes_max_steps")
-    parser.add_argument("--ground_truth", default="./csv/eval.csv")
-    parser.add_argument("--output_dir", default="./smart_parallel_evaluation_results")
+    parser.add_argument("--ground_truth", default="./csv/eval_5labels.csv")
+    parser.add_argument("--output_dir", default="./new_classifier_results")
     parser.add_argument("--workers", type=int, default=None, help="Number of workers (auto-detect if not specified)")
     parser.add_argument("--gpu_mode", choices=['shared', 'exclusive', 'round_robin'], default='shared',
                        help="GPU allocation mode")
