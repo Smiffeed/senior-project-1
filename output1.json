@@ -1,0 +1,68 @@
+{
+  "censoring_method": "silence",
+  "model_info": {
+    "model_dir": "models/5_class_profanity_fold_1",
+    "ensemble_size": 1,
+    "confidence_threshold": 0.7,
+    "window_size": 0.5,
+    "overlap": 0.25
+  },
+  "detections": [
+    {
+      "label": "กู",
+      "start_time": 2.062,
+      "end_time": 2.25,
+      "duration": 0.188,
+      "confidence": 0.898
+    },
+    {
+      "label": "มึง",
+      "start_time": 3.71,
+      "end_time": 4.0,
+      "duration": 0.29,
+      "confidence": 0.943
+    },
+    {
+      "label": "กู",
+      "start_time": 4.75,
+      "end_time": 5.75,
+      "duration": 1.0,
+      "confidence": 0.879
+    },
+    {
+      "label": "เย็ด",
+      "start_time": 8.5,
+      "end_time": 9.172,
+      "duration": 0.672,
+      "confidence": 0.945
+    },
+    {
+      "label": "เย็ด",
+      "start_time": 10.25,
+      "end_time": 10.57,
+      "duration": 0.32,
+      "confidence": 0.948
+    }
+  ],
+  "summary": {
+    "total_detections": 5,
+    "total_censored_duration": 2.4700000000000006,
+    "detections_by_class": {
+      "กู": {
+        "count": 2,
+        "total_duration": 1.188,
+        "avg_confidence": 0.888
+      },
+      "มึง": {
+        "count": 1,
+        "total_duration": 0.29,
+        "avg_confidence": 0.943
+      },
+      "เย็ด": {
+        "count": 2,
+        "total_duration": 0.992,
+        "avg_confidence": 0.946
+      }
+    }
+  }
+}

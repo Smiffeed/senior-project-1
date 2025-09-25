@@ -573,7 +573,7 @@ def train_wav2vec2_model_with_data(train_dataset, val_dataset, model_name, outpu
         save_on_each_node=False,
         disable_tqdm=False,
         remove_unused_columns=True,
-        max_steps=14700,
+        max_steps=50000,
         # Additional parameters for better convergence
         adam_epsilon=1e-6,
         max_grad_norm=1.0,
@@ -834,7 +834,7 @@ def evaluate_model(model, feature_extractor, test_data):
     accuracy = sum(p == l for p, l in zip(predictions, labels)) / len(labels)
     
     # Calculate per-class metrics
-    class_names = ['none', 'เย็ด', 'กู', 'มึง', 'เหี้ย', 'ควย', "สวะ", "หี", 'แตด']
+    class_names = ['none', 'เย็ด', 'กู', 'มึง', 'เหี้ย']
     per_class_metrics = {}
     for i, name in enumerate(class_names):
         class_preds = [p == i for p in predictions]
@@ -1115,7 +1115,7 @@ def evaluate_dataset(model, feature_extractor, dataset):
     }
 
 if __name__ == "__main__":
-    csv_file = './csv/balanced_train_original_profanity.csv'  # Use the original training dataset
+    csv_file = './csv/train.csv'  # Use the original training dataset
     model_name = "airesearch/wav2vec2-large-xlsr-53-th"
     output_dir = './models/5_class_profanity'  # Updated for 5-class model
     

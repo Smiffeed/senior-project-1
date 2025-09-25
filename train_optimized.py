@@ -12,10 +12,12 @@ Performance improvements:
 
 import os
 import sys
+# Disable wandb logging completely
+os.environ["WANDB_DISABLED"] = "true"
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import DataLoader, Dataset, Subset
 import numpy as np
 import pandas as pd
 import librosa
@@ -25,6 +27,7 @@ from typing import Dict, List, Tuple, Optional
 from dataclasses import dataclass
 from sklearn.metrics import classification_report, f1_score, accuracy_score, precision_recall_fscore_support
 from sklearn.utils.class_weight import compute_class_weight
+from sklearn.model_selection import KFold
 from transformers import (
     Wav2Vec2ForSequenceClassification, 
     Wav2Vec2FeatureExtractor,
@@ -327,7 +330,7 @@ class OptimizedTrainer:
         print(f"Device: {self.device}")
         print(f"Batch size: {config.batch_size} (effective: {config.batch_size * config.gradient_accumulation_steps})")
         
-    def compute_class_weights(self, labels):
+    def compute_class_weights(self, labels, num_classes):
         """Compute class weights for imbalanced datasets"""
         unique_labels = np.unique(labels)
         class_weights = compute_class_weight(
@@ -336,13 +339,19 @@ class OptimizedTrainer:
             y=labels
         )
         
-        # Create tensor with weights for all classes
-        weight_tensor = torch.ones(max(5, len(unique_labels)))  # Handle both binary and multiclass
+        # Create tensor with weights matching the actual number of classes
+        weight_tensor = torch.ones(num_classes)
         for i, weight in zip(unique_labels, class_weights):
-            weight_tensor[i] = weight
+            if i < num_classes:  # Ensure we don't exceed tensor size
+                weight_tensor[i] = weight
             
-        id2label = {0: 'none', 1: 'เย็ด', 2: 'กู', 3: 'มึง', 4: 'เหี้ย'}
-        print(f"Class weights computed for {len(unique_labels)} classes:")
+        # Label mappings for display
+        if num_classes == 2:
+            id2label = {0: 'none', 1: 'profanity'}
+        else:
+            id2label = {0: 'none', 1: 'เย็ด', 2: 'กู', 3: 'มึง', 4: 'เหี้ย'}
+            
+        print(f"Class weights computed for {num_classes} classes:")
         for i, weight in enumerate(weight_tensor):
             if i < len(id2label):
                 print(f"  {id2label[i]}: {weight:.3f}")
@@ -413,7 +422,7 @@ class OptimizedTrainer:
         model = self.create_fast_model(num_classes, pretrained_path)
         
         # Compute class weights for imbalanced datasets
-        class_weights = self.compute_class_weights(dataset.labels)
+        class_weights = self.compute_class_weights(dataset.labels, num_classes)
         
         # Optimized training arguments
         training_args = TrainingArguments(
@@ -430,7 +439,7 @@ class OptimizedTrainer:
             dataloader_pin_memory=self.config.pin_memory,
             dataloader_num_workers=self.config.num_workers,
             remove_unused_columns=False,
-            report_to=None,  # Disable wandb for speed
+            report_to=[],  # Disable wandb for speed (empty list)
             warmup_steps=100,
             lr_scheduler_type="cosine",
             eval_strategy="steps" if stage == "multiclass" else "no",
@@ -520,7 +529,7 @@ class OptimizedTrainer:
             
             # Compute class weights for training set
             train_labels = [full_dataset.labels[i] for i in train_idx]
-            class_weights = self.compute_class_weights(train_labels)
+            class_weights = self.compute_class_weights(train_labels, num_classes)
             
             # Training arguments for CV
             training_args = TrainingArguments(
@@ -538,7 +547,7 @@ class OptimizedTrainer:
                 dataloader_pin_memory=self.config.pin_memory,
                 dataloader_num_workers=self.config.num_workers,
                 remove_unused_columns=False,
-                report_to=None,
+                report_to=[],
             )
             
             # Create trainer for this fold

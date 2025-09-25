@@ -1,0 +1,20 @@
+  0%|                                                           | 0/9850 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\train_optimized.py", line 723, in <module>
+    main()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\train_optimized.py", line 692, in main
+    trainer.train_full_pipeline()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\train_optimized.py", line 642, in train_full_pipeline
+    binary_model = self.train_stage_fast("binary", max_samples=None)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\train_optimized.py", line 467, in train_stage_fast
+    trainer.train()
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2240, in train
+    return inner_training_loop(
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 2555, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\transformers\trainer.py", line 3745, in training_step
+    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\train_optimized.py", line 70, in compute_loss
+    loss = torch.nn.functional.cross_entropy(logits, labels, weight=self.class_weights)
+  File "C:\Users\muldi\Documents\Playground\University\senior-project-1\env\lib\site-packages\torch\nn\functional.py", line 3462, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(
+RuntimeError: weight tensor should be defined either for all 2 classes or no classes but got weight tensor of shape: [5]

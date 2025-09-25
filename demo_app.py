@@ -112,16 +112,16 @@ class ProfanityDetectionDemo:
             with st.spinner("🔄 Loading AI models..."):
                 # Initialize feature extractor
                 _self.feature_extractor = Wav2Vec2FeatureExtractor.from_pretrained(
-                    "facebook/wav2vec2-base"
+                    "airesearch/wav2vec2-large-xlsr-53-th"
                 )
                 
                 # Try to load trained models
                 try:
                     _self.binary_model = Wav2Vec2ForSequenceClassification.from_pretrained(
-                        "models/binary_classifier_fast"
+                        "models/binary_classifier_full"
                     )
                     _self.multiclass_model = Wav2Vec2ForSequenceClassification.from_pretrained(
-                        "models/multiclass_classifier_fast"
+                        "models/4_classes_max_steps"
                     )
                     st.success("✅ Loaded trained models successfully!")
                     return True
@@ -130,10 +130,10 @@ class ProfanityDetectionDemo:
                     st.warning("⚠️ Trained models not found. Using demo models.")
                     # Load base models for demo
                     _self.binary_model = Wav2Vec2ForSequenceClassification.from_pretrained(
-                        "facebook/wav2vec2-base", num_labels=2
+                        "airesearch/wav2vec2-large-xlsr-53-th", num_labels=2
                     )
                     _self.multiclass_model = Wav2Vec2ForSequenceClassification.from_pretrained(
-                        "facebook/wav2vec2-base", num_labels=5
+                        "airesearch/wav2vec2-large-xlsr-53-th", num_labels=5
                     )
                     return False
                     
