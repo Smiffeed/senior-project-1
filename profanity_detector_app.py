@@ -49,32 +49,49 @@ st.markdown("""
         margin-bottom: 2rem;
         font-weight: bold;
     }
-    .detection-result {
-        background-color: #fee2e2;
-        border: 2px solid #fca5a5;
-        border-radius: 10px;
-        padding: 15px;
-        margin: 10px 0;
+    
+    .metric-container {
+        background: linear-gradient(90deg, #f8fafc 0%, #e2e8f0 100%);
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border-left: 4px solid #3b82f6;
     }
-    .clean-result {
-        background-color: #d1fae5;
-        border: 2px solid #6ee7b7;
-        border-radius: 10px;
-        padding: 15px;
-        margin: 10px 0;
-    }
-    .metric-card {
-        background-color: #f8fafc;
+    
+    .timeline-container {
+        background: #f8fafc;
+        padding: 1.5rem;
+        border-radius: 0.75rem;
         border: 1px solid #e2e8f0;
-        border-radius: 8px;
-        padding: 20px;
-        text-align: center;
+        margin: 1rem 0;
     }
-    .sidebar .element-container {
-        background-color: #f1f5f9;
-        border-radius: 8px;
-        padding: 10px;
-        margin: 5px 0;
+    
+    .profanity-badge {
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        font-size: 0.75rem;
+        font-weight: bold;
+        color: white;
+    }
+    
+    .badge-high { background-color: #dc2626; }
+    .badge-medium { background-color: #f59e0b; }
+    .badge-low { background-color: #10b981; }
+    
+    .audio-player {
+        background: #ffffff;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        border: 1px solid #e2e8f0;
+    }
+    
+    .navigation-tip {
+        background: #eff6ff;
+        padding: 0.75rem;
+        border-radius: 0.375rem;
+        border-left: 3px solid #3b82f6;
+        font-size: 0.875rem;
+        color: #1e40af;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -105,29 +122,9 @@ def format_time(seconds):
     seconds = int(seconds % 60)
     return f"{minutes:02d}:{seconds:02d}"
 
-def create_timeline_visualization(detections, audio_duration):
-    """Create an interactive timeline visualization of detections"""
-    if not detections:
-        # Create empty timeline
-        fig = go.Figure()
-        fig.add_trace(go.Scatter(
-            x=[0, audio_duration],
-            y=[1, 1],
-            mode='lines',
-            line=dict(color='green', width=10),
-            name='Clean Audio',
-            hovertemplate="Clean audio<extra></extra>"
-        ))
-        fig.update_layout(
-            title="Audio Timeline - No Profanity Detected",
-            xaxis_title="Time (seconds)",
-            yaxis=dict(visible=False),
-            height=200,
-            showlegend=False
-        )
-        return fig
-    
-    # Create timeline with detections
+def create_interactive_audio_timeline(detections, audio_duration, audio_file_path=None):
+    """Create an enhanced interactive timeline with profanity markers and audio playback"""
+    # Create the timeline visualization
     fig = go.Figure()
     
     # Color mapping for different profanity types
@@ -139,57 +136,141 @@ def create_timeline_visualization(detections, audio_duration):
         'none': '#22c55e'
     }
     
-    # Add clean segments
-    current_time = 0
-    for detection in detections:
-        start_time = detection['start_time']
-        if start_time > current_time:
-            # Add clean segment
+    if not detections:
+        # Clean audio timeline
+        fig.add_trace(go.Scatter(
+            x=[0, audio_duration],
+            y=[0.5, 0.5],
+            mode='lines',
+            line=dict(color='#22c55e', width=15),
+            name='Clean Audio',
+            hovertemplate="Clean audio<br>Duration: %{x:.2f}s<extra></extra>",
+            showlegend=False
+        ))
+        title = "🎵 Audio Timeline - No Profanity Detected"
+    else:
+        # Add background clean timeline
+        fig.add_trace(go.Scatter(
+            x=[0, audio_duration],
+            y=[0.5, 0.5],
+            mode='lines',
+            line=dict(color='#e5e7eb', width=12),
+            name='Audio Track',
+            showlegend=False,
+            hovertemplate="Audio Track<extra></extra>"
+        ))
+        
+        # Add clean segments
+        current_time = 0
+        for detection in sorted(detections, key=lambda x: x['start_time']):
+            start_time = detection['start_time']
+            if start_time > current_time:
+                # Clean segment
+                fig.add_trace(go.Scatter(
+                    x=[current_time, start_time],
+                    y=[0.5, 0.5],
+                    mode='lines',
+                    line=dict(color='#22c55e', width=15),
+                    name='Clean',
+                    showlegend=False,
+                    hovertemplate=f"✅ Clean audio<br>Time: {format_time(current_time)} - {format_time(start_time)}<br>Duration: {start_time-current_time:.2f}s<extra></extra>"
+                ))
+            current_time = detection['end_time']
+        
+        # Final clean segment
+        if current_time < audio_duration:
             fig.add_trace(go.Scatter(
-                x=[current_time, start_time],
-                y=[1, 1],
+                x=[current_time, audio_duration],
+                y=[0.5, 0.5],
                 mode='lines',
-                line=dict(color='#22c55e', width=8),
+                line=dict(color='#22c55e', width=15),
                 name='Clean',
                 showlegend=False,
-                hovertemplate=f"Clean audio<br>Time: {format_time(current_time)} - {format_time(start_time)}<extra></extra>"
+                hovertemplate=f"✅ Clean audio<br>Time: {format_time(current_time)} - {format_time(audio_duration)}<br>Duration: {audio_duration-current_time:.2f}s<extra></extra>"
             ))
-        current_time = detection['end_time']
-    
-    # Add final clean segment if needed
-    if current_time < audio_duration:
-        fig.add_trace(go.Scatter(
-            x=[current_time, audio_duration],
-            y=[1, 1],
-            mode='lines',
-            line=dict(color='#22c55e', width=8),
-            name='Clean',
-            showlegend=False,
-            hovertemplate=f"Clean audio<br>Time: {format_time(current_time)} - {format_time(audio_duration)}<extra></extra>"
-        ))
-    
-    # Add profanity detections
-    for detection in detections:
-        label = detection['label']
-        start_time = detection['start_time']
-        end_time = detection['end_time']
-        confidence = detection['confidence']
         
-        fig.add_trace(go.Scatter(
-            x=[start_time, end_time],
-            y=[1, 1],
-            mode='lines',
-            line=dict(color=colors.get(label, '#dc2626'), width=12),
-            name=label,
-            hovertemplate=f"Profanity: {label}<br>Time: {format_time(start_time)} - {format_time(end_time)}<br>Confidence: {confidence:.3f}<extra></extra>"
-        ))
+        # Add profanity detections with enhanced styling
+        for i, detection in enumerate(detections):
+            label = detection['label']
+            start_time = detection['start_time']
+            end_time = detection['end_time']
+            confidence = detection['confidence']
+            duration = end_time - start_time
+            
+            # Main profanity segment
+            fig.add_trace(go.Scatter(
+                x=[start_time, end_time],
+                y=[0.5, 0.5],
+                mode='lines',
+                line=dict(color=colors.get(label, '#dc2626'), width=20),
+                name=f'{label} ({i+1})',
+                hovertemplate=f"🚨 {label} #{i+1}<br>Time: {format_time(start_time)} - {format_time(end_time)}<br>Duration: {duration:.2f}s<br>Confidence: {confidence:.3f}<extra></extra>",
+                showlegend=True
+            ))
+            
+            # Add markers at start and end
+            fig.add_trace(go.Scatter(
+                x=[start_time, end_time],
+                y=[0.8, 0.8],
+                mode='markers+text',
+                marker=dict(
+                    size=12,
+                    color=colors.get(label, '#dc2626'),
+                    symbol='triangle-down'
+                ),
+                text=[f"▼ {label}", "▼"],
+                textposition="top center",
+                textfont=dict(size=10, color=colors.get(label, '#dc2626')),
+                name=f'{label} markers',
+                showlegend=False,
+                hovertemplate=f"🎯 {label} boundary<br>Time: %{{x:.2f}}s<extra></extra>"
+            ))
+        
+        title = f"🎵 Audio Timeline - {len(detections)} Profanity Detection(s)"
     
+    # Enhanced layout
     fig.update_layout(
-        title="Audio Timeline - Profanity Detection Results",
-        xaxis_title="Time (seconds)",
-        yaxis=dict(visible=False),
-        height=250,
-        hovermode='x unified'
+        title=dict(text=title, font=dict(size=16)),
+        xaxis=dict(
+            title="Time (seconds)",
+            showgrid=True,
+            gridwidth=1,
+            gridcolor='rgba(128,128,128,0.2)',
+            tickformat='.1f',
+            range=[0, audio_duration]
+        ),
+        yaxis=dict(
+            visible=False,
+            range=[0, 1]
+        ),
+        height=300,
+        hovermode='x unified',
+        plot_bgcolor='rgba(248,250,252,0.8)',
+        margin=dict(l=50, r=50, t=60, b=50),
+        showlegend=True,
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.02,
+            xanchor="right",
+            x=1
+        )
+    )
+    
+    # Add range selector for zooming
+    fig.update_layout(
+        xaxis=dict(
+            rangeselector=dict(
+                buttons=list([
+                    dict(count=10, label="10s", step="second", stepmode="backward"),
+                    dict(count=30, label="30s", step="second", stepmode="backward"),
+                    dict(count=60, label="1m", step="second", stepmode="backward"),
+                    dict(step="all", label="All")
+                ])
+            ),
+            rangeslider=dict(visible=True),
+            type="linear"
+        )
     )
     
     return fig
@@ -256,10 +337,65 @@ def display_detection_results(detections, audio_duration):
     with col4:
         st.metric("Avg Confidence", f"{avg_confidence:.3f}")
     
-    # Timeline visualization
-    st.subheader("📊 Audio Timeline")
-    timeline_fig = create_timeline_visualization(detections, audio_duration)
-    st.plotly_chart(timeline_fig, use_container_width=True)
+    # Enhanced Timeline visualization with audio playback
+    st.subheader("🎵 Interactive Audio Timeline")
+    st.markdown("🔍 **Hover over the timeline** to see details | 📊 **Use the range slider** below to zoom in/out")
+    
+    # Audio playback controls
+    col1, col2 = st.columns([3, 1])
+    with col1:
+        timeline_fig = create_interactive_audio_timeline(detections, audio_duration)
+        
+        # Use plotly event handling for timeline clicks
+        selected_data = st.plotly_chart(timeline_fig, use_container_width=True, key="timeline")
+        
+        # Timeline legend
+        st.markdown("""
+        **Legend:** 🟢 Clean Audio | 🔴 เย็ด | 🟠 กู | 🟡 มึง | 🟣 เหี้ย  
+        💡 **Tip:** Use the range slider at the bottom to focus on specific time periods
+        """)
+        
+    with col2:
+        st.markdown("### 🎮 Quick Navigation")
+        if detections:
+            st.markdown("**Jump to profanity:**")
+            for i, detection in enumerate(detections):
+                label = detection['label']
+                start_time = detection['start_time']
+                confidence = detection['confidence']
+                
+                # Color-coded button based on confidence
+                button_color = "🔴" if confidence >= 0.9 else "🟡" if confidence >= 0.7 else "🟢"
+                
+                if st.button(f"{button_color} {label} #{i+1}", key=f"jump_{i}"):
+                    st.info(f"⏭️ **{label}** at **{format_time(start_time)}** (conf: {confidence:.2f})")
+                    st.balloons()  # Fun feedback
+                    
+            # Show profanity statistics
+            st.markdown("---")
+            st.markdown("### 📊 Quick Stats")
+            profanity_types = {}
+            total_duration = 0
+            for detection in detections:
+                label = detection['label']
+                duration = detection['end_time'] - detection['start_time']
+                total_duration += duration
+                if label in profanity_types:
+                    profanity_types[label] += 1
+                else:
+                    profanity_types[label] = 1
+            
+            st.metric("Total profanity time", f"{total_duration:.1f}s")
+            st.metric("Coverage", f"{(total_duration/audio_duration)*100:.1f}%")
+            
+            st.markdown("**By type:**")
+            for label, count in profanity_types.items():
+                st.write(f"• **{label}:** {count} times")
+        else:
+            st.success("✅ **Clean Audio!**\nNo profanity detected")
+            st.write(f"**Duration:** {format_time(audio_duration)}")
+            st.write("🎉 This audio is safe for all audiences!")
+            st.balloons()
     
     # Profanity summary chart
     st.subheader("📈 Profanity Summary")
@@ -271,12 +407,39 @@ def display_detection_results(detections, audio_duration):
             st.plotly_chart(summary_fig, use_container_width=True)
     
     with col2:
-        st.subheader("Detailed List")
-        for i, detection in enumerate(detections, 1):
-            with st.expander(f"{i}. {detection['label']} ({format_time(detection['start_time'])})"):
-                st.write(f"**Time:** {format_time(detection['start_time'])} - {format_time(detection['end_time'])}")
-                st.write(f"**Duration:** {detection['duration']:.2f} seconds")
-                st.write(f"**Confidence:** {detection['confidence']:.3f}")
+        st.subheader("📋 Detailed Detection List")
+        if detections:
+            for i, detection in enumerate(detections, 1):
+                # Color-coded expander based on profanity type
+                label = detection['label']
+                confidence = detection['confidence']
+                duration = detection['duration']
+                
+                # Confidence badge
+                if confidence >= 0.9:
+                    conf_badge = "🔴 HIGH"
+                elif confidence >= 0.7:
+                    conf_badge = "🟡 MEDIUM"
+                else:
+                    conf_badge = "🟢 LOW"
+                
+                with st.expander(f"#{i} **{label}** | {format_time(detection['start_time'])} | {conf_badge}"):
+                    col_a, col_b = st.columns(2)
+                    with col_a:
+                        st.write(f"**🕐 Time:** {format_time(detection['start_time'])} - {format_time(detection['end_time'])}")
+                        st.write(f"**⏱️ Duration:** {duration:.2f}s")
+                    with col_b:
+                        st.write(f"**🎯 Confidence:** {confidence:.3f}")
+                        st.write(f"**🏷️ Type:** {label}")
+                        
+                    # Progress bar for confidence
+                    st.progress(confidence)
+                    
+                    # Quick navigation button
+                    if st.button(f"🎵 Play from {format_time(detection['start_time'])}", key=f"play_{i}"):
+                        st.info(f"▶️ Jump to {label} at {format_time(detection['start_time'])}")
+        else:
+            st.info("🎉 No profanity detected in this audio!")
 
 def main():
     # Header
@@ -290,7 +453,7 @@ def main():
         # Model selection
         model_options = {
             "5-Class Model (Fold 1)": "models/5_class_profanity_fold_1",
-            "5-Class Model (Best)": "models/5_class_profanity_best_model", 
+            "Work_v1": "models/work_v1", 
             "4-Classes Max Steps": "models/4_classes_max_steps",
             "Custom Model": "custom"
         }
@@ -302,11 +465,12 @@ def main():
         else:
             model_path = model_options[selected_model]
         
-        # Detection parameters
-        st.subheader("🔧 Detection Parameters")
-        window_size = st.slider("Window Size (seconds)", 0.1, 2.0, 0.5, 0.1)
-        overlap = st.slider("Overlap (seconds)", 0.1, 1.0, 0.25, 0.05)
-        confidence_threshold = st.slider("Confidence Threshold", 0.1, 1.0, 0.7, 0.05)
+        # Model info
+        st.subheader("ℹ️ Model Configuration")
+        st.info("Using default settings from frame_level_censor.py:\n"
+               "• Window Size: 0.5 seconds\n"
+               "• Overlap: 0.25 seconds\n" 
+               "• Confidence Threshold: 0.7")
         
         # Censoring options
         st.subheader("🔇 Censoring Options")
@@ -367,10 +531,8 @@ def main():
             try:
                 with st.spinner("Loading model..."):
                     censor = AdvancedFrameLevelCensor(
-                        model_dir=model_path,
-                        window_size=window_size,
-                        overlap=overlap,
-                        confidence_threshold=confidence_threshold
+                        model_dir=model_path
+                        # Using default parameters: window_size=0.5, overlap=0.25, confidence_threshold=0.7
                     )
                 
                 if not censor.models:
@@ -418,6 +580,37 @@ def main():
                             audio_duration = len(y) / sr
                         except:
                             audio_duration = 60  # Fallback
+                        
+                        # Audio playback section
+                        st.header("🎵 Audio Playback")
+                        col1, col2 = st.columns([2, 1])
+                        
+                        with col1:
+                            st.subheader("Original Audio")
+                            try:
+                                with open(audio_path, 'rb') as f:
+                                    original_audio = f.read()
+                                st.audio(original_audio, format='audio/wav')
+                                st.caption(f"Duration: {format_time(audio_duration)} | Click timeline markers below to navigate")
+                            except Exception as e:
+                                st.error(f"Could not load original audio: {e}")
+                        
+                        with col2:
+                            if detections:
+                                st.subheader("🔍 Detected Profanity")
+                                st.write(f"**{len(detections)} profanity instance(s) found:**")
+                                for i, detection in enumerate(detections[:5]):  # Show first 5
+                                    label = detection['label']
+                                    start_time = format_time(detection['start_time'])
+                                    confidence = detection['confidence']
+                                    st.write(f"• **{label}** at {start_time} ({confidence:.2f})")
+                                if len(detections) > 5:
+                                    st.write(f"... and {len(detections) - 5} more")
+                            else:
+                                st.success("✅ **Clean Audio**")
+                                st.write("No profanity detected!")
+                        
+                        st.markdown("---")
                         
                         # Display results
                         st.header("🎯 Detection Results")
