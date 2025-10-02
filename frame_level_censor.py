@@ -69,22 +69,23 @@ class SimpleAudioPreprocessor:
     
     def preprocess(self, audio):
         """Main preprocessing function"""
-        # Normalize
+        # Only normalize - don't apply VAD per window to maintain fixed window lengths
         audio = self.normalize_audio(audio)
         
-        # Apply VAD
-        audio = self.apply_voice_activity_detection(audio)
+        # Skip VAD per window - this was breaking longer windows
+        # VAD should only be applied once at the file level, not per window
         
         return audio
 
 class SimpleProfanityDataset:
     """Simple dataset class matching evaluation script"""
     
-    def __init__(self, audio_data, feature_extractor, preprocessor, mode='eval'):
+    def __init__(self, audio_data, feature_extractor, preprocessor, mode='eval', window_size=0.5):
         self.audio_data = audio_data
         self.feature_extractor = feature_extractor
         self.preprocessor = preprocessor
         self.mode = mode
+        self.window_size = window_size  # Store window_size for consistent processing
     
     def process_audio_window(self, audio_window, label=0):
         """Process a single audio window"""
@@ -92,14 +93,15 @@ class SimpleProfanityDataset:
             # Preprocess audio
             processed_audio = self.preprocessor.preprocess(audio_window)
             
-            # Extract features
+            # Extract features with consistent max_length based on window_size
+            target_length = int(self.window_size * 16000)  # Fixed length based on window size
             inputs = self.feature_extractor(
                 processed_audio,
                 sampling_rate=16000,
                 return_tensors="pt",
                 padding=True,
                 truncation=True,
-                max_length=len(processed_audio)
+                max_length=target_length  # Use consistent max_length
             )
             
             return {
@@ -171,20 +173,21 @@ class AdvancedFrameLevelCensor:
     """
 
     def __init__(self, model_dir: str, window_size: float = 0.5, overlap: float = 0.25, 
-                 confidence_threshold: float = 0.7, model_name: str = "airesearch/wav2vec2-large-xlsr-53-th"):
+                 confidence_threshold: float = 0.5, model_name: str = "airesearch/wav2vec2-large-xlsr-53-th"):
         """
         Initialize the advanced censoring system
         
         Args:
             model_dir: Directory containing trained models
-            window_size: Window size in seconds for detection
-            overlap: Overlap between windows
+            window_size: Window size in seconds (0.5s balanced for both word/binary detection)
+            overlap: Overlap in seconds (0.25s gives 0.25s stride = 50% overlap)
             confidence_threshold: Minimum confidence for detection
             model_name: Base model name
         """
         self.model_dir = model_dir
         self.window_size = window_size
         self.overlap = overlap
+        # 0.5s window - 0.25s overlap = 0.25s stride (50% overlap)
         self.hop_length = window_size - overlap
         self.sample_rate = 16000
         self.confidence_threshold = confidence_threshold
@@ -203,6 +206,7 @@ class AdvancedFrameLevelCensor:
         if self.models:
             self.ensemble = ModelEnsemble(self.models) if len(self.models) > 1 else None
             print(f"✅ Loaded {'ensemble of ' if self.ensemble else ''}{len(self.models)} model{'s' if len(self.models) > 1 else ''}")
+            print(f"🎯 Configuration: window={window_size}s, hop={self.hop_length}s, overlap={overlap}s, confidence≥{confidence_threshold}")
         else:
             print("❌ No models loaded - trying single model fallback")
             self.ensemble = None
@@ -352,7 +356,7 @@ class AdvancedFrameLevelCensor:
         print("🔍 Scanning audio with word-level detection...")
         
         # Create dataset processor
-        dataset_processor = SimpleProfanityDataset(None, self.feature_extractor, self.preprocessor)
+        dataset_processor = SimpleProfanityDataset(None, self.feature_extractor, self.preprocessor, window_size=self.window_size)
         
         for i in tqdm(range(0, len(audio_np) - window_samples, hop_samples), desc="Processing windows"):
             start_sample = i
@@ -497,6 +501,11 @@ class AdvancedFrameLevelCensor:
                 audio = torchaudio.functional.resample(audio, sr, self.sample_rate)
             
             audio_np = audio.squeeze().numpy()
+            
+            # Optional: Apply VAD once at file level (not per window) to remove long silent periods
+            # This preserves the temporal structure while removing obvious silence
+            # Uncomment if you want file-level VAD:
+            # audio_np = self.preprocessor.apply_voice_activity_detection(audio_np, top_db=30)
             
         except Exception as e:
             print(f"❌ Error loading audio: {e}")
@@ -652,9 +661,9 @@ def main():
     parser.add_argument("-o", "--output", type=str, required=True, help="Output censored audio file path")
     parser.add_argument("-m", "--model-dir", type=str, required=True, help="Directory containing trained models")
     parser.add_argument("--method", choices=["silence", "beep", "fade"], default="silence", help="Censoring method")
-    parser.add_argument("--window-size", type=float, default=0.5, help="Detection window size in seconds")
-    parser.add_argument("--overlap", type=float, default=0.25, help="Window overlap in seconds")
-    parser.add_argument("--confidence-threshold", type=float, default=0.7, help="Minimum confidence for detection")
+    parser.add_argument("--window-size", type=float, default=0.5, help="Detection window size in seconds (0.5s balanced)")
+    parser.add_argument("--overlap", type=float, default=0.25, help="Window overlap in seconds (0.25s = 50% overlap)")
+    parser.add_argument("--confidence-threshold", type=float, default=0.5, help="Minimum confidence for detection (lowered from 0.7)")
     parser.add_argument("--beep-freq", type=float, default=1000.0, help="Beep frequency for beep method")
     parser.add_argument("--fade-duration", type=float, default=0.05, help="Fade duration for fade method")
     parser.add_argument("--model-name", type=str, default="airesearch/wav2vec2-large-xlsr-53-th", help="Base model name")

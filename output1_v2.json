@@ -1,0 +1,79 @@
+{
+  "version": "frame_level_censor_v2",
+  "merging_strategy": "any_profanity_no_gap",
+  "censoring_method": "silence",
+  "model_info": {
+    "model_dir": "models/4_classes_max_steps",
+    "ensemble_size": 1,
+    "confidence_threshold": 0.5,
+    "window_size": 0.5,
+    "overlap": 0.25
+  },
+  "detections": [
+    {
+      "label": "เหี้ย",
+      "start_time": 0.0,
+      "end_time": 0.5,
+      "duration": 0.5,
+      "confidence": 0.72
+    },
+    {
+      "label": "เหี้ย",
+      "start_time": 2.062,
+      "end_time": 2.5,
+      "duration": 0.438,
+      "confidence": 0.899
+    },
+    {
+      "label": "มึง",
+      "start_time": 3.736,
+      "end_time": 4.0,
+      "duration": 0.264,
+      "confidence": 0.873
+    },
+    {
+      "label": "เหี้ย",
+      "start_time": 4.5,
+      "end_time": 5.75,
+      "duration": 1.25,
+      "confidence": 0.887
+    },
+    {
+      "label": "เหี้ย",
+      "start_time": 6.782,
+      "end_time": 7.678,
+      "duration": 0.896,
+      "confidence": 0.92
+    },
+    {
+      "label": "มึง",
+      "start_time": 8.5,
+      "end_time": 9.172,
+      "duration": 0.672,
+      "confidence": 0.847
+    },
+    {
+      "label": "เหี้ย",
+      "start_time": 10.0,
+      "end_time": 10.576,
+      "duration": 0.576,
+      "confidence": 0.957
+    }
+  ],
+  "summary": {
+    "total_detections": 7,
+    "total_censored_duration": 4.596000000000001,
+    "detections_by_class": {
+      "เหี้ย": {
+        "count": 5,
+        "total_duration": 3.66,
+        "avg_confidence": 0.877
+      },
+      "มึง": {
+        "count": 2,
+        "total_duration": 0.936,
+        "avg_confidence": 0.86
+      }
+    }
+  }
+}
