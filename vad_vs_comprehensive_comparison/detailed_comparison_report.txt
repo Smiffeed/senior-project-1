@@ -1,0 +1,21 @@
+VAD REFINED vs COMPREHENSIVE EVALUATION DETAILED COMPARISON
+============================================================
+
+Analysis Date: 2025-10-04 00:42:09
+
+DATASET SUMMARY:
+VAD Refined Results: 406 configurations
+Comprehensive Results: 1 configurations
+
+PERFORMANCE METRICS:
+VAD Binary F1: 0.359 ± 0.021
+Comprehensive Binary F1: 0.865 ± nan
+Binary F1 Improvement: -58.5%
+
+VAD IoU: 0.221 ± 0.049
+Comprehensive IoU: 0.196 ± nan
+IoU Improvement: +12.9%
+
+BEST CONFIGURATIONS:
+Best VAD F1: 0.407 (eval_percent, window_0.5s, stride_30.0%)
+Best VAD IoU: 0.350 (eval_by_0.05, window_0.8s, stride_0.75s)

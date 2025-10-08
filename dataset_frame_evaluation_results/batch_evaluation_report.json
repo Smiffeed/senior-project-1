@@ -1,0 +1,25 @@
+{
+  "total_configurations": 1,
+  "successful_configurations": 1,
+  "failed_configurations": 0,
+  "total_duration_seconds": 191.40027713775635,
+  "sequential_duration_seconds": 191.39425015449524,
+  "speedup": 0.9999685111048362,
+  "efficiency_percent": 99.99685111048362,
+  "workers_used": 1,
+  "system_info": {
+    "cpu_count": 12,
+    "memory_gb": 31.748153686523438,
+    "recommended_workers": 6
+  },
+  "processing_settings": {
+    "confidence_threshold": 0.5,
+    "model_dir": "models/4_classes_max_steps",
+    "ground_truth": "csv/eval_5labels.csv",
+    "datasets": [
+      "csv/eval_by_0.05",
+      "csv/eval_percent"
+    ]
+  },
+  "timestamp": "2025-10-09T02:20:31.653795"
+}

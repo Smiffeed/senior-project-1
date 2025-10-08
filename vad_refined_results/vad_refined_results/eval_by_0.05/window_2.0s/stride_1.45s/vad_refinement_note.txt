@@ -1,0 +1,28 @@
+=== WINDOW EVALUATION + VAD REFINEMENT RESULTS ===
+Processing Date: 2025-10-03 22:27:10.609735
+
+Configuration:
+  Window Size: 2.0s
+  Stride: 1.45s
+  Evaluation Type: eval_by_0.05
+
+Processing Pipeline:
+  1. Window Evaluation: 3391 window predictions
+  2. Profanity Filtering: 297 profanity predictions
+  3. Overlapping Merge: 250 merged predictions
+  4. VAD Refinement: 456 refined predictions
+
+Performance Metrics:
+  Combined Mean IoU: 0.1547
+  Binary F1: 0.348
+  Multiclass F1: 0.300
+
+IoU by Word Class:
+  เย็ด: 0.0000
+  กู: 0.2336
+  มึง: 0.1217
+  เหี้ย: 0.2636
+
+VAD Refinement Statistics:
+  Successfully refined: 455/456
+  Refinement success rate: 99.8%

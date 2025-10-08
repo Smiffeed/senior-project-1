@@ -1,0 +1,5447 @@
+{
+  "configuration": {
+    "eval_type": "eval_by_0.05",
+    "window": "window_2.0s",
+    "stride": "stride_1.0s",
+    "csv_path": "csv\\eval_by_0.05\\window_2.0s\\stride_1.0s.csv",
+    "window_size_value": 2.0,
+    "stride_value": 1.0
+  },
+  "processing_stats": {
+    "raw_windows": 4908,
+    "profanity_windows": 800,
+    "merged_predictions": 616,
+    "refined_predictions": 1023,
+    "processing_time_seconds": 191.3630175590515
+  },
+  "evaluation_metrics": {
+    "total_ground_truth": 676,
+    "total_predictions": 1023,
+    "mean_iou": 0.11306279095394348,
+    "iou_by_class": {
+      "เย็ด": 0.06208624680282752,
+      "กู": 0.05448373896189605,
+      "มึง": 0.0614288467428635,
+      "เหี้ย": 0.1322342627324475
+    },
+    "binary_accuracy": 0.386094674556213,
+    "binary_precision": 0.454320987654321,
+    "binary_recall": 0.48677248677248675,
+    "binary_f1": 0.46998722860791825,
+    "multiclass_accuracy": 0.31746031746031744,
+    "multiclass_precision": 0.6746882222155771,
+    "multiclass_recall": 0.31746031746031744,
+    "multiclass_f1": 0.4064794570365134,
+    "detailed_matches": [
+      {
+        "gt_start": 15.342018,
+        "gt_end": 15.659347,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.15866450000000043,
+        "confidence": 0.904312789440155
+      },
+      {
+        "gt_start": 5.294268,
+        "gt_end": 5.558295,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 5.570895,
+        "gt_end": 5.802535,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 7.282757,
+        "gt_end": 7.473012,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.09512749999999981,
+        "confidence": 0.6732829213142395
+      },
+      {
+        "gt_start": 7.887292,
+        "gt_end": 7.996571,
+        "gt_label": "กู",
+        "pred_label": "มึง",
+        "iou": 0.05463949999999995,
+        "confidence": 0.6732829213142395
+      },
+      {
+        "gt_start": 8.195119,
+        "gt_end": 8.340567,
+        "gt_label": "กู",
+        "pred_label": "มึง",
+        "iou": 0.07272400000000001,
+        "confidence": 0.6732829213142395
+      },
+      {
+        "gt_start": 8.387511,
+        "gt_end": 8.645316,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.1289024999999997,
+        "confidence": 0.6732829213142395
+      },
+      {
+        "gt_start": 11.203356,
+        "gt_end": 11.441152,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 11.512722,
+        "gt_end": 11.625848,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 12.928725,
+        "gt_end": 13.001065,
+        "gt_label": "กู",
+        "pred_label": "เหี้ย",
+        "iou": 0.02213586291309686,
+        "confidence": 0.6397148370742798
+      },
+      {
+        "gt_start": 13.908701,
+        "gt_end": 14.008097,
+        "gt_label": "มึง",
+        "pred_label": "เหี้ย",
+        "iou": 0.03041493268053817,
+        "confidence": 0.6397148370742798
+      },
+      {
+        "gt_start": 14.849203,
+        "gt_end": 15.102784,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.07759516523867827,
+        "confidence": 0.6397148370742798
+      },
+      {
+        "gt_start": 15.714563,
+        "gt_end": 15.849237,
+        "gt_label": "มึง",
+        "pred_label": "เหี้ย",
+        "iou": 0.04120991432068557,
+        "confidence": 0.6397148370742798
+      },
+      {
+        "gt_start": 15.976985,
+        "gt_end": 16.152446,
+        "gt_label": "มึง",
+        "pred_label": "เหี้ย",
+        "iou": 0.006728654684213438,
+        "confidence": 0.6397148370742798
+      },
+      {
+        "gt_start": 68.000021,
+        "gt_end": 70.524082,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.5080308895495632,
+        "confidence": 0.7592830657958984
+      },
+      {
+        "gt_start": 70.524082,
+        "gt_end": 70.84226,
+        "gt_label": "กู",
+        "pred_label": "มึง",
+        "iou": 0.18119476082003924,
+        "confidence": 0.729078471660614
+      },
+      {
+        "gt_start": 70.84226,
+        "gt_end": 74.496,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.4094434743577785,
+        "confidence": 0.9350491166114807
+      },
+      {
+        "gt_start": 0.0,
+        "gt_end": 10.18111,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.19644223468757335,
+        "confidence": 0.7470298409461975
+      },
+      {
+        "gt_start": 10.181355,
+        "gt_end": 10.256798,
+        "gt_label": "กู",
+        "pred_label": "เหี้ย",
+        "iou": 0.08854812206572758,
+        "confidence": 0.5132442712783813
+      },
+      {
+        "gt_start": 10.256798,
+        "gt_end": 12.014889,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.3980965124332512,
+        "confidence": 0.5132442712783813
+      },
+      {
+        "gt_start": 18.663428,
+        "gt_end": 18.765268,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 18.765268,
+        "gt_end": 19.118072,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 19.118072,
+        "gt_end": 19.305991,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 19.305991,
+        "gt_end": 21.482667,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.2217429026049335,
+        "confidence": 0.9289054870605469
+      },
+      {
+        "gt_start": 12.690808,
+        "gt_end": 12.951327,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 22.086253,
+        "gt_end": 22.476127,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.870254464285726,
+        "confidence": 0.778678297996521
+      },
+      {
+        "gt_start": 43.185581,
+        "gt_end": 45.158615,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.4932584999999996,
+        "confidence": 0.652421236038208
+      },
+      {
+        "gt_start": 45.158615,
+        "gt_end": 45.194149,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.008883500000001376,
+        "confidence": 0.652421236038208
+      },
+      {
+        "gt_start": 45.194149,
+        "gt_end": 46.307452,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.2783257499999987,
+        "confidence": 0.652421236038208
+      },
+      {
+        "gt_start": 46.360844,
+        "gt_end": 46.662161,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.07532924999999935,
+        "confidence": 0.652421236038208
+      },
+      {
+        "gt_start": 46.713473,
+        "gt_end": 47.971366,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.05763546679121983,
+        "confidence": 0.652421236038208
+      },
+      {
+        "gt_start": 47.971366,
+        "gt_end": 48.012196,
+        "gt_label": "กู",
+        "pred_label": "เหี้ย",
+        "iou": 0.006011927237738795,
+        "confidence": 0.5997627377510071
+      },
+      {
+        "gt_start": 48.012586,
+        "gt_end": 53.478635,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.3627571466250265,
+        "confidence": 0.5997627377510071
+      },
+      {
+        "gt_start": 32.452874,
+        "gt_end": 32.641612,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 56.540153,
+        "gt_end": 56.668495,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 116.467457,
+        "gt_end": 116.575307,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 118.800997,
+        "gt_end": 118.94333,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 0.0,
+        "gt_end": 101.013916,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.029698878320884026,
+        "confidence": 0.5078962445259094
+      },
+      {
+        "gt_start": 101.013916,
+        "gt_end": 101.158069,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 101.158069,
+        "gt_end": 105.984,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.4111123843254265,
+        "confidence": 0.9350491166114807
+      },
+      {
+        "gt_start": 11.862371,
+        "gt_end": 11.899454,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 2.903761,
+        "gt_end": 3.02935,
+        "gt_label": "มึง",
+        "pred_label": "กู",
+        "iou": 0.17063722826086986,
+        "confidence": 0.516732931137085
+      },
+      {
+        "gt_start": 7.560986,
+        "gt_end": 7.697133,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 13.681043,
+        "gt_end": 13.777772,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 16.418863,
+        "gt_end": 16.512703,
+        "gt_label": "กู",
+        "pred_label": "มึง",
+        "iou": 0.06571428571428337,
+        "confidence": 0.7551011443138123
+      },
+      {
+        "gt_start": 22.665674,
+        "gt_end": 22.745967,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 25.732988,
+        "gt_end": 25.884321,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.49134090909091277,
+        "confidence": 0.5830591320991516
+      },
+      {
+        "gt_start": 26.114683,
+        "gt_end": 26.208592,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 40.055866,
+        "gt_end": 40.103656,
+        "gt_label": "กู",
+        "pred_label": "มึง",
+        "iou": 0.032554495912806014,
+        "confidence": 0.8086737990379333
+      },
+      {
+        "gt_start": 42.866725,
+        "gt_end": 42.973782,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.12867427884615074,
+        "confidence": 0.8086737990379333
+      },
+      {
+        "gt_start": 43.996296,
+        "gt_end": 44.10907,
+        "gt_label": "กู",
+        "pred_label": "มึง",
+        "iou": 0.03275846820552573,
+        "confidence": 0.8086737990379333
+      },
+      {
+        "gt_start": 0.0,
+        "gt_end": 2.917098,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 2.917098,
+        "gt_end": 2.971922,
+        "gt_label": "เย็ด",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 2.971922,
+        "gt_end": 27.863231,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.08034932996091125,
+        "confidence": 0.5104524493217468
+      },
+      {
+        "gt_start": 27.863231,
+        "gt_end": 28.134757,
+        "gt_label": "เย็ด",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 28.134757,
+        "gt_end": 32.602139,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.12893457510461395,
+        "confidence": 0.6127889752388
+      },
+      {
+        "gt_start": 32.602139,
+        "gt_end": 32.76513,
+        "gt_label": "เย็ด",
+        "pred_label": "เย็ด",
+        "iou": 0.6366835937499921,
+        "confidence": 0.9006560444831848
+      },
+      {
+        "gt_start": 32.76513,
+        "gt_end": 33.968825,
+        "gt_label": "none",
+        "pred_label": "เย็ด",
+        "iou": 0.451941729424809,
+        "confidence": 0.9006560444831848
+      },
+      {
+        "gt_start": 33.968825,
+        "gt_end": 34.028098,
+        "gt_label": "เย็ด",
+        "pred_label": "เย็ด",
+        "iou": 0.08469212003324447,
+        "confidence": 0.9006560444831848
+      },
+      {
+        "gt_start": 34.028098,
+        "gt_end": 34.950411,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 34.950411,
+        "gt_end": 35.001791,
+        "gt_label": "เย็ด",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 35.001791,
+        "gt_end": 35.502075,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 35.502075,
+        "gt_end": 35.572734,
+        "gt_label": "เย็ด",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 35.572734,
+        "gt_end": 36.946539,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 36.946539,
+        "gt_end": 37.039431,
+        "gt_label": "เย็ด",
+        "pred_label": "เย็ด",
+        "iou": 0.019202215186945582,
+        "confidence": 0.6074419617652893
+      },
+      {
+        "gt_start": 37.039431,
+        "gt_end": 37.695835,
+        "gt_label": "none",
+        "pred_label": "เย็ด",
+        "iou": 0.328202000000001,
+        "confidence": 0.6074419617652893
+      },
+      {
+        "gt_start": 37.761213,
+        "gt_end": 92.642736,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.0728842747312242,
+        "confidence": 0.9535101056098938
+      },
+      {
+        "gt_start": 92.642736,
+        "gt_end": 92.708451,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 92.708451,
+        "gt_end": 93.802158,
+        "gt_label": "none",
+        "pred_label": "เย็ด",
+        "iou": 0.6429871692414498,
+        "confidence": 0.5534877181053162
+      },
+      {
+        "gt_start": 93.802158,
+        "gt_end": 93.903215,
+        "gt_label": "เย็ด",
+        "pred_label": "เย็ด",
+        "iou": 0.10570815899581272,
+        "confidence": 0.5534877181053162
+      },
+      {
+        "gt_start": 93.903215,
+        "gt_end": 102.430887,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.21998969941620544,
+        "confidence": 0.8164196014404297
+      },
+      {
+        "gt_start": 102.59951,
+        "gt_end": 106.407147,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 106.408161,
+        "gt_end": 106.477792,
+        "gt_label": "เย็ด",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 106.477792,
+        "gt_end": 106.825602,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 106.825602,
+        "gt_end": 106.866893,
+        "gt_label": "เย็ด",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 106.866893,
+        "gt_end": 107.189344,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 107.189344,
+        "gt_end": 107.248474,
+        "gt_label": "เย็ด",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 107.248474,
+        "gt_end": 107.609723,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 107.609723,
+        "gt_end": 107.672679,
+        "gt_label": "เย็ด",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 107.672679,
+        "gt_end": 107.993488,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 107.993488,
+        "gt_end": 108.041082,
+        "gt_label": "เย็ด",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 108.041082,
+        "gt_end": 108.605772,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 108.605772,
+        "gt_end": 108.675626,
+        "gt_label": "เย็ด",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 108.675626,
+        "gt_end": 108.89964,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 108.89964,
+        "gt_end": 108.958406,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 108.958406,
+        "gt_end": 114.864021,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.1835541260309051,
+        "confidence": 0.8031899333000183
+      },
+      {
+        "gt_start": 114.864021,
+        "gt_end": 114.937478,
+        "gt_label": "เย็ด",
+        "pred_label": "เหี้ย",
+        "iou": 0.09321954314721456,
+        "confidence": 0.8031899333000183
+      },
+      {
+        "gt_start": 114.937478,
+        "gt_end": 151.008217,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.052896060710039425,
+        "confidence": 0.6243849396705627
+      },
+      {
+        "gt_start": 151.008217,
+        "gt_end": 151.136017,
+        "gt_label": "เย็ด",
+        "pred_label": "เหี้ย",
+        "iou": 0.5705357142857028,
+        "confidence": 0.6804739236831665
+      },
+      {
+        "gt_start": 151.136017,
+        "gt_end": 152.006016,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.5747133042681799,
+        "confidence": 0.6804739236831665
+      },
+      {
+        "gt_start": 152.006016,
+        "gt_end": 152.092069,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 152.092069,
+        "gt_end": 170.145049,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.007917551654534083,
+        "confidence": 0.5853702425956726
+      },
+      {
+        "gt_start": 170.145049,
+        "gt_end": 170.364915,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.5336553398058079,
+        "confidence": 0.5853702425956726
+      },
+      {
+        "gt_start": 170.364915,
+        "gt_end": 177.97553,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.15977683800849327,
+        "confidence": 0.5853702425956726
+      },
+      {
+        "gt_start": 177.97553,
+        "gt_end": 178.04001,
+        "gt_label": "เย็ด",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 178.04001,
+        "gt_end": 182.152395,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.177998898449439,
+        "confidence": 0.7710815072059631
+      },
+      {
+        "gt_start": 182.152395,
+        "gt_end": 182.263848,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.14512109374997792,
+        "confidence": 0.7710815072059631
+      },
+      {
+        "gt_start": 182.263848,
+        "gt_end": 204.198727,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.09117898484874253,
+        "confidence": 0.6111598014831543
+      },
+      {
+        "gt_start": 204.198727,
+        "gt_end": 204.293331,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 204.293331,
+        "gt_end": 204.34993,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 204.34993,
+        "gt_end": 204.474592,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 204.474592,
+        "gt_end": 205.228977,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 205.228977,
+        "gt_end": 205.311368,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 205.311368,
+        "gt_end": 206.395352,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 206.395352,
+        "gt_end": 206.434756,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 206.434756,
+        "gt_end": 207.317418,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 207.317418,
+        "gt_end": 207.401243,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 207.401243,
+        "gt_end": 208.711623,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 208.711623,
+        "gt_end": 208.83127,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 208.83127,
+        "gt_end": 208.892168,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 208.892168,
+        "gt_end": 208.996769,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 208.996769,
+        "gt_end": 243.468469,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.05801860656712608,
+        "confidence": 0.7297444343566895
+      },
+      {
+        "gt_start": 243.468469,
+        "gt_end": 243.609901,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.07071600000000444,
+        "confidence": 0.6567858457565308
+      },
+      {
+        "gt_start": 243.609901,
+        "gt_end": 246.360368,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.4136746332544515,
+        "confidence": 0.6567858457565308
+      },
+      {
+        "gt_start": 246.360368,
+        "gt_end": 246.591064,
+        "gt_label": "มึง",
+        "pred_label": "กู",
+        "iou": 0.1344382284382247,
+        "confidence": 0.7927476763725281
+      },
+      {
+        "gt_start": 246.591064,
+        "gt_end": 255.14347,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.041476468816276195,
+        "confidence": 0.7927476763725281
+      },
+      {
+        "gt_start": 255.14347,
+        "gt_end": 255.208223,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.03451652452025368,
+        "confidence": 0.6597846746444702
+      },
+      {
+        "gt_start": 255.208223,
+        "gt_end": 260.968038,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.30659913573457276,
+        "confidence": 0.6597846746444702
+      },
+      {
+        "gt_start": 260.968038,
+        "gt_end": 261.259842,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 261.259842,
+        "gt_end": 295.869852,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.03686794658539405,
+        "confidence": 0.5022119283676147
+      },
+      {
+        "gt_start": 295.965856,
+        "gt_end": 297.626608,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.1340107786578363,
+        "confidence": 0.9275862574577332
+      },
+      {
+        "gt_start": 297.626608,
+        "gt_end": 297.919932,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.16478876404496412,
+        "confidence": 0.9275862574577332
+      },
+      {
+        "gt_start": 297.919748,
+        "gt_end": 300.009289,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.3872857921857335,
+        "confidence": 0.9275862574577332
+      },
+      {
+        "gt_start": 300.009289,
+        "gt_end": 300.090018,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 300.090018,
+        "gt_end": 405.083256,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.02434442492382207,
+        "confidence": 0.7574970126152039
+      },
+      {
+        "gt_start": 405.083256,
+        "gt_end": 405.144555,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 405.144555,
+        "gt_end": 420.596908,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.1294301262726787,
+        "confidence": 0.5428245663642883
+      },
+      {
+        "gt_start": 420.596908,
+        "gt_end": 421.001609,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.0013418486654681529,
+        "confidence": 0.7483306527137756
+      },
+      {
+        "gt_start": 421.001253,
+        "gt_end": 432.51693,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.09899548241931802,
+        "confidence": 0.5422649383544922
+      },
+      {
+        "gt_start": 432.51693,
+        "gt_end": 432.769975,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.1797194602272608,
+        "confidence": 0.6472586989402771
+      },
+      {
+        "gt_start": 432.769975,
+        "gt_end": 435.798669,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.09509049114899296,
+        "confidence": 0.6472586989402771
+      },
+      {
+        "gt_start": 435.798667,
+        "gt_end": 435.957718,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 435.957742,
+        "gt_end": 444.431797,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.04299799905559259,
+        "confidence": 0.7209498286247253
+      },
+      {
+        "gt_start": 444.43181,
+        "gt_end": 444.659627,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.11390850000000796,
+        "confidence": 0.7209498286247253
+      },
+      {
+        "gt_start": 444.659627,
+        "gt_end": 482.96594,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.052210715241636556,
+        "confidence": 0.5994806885719299
+      },
+      {
+        "gt_start": 482.96594,
+        "gt_end": 483.06655,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 483.06655,
+        "gt_end": 492.436153,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.13618506568527566,
+        "confidence": 0.535952627658844
+      },
+      {
+        "gt_start": 492.436153,
+        "gt_end": 492.55062,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 492.550433,
+        "gt_end": 493.803484,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 493.803484,
+        "gt_end": 493.865236,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 493.865429,
+        "gt_end": 495.657192,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.29622310937987106,
+        "confidence": 0.8586726188659668
+      },
+      {
+        "gt_start": 496.038037,
+        "gt_end": 508.49982,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.06066547620031797,
+        "confidence": 0.8586726188659668
+      },
+      {
+        "gt_start": 508.49982,
+        "gt_end": 508.816712,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.3552600896860955,
+        "confidence": 0.925789475440979
+      },
+      {
+        "gt_start": 508.816179,
+        "gt_end": 510.198216,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.685944008734946,
+        "confidence": 0.925789475440979
+      },
+      {
+        "gt_start": 510.198216,
+        "gt_end": 510.283245,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 510.283245,
+        "gt_end": 517.210471,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 517.211817,
+        "gt_end": 517.37881,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 517.378302,
+        "gt_end": 518.503692,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 518.504897,
+        "gt_end": 518.633823,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 518.633823,
+        "gt_end": 520.082131,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 520.082131,
+        "gt_end": 520.161655,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 520.161655,
+        "gt_end": 560.29935,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.04982847171468117,
+        "confidence": 0.5134866237640381
+      },
+      {
+        "gt_start": 560.29935,
+        "gt_end": 560.455384,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.08177882599579436,
+        "confidence": 0.5361432433128357
+      },
+      {
+        "gt_start": 560.455384,
+        "gt_end": 564.528348,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.34817286651092205,
+        "confidence": 0.5361432433128357
+      },
+      {
+        "gt_start": 564.680298,
+        "gt_end": 572.60076,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.2525105227447577,
+        "confidence": 0.7185466885566711
+      },
+      {
+        "gt_start": 572.600549,
+        "gt_end": 572.885329,
+        "gt_label": "เย็ด",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 572.885329,
+        "gt_end": 579.084401,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.4839434031416314,
+        "confidence": 0.9493896961212158
+      },
+      {
+        "gt_start": 579.084401,
+        "gt_end": 579.259686,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 579.259354,
+        "gt_end": 580.978769,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 580.978769,
+        "gt_end": 581.042601,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 581.042601,
+        "gt_end": 582.340521,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 582.340521,
+        "gt_end": 582.408406,
+        "gt_label": "เย็ด",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 582.408406,
+        "gt_end": 584.045751,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 584.045751,
+        "gt_end": 584.129847,
+        "gt_label": "เย็ด",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 584.129847,
+        "gt_end": 588.810975,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 588.810975,
+        "gt_end": 589.066576,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 589.06644,
+        "gt_end": 595.955875,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.07662070999652502,
+        "confidence": 0.541575014591217
+      },
+      {
+        "gt_start": 595.955513,
+        "gt_end": 596.080891,
+        "gt_label": "มึง",
+        "pred_label": "เหี้ย",
+        "iou": 0.07589467312345752,
+        "confidence": 0.541575014591217
+      },
+      {
+        "gt_start": 596.081119,
+        "gt_end": 600.074459,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.19441213813555522,
+        "confidence": 0.541575014591217
+      },
+      {
+        "gt_start": 600.257537,
+        "gt_end": 609.50113,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.14756166784929062,
+        "confidence": 0.6733885407447815
+      },
+      {
+        "gt_start": 609.501024,
+        "gt_end": 609.734472,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.14029326923074206,
+        "confidence": 0.779617428779602
+      },
+      {
+        "gt_start": 609.734472,
+        "gt_end": 643.74399,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.054220115674678104,
+        "confidence": 0.7989766597747803
+      },
+      {
+        "gt_start": 643.744092,
+        "gt_end": 643.965478,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.18266171617156812,
+        "confidence": 0.9293258190155029
+      },
+      {
+        "gt_start": 643.965478,
+        "gt_end": 650.581929,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.30227685506928187,
+        "confidence": 0.5937870144844055
+      },
+      {
+        "gt_start": 650.581929,
+        "gt_end": 650.733102,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.08454865771816798,
+        "confidence": 0.868246853351593
+      },
+      {
+        "gt_start": 650.733102,
+        "gt_end": 651.987961,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.5306432067832106,
+        "confidence": 0.868246853351593
+      },
+      {
+        "gt_start": 651.98817,
+        "gt_end": 652.044403,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.12271402342282516,
+        "confidence": 0.868246853351593
+      },
+      {
+        "gt_start": 652.044403,
+        "gt_end": 653.351232,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 653.350944,
+        "gt_end": 653.425921,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 653.425921,
+        "gt_end": 657.283074,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 657.282481,
+        "gt_end": 657.446621,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 657.446621,
+        "gt_end": 659.466112,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.1789037218769162,
+        "confidence": 0.7712234258651733
+      },
+      {
+        "gt_start": 659.466958,
+        "gt_end": 659.813023,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.32895912547534223,
+        "confidence": 0.7712234258651733
+      },
+      {
+        "gt_start": 659.813023,
+        "gt_end": 670.012003,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.0804001968824382,
+        "confidence": 0.7712234258651733
+      },
+      {
+        "gt_start": 670.011277,
+        "gt_end": 670.131769,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.18037724550899967,
+        "confidence": 0.9325498938560486
+      },
+      {
+        "gt_start": 670.131769,
+        "gt_end": 670.23739,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.1581152694611391,
+        "confidence": 0.9325498938560486
+      },
+      {
+        "gt_start": 670.23739,
+        "gt_end": 670.498856,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.3914161676647287,
+        "confidence": 0.9325498938560486
+      },
+      {
+        "gt_start": 670.498497,
+        "gt_end": 675.243853,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.24023487384297618,
+        "confidence": 0.9325498938560486
+      },
+      {
+        "gt_start": 675.244156,
+        "gt_end": 675.501157,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 675.501157,
+        "gt_end": 702.701286,
+        "gt_label": "none",
+        "pred_label": "เย็ด",
+        "iou": 0.07352906304231145,
+        "confidence": 0.6828166246414185
+      },
+      {
+        "gt_start": 702.701405,
+        "gt_end": 702.98938,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.32140066964278713,
+        "confidence": 0.9443228840827942
+      },
+      {
+        "gt_start": 702.98938,
+        "gt_end": 713.708057,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.0417962030202026,
+        "confidence": 0.9443228840827942
+      },
+      {
+        "gt_start": 713.708822,
+        "gt_end": 713.789551,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 713.789551,
+        "gt_end": 745.701126,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.05778467530982241,
+        "confidence": 0.5135268568992615
+      },
+      {
+        "gt_start": 745.701126,
+        "gt_end": 745.750773,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 745.750773,
+        "gt_end": 746.998684,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 746.999046,
+        "gt_end": 747.131777,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 747.131777,
+        "gt_end": 748.311214,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.2113905298314026,
+        "confidence": 0.7739518284797668
+      },
+      {
+        "gt_start": 748.311149,
+        "gt_end": 748.428681,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.19458940397350472,
+        "confidence": 0.7739518284797668
+      },
+      {
+        "gt_start": 748.428712,
+        "gt_end": 749.630862,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.26535020807709236,
+        "confidence": 0.7739518284797668
+      },
+      {
+        "gt_start": 749.631062,
+        "gt_end": 749.695814,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.03211904761904751,
+        "confidence": 0.7739518284797668
+      },
+      {
+        "gt_start": 749.695814,
+        "gt_end": 752.346298,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.37642295750990845,
+        "confidence": 0.7739518284797668
+      },
+      {
+        "gt_start": 752.345344,
+        "gt_end": 752.899998,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.600274891774936,
+        "confidence": 0.9410319328308105
+      },
+      {
+        "gt_start": 752.899998,
+        "gt_end": 774.227346,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.08196049504139216,
+        "confidence": 0.582622230052948
+      },
+      {
+        "gt_start": 774.227346,
+        "gt_end": 774.537475,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.30286035156246144,
+        "confidence": 0.8250783681869507
+      },
+      {
+        "gt_start": 774.537475,
+        "gt_end": 783.76564,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.0766059417531064,
+        "confidence": 0.8490431308746338
+      },
+      {
+        "gt_start": 783.76564,
+        "gt_end": 783.952415,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.12191579634466093,
+        "confidence": 0.8490431308746338
+      },
+      {
+        "gt_start": 783.952415,
+        "gt_end": 784.98557,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.29189854802396115,
+        "confidence": 0.8490431308746338
+      },
+      {
+        "gt_start": 784.98557,
+        "gt_end": 785.237397,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.12107067307689594,
+        "confidence": 0.8490431308746338
+      },
+      {
+        "gt_start": 785.237397,
+        "gt_end": 789.03354,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.3840743462551169,
+        "confidence": 0.8490431308746338
+      },
+      {
+        "gt_start": 789.03354,
+        "gt_end": 789.221506,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 789.221506,
+        "gt_end": 791.834966,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 791.834966,
+        "gt_end": 791.947023,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 791.947023,
+        "gt_end": 792.925994,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 792.926039,
+        "gt_end": 793.001441,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 793.001441,
+        "gt_end": 797.708925,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 797.709027,
+        "gt_end": 797.767465,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 797.767519,
+        "gt_end": 798.508325,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 798.508588,
+        "gt_end": 798.554475,
+        "gt_label": "เย็ด",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 798.554475,
+        "gt_end": 815.71758,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.027385415964367443,
+        "confidence": 0.8429244756698608
+      },
+      {
+        "gt_start": 815.714505,
+        "gt_end": 815.955984,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.16055784574463308,
+        "confidence": 0.8429244756698608
+      },
+      {
+        "gt_start": 816.118581,
+        "gt_end": 816.910081,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.3582189256017886,
+        "confidence": 0.8429244756698608
+      },
+      {
+        "gt_start": 816.910061,
+        "gt_end": 816.976332,
+        "gt_label": "กู",
+        "pred_label": "เหี้ย",
+        "iou": 0.5713017241372712,
+        "confidence": 0.8429244756698608
+      },
+      {
+        "gt_start": 816.976352,
+        "gt_end": 818.8118,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.012266832658979635,
+        "confidence": 0.8429244756698608
+      },
+      {
+        "gt_start": 818.811827,
+        "gt_end": 818.89362,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 818.89362,
+        "gt_end": 822.855039,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.20561829366244558,
+        "confidence": 0.8339897394180298
+      },
+      {
+        "gt_start": 822.855039,
+        "gt_end": 823.020567,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.15734600760455467,
+        "confidence": 0.8339897394180298
+      },
+      {
+        "gt_start": 823.020567,
+        "gt_end": 874.026886,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.06650156424736424,
+        "confidence": 0.6350122690200806
+      },
+      {
+        "gt_start": 874.093593,
+        "gt_end": 877.118825,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 877.119001,
+        "gt_end": 877.22538,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 877.22538,
+        "gt_end": 879.257203,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.009824856996471013,
+        "confidence": 0.673493504524231
+      },
+      {
+        "gt_start": 879.257549,
+        "gt_end": 879.393704,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.07597935267852865,
+        "confidence": 0.673493504524231
+      },
+      {
+        "gt_start": 879.393704,
+        "gt_end": 934.816163,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.03341605611544546,
+        "confidence": 0.584991455078125
+      },
+      {
+        "gt_start": 934.816983,
+        "gt_end": 934.909691,
+        "gt_label": "เย็ด",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 934.910147,
+        "gt_end": 943.810256,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 943.810357,
+        "gt_end": 943.870424,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 943.871048,
+        "gt_end": 944.278358,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 944.278358,
+        "gt_end": 944.338604,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 944.338609,
+        "gt_end": 951.787717,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 951.787717,
+        "gt_end": 951.871307,
+        "gt_label": "เย็ด",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 951.871307,
+        "gt_end": 955.997603,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.31796070858707276,
+        "confidence": 0.5225778222084045
+      },
+      {
+        "gt_start": 955.997899,
+        "gt_end": 956.071863,
+        "gt_label": "กู",
+        "pred_label": "มึง",
+        "iou": 0.02287101444584881,
+        "confidence": 0.5225778222084045
+      },
+      {
+        "gt_start": 956.071863,
+        "gt_end": 956.726918,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 956.801389,
+        "gt_end": 960.300108,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 960.300035,
+        "gt_end": 960.340343,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 960.340343,
+        "gt_end": 966.20446,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.026602470585076487,
+        "confidence": 0.8179337978363037
+      },
+      {
+        "gt_start": 13.251428,
+        "gt_end": 14.233201,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.5245428841363118,
+        "confidence": 0.7927718162536621
+      },
+      {
+        "gt_start": 15.136641,
+        "gt_end": 15.249674,
+        "gt_label": "มึง",
+        "pred_label": "กู",
+        "iou": 0.08238556851312064,
+        "confidence": 0.5409126877784729
+      },
+      {
+        "gt_start": 15.877913,
+        "gt_end": 15.992726,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.08368294460641387,
+        "confidence": 0.5409126877784729
+      },
+      {
+        "gt_start": 17.752482,
+        "gt_end": 18.719152,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 19.382608,
+        "gt_end": 19.435473,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 42.592481,
+        "gt_end": 42.703995,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 0.0,
+        "gt_end": 5.628947,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.2821131554445263,
+        "confidence": 0.7301265001296997
+      },
+      {
+        "gt_start": 5.628947,
+        "gt_end": 5.738788,
+        "gt_label": "เย็ด",
+        "pred_label": "เย็ด",
+        "iou": 0.06371287703016207,
+        "confidence": 0.6231560707092285
+      },
+      {
+        "gt_start": 5.738788,
+        "gt_end": 32.814451,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.16856466266403156,
+        "confidence": 0.6673945784568787
+      },
+      {
+        "gt_start": 32.814451,
+        "gt_end": 32.977913,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.08173100000000133,
+        "confidence": 0.5221317410469055
+      },
+      {
+        "gt_start": 32.977913,
+        "gt_end": 33.814658,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.007847134536415817,
+        "confidence": 0.5221317410469055
+      },
+      {
+        "gt_start": 33.814658,
+        "gt_end": 33.980661,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 33.980661,
+        "gt_end": 38.549333,
+        "gt_label": "none",
+        "pred_label": "เย็ด",
+        "iou": 0.1751055886699674,
+        "confidence": 0.820130467414856
+      },
+      {
+        "gt_start": 6.003302,
+        "gt_end": 6.123607,
+        "gt_label": "เหี้ย",
+        "pred_label": "กู",
+        "iou": 0.07110224586288422,
+        "confidence": 0.5511511564254761
+      },
+      {
+        "gt_start": 6.15593,
+        "gt_end": 6.231792,
+        "gt_label": "มึง",
+        "pred_label": "กู",
+        "iou": 0.044835697399527634,
+        "confidence": 0.5511511564254761
+      },
+      {
+        "gt_start": 9.291706,
+        "gt_end": 9.370981,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 9.973041,
+        "gt_end": 10.148739,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 11.157715,
+        "gt_end": 11.280346,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.06131550000000008,
+        "confidence": 0.8720089793205261
+      },
+      {
+        "gt_start": 12.346257,
+        "gt_end": 12.67384,
+        "gt_label": "กู",
+        "pred_label": "เหี้ย",
+        "iou": 0.1637915000000003,
+        "confidence": 0.8720089793205261
+      },
+      {
+        "gt_start": 18.597191,
+        "gt_end": 19.314388,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.5064039366727766,
+        "confidence": 0.6230639219284058
+      },
+      {
+        "gt_start": 19.314388,
+        "gt_end": 19.363083,
+        "gt_label": "กู",
+        "pred_label": "มึง",
+        "iou": 0.0348818051575921,
+        "confidence": 0.6230639219284058
+      },
+      {
+        "gt_start": 19.363083,
+        "gt_end": 20.494472,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.33690898357658866,
+        "confidence": 0.6230639219284058
+      },
+      {
+        "gt_start": 21.499116,
+        "gt_end": 21.753045,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.1269644999999997,
+        "confidence": 0.6684866547584534
+      },
+      {
+        "gt_start": 21.966044,
+        "gt_end": 25.100683,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.2521423870121148,
+        "confidence": 0.6684866547584534
+      },
+      {
+        "gt_start": 49.132166,
+        "gt_end": 49.415824,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.44600314465409524,
+        "confidence": 0.503716230392456
+      },
+      {
+        "gt_start": 0.0,
+        "gt_end": 20.333381,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.12727839015065914,
+        "confidence": 0.58991938829422
+      },
+      {
+        "gt_start": 20.333268,
+        "gt_end": 20.429073,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 20.429174,
+        "gt_end": 22.757007,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 22.757007,
+        "gt_end": 22.836244,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 22.836244,
+        "gt_end": 23.588872,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 23.588952,
+        "gt_end": 23.693493,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 23.693493,
+        "gt_end": 26.331104,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.2973240340939853,
+        "confidence": 0.5080648064613342
+      },
+      {
+        "gt_start": 26.331104,
+        "gt_end": 26.430791,
+        "gt_label": "กู",
+        "pred_label": "มึง",
+        "iou": 0.06034322033898266,
+        "confidence": 0.5080648064613342
+      },
+      {
+        "gt_start": 26.430805,
+        "gt_end": 33.047886,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.07392252300878228,
+        "confidence": 0.5080648064613342
+      },
+      {
+        "gt_start": 33.047886,
+        "gt_end": 33.199628,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.0817575431034475,
+        "confidence": 0.8222883939743042
+      },
+      {
+        "gt_start": 33.199628,
+        "gt_end": 35.707805,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.6285427484462497,
+        "confidence": 0.8222883939743042
+      },
+      {
+        "gt_start": 35.912658,
+        "gt_end": 38.063093,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.26971287204681743,
+        "confidence": 0.8222883939743042
+      },
+      {
+        "gt_start": 38.198565,
+        "gt_end": 38.310626,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 38.452522,
+        "gt_end": 73.734158,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.10441692669807051,
+        "confidence": 0.9485300183296204
+      },
+      {
+        "gt_start": 73.734201,
+        "gt_end": 73.795267,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 73.795267,
+        "gt_end": 74.353244,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 74.353244,
+        "gt_end": 74.469129,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 74.469129,
+        "gt_end": 81.050803,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.045343315216564546,
+        "confidence": 0.8162571787834167
+      },
+      {
+        "gt_start": 81.050803,
+        "gt_end": 81.486834,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.5677486979166659,
+        "confidence": 0.8162571787834167
+      },
+      {
+        "gt_start": 81.486834,
+        "gt_end": 98.2302,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.07812049261779222,
+        "confidence": 0.8162571787834167
+      },
+      {
+        "gt_start": 98.230894,
+        "gt_end": 98.383859,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.140592830882347,
+        "confidence": 0.8750181198120117
+      },
+      {
+        "gt_start": 98.383666,
+        "gt_end": 99.263753,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.2781835787947868,
+        "confidence": 0.8750181198120117
+      },
+      {
+        "gt_start": 99.263753,
+        "gt_end": 99.323238,
+        "gt_label": "กู",
+        "pred_label": "เหี้ย",
+        "iou": 0.06382510729614818,
+        "confidence": 0.8750181198120117
+      },
+      {
+        "gt_start": 99.323167,
+        "gt_end": 111.802627,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.053149024309860245,
+        "confidence": 0.8750181198120117
+      },
+      {
+        "gt_start": 111.802627,
+        "gt_end": 111.995785,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 111.995644,
+        "gt_end": 146.344623,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.052053948968905604,
+        "confidence": 0.7503353953361511
+      },
+      {
+        "gt_start": 146.495154,
+        "gt_end": 147.357061,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.8600989777379399,
+        "confidence": 0.8619526028633118
+      },
+      {
+        "gt_start": 150.917787,
+        "gt_end": 151.058754,
+        "gt_label": "กู",
+        "pred_label": "เย็ด",
+        "iou": 0.04668886184075355,
+        "confidence": 0.8467316031455994
+      },
+      {
+        "gt_start": 151.567484,
+        "gt_end": 151.66738,
+        "gt_label": "มึง",
+        "pred_label": "เย็ด",
+        "iou": 0.03468611111111155,
+        "confidence": 0.8467316031455994
+      },
+      {
+        "gt_start": 151.66748,
+        "gt_end": 152.239214,
+        "gt_label": "none",
+        "pred_label": "เย็ด",
+        "iou": 0.1985187499999976,
+        "confidence": 0.8467316031455994
+      },
+      {
+        "gt_start": 152.239442,
+        "gt_end": 152.356048,
+        "gt_label": "เย็ด",
+        "pred_label": "เย็ด",
+        "iou": 0.040488194444441114,
+        "confidence": 0.8467316031455994
+      },
+      {
+        "gt_start": 152.356048,
+        "gt_end": 163.318824,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.14485382169625569,
+        "confidence": 0.6669053435325623
+      },
+      {
+        "gt_start": 163.318824,
+        "gt_end": 163.452983,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.11032812499998752,
+        "confidence": 0.8061431646347046
+      },
+      {
+        "gt_start": 163.452757,
+        "gt_end": 185.493758,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.07241050440494975,
+        "confidence": 0.7396234273910522
+      },
+      {
+        "gt_start": 185.493758,
+        "gt_end": 185.569102,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.07357812499997333,
+        "confidence": 0.5100129246711731
+      },
+      {
+        "gt_start": 185.569102,
+        "gt_end": 205.807468,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.09882220728689256,
+        "confidence": 0.5079023838043213
+      },
+      {
+        "gt_start": 205.984643,
+        "gt_end": 233.901757,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.06788266164161334,
+        "confidence": 0.5104710459709167
+      },
+      {
+        "gt_start": 233.901956,
+        "gt_end": 234.149153,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.8583229166666337,
+        "confidence": 0.6707912683486938
+      },
+      {
+        "gt_start": 234.149153,
+        "gt_end": 250.457023,
+        "gt_label": "none",
+        "pred_label": "เย็ด",
+        "iou": 0.18224329725463914,
+        "confidence": 0.6511730551719666
+      },
+      {
+        "gt_start": 250.459551,
+        "gt_end": 250.719774,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 250.719774,
+        "gt_end": 251.21267,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.42514783317941035,
+        "confidence": 0.5332555174827576
+      },
+      {
+        "gt_start": 251.213902,
+        "gt_end": 251.904726,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.2042026809279316,
+        "confidence": 0.5332555174827576
+      },
+      {
+        "gt_start": 251.987431,
+        "gt_end": 377.630483,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.015918110617051864,
+        "confidence": 0.7472383379936218
+      },
+      {
+        "gt_start": 377.749411,
+        "gt_end": 390.442997,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.1509423735735512,
+        "confidence": 0.9105141758918762
+      },
+      {
+        "gt_start": 390.442997,
+        "gt_end": 390.566065,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 390.56643,
+        "gt_end": 391.415775,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 391.415775,
+        "gt_end": 391.554751,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 391.554751,
+        "gt_end": 394.13417,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.01086505916007941,
+        "confidence": 0.556753396987915
+      },
+      {
+        "gt_start": 394.134194,
+        "gt_end": 394.199266,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.04841666666669911,
+        "confidence": 0.556753396987915
+      },
+      {
+        "gt_start": 394.199266,
+        "gt_end": 397.015719,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.42300029517198934,
+        "confidence": 0.556753396987915
+      },
+      {
+        "gt_start": 397.015719,
+        "gt_end": 397.114319,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 397.114757,
+        "gt_end": 401.002705,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 401.002705,
+        "gt_end": 401.121534,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 401.121534,
+        "gt_end": 402.687054,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 402.685803,
+        "gt_end": 402.815063,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 402.813989,
+        "gt_end": 430.135127,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.06310132469591817,
+        "confidence": 0.534196138381958
+      },
+      {
+        "gt_start": 430.135127,
+        "gt_end": 430.275271,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.07007199999998193,
+        "confidence": 0.6276113390922546
+      },
+      {
+        "gt_start": 430.275271,
+        "gt_end": 452.90394,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.08838345728597646,
+        "confidence": 0.69267338514328
+      },
+      {
+        "gt_start": 452.90394,
+        "gt_end": 453.234737,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.21705839895014306,
+        "confidence": 0.5133990049362183
+      },
+      {
+        "gt_start": 453.236427,
+        "gt_end": 458.682639,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.3672277171729633,
+        "confidence": 0.6978098154067993
+      },
+      {
+        "gt_start": 458.686766,
+        "gt_end": 459.008668,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.31559019607845934,
+        "confidence": 0.8069230318069458
+      },
+      {
+        "gt_start": 459.008723,
+        "gt_end": 464.816067,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.06612317093666477,
+        "confidence": 0.8069230318069458
+      },
+      {
+        "gt_start": 464.816067,
+        "gt_end": 464.951499,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 464.951499,
+        "gt_end": 475.577013,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.11632378443057396,
+        "confidence": 0.7727017402648926
+      },
+      {
+        "gt_start": 475.581106,
+        "gt_end": 476.036344,
+        "gt_label": "เหี้ย",
+        "pred_label": "มึง",
+        "iou": 0.2974372738478831,
+        "confidence": 0.715837836265564
+      },
+      {
+        "gt_start": 476.036445,
+        "gt_end": 509.241954,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.06023096950569255,
+        "confidence": 0.695894181728363
+      },
+      {
+        "gt_start": 509.241952,
+        "gt_end": 509.339277,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 509.339078,
+        "gt_end": 513.617569,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.04761927474005921,
+        "confidence": 0.5569931268692017
+      },
+      {
+        "gt_start": 513.617569,
+        "gt_end": 513.691353,
+        "gt_label": "มึง",
+        "pred_label": "กู",
+        "iou": 0.044663438256685284,
+        "confidence": 0.5569931268692017
+      },
+      {
+        "gt_start": 513.691715,
+        "gt_end": 515.319671,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.6635412297487489,
+        "confidence": 0.5569931268692017
+      },
+      {
+        "gt_start": 515.319671,
+        "gt_end": 515.454993,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 515.453975,
+        "gt_end": 517.563128,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.07871574509486406,
+        "confidence": 0.5093402862548828
+      },
+      {
+        "gt_start": 517.563128,
+        "gt_end": 517.703169,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.08160897435897195,
+        "confidence": 0.5093402862548828
+      },
+      {
+        "gt_start": 517.703169,
+        "gt_end": 518.187935,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.28249766899768863,
+        "confidence": 0.5093402862548828
+      },
+      {
+        "gt_start": 518.187935,
+        "gt_end": 518.258267,
+        "gt_label": "มึง",
+        "pred_label": "เหี้ย",
+        "iou": 0.04098601398601823,
+        "confidence": 0.5093402862548828
+      },
+      {
+        "gt_start": 518.257994,
+        "gt_end": 525.244417,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.18321249658086589,
+        "confidence": 0.5742241144180298
+      },
+      {
+        "gt_start": 525.244557,
+        "gt_end": 525.37838,
+        "gt_label": "มึง",
+        "pred_label": "กู",
+        "iou": 0.06691150000000334,
+        "confidence": 0.835060715675354
+      },
+      {
+        "gt_start": 525.379001,
+        "gt_end": 526.757032,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.6890154999999822,
+        "confidence": 0.835060715675354
+      },
+      {
+        "gt_start": 526.756592,
+        "gt_end": 526.882811,
+        "gt_label": "มึง",
+        "pred_label": "กู",
+        "iou": 0.06310949999999593,
+        "confidence": 0.835060715675354
+      },
+      {
+        "gt_start": 526.881887,
+        "gt_end": 529.05042,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.029160679633221498,
+        "confidence": 0.835060715675354
+      },
+      {
+        "gt_start": 529.05042,
+        "gt_end": 529.238988,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.12845231607624208,
+        "confidence": 0.6580231189727783
+      },
+      {
+        "gt_start": 529.237501,
+        "gt_end": 529.997856,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.5179529972752209,
+        "confidence": 0.6580231189727783
+      },
+      {
+        "gt_start": 529.997856,
+        "gt_end": 530.119512,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.08287193460492726,
+        "confidence": 0.6580231189727783
+      },
+      {
+        "gt_start": 530.119883,
+        "gt_end": 531.397345,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.291202399758323,
+        "confidence": 0.6580231189727783
+      },
+      {
+        "gt_start": 531.398841,
+        "gt_end": 531.648311,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 531.648565,
+        "gt_end": 533.478706,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.1376943087991303,
+        "confidence": 0.7118352055549622
+      },
+      {
+        "gt_start": 533.479786,
+        "gt_end": 533.591834,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.07002999999997328,
+        "confidence": 0.7118352055549622
+      },
+      {
+        "gt_start": 533.591045,
+        "gt_end": 535.710915,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.6409393382636529,
+        "confidence": 0.7118352055549622
+      },
+      {
+        "gt_start": 535.710673,
+        "gt_end": 535.804459,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.07921114864857395,
+        "confidence": 0.7118352055549622
+      },
+      {
+        "gt_start": 535.804459,
+        "gt_end": 537.240854,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.42038069137175765,
+        "confidence": 0.7118352055549622
+      },
+      {
+        "gt_start": 537.240854,
+        "gt_end": 537.410778,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.10836989795920857,
+        "confidence": 0.7118352055549622
+      },
+      {
+        "gt_start": 537.410778,
+        "gt_end": 545.810454,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.23810442212294858,
+        "confidence": 0.627475380897522
+      },
+      {
+        "gt_start": 545.810454,
+        "gt_end": 545.936284,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 545.93649,
+        "gt_end": 547.721495,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.19495743709399413,
+        "confidence": 0.5428784489631653
+      },
+      {
+        "gt_start": 547.720982,
+        "gt_end": 547.806659,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.06374776785707997,
+        "confidence": 0.5428784489631653
+      },
+      {
+        "gt_start": 547.80687,
+        "gt_end": 553.638961,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.189086557477333,
+        "confidence": 0.5428784489631653
+      },
+      {
+        "gt_start": 553.638961,
+        "gt_end": 553.736139,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 553.736083,
+        "gt_end": 554.729106,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 554.729163,
+        "gt_end": 554.869955,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 554.869137,
+        "gt_end": 556.633825,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 556.633008,
+        "gt_end": 556.74699,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 556.746356,
+        "gt_end": 557.46374,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 557.46316,
+        "gt_end": 557.522838,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 557.522707,
+        "gt_end": 558.508127,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 558.508045,
+        "gt_end": 558.549002,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 558.549002,
+        "gt_end": 561.177123,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.26634998921279157,
+        "confidence": 0.8342981338500977
+      },
+      {
+        "gt_start": 561.285304,
+        "gt_end": 563.630125,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.6189958936871076,
+        "confidence": 0.8342981338500977
+      },
+      {
+        "gt_start": 563.630125,
+        "gt_end": 563.687762,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 563.687762,
+        "gt_end": 564.888931,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.3844461513044785,
+        "confidence": 0.6837795376777649
+      },
+      {
+        "gt_start": 564.888931,
+        "gt_end": 565.005133,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.05810100000002194,
+        "confidence": 0.6837795376777649
+      },
+      {
+        "gt_start": 565.005133,
+        "gt_end": 565.128141,
+        "gt_label": "มึง",
+        "pred_label": "เหี้ย",
+        "iou": 0.06150400000001355,
+        "confidence": 0.6837795376777649
+      },
+      {
+        "gt_start": 565.128141,
+        "gt_end": 578.444391,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.11775086830000844,
+        "confidence": 0.5671156644821167
+      },
+      {
+        "gt_start": 578.444391,
+        "gt_end": 578.589707,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.11989768976896131,
+        "confidence": 0.7197942733764648
+      },
+      {
+        "gt_start": 578.589735,
+        "gt_end": 588.041556,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.21159943676461931,
+        "confidence": 0.5942962169647217
+      },
+      {
+        "gt_start": 588.041556,
+        "gt_end": 588.164565,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 588.164565,
+        "gt_end": 590.339629,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.04229760595549763,
+        "confidence": 0.803797721862793
+      },
+      {
+        "gt_start": 590.340617,
+        "gt_end": 590.501882,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.12921875000006397,
+        "confidence": 0.803797721862793
+      },
+      {
+        "gt_start": 590.501607,
+        "gt_end": 592.253253,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.548401783349909,
+        "confidence": 0.803797721862793
+      },
+      {
+        "gt_start": 592.253253,
+        "gt_end": 592.470812,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 592.470812,
+        "gt_end": 600.668292,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.24397741745024296,
+        "confidence": 0.6250179409980774
+      },
+      {
+        "gt_start": 600.668629,
+        "gt_end": 600.829018,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 600.829018,
+        "gt_end": 603.308083,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 609.000382,
+        "gt_end": 609.07399,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 609.712548,
+        "gt_end": 609.79455,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 613.419926,
+        "gt_end": 613.51764,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.18045746604801813,
+        "confidence": 0.5092597603797913
+      },
+      {
+        "gt_start": 653.168502,
+        "gt_end": 653.302061,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.35147105263155975,
+        "confidence": 0.8171623349189758
+      },
+      {
+        "gt_start": 665.68181,
+        "gt_end": 665.798472,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.07777466666660378,
+        "confidence": 0.7093465924263
+      },
+      {
+        "gt_start": 666.987188,
+        "gt_end": 667.081307,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.049030450772648934,
+        "confidence": 0.7093465924263
+      },
+      {
+        "gt_start": 670.684904,
+        "gt_end": 670.978038,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 724.323563,
+        "gt_end": 724.452612,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 729.294579,
+        "gt_end": 729.354724,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.030499492900626115,
+        "confidence": 0.516158401966095
+      },
+      {
+        "gt_start": 729.819817,
+        "gt_end": 729.877107,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.029051724137971895,
+        "confidence": 0.516158401966095
+      },
+      {
+        "gt_start": 731.950656,
+        "gt_end": 732.156887,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.08114800056274549,
+        "confidence": 0.8131133317947388
+      },
+      {
+        "gt_start": 804.672483,
+        "gt_end": 804.803786,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.09626319648085467,
+        "confidence": 0.5180782079696655
+      },
+      {
+        "gt_start": 808.109852,
+        "gt_end": 808.225243,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 811.995369,
+        "gt_end": 812.061021,
+        "gt_label": "เย็ด",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 813.065642,
+        "gt_end": 813.212459,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 820.487649,
+        "gt_end": 820.600585,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 824.641056,
+        "gt_end": 824.729441,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 825.192174,
+        "gt_end": 825.296762,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 826.2586,
+        "gt_end": 826.356314,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 826.801044,
+        "gt_end": 826.845714,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 857.558741,
+        "gt_end": 857.743722,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 858.202414,
+        "gt_end": 858.26281,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 860.288098,
+        "gt_end": 860.487803,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 861.033525,
+        "gt_end": 861.155742,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 868.892179,
+        "gt_end": 868.975509,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 871.858363,
+        "gt_end": 872.088432,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 874.196434,
+        "gt_end": 874.262231,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.04041584766590391,
+        "confidence": 0.7081500887870789
+      },
+      {
+        "gt_start": 878.845873,
+        "gt_end": 879.022595,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 883.33046,
+        "gt_end": 883.399002,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 895.583998,
+        "gt_end": 895.792101,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.16258046875002888,
+        "confidence": 0.5376667380332947
+      },
+      {
+        "gt_start": 917.822094,
+        "gt_end": 918.126248,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 926.062676,
+        "gt_end": 926.12107,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 926.61858,
+        "gt_end": 926.72252,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 968.86868,
+        "gt_end": 968.995063,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.08470710455758208,
+        "confidence": 0.6521047949790955
+      },
+      {
+        "gt_start": 969.668184,
+        "gt_end": 969.732764,
+        "gt_label": "กู",
+        "pred_label": "มึง",
+        "iou": 0.04328418230561316,
+        "confidence": 0.6521047949790955
+      },
+      {
+        "gt_start": 973.585812,
+        "gt_end": 973.751065,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 983.589043,
+        "gt_end": 983.710327,
+        "gt_label": "มึง",
+        "pred_label": "เหี้ย",
+        "iou": 0.2943786407768192,
+        "confidence": 0.6466720700263977
+      },
+      {
+        "gt_start": 985.589448,
+        "gt_end": 985.716745,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 988.907593,
+        "gt_end": 989.077489,
+        "gt_label": "มึง",
+        "pred_label": "กู",
+        "iou": 0.09153879310344545,
+        "confidence": 0.5280237793922424
+      },
+      {
+        "gt_start": 991.838474,
+        "gt_end": 991.937081,
+        "gt_label": "เหี้ย",
+        "pred_label": "เย็ด",
+        "iou": 0.44020982142854914,
+        "confidence": 0.9417405128479004
+      },
+      {
+        "gt_start": 1001.347021,
+        "gt_end": 1001.405699,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 1013.980815,
+        "gt_end": 1014.247088,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.2684203629031914,
+        "confidence": 0.6995241641998291
+      },
+      {
+        "gt_start": 1017.151567,
+        "gt_end": 1017.282368,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 1019.501843,
+        "gt_end": 1019.681002,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.11755839895014884,
+        "confidence": 0.7551762461662292
+      },
+      {
+        "gt_start": 1021.308714,
+        "gt_end": 1021.496207,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.18630167292817854,
+        "confidence": 0.9660675525665283
+      },
+      {
+        "gt_start": 1021.628146,
+        "gt_end": 1021.86147,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.24304583333339325,
+        "confidence": 0.9660675525665283
+      },
+      {
+        "gt_start": 1055.739439,
+        "gt_end": 1056.095925,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.28656430868174526,
+        "confidence": 0.9218563437461853
+      },
+      {
+        "gt_start": 1063.637166,
+        "gt_end": 1063.742717,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 1065.715189,
+        "gt_end": 1065.791989,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 1080.7143,
+        "gt_end": 1080.795547,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 1081.315316,
+        "gt_end": 1081.453505,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.09544424731579247,
+        "confidence": 0.7055491805076599
+      },
+      {
+        "gt_start": 1103.257582,
+        "gt_end": 1103.337128,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 1105.728802,
+        "gt_end": 1105.802298,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 0.0,
+        "gt_end": 19.478165,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.11849165462968404,
+        "confidence": 0.8060148358345032
+      },
+      {
+        "gt_start": 19.783627,
+        "gt_end": 20.48689,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.413684117647058,
+        "confidence": 0.7240817546844482
+      },
+      {
+        "gt_start": 20.486934,
+        "gt_end": 20.566161,
+        "gt_label": "กู",
+        "pred_label": "เหี้ย",
+        "iou": 0.04660411764705845,
+        "confidence": 0.7240817546844482
+      },
+      {
+        "gt_start": 20.565977,
+        "gt_end": 56.995884,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.13648127073176447,
+        "confidence": 0.6197733879089355
+      },
+      {
+        "gt_start": 57.118727,
+        "gt_end": 57.546852,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 57.664793,
+        "gt_end": 58.079944,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 58.079944,
+        "gt_end": 58.166041,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 58.166041,
+        "gt_end": 127.448485,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.043301012879972886,
+        "confidence": 0.6905363202095032
+      },
+      {
+        "gt_start": 127.448485,
+        "gt_end": 127.531236,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 127.531236,
+        "gt_end": 130.582868,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 130.582868,
+        "gt_end": 130.697271,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 130.697271,
+        "gt_end": 144.605871,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.14379592482349043,
+        "confidence": 0.7053073048591614
+      },
+      {
+        "gt_start": 144.605871,
+        "gt_end": 144.666751,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 144.666751,
+        "gt_end": 239.426206,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.060067884518753376,
+        "confidence": 0.8429766893386841
+      },
+      {
+        "gt_start": 239.426206,
+        "gt_end": 239.561406,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 239.561406,
+        "gt_end": 241.053293,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 241.147645,
+        "gt_end": 265.757351,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.08126874819227822,
+        "confidence": 0.5382258892059326
+      },
+      {
+        "gt_start": 265.998124,
+        "gt_end": 273.115236,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.28101286027253897,
+        "confidence": 0.7973657250404358
+      },
+      {
+        "gt_start": 273.115236,
+        "gt_end": 273.261592,
+        "gt_label": "กู",
+        "pred_label": "มึง",
+        "iou": 0.07317800000001284,
+        "confidence": 0.750237226486206
+      },
+      {
+        "gt_start": 273.261698,
+        "gt_end": 273.623776,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.1810389999999984,
+        "confidence": 0.750237226486206
+      },
+      {
+        "gt_start": 273.623776,
+        "gt_end": 273.757049,
+        "gt_label": "กู",
+        "pred_label": "มึง",
+        "iou": 0.06663649999998711,
+        "confidence": 0.750237226486206
+      },
+      {
+        "gt_start": 273.757049,
+        "gt_end": 274.318494,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.14199775206858564,
+        "confidence": 0.6837798953056335
+      },
+      {
+        "gt_start": 274.443274,
+        "gt_end": 274.701628,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.12917700000002696,
+        "confidence": 0.6837798953056335
+      },
+      {
+        "gt_start": 274.880144,
+        "gt_end": 275.715702,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.4177790000000243,
+        "confidence": 0.6837798953056335
+      },
+      {
+        "gt_start": 275.944799,
+        "gt_end": 310.756659,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.05745168456956907,
+        "confidence": 0.6837671995162964
+      },
+      {
+        "gt_start": 310.925258,
+        "gt_end": 1075.430729,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.005232140451222487,
+        "confidence": 0.6281843185424805
+      },
+      {
+        "gt_start": 1075.654867,
+        "gt_end": 1076.691332,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.5182325000000674,
+        "confidence": 0.5858952403068542
+      },
+      {
+        "gt_start": 1076.691332,
+        "gt_end": 1076.847038,
+        "gt_label": "เหี้ย",
+        "pred_label": "กู",
+        "iou": 0.07785300000000461,
+        "confidence": 0.5858952403068542
+      },
+      {
+        "gt_start": 1076.847038,
+        "gt_end": 1088.796851,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.3347332715583095,
+        "confidence": 0.7372868061065674
+      },
+      {
+        "gt_start": 1088.796851,
+        "gt_end": 1088.85874,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 1088.85874,
+        "gt_end": 1163.000211,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.02697545615192874,
+        "confidence": 0.5436335206031799
+      },
+      {
+        "gt_start": 1163.000211,
+        "gt_end": 1163.162908,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 1163.162908,
+        "gt_end": 1169.9105,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 1169.9105,
+        "gt_end": 1170.010576,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 1170.011165,
+        "gt_end": 1270.506929,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.05970400901673825,
+        "confidence": 0.8753330111503601
+      },
+      {
+        "gt_start": 1270.76677,
+        "gt_end": 1274.997617,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 1275.234648,
+        "gt_end": 1301.148195,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.07717970835872098,
+        "confidence": 0.5044826865196228
+      },
+      {
+        "gt_start": 1301.148195,
+        "gt_end": 1301.295464,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 1301.295464,
+        "gt_end": 1315.105073,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.14482669277602378,
+        "confidence": 0.6555773615837097
+      },
+      {
+        "gt_start": 1315.274782,
+        "gt_end": 1324.097667,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.34002483314697923,
+        "confidence": 0.7837551832199097
+      },
+      {
+        "gt_start": 1324.310896,
+        "gt_end": 1357.184687,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.12167747857252004,
+        "confidence": 0.6723823547363281
+      },
+      {
+        "gt_start": 3.035611,
+        "gt_end": 3.178815,
+        "gt_label": "กู",
+        "pred_label": "เหี้ย",
+        "iou": 0.10407267441860486,
+        "confidence": 0.9350491166114807
+      },
+      {
+        "gt_start": 5.004079,
+        "gt_end": 5.059272,
+        "gt_label": "กู",
+        "pred_label": "เหี้ย",
+        "iou": 0.03875912921348317,
+        "confidence": 0.9350491166114807
+      },
+      {
+        "gt_start": 9.521606,
+        "gt_end": 9.623394,
+        "gt_label": "กู",
+        "pred_label": "เหี้ย",
+        "iou": 0.05089399999999955,
+        "confidence": 0.6870132088661194
+      },
+      {
+        "gt_start": 11.70444,
+        "gt_end": 11.758234,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 15.789596,
+        "gt_end": 15.85552,
+        "gt_label": "กู",
+        "pred_label": "เหี้ย",
+        "iou": 0.10497452229299482,
+        "confidence": 0.5299028754234314
+      },
+      {
+        "gt_start": 16.122258,
+        "gt_end": 16.224024,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 16.893305,
+        "gt_end": 16.965558,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 20.497368,
+        "gt_end": 20.574535,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 21.529066,
+        "gt_end": 21.662097,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 27.473708,
+        "gt_end": 27.567175,
+        "gt_label": "กู",
+        "pred_label": "มึง",
+        "iou": 0.06638281250000024,
+        "confidence": 0.8660271167755127
+      },
+      {
+        "gt_start": 29.356449,
+        "gt_end": 29.435105,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 32.091262,
+        "gt_end": 32.144963,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 33.693795,
+        "gt_end": 33.789264,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 35.039413,
+        "gt_end": 35.166954,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 44.130655,
+        "gt_end": 44.363041,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 3.948172,
+        "gt_end": 4.024041,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 5.286131,
+        "gt_end": 5.396971,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 8.614763,
+        "gt_end": 8.872702,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.09265050287356333,
+        "confidence": 0.7879555821418762
+      },
+      {
+        "gt_start": 9.110158,
+        "gt_end": 9.19415,
+        "gt_label": "กู",
+        "pred_label": "เหี้ย",
+        "iou": 0.030169540229885154,
+        "confidence": 0.7879555821418762
+      },
+      {
+        "gt_start": 10.540894,
+        "gt_end": 10.616774,
+        "gt_label": "กู",
+        "pred_label": "เหี้ย",
+        "iou": 0.027255747126436677,
+        "confidence": 0.7879555821418762
+      },
+      {
+        "gt_start": 76.165856,
+        "gt_end": 93.00204,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.2969794105362595,
+        "confidence": 0.8842579126358032
+      },
+      {
+        "gt_start": 93.00204,
+        "gt_end": 93.13855,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 93.13855,
+        "gt_end": 113.627104,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.146423217568209,
+        "confidence": 0.8751459121704102
+      },
+      {
+        "gt_start": 13.986202,
+        "gt_end": 14.05307,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 16.797544,
+        "gt_end": 16.968696,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 142.941353,
+        "gt_end": 143.029457,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 143.633679,
+        "gt_end": 143.746699,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 144.797836,
+        "gt_end": 144.835388,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 180.565019,
+        "gt_end": 180.615698,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.02932812500000122,
+        "confidence": 0.6852733492851257
+      },
+      {
+        "gt_start": 181.523369,
+        "gt_end": 181.735847,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.12296180555555748,
+        "confidence": 0.6852733492851257
+      },
+      {
+        "gt_start": 39.778927,
+        "gt_end": 39.904416,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.06274449999999732,
+        "confidence": 0.6580358147621155
+      },
+      {
+        "gt_start": 43.993688,
+        "gt_end": 44.101438,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 45.377464,
+        "gt_end": 45.495142,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.058838999999998975,
+        "confidence": 0.6337467432022095
+      },
+      {
+        "gt_start": 0.0,
+        "gt_end": 0.113714,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 0.113714,
+        "gt_end": 0.194503,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 0.194503,
+        "gt_end": 2.572296,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 2.572296,
+        "gt_end": 2.775293,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 2.775387,
+        "gt_end": 3.472544,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.21241627195381851,
+        "confidence": 0.8159451484680176
+      },
+      {
+        "gt_start": 3.472544,
+        "gt_end": 3.657632,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.09254399999999996,
+        "confidence": 0.8159451484680176
+      },
+      {
+        "gt_start": 3.657632,
+        "gt_end": 4.661521,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.5019444999999998,
+        "confidence": 0.8159451484680176
+      },
+      {
+        "gt_start": 4.661521,
+        "gt_end": 4.793888,
+        "gt_label": "มึง",
+        "pred_label": "เหี้ย",
+        "iou": 0.06618350000000017,
+        "confidence": 0.8159451484680176
+      },
+      {
+        "gt_start": 4.793888,
+        "gt_end": 6.532306,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.0583505506034868,
+        "confidence": 0.8159451484680176
+      },
+      {
+        "gt_start": 6.532306,
+        "gt_end": 6.669085,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 6.669085,
+        "gt_end": 7.40837,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.12259994626101227,
+        "confidence": 0.8939433693885803
+      },
+      {
+        "gt_start": 7.40837,
+        "gt_end": 7.649822,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.08048400000000022,
+        "confidence": 0.8939433693885803
+      },
+      {
+        "gt_start": 7.649822,
+        "gt_end": 7.697617,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.015931666666666604,
+        "confidence": 0.8939433693885803
+      },
+      {
+        "gt_start": 7.697617,
+        "gt_end": 7.913764,
+        "gt_label": "มึง",
+        "pred_label": "เหี้ย",
+        "iou": 0.07204899999999981,
+        "confidence": 0.8939433693885803
+      },
+      {
+        "gt_start": 7.913764,
+        "gt_end": 8.525175,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.20380366666666708,
+        "confidence": 0.8939433693885803
+      },
+      {
+        "gt_start": 8.525175,
+        "gt_end": 8.880846,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.11855699999999973,
+        "confidence": 0.8939433693885803
+      },
+      {
+        "gt_start": 8.880846,
+        "gt_end": 9.145259,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.08813766666666645,
+        "confidence": 0.8939433693885803
+      },
+      {
+        "gt_start": 9.145259,
+        "gt_end": 9.308274,
+        "gt_label": "มึง",
+        "pred_label": "เหี้ย",
+        "iou": 0.05433833333333382,
+        "confidence": 0.8939433693885803
+      },
+      {
+        "gt_start": 9.308274,
+        "gt_end": 10.891632,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.17774702232893533,
+        "confidence": 0.8939433693885803
+      },
+      {
+        "gt_start": 11.191145,
+        "gt_end": 12.283356,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 0.0,
+        "gt_end": 3.114908,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.002726999999999924,
+        "confidence": 0.9350491166114807
+      },
+      {
+        "gt_start": 3.114908,
+        "gt_end": 3.344441,
+        "gt_label": "กู",
+        "pred_label": "เหี้ย",
+        "iou": 0.2561752232142862,
+        "confidence": 0.9350491166114807
+      },
+      {
+        "gt_start": 3.344441,
+        "gt_end": 6.109426,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.218125150976933,
+        "confidence": 0.9350491166114807
+      },
+      {
+        "gt_start": 6.109426,
+        "gt_end": 6.219232,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 6.219232,
+        "gt_end": 12.082587,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 12.082587,
+        "gt_end": 12.34321,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 12.34321,
+        "gt_end": 18.205243,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.303648921798973,
+        "confidence": 0.6226599216461182
+      },
+      {
+        "gt_start": 18.205243,
+        "gt_end": 18.344153,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 18.344153,
+        "gt_end": 19.292715,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 19.292715,
+        "gt_end": 19.410459,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 19.410459,
+        "gt_end": 20.167191,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 20.167191,
+        "gt_end": 20.286258,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 20.286258,
+        "gt_end": 39.736405,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.29387952697735403,
+        "confidence": 0.8350851535797119
+      },
+      {
+        "gt_start": 39.736405,
+        "gt_end": 39.81446,
+        "gt_label": "กู",
+        "pred_label": "มึง",
+        "iou": 0.0360697781885393,
+        "confidence": 0.8420760035514832
+      },
+      {
+        "gt_start": 39.81446,
+        "gt_end": 40.202087,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.09246547763939278,
+        "confidence": 0.5546294450759888
+      },
+      {
+        "gt_start": 40.202087,
+        "gt_end": 40.296876,
+        "gt_label": "กู",
+        "pred_label": "เหี้ย",
+        "iou": 0.04739449999999934,
+        "confidence": 0.5546294450759888
+      },
+      {
+        "gt_start": 40.296876,
+        "gt_end": 41.355024,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.5290740000000014,
+        "confidence": 0.5546294450759888
+      },
+      {
+        "gt_start": 41.355024,
+        "gt_end": 41.494083,
+        "gt_label": "มึง",
+        "pred_label": "เหี้ย",
+        "iou": 0.06952950000000158,
+        "confidence": 0.5546294450759888
+      },
+      {
+        "gt_start": 41.494083,
+        "gt_end": 41.640929,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.07342299999999824,
+        "confidence": 0.5546294450759888
+      },
+      {
+        "gt_start": 41.640929,
+        "gt_end": 41.80335,
+        "gt_label": "กู",
+        "pred_label": "เหี้ย",
+        "iou": 0.08121050000000096,
+        "confidence": 0.5546294450759888
+      },
+      {
+        "gt_start": 41.80335,
+        "gt_end": 53.828056,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.158673318083619,
+        "confidence": 0.5397970676422119
+      },
+      {
+        "gt_start": 53.828056,
+        "gt_end": 53.949316,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 53.949316,
+        "gt_end": 58.714533,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.33946550605819015,
+        "confidence": 0.5723331570625305
+      },
+      {
+        "gt_start": 58.714533,
+        "gt_end": 58.819942,
+        "gt_label": "กู",
+        "pred_label": "เหี้ย",
+        "iou": 0.05270449999999727,
+        "confidence": 0.5723331570625305
+      },
+      {
+        "gt_start": 58.819942,
+        "gt_end": 58.993002,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.08652999999999977,
+        "confidence": 0.5723331570625305
+      },
+      {
+        "gt_start": 58.993002,
+        "gt_end": 59.809531,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.002490807184545373,
+        "confidence": 0.5723331570625305
+      },
+      {
+        "gt_start": 59.809531,
+        "gt_end": 59.887408,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 59.887408,
+        "gt_end": 60.657525,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 60.657525,
+        "gt_end": 60.766867,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 60.766867,
+        "gt_end": 66.304,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.24200249479288202,
+        "confidence": 0.7363357543945312
+      },
+      {
+        "gt_start": 0.0,
+        "gt_end": 19.031222,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.10509046660272263,
+        "confidence": 0.5447099208831787
+      },
+      {
+        "gt_start": 19.032041,
+        "gt_end": 19.153205,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 19.153205,
+        "gt_end": 23.022478,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.2222639756874223,
+        "confidence": 0.7789466381072998
+      },
+      {
+        "gt_start": 23.022478,
+        "gt_end": 23.217391,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.06693440934065925,
+        "confidence": 0.7789466381072998
+      },
+      {
+        "gt_start": 23.217391,
+        "gt_end": 24.340333,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.3856256868131876,
+        "confidence": 0.7789466381072998
+      },
+      {
+        "gt_start": 24.340333,
+        "gt_end": 24.50921,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.05799347527472474,
+        "confidence": 0.7789466381072998
+      },
+      {
+        "gt_start": 24.50921,
+        "gt_end": 26.009433,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.34296544778115984,
+        "confidence": 0.7789466381072998
+      },
+      {
+        "gt_start": 26.009433,
+        "gt_end": 26.205666,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 26.205666,
+        "gt_end": 28.161061,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.04706174207426866,
+        "confidence": 0.5303297638893127
+      },
+      {
+        "gt_start": 28.161061,
+        "gt_end": 28.271807,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.06802579852579785,
+        "confidence": 0.5303297638893127
+      },
+      {
+        "gt_start": 28.271807,
+        "gt_end": 29.996729,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.679207343610476,
+        "confidence": 0.5303297638893127
+      },
+      {
+        "gt_start": 29.996729,
+        "gt_end": 30.232618,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.21061517857142925,
+        "confidence": 0.5303297638893127
+      },
+      {
+        "gt_start": 30.232618,
+        "gt_end": 34.418552,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.13798923851144165,
+        "confidence": 0.5303297638893127
+      },
+      {
+        "gt_start": 34.418552,
+        "gt_end": 34.59257,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.1754213709677462,
+        "confidence": 0.5033121109008789
+      },
+      {
+        "gt_start": 34.59257,
+        "gt_end": 39.071439,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.35455379471915843,
+        "confidence": 0.6155442595481873
+      },
+      {
+        "gt_start": 40.5462,
+        "gt_end": 40.65505,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.06198747152619811,
+        "confidence": 0.7200325131416321
+      },
+      {
+        "gt_start": 40.65505,
+        "gt_end": 44.669968,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.23575108009305376,
+        "confidence": 0.7200325131416321
+      },
+      {
+        "gt_start": 44.669968,
+        "gt_end": 44.885318,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 57.399682,
+        "gt_end": 57.951197,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.156966927823098,
+        "confidence": 0.8169747591018677
+      },
+      {
+        "gt_start": 57.951197,
+        "gt_end": 58.117316,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.1277838461538472,
+        "confidence": 0.8169747591018677
+      },
+      {
+        "gt_start": 58.117316,
+        "gt_end": 60.009619,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.3821773201554004,
+        "confidence": 0.8169747591018677
+      },
+      {
+        "gt_start": 60.009619,
+        "gt_end": 60.131435,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 60.131435,
+        "gt_end": 61.845558,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.2776930243628963,
+        "confidence": 0.7367829084396362
+      },
+      {
+        "gt_start": 61.845558,
+        "gt_end": 61.939615,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.06895674486803974,
+        "confidence": 0.7367829084396362
+      },
+      {
+        "gt_start": 61.939615,
+        "gt_end": 65.629591,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.2655216821151676,
+        "confidence": 0.7367829084396362
+      },
+      {
+        "gt_start": 79.568686,
+        "gt_end": 79.781013,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 83.715585,
+        "gt_end": 83.926981,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.21310080645160537,
+        "confidence": 0.7237752079963684
+      },
+      {
+        "gt_start": 83.926981,
+        "gt_end": 87.515124,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.1250315637647022,
+        "confidence": 0.7237752079963684
+      },
+      {
+        "gt_start": 87.515124,
+        "gt_end": 87.703239,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.10962412587412408,
+        "confidence": 0.5143270492553711
+      },
+      {
+        "gt_start": 87.703239,
+        "gt_end": 92.078296,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.270479962021537,
+        "confidence": 0.5143270492553711
+      },
+      {
+        "gt_start": 92.078296,
+        "gt_end": 92.249414,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 92.249414,
+        "gt_end": 95.572572,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 96.701384,
+        "gt_end": 96.844937,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.08972062499999854,
+        "confidence": 0.7514817118644714
+      },
+      {
+        "gt_start": 96.844937,
+        "gt_end": 98.555061,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.5445775925183673,
+        "confidence": 0.7514817118644714
+      },
+      {
+        "gt_start": 98.555061,
+        "gt_end": 98.741417,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.09870550847457861,
+        "confidence": 0.7514817118644714
+      },
+      {
+        "gt_start": 98.741417,
+        "gt_end": 99.453283,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.3770476694915275,
+        "confidence": 0.7514817118644714
+      },
+      {
+        "gt_start": 99.453283,
+        "gt_end": 99.658163,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.1085169491525444,
+        "confidence": 0.7514817118644714
+      },
+      {
+        "gt_start": 99.658163,
+        "gt_end": 100.578463,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.2325414105912641,
+        "confidence": 0.7514817118644714
+      },
+      {
+        "gt_start": 100.578463,
+        "gt_end": 100.726862,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.09160432098765346,
+        "confidence": 0.7514817118644714
+      },
+      {
+        "gt_start": 100.726862,
+        "gt_end": 102.836575,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.5182573298189593,
+        "confidence": 0.7514817118644714
+      },
+      {
+        "gt_start": 102.836575,
+        "gt_end": 103.044777,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 103.044777,
+        "gt_end": 103.905744,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 103.905744,
+        "gt_end": 103.991368,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 107.484321,
+        "gt_end": 107.566634,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 107.566634,
+        "gt_end": 108.881956,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 118.448281,
+        "gt_end": 132.010667,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.08523573949303538,
+        "confidence": 0.8400665521621704
+      },
+      {
+        "gt_start": 3.531079,
+        "gt_end": 3.901909,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.32190104166666644,
+        "confidence": 0.8741127848625183
+      },
+      {
+        "gt_start": 4.867109,
+        "gt_end": 5.149732,
+        "gt_label": "กู",
+        "pred_label": "มึง",
+        "iou": 0.46661327366613575,
+        "confidence": 0.5046414136886597
+      },
+      {
+        "gt_start": 6.984537,
+        "gt_end": 7.301412,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.7621749695926034,
+        "confidence": 0.8496179580688477
+      },
+      {
+        "gt_start": 7.96435,
+        "gt_end": 8.062951,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.06162562500000022,
+        "confidence": 0.8496179580688477
+      },
+      {
+        "gt_start": 9.236856,
+        "gt_end": 9.497076,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.16263750000000016,
+        "confidence": 0.8496179580688477
+      },
+      {
+        "gt_start": 11.844661,
+        "gt_end": 11.961329,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.08170028011204399,
+        "confidence": 0.8496179580688477
+      },
+      {
+        "gt_start": 12.369961,
+        "gt_end": 12.811552,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.4329323529411774,
+        "confidence": 0.8053807020187378
+      },
+      {
+        "gt_start": 0.0,
+        "gt_end": 5.244845,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.09614083333333327,
+        "confidence": 0.7973135709762573
+      },
+      {
+        "gt_start": 5.244845,
+        "gt_end": 5.478995,
+        "gt_label": "มึง",
+        "pred_label": "กู",
+        "iou": 0.1757882882882887,
+        "confidence": 0.7973135709762573
+      },
+      {
+        "gt_start": 5.478995,
+        "gt_end": 19.765428,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.12011395706682006,
+        "confidence": 0.5203583240509033
+      },
+      {
+        "gt_start": 19.765428,
+        "gt_end": 19.861178,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 19.861178,
+        "gt_end": 22.193372,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.2883361497546886,
+        "confidence": 0.6976218819618225
+      },
+      {
+        "gt_start": 22.193372,
+        "gt_end": 22.500443,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.10235700000000018,
+        "confidence": 0.6976218819618225
+      },
+      {
+        "gt_start": 22.500443,
+        "gt_end": 29.512519,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.1761590194394866,
+        "confidence": 0.6976218819618225
+      },
+      {
+        "gt_start": 30.793568,
+        "gt_end": 30.85264,
+        "gt_label": "กู",
+        "pred_label": "มึง",
+        "iou": 0.03646419753086446,
+        "confidence": 0.7213653922080994
+      },
+      {
+        "gt_start": 36.211314,
+        "gt_end": 36.258571,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 36.258571,
+        "gt_end": 37.924782,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 37.924782,
+        "gt_end": 38.043642,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 38.043642,
+        "gt_end": 39.712069,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.16275036047595792,
+        "confidence": 0.6637955904006958
+      },
+      {
+        "gt_start": 39.712069,
+        "gt_end": 39.755921,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.062289772727274255,
+        "confidence": 0.6637955904006958
+      },
+      {
+        "gt_start": 39.755921,
+        "gt_end": 41.739548,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.2826403561290919,
+        "confidence": 0.8553760647773743
+      },
+      {
+        "gt_start": 41.739548,
+        "gt_end": 41.992217,
+        "gt_label": "กู",
+        "pred_label": "มึง",
+        "iou": 0.07302572254335182,
+        "confidence": 0.8553760647773743
+      },
+      {
+        "gt_start": 41.992217,
+        "gt_end": 42.846921,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.24702427745664884,
+        "confidence": 0.8553760647773743
+      },
+      {
+        "gt_start": 42.846921,
+        "gt_end": 43.059568,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.06145867052023031,
+        "confidence": 0.8553760647773743
+      },
+      {
+        "gt_start": 43.059568,
+        "gt_end": 55.128349,
+        "gt_label": "none",
+        "pred_label": "มึง",
+        "iou": 0.24857522893157144,
+        "confidence": 0.827616810798645
+      },
+      {
+        "gt_start": 55.128349,
+        "gt_end": 55.268089,
+        "gt_label": "เหี้ย",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 55.268089,
+        "gt_end": 60.352,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.265936992209344,
+        "confidence": 0.9350491166114807
+      },
+      {
+        "gt_start": 3.514832,
+        "gt_end": 3.739324,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 6.264837,
+        "gt_end": 6.429226,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 11.123742,
+        "gt_end": 11.785848,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 17.212415,
+        "gt_end": 17.374221,
+        "gt_label": "เหี้ย",
+        "pred_label": "เหี้ย",
+        "iou": 0.20327386934673203,
+        "confidence": 0.7964757084846497
+      },
+      {
+        "gt_start": 24.387903,
+        "gt_end": 24.435408,
+        "gt_label": "มึง",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 0.0,
+        "gt_end": 2.556823,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 2.556823,
+        "gt_end": 3.076616,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 3.076616,
+        "gt_end": 4.295322,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.0752722649631032,
+        "confidence": 0.875404953956604
+      },
+      {
+        "gt_start": 4.295322,
+        "gt_end": 4.892382,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.19901999999999997,
+        "confidence": 0.875404953956604
+      },
+      {
+        "gt_start": 4.892382,
+        "gt_end": 5.755192,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.2876033333333335,
+        "confidence": 0.875404953956604
+      },
+      {
+        "gt_start": 5.755192,
+        "gt_end": 6.010406,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.08507133333333321,
+        "confidence": 0.875404953956604
+      },
+      {
+        "gt_start": 6.010406,
+        "gt_end": 7.785197,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.8873955000000002,
+        "confidence": 0.6332636475563049
+      },
+      {
+        "gt_start": 7.785197,
+        "gt_end": 8.046265,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.10497320728253665,
+        "confidence": 0.6332636475563049
+      },
+      {
+        "gt_start": 8.046265,
+        "gt_end": 9.218322,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.9619837898840674,
+        "confidence": 0.7906700372695923
+      },
+      {
+        "gt_start": 1.506835,
+        "gt_end": 1.590017,
+        "gt_label": "มึง",
+        "pred_label": "เหี้ย",
+        "iou": 0.15754166666666683,
+        "confidence": 0.9350491166114807
+      },
+      {
+        "gt_start": 2.227271,
+        "gt_end": 2.298155,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 9.832852,
+        "gt_end": 9.919234,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 25.36253,
+        "gt_end": 25.412865,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 51.471081,
+        "gt_end": 51.543976,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 0.0,
+        "gt_end": 12.799492,
+        "gt_label": "none",
+        "pred_label": "เหี้ย",
+        "iou": 0.07500297668063707,
+        "confidence": 0.6698128581047058
+      },
+      {
+        "gt_start": 12.796937,
+        "gt_end": 13.298601,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.37437611940298504,
+        "confidence": 0.6011003851890564
+      },
+      {
+        "gt_start": 13.298601,
+        "gt_end": 13.676268,
+        "gt_label": "none",
+        "pred_label": "กู",
+        "iou": 0.02469712480343249,
+        "confidence": 0.6011003851890564
+      },
+      {
+        "gt_start": 13.676268,
+        "gt_end": 13.763936,
+        "gt_label": "มึง",
+        "pred_label": "กู",
+        "iou": 0.2578470588235265,
+        "confidence": 0.6011003851890564
+      },
+      {
+        "gt_start": 13.763936,
+        "gt_end": 33.564691,
+        "gt_label": "none",
+        "pred_label": "เย็ด",
+        "iou": 0.10100624950917274,
+        "confidence": 0.5385997891426086
+      },
+      {
+        "gt_start": 33.564691,
+        "gt_end": 33.945743,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.19052599999999842,
+        "confidence": 0.7902330160140991
+      },
+      {
+        "gt_start": 7.602102,
+        "gt_end": 7.667882,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 18.39396,
+        "gt_end": 18.465963,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.03773742138364709,
+        "confidence": 0.5518739819526672
+      },
+      {
+        "gt_start": 25.718049,
+        "gt_end": 25.847625,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.11610752688172059,
+        "confidence": 0.7299303412437439
+      },
+      {
+        "gt_start": 25.847625,
+        "gt_end": 26.04843,
+        "gt_label": "มึง",
+        "pred_label": "มึง",
+        "iou": 0.1799327956989239,
+        "confidence": 0.7299303412437439
+      },
+      {
+        "gt_start": 0.0,
+        "gt_end": 1.431357,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 1.431357,
+        "gt_end": 1.59603,
+        "gt_label": "กู",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 1.595768,
+        "gt_end": 3.669565,
+        "gt_label": "none",
+        "pred_label": "none",
+        "iou": 0.0,
+        "confidence": 0.0
+      },
+      {
+        "gt_start": 0.0,
+        "gt_end": 1.59,
+        "gt_label": "กู",
+        "pred_label": "กู",
+        "iou": 0.4830188679245283,
+        "confidence": 0.8258104920387268
+      }
+    ]
+  },
+  "processing_time_seconds": 191.3630175590515
+}

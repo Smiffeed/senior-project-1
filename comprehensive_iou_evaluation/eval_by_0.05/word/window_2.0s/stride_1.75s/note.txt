@@ -1,0 +1,55 @@
+=== IoU EVALUATION USING EXISTING PREDICTIONS (NO AUDIO PROCESSING) ===
+Using pre-computed predictions from fixed_smart_parallel_results
+Step 1-2: Load and parse existing predictions
+Step 3: Merge overlapping predictions (no VAD audio processing)
+Step 4: IoU threshold analysis (0.1-0.9)
+
+Source: fixed_smart_parallel_results/eval_by_0.05/eval_by_0.05/word_eval/
+Configuration: Window 2.0s, Stride 1.75 (absolute)
+Ground Truth: csv/eval_5labels.csv
+
+Overall Mean IoU: 0.0455 (4.5%)
+Traditional Binary F1: 0.327
+Traditional Multiclass F1: 0.277
+
+=== MEAN IoU BY WORD CLASS ===
+  เย็ด: 0.0024 (0.2%)
+  กู: 0.0124 (1.2%)
+  มึง: 0.0073 (0.7%)
+  เหี้ย: 0.0515 (5.2%)
+
+=== IoU THRESHOLD ANALYSIS ===
+Threshold | Precision | Recall | F1-Score | TP | FP | TN | FN
+----------|-----------|--------|----------|----|----|----|----|n   0.1    |   0.205   | 0.083 |  0.118  | 31 |120 |178 |342 |
+   0.2    |   0.032   | 0.011 |  0.016  |  4 |120 |178 |369 |
+   0.3    |   0.008   | 0.003 |  0.004  |  1 |120 |178 |372 |
+   0.4    |   0.008   | 0.003 |  0.004  |  1 |120 |178 |372 |
+   0.5    |   0.008   | 0.003 |  0.004  |  1 |120 |178 |372 |
+   0.6    |   0.008   | 0.003 |  0.004  |  1 |120 |178 |372 |
+   0.7    |   0.008   | 0.003 |  0.004  |  1 |120 |178 |372 |
+   0.8    |   0.000   | 0.000 |  0.000  |  0 |120 |178 |373 |
+   0.9    |   0.000   | 0.000 |  0.000  |  0 |120 |178 |373 |
+
+=== BINARY CLASSIFICATION REPORT (Traditional) ===
+              precision    recall  f1-score   support
+
+           0       0.36      0.60      0.45       298
+           1       0.34      0.17      0.23       373
+
+    accuracy                           0.36       671
+   macro avg       0.35      0.38      0.34       671
+weighted avg       0.35      0.36      0.33       671
+
+
+=== MULTICLASS CLASSIFICATION REPORT (Traditional) ===
+              precision    recall  f1-score   support
+
+        none       0.36      0.60      0.45       298
+          กู       0.38      0.05      0.09       153
+         มึง       0.22      0.05      0.08       116
+        เย็ด       0.00      0.00      0.00        26
+       เหี้ย       0.28      0.46      0.35        78
+
+    accuracy                           0.34       671
+   macro avg       0.25      0.23      0.20       671
+weighted avg       0.32      0.34      0.28       671
