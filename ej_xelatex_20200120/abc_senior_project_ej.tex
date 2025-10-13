@@ -1,0 +1,207 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[top=2.8cm,bottom=2.4cm,left=2.4cm,right=2.4cm,a4paper,twoside]{geometry}
+\usepackage{amssymb,amsmath}
+\usepackage[title,titletoc,toc]{appendix}
+%\usepackage{hyperref}
+\usepackage{graphicx,color,psfrag}
+\usepackage{fancyhdr}
+\usepackage{longtable,tabularx}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage[no-math]{fontspec}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\usepackage{sectsty}
+\usepackage{wrapfig}
+\usepackage{indentfirst}
+\usepackage{url} % for breakable paths/URLs in tables
+
+\newenvironment{Figure}
+  {\par\medskip\noindent\minipage{\linewidth}}
+  {\endminipage\par\medskip}
+
+\newenvironment{Table}
+   {\par\bigskip\noindent\minipage{\columnwidth}\centering}
+   {\endminipage\par\bigskip}
+
+\usepackage{secdot}
+\sectiondot{subsection}
+\sectiondot{subsubsection}
+
+\usepackage[justification=RaggedRight,singlelinecheck=false]{caption}
+\captionsetup[figure]{labelsep=period}
+\captionsetup[table]{labelsep=period}
+
+\setcounter{page}{1}
+
+\sectionfont{\fontsize{12}{15}\selectfont}
+\subsectionfont{\fontsize{11}{13}\selectfont}
+
+% Use Garamond if available; otherwise fall back to common fonts so compilation succeeds
+\defaultfontfeatures{Scale=1.0,Ligatures=TeX}
+\IfFontExistsTF{GaramondNo8}{%
+  \setmainfont{GaramondNo8}%
+}{%
+  \IfFontExistsTF{Garamond}{%
+    \setmainfont{Garamond}% Windows Garamond
+  }{%
+    \IfFontExistsTF{EB Garamond}{%
+      \setmainfont{EB Garamond}% Open-source Garamond
+    }{%
+      \setmainfont{TeX Gyre Termes}% TeX fallback (Times-like)
+    }%
+  }%
+}
+
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\figurename}{Fig.}
+
+\begin{document}
+\thispagestyle{empty}
+\begin{center}
+\includegraphics[width=1\linewidth]{ej_banner.png}
+\end{center}
+\vspace{5mm}
+
+\begin{flushleft}
+\textit{\fontsize{14}{17}\selectfont Review} \\ [4ex]
+\textbf{\fontsize{20}{24}\selectfont ABC -- Automatic Beep Censor} \\ [5ex]
+\textbf{\fontsize{12}{15}\selectfont Nutchapol Rodpholchoo{\normalfont{\textsuperscript{1,a}}}, Nutchanon Tongkumbanchong{\normalfont{\textsuperscript{1,b,*}}}, and Sirinalin Saekhow{\normalfont{\textsuperscript{1}}}} \\ [2ex]
+{\fontsize{8}{12}\selectfont 1} Department of Computer Science and Information Technology, Vincent Mary School of Engineering, Science and Technology, Assumption University, Thailand \\
+E-mail: {\textsuperscript{a}}[nutchapol.r@gmail.com], {\textsuperscript{b}}[not provided] (Corresponding author) \\ [5ex]
+\end{flushleft}
+
+%--------------------------ABSTRACT-------------------------------------
+{\paragraph{Abstract.} This article investigates profanity detection in Thai language audio, addressing the challenges of limited data availability. While initial model development was constrained by data scarcity, the focus shifted to a comprehensive evaluation of detection methods and parameter optimization. By systematically analyzing various evaluation metrics and window/stride configurations, the study provides practical guidance for future research and model improvement, enabling others to efficiently optimize profanity detection systems even with limited resources.}
+%---------------------------------------------------------------------------
+
+{\flushleft \textbf{Keywords:} Thai profanity detection, Wav2Vec2, window/stride optimization, evaluation methodology, VAD}
+
+\vfill
+\begin{flushleft}
+\textbf{ENGINEERING JOURNAL} Volume \# Issue \# \\
+Received Date Month Year \\
+Accepted Date Month Year \\
+Published Date Month Year \\
+Online at http://www.engj.org/ \\
+DOI:10.4186/ej.20xx.xx.x.xx
+\end{flushleft}
+
+\newpage
+
+\newgeometry{top=1.95cm,bottom=1.8cm,left=1.6cm,right=1.6cm,headsep=0.5cm,a4paper,twoside}
+
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[RO,LE]{\footnotesize DOI:10.4186/ej.year.vol.issue.pp}
+\fancyfoot{}
+\fancyfoot[LE]{\footnotesize \thepage \hfill ENGINEERING JOURNAL Volume \# Issue \#, ISSN 0125-8281 (http://www.engj.org/)}
+\fancyfoot[RO]{\footnotesize ENGINEERING JOURNAL Volume \# Issue \#, ISSN 0125-8281 (http://www.engj.org/) \hfill \thepage}
+
+\begin{multicols}{2}
+
+\section{Introduction}
+Content moderation remains a critical challenge for digital media platforms that host large volumes of explicit content, especially in languages with limited computational resources such as Thai. While automated profanity detection systems are well-researched for languages like English in both text \cite{Davidson2017} and audio \cite{Wazir2022}, Thai presents unique computational challenges due to its tonal nature and complex phonetic structure \cite{TheeraUmpon2011}, as well as the scarcity of large-scale profanity-labeled datasets. Moreover, traditional manual censorship is still widely used, but it is time-consuming, inconsistent, and impractical for large-scale content moderation.
+
+Recent advances in speech recognition and deep learning have enabled more sophisticated content moderation tools. However, most existing models are trained on non-Thai datasets, resulting in higher error rates when applied to Thai profanity detection. Our work addressed these challenges by fine-tuning a pre-trained wav2vec~2.0 model \cite{Baevski2020} specifically for Thai profanity detection through supervised learning with sequence classification. The base model used was \texttt{airesearch/wav2vec2-large-xlsr-53-th}, which had been pre-trained on Thai speech data using self-supervised learning techniques.
+
+While this initial system demonstrated promising results, its performance was constrained by limited training data, time, and computational resources. A fundamental issue in low-resource language processing is that deep learning models typically require extensive labeled datasets to achieve optimal performance—often impractical to obtain for specialized tasks like profanity detection \cite{Kenton2019}.
+
+The development of robust Thai profanity detection models faces this central constraint: the lack of extensive labeled datasets. Although ASR-based pipelines show promise, they struggle with Thai's phonetic diversity, slang variations, and tonal ambiguities, leading to inconsistent profanity detection accuracy. More critically, the evaluation methodologies used to assess these systems often lack systematic analysis of temporal parameters—specifically window size and stride—that significantly impact detection performance in practical deployment scenarios.
+
+Traditional evaluation approaches in speech processing often use fixed parameters without exploring the relationship between temporal segmentation settings and detection accuracy. In profanity detection, the choice of analysis window size and stride directly affects both detection sensitivity and temporal precision, yet existing evaluation methods rarely provide guidance on appropriate stride for parameter optimization \cite{Wazir2022}, especially for Thai where phoneme and tone differences are critical.
+
+Recognizing the data limitation as an inherent challenge rather than a solvable problem within the scope of our research, this project shifts focus from purely model development to comprehensive evaluation methodology and parameter optimization. The central question becomes: given limited training data, how can we systematically identify the most effective evaluation approaches and optimal system parameters (window size and stride configurations) to guide future research and practical implementation?
+
+This project centers on the comprehensive evaluation and optimization of Thai profanity detection systems in audio content. Building upon the foundational fine-tuned wav2vec~2.0 model developed in Senior Project 1, we design and implement multiple evaluation methodologies to assess detection performance and produce meaningful evaluation results. Concretely, we systematically explore the impact of critical temporal parameters—window size (ranging from 0.3\,s to 2.0\,s) and stride configurations (as a percentage of window length and fixed increments of 0.05\,s)—across different parameter combinations.
+
+This research addresses a practical need by identifying optimal window and stride parameters for different evaluation methods. Our contributions are twofold: (1) Optimal parameter identification across evaluation methods, providing concrete guidance for future implementations; and (2) An extensible evaluation system framework that future researchers can directly apply to assess Thai profanity detection models consistently and reliably. The practical impact is that developers can immediately adopt effective configurations (e.g., short windows such as 0.3\,s for word-level tasks) instead of spending significant time on ad hoc parameter exploration, accelerating the development of Thai language content moderation systems.
+
+\section{Related Work}
+Profanity detection in speech has been a significant research area in speech processing and NLP. Existing methods generally fall into three main categories: (1) ASR-based text processing \cite{Jacobs2023,An2024}, (2) direct speech-based profanity detection using deep learning \cite{An2024,Wazir2022}, and (3) text-based hate speech \cite{Hemtanon2024} and keyword-based approaches \cite{Aljumily2023}. This section overviews these approaches and their relevance to profanity detection in Thai speech, with emphasis on evaluation methodologies and parameter optimization that inform our research.
+
+Traditional pipelines convert speech to text using Automatic Speech Recognition (ASR) and then apply text-based profanity detection algorithms \cite{Davidson2017}. While this leverages mature text processing techniques and extensive text-based profanity datasets, it is unable to precisely locate timestamps in audio, which limits downstream censoring applications that require accurate time spans.
+
+Recent advances in deep learning enable direct processing of audio for speech classification, bypassing ASR. Convolutional and recurrent architectures have been applied on spectrograms for classification tasks including profanity \cite{Wazir2022}. More recently, self-supervised models such as wav2vec~2.0 \cite{Baevski2020} operate directly on raw waveforms and offer precise temporal localization of acoustic features. This direct analysis allows fine-grained windowing strategies that can capture the exact boundaries of profane words—crucial for accurate detection and subsequent censoring. Configurable window sizes make such models particularly suitable for tasks where precise temporal localization is essential.
+
+Keyword spotting focuses on detecting predefined words or phrases in continuous audio streams with low latency and compact models. The technique is modern CNN-based small-footprint systems that operate on log-mel features \cite{Sainath2015KWS}. KWS-style modeling and post-processing (e.g., merging adjacent positive frames/windows) provide complementary insights for profanity detection, especially for obtaining robust word-level spans under resource constraints.
+
+Prior work explores limited segment lengths and overlaps, e.g., 0.3--0.5\,s windows with overlapping strides to reduce word-splitting \cite{Wazir2022}. Frame-level methods evaluate with localization metrics such as IoU \cite{An2024}, but require frame-wise annotations, which are resource-intensive—especially in low-resource languages like Thai. Our study systematizes window/stride choices across evaluation methods to provide practical guidance for downstream censoring.
+
+Evaluation methodologies in speech processing commonly include window-based and frame-based paradigms. In window-based evaluation, continuous audio is segmented into fixed-size windows and each segment is classified independently. For instance, \cite{Wazir2022} systematically examined window lengths of 0.3, 0.4, and 0.5\,s for film censorship and found improved F1 and accuracy with longer segments, concluding 0.5\,s as optimal in their setting. They also addressed the word-splitting issue of fixed windows by introducing overlapping windows (stride < 100\%), which reduced false negatives. However, they did not broadly analyze stride values, leaving open the optimal relationship between window size and stride—an explicit focus of our work. Beyond profanity detection, event-detection literature also motivates windowing and overlapping strategies for robustness \cite{Mesaros2016,Piczak2015}.
+
+Frame-level evaluation offers finer temporal resolution by predicting at short frame intervals (e.g., 10\,ms), producing detailed time-stamped rationales for events (e.g., hate speech), and scoring localization quality via metrics like IoU \cite{An2024}. This granularity enables precise temporal alignment but depends on framewise annotations, which are costly to obtain—particularly for low-resource languages. In contrast, window-based evaluation works well with more common word-level or clip-level labels, aligning with our objective to optimize practical profanity detection. Accordingly, we adopt window-based evaluation to conduct a systematic, large-scale study of window and stride configurations without requiring exhaustive frame-level labels, targeting deployable performance and speed.
+
+\section{Proposed Methodology}
+\subsection{Data Collection}
+We collected data by recording speech and downloading public audio/video content, then labeled profane words in Audacity with start/end timestamps and labels. Labels were consolidated in a CSV containing file path, start time, end time, and label.
+
+\begin{Table}
+\small
+\begin{tabularx}{\columnwidth}{|>{\raggedright\arraybackslash}X|c|c|c|} \hline
+file\_path & start\_time & end\_time & label \\ \hline
+\url{./dataset/audio/example.wav} & 0 & 14.18 & none \\ \hline
+\url{./dataset/audio/example.wav} & 14.18 & 14.91 & profanity1 \\ \hline
+\url{./dataset/audio/example.wav} & 14.91 & 15.37 & profanity2 \\ \hline
+\end{tabularx}
+\captionof{table}{Example of label storage format used in the CSV.}
+\end{Table}
+
+\subsection{Data Processing}
+Audio is normalized, resampled to 16 kHz mono, and denoised (spectral gating). For training, we segment windows using labeled timestamps; for evaluation and real usage, windows slide with overlap to avoid splitting profanity across boundaries \cite{Wazir2022}.
+
+\subsection{Model}
+We adopt a Thai wav2vec~2.0 backbone pre-trained via self-supervised learning \cite{Baevski2020} and fine-tune it for multi-class sequence classification (four profanity types plus none). Input raw waveforms are encoded by a CNN feature encoder and transformer stack; sequence representations are mean-pooled and passed to a classifier.
+
+\subsection{Training}
+We use transfer learning with AdamW, weight decay, batch size 16, learning rate 5e-5 with linear decay, early stopping up to 100 epochs, and class weighting. We also found padding 0.2s at window edges improves transitions capture. Data augmentation includes time stretching (\(\pm10\%\)), pitch shifting (\(\pm2\) semitones), background noise at varying SNRs, and time masking. An 80/20 split with stratification supports robust evaluation.
+
+\begin{equation}
+\mathcal{L}_{\text{weighted}} = - \sum_{c=1}^{C} w_c\, y_c\, \log(p_c)
+\label{eq:weighted-loss}
+\end{equation}
+\begin{equation}
+w_c = \frac{N}{C\, N_c}
+\label{eq:class-weight}
+\end{equation}
+
+\subsection{Evaluation Methodology}
+We evaluate via four methods and two stride strategies: (1) fixed-time stride of 0.05s, and (2) percentage-based strides relative to window length.
+\begin{itemize}
+  \item Window Evaluation: each analysis window is labeled positive if it overlaps a ground-truth profanity by at least 50\%, and predictions are compared window-wise.
+  \item Merged Word Evaluation: consecutive positive windows are merged into a single predicted profanity event and compared to ground truth spans.
+  \item Merged Word IoU Evaluation: merged predictions are scored against ground truth using IoU; a prediction is a TP if IoU exceeds a threshold (e.g., 0.5).
+  \item IoU Area Combination and VAD: extensions incorporate area-based IoU aggregation and optional VAD to refine boundaries and reduce over-segmentation.
+\end{itemize}
+
+\section{System Design}
+We implemented a web-based workflow for uploading audio, running inference with configurable window/stride settings, and reviewing results with timestamps for censoring. The stack comprises a model-serving backend and a simple frontend to visualize detections and playback audio segments.
+
+\section{Results}
+We conducted a grid search over window sizes (0.3--2.0s) and both stride strategies. Findings include: (1) shorter windows (e.g., 0.3s) favor precise word-level localization; (2) percentage-based strides maintain consistent overlap across window sizes; and (3) merging strategies with IoU thresholds stabilize detection compared to raw window classification. Heatmaps of F1-scores across configurations reveal practical optima for binary and multiclass settings and support selecting operating points based on application needs.
+
+\subsection{Real-World Usage Recommendations}
+For binary profanity detection in censoring applications, we recommend short windows with substantial overlap and merged-word IoU post-processing to obtain robust spans for beeping. VAD can further refine spans by trimming silence and bridging small gaps.
+
+\section{Future Work and Limitations}
+Future directions include: (1) context-aware hierarchical models for sentence-level and word-level cues; (2) neural VAD for boundary refinement; and (3) real-time streaming architectures. Current limitations are primarily dataset size and coverage of colloquial variants.
+
+\section{Conclusion}
+We present a practical evaluation framework and parameter study for Thai profanity detection using wav2vec~2.0. By systematically analyzing window and stride configurations across multiple evaluation methods, we provide actionable guidance for deploying censorship systems under data constraints and establish a reproducible foundation for future research.
+
+%--------------------------------------Reference---------------------------------------------------------
+\newcommand{\BIBdecl}{\setlength{\itemsep}{-0.3em}}
+\bibliographystyle{IEEEtran}
+% Include all referenced works; replace placeholders in ref.bib with full citations.
+\nocite{Baevski2020,Davidson2017,Wazir2022,TheeraUmpon2011,Kenton2019,Jacobs2023,An2024,Hemtanon2024,Aljumily2023,Suwanbandit2024}
+\bibliography{ref}
+
+\end{multicols}
+
+\begin{center}
+\includegraphics[width=4.76cm,height=0.18cm]{h-bar.png}
+\end{center}
+
+\newpage
+
+\end{document}
