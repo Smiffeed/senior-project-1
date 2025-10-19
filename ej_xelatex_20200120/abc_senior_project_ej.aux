@@ -17,17 +17,28 @@
 \citation{Davidson_Warmsley_Macy_Weber_2017}
 \citation{jacobs2023hatespeechdetectionlowresource}
 \citation{9900333}
+\citation{7324337}
 \citation{baevski2020wav2vec20frameworkselfsupervised}
+\citation{conneau2021unsupervised}
+\citation{babu2021xlsr}
 \citation{9665775}
 \citation{sainath15b_interspeech}
+\citation{warden2018speechcommands}
 \citation{9900333}
 \citation{app6060162}
 \citation{an-etal-2024-investigation}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{2}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{2}{}\protected@file@percent }
+\citation{harris1978windows}
+\citation{allen1977shorttime}
 \citation{shrawankar2013adaptivemethodologyubiquitousasr}
 \citation{9900333}
+\citation{mcfee2015librosa}
+\citation{sohn1999vad}
 \citation{baevski2020wav2vec20frameworkselfsupervised}
+\citation{loshchilov2019decoupled}
+\citation{park2019specaugment}
+\citation{ko2015audio}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Methodology}{3}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Data Collection}{3}{}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Example of label storage format used in the CSV.}}{3}{}\protected@file@percent }
@@ -38,62 +49,70 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Data Processing}{3}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Model}{3}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Training}{3}{}\protected@file@percent }
-\newlabel{eq:weighted-loss}{{1}{3}{}{equation.1}{}}
-\newlabel{eq:class-weight}{{2}{4}{}{equation.2}{}}
 \@writefile{toc}{\contentsline {paragraph}{Data augmentation.}{4}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Data selection.}{4}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Evaluation Methodology}{4}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Stride strategies.}{4}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.1}Window Evaluation}{4}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.2}Merged-Word Evaluation}{4}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.3}Merged-Word IoU Evaluation}{4}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.4}Merged-Word IoU Area Combination Evaluation}{4}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{4}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Model Performance}{5}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1}Evaluation Methodology Selection}{5}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.2}Window Size Optimization}{5}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Binary F1-score eval 0.05 and eval by percent comparison}}{5}{}\protected@file@percent }
-\newlabel{fig:eval_compare_binary}{{1}{5}{}{figure.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Multiclass F1-score eval by 0.05 and eval by percent comparison}}{5}{}\protected@file@percent }
-\newlabel{fig:eval_compare_multiclass}{{2}{5}{}{figure.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.3}Stride Selection}{6}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Binary F1-score eval by percentage}}{6}{}\protected@file@percent }
-\newlabel{fig:binary_heatmap_percent}{{3}{6}{}{figure.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Binary F1-score eval by 0.05}}{6}{}\protected@file@percent }
-\newlabel{fig:binary_heatmap_0.05}{{4}{6}{}{figure.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Multiclass F1-score eval by 0.05}}{6}{}\protected@file@percent }
-\newlabel{fig:multiclass_heatmap_0.05}{{5}{6}{}{figure.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Multiclass F1-score eval by percentage}}{6}{}\protected@file@percent }
-\newlabel{fig:multiclass_heatmap_percent}{{6}{6}{}{figure.6}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.4}IoU Threshold and Percentage Analysis}{6}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Mean IoU percentage heatmap across different window and stride configurations}}{6}{}\protected@file@percent }
-\newlabel{fig:mean_iou}{{7}{6}{}{figure.7}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Real-World Usage Recommendations}{7}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Voice Activity Detection (VAD) IoU improvement results across different window}}{7}{}\protected@file@percent }
-\newlabel{fig:vad}{{8}{7}{}{figure.8}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Future Work and Limitations}{7}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Future Work}{7}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Context-aware hierarchical models.}{7}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Advanced boundary refinement with neural VAD.}{7}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Real-time streaming architecture.}{7}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Limitations}{7}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Sensitivity to noise.}{7}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Lack of linguistic context.}{7}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Model framework overview}}{4}{}\protected@file@percent }
+\newlabel{fig:model_framework}{{1}{4}{}{figure.1}{}}
+\@writefile{toc}{\contentsline {paragraph}{Model framework overview.}{4}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Model framework overview (5-label setup)}}{4}{}\protected@file@percent }
+\newlabel{fig:model_architecture}{{2}{4}{}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Evaluation Methodology}{5}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Stride strategies.}{5}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Terminology used in figures.}{5}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Classification.}{5}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.1}Window Evaluation}{5}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.2}Merged-Word Evaluation}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.3}Merged-Word IoU Evaluation}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.4}Merged-Word IoU Area Combination Evaluation}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Model Performance}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1}Evaluation Methodology Selection}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.2}Window Size Optimization}{6}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Binary F1-score eval 0.05 and eval by percent comparison}}{6}{}\protected@file@percent }
+\newlabel{fig:eval_compare_binary}{{3}{6}{}{figure.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Multiclass F1-score eval by 0.05 and eval by percent comparison}}{7}{}\protected@file@percent }
+\newlabel{fig:eval_compare_multiclass}{{4}{7}{}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.3}Stride Selection}{7}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Binary F1-score eval by percentage}}{7}{}\protected@file@percent }
+\newlabel{fig:binary_heatmap_percent}{{5}{7}{}{figure.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Binary F1-score eval by 0.05}}{7}{}\protected@file@percent }
+\newlabel{fig:binary_heatmap_0.05}{{6}{7}{}{figure.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Multiclass F1-score eval by 0.05}}{7}{}\protected@file@percent }
+\newlabel{fig:multiclass_heatmap_0.05}{{7}{7}{}{figure.7}{}}
+\citation{harris1978windows}
+\citation{allen1977shorttime}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Multiclass F1-score eval by percentage}}{8}{}\protected@file@percent }
+\newlabel{fig:multiclass_heatmap_percent}{{8}{8}{}{figure.8}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.4}IoU Threshold and Percentage Analysis}{8}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Mean IoU percentage heatmap across different window and stride configurations}}{8}{}\protected@file@percent }
+\newlabel{fig:mean_iou}{{9}{8}{}{figure.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Real-World Usage Recommendations}{8}{}\protected@file@percent }
+\citation{sohn1999vad}
 \bibstyle{IEEEtran}
-\citation{bbaevski2020wav2vec20frameworkselfsupervised}
+\citation{baevski2020wav2vec20frameworkselfsupervised}
 \citation{9900333}
 \citation{Davidson_Warmsley_Macy_Weber_2017}
 \citation{THEERAUMPON201113254}
-\citation{devlin-etal-2019-bert}
 \citation{jacobs2023hatespeechdetectionlowresource}
 \citation{an-etal-2024-investigation}
-\citation{hemtanon_phetkrachang_yangyuen_2024}
+\citation{Hemtanon_Phetkrachang_Yangyuen_2024}
 \citation{Aljumily2023}
 \citation{sainath15b_interspeech}
 \citation{app6060162}
 \citation{7324337}
 \citation{suwanbandit2024improving}
 \citation{9665775}
+\citation{shrawankar2013adaptivemethodologyubiquitousasr}
+\citation{conneau2021unsupervised}
+\citation{babu2021xlsr}
+\citation{mcfee2015librosa}
+\citation{park2019specaugment}
+\citation{ko2015audio}
+\citation{harris1978windows}
+\citation{allen1977shorttime}
+\citation{warden2018speechcommands}
+\citation{loshchilov2019decoupled}
+\citation{sohn1999vad}
 \bibdata{ref}
 \bibcite{Davidson_Warmsley_Macy_Weber_2017}{1}
 \bibcite{9900333}{2}
@@ -102,14 +121,33 @@
 \bibcite{suwanbandit2024improving}{5}
 \bibcite{9665775}{6}
 \bibcite{app6060162}{7}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Voice Activity Detection (VAD) IoU improvement results across different window}}{9}{}\protected@file@percent }
+\newlabel{fig:vad}{{10}{9}{}{figure.10}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Future Work and Limitations}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Future Work}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Context-aware hierarchical models.}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Advanced boundary refinement with neural VAD.}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Real-time streaming architecture.}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Limitations}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Sensitivity to noise.}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Lack of linguistic context.}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Data scarcity.}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{9}{}\protected@file@percent }
 \bibcite{Hemtanon_Phetkrachang_Yangyuen_2024}{8}
 \bibcite{Aljumily2023}{9}
 \bibcite{jacobs2023hatespeechdetectionlowresource}{10}
-\bibcite{sainath15b_interspeech}{11}
-\bibcite{an-etal-2024-investigation}{12}
-\bibcite{shrawankar2013adaptivemethodologyubiquitousasr}{13}
-\bibcite{devlin-etal-2019-bert}{14}
-\bibcite{7324337}{15}
-\@writefile{toc}{\contentsline {paragraph}{Data scarcity.}{8}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{8}{}\protected@file@percent }
-\gdef \@abspage@last{9}
+\bibcite{7324337}{11}
+\bibcite{conneau2021unsupervised}{12}
+\bibcite{babu2021xlsr}{13}
+\bibcite{sainath15b_interspeech}{14}
+\bibcite{warden2018speechcommands}{15}
+\bibcite{an-etal-2024-investigation}{16}
+\bibcite{harris1978windows}{17}
+\bibcite{allen1977shorttime}{18}
+\bibcite{shrawankar2013adaptivemethodologyubiquitousasr}{19}
+\bibcite{mcfee2015librosa}{20}
+\bibcite{sohn1999vad}{21}
+\bibcite{loshchilov2019decoupled}{22}
+\bibcite{ko2015audio}{23}
+\bibcite{park2019specaugment}{24}
+\gdef \@abspage@last{11}

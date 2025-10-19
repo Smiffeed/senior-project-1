@@ -15,6 +15,9 @@
 \usepackage{wrapfig}
 \usepackage{indentfirst}
 \usepackage{url} % for breakable paths/URLs in tables
+% TikZ for drawing architecture diagram
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,calc}
 
 \newenvironment{Figure}
   {\par\medskip\noindent\minipage{\linewidth}}
@@ -121,7 +124,7 @@ DOI:10.4186/ej.20xx.xx.x.xx
 \section{Introduction}
 Content moderation remains a critical challenge for digital media platforms that host large volumes of explicit content, especially in languages with limited computational resources such as Thai. While automated profanity detection systems are well-researched for languages like English in both text \cite{Davidson_Warmsley_Macy_Weber_2017} and audio \cite{9900333}, Thai presents unique computational challenges due to its tonal nature and complex phonetic structure \cite{THEERAUMPON201113254}, as well as the scarcity of large-scale profanity-labeled datasets. Moreover, traditional manual censorship is still widely used, but it is time-consuming, especially for large-scale content moderation.
 
-Recent advances in speech recognition and deep learning have enabled more sophisticated content moderation tools. However, most existing models are trained on non-Thai datasets. Therefore, our work addressed these challenges by fine-tuning a pre-trained wav2vec~2.0 model \cite{baevski2020wav2vec20frameworkselfsupervised} specifically for Thai profanity detection through supervised learning with sequence classification. The base model used was \texttt{airesearch/wav2vec2-large-xlsr-53-th}, which had been pre-trained on Thai speech data using self-supervised learning techniques.
+Recent advances in speech recognition and deep learning have enabled more sophisticated content moderation tools. However, most existing models are trained on non-Thai datasets. Therefore, our work addressed these challenges by fine-tuning a pre-trained wav2vec~2.0 trans model \cite{baevski2020wav2vec20frameworkselfsupervised} specifically for Thai profanity detection through supervised learning with sequence classification. The base transformer model used was \texttt{airesearch/wav2vec2-large-xlsr-53-th}, which had been pre-trained on Thai speech data using self-supervised learning techniques.
 
 While this initial system demonstrated promising results, its performance was constrained by limited training data, time, and computational resources. A fundamental issue in low-resource language processing is that deep learning models typically require extensive labeled datasets to achieve optimal performance.
 
@@ -140,9 +143,9 @@ Research on spoken profanity/hate-speech detection spans two main paradigms: (i)
 
 	\textbf{ASR vs. AWE.} Jacobs et\,al. \cite{jacobs2023hatespeechdetectionlowresource} compare cascaded ASR systems with AWE models for low-resource languages (Wolof, Swahili), showing that AWE can match or surpass ASR in the presence of transcription errors by operating directly on audio and avoiding error propagation. This supports speech-native representations when labeled text resources are scarce, and motivates evaluation settings that emphasize temporal localization from audio.
 
-	\textbf{Direct audio methods.} CNN/RNN classifiers on spectrograms have been used for profanity detection \cite{9900333}. Self-supervised models such as wav2vec2.0 operate on raw waveforms and provide fine temporal sensitivity \cite{baevski2020wav2vec20frameworkselfsupervised}, enabling sliding-window inference that better captures word boundaries.
+  \textbf{Direct audio methods.} CNN/RNN classifiers on spectrograms have been used for profanity detection \cite{9900333} and broadly for audio event recognition \cite{7324337}, such as wav2vec2.0 operate on raw waveforms E2E CNN and provide fine temporal sensitivity \cite{baevski2020wav2vec20frameworkselfsupervised}. With self-supervised model cross-lingual extensions improving transfer across languages \cite{conneau2021unsupervised,babu2021xlsr}, enabling prove of utilizing pre-trained transformer model.
 
-	\textbf{Keyword spotting (KWS).} KWS targets predefined terms with low-latency, small-footprint models \cite{9665775}, commonly using CNNs over log-mel features \cite{sainath15b_interspeech}. KWS-style post-processing (merging adjacent positives) is useful for forming robust word-level spans.
+  \textbf{Keyword spotting (KWS).} KWS targets predefined terms with low-latency, small-footprint models \cite{9665775}, commonly using CNNs over log-mel features \cite{sainath15b_interspeech} and widely adopted datasets such as Speech Commands \cite{warden2018speechcommands}. KWS-style post-processing (merging adjacent positives) is useful for forming robust word-level spans.
 
 	\textbf{Temporal segmentation and evaluation.} Prior work has examined fixed window lengths (0.3--0.5\,s) and overlaps for censorship \cite{9900333}, but systematic analyses of stride relative to window size are limited. Localization-quality metrics from sound event detection (e.g., event/segment measures and IoU) provide objective temporal scoring \cite{app6060162,an-etal-2024-investigation}. These gaps motivate our study of window/stride trade-offs under window- and IoU-based evaluations tailored to censorable spans.
 
@@ -170,7 +173,7 @@ file\_path & start\_time & end\_time & label \\ \hline
 \begin{tabularx}{\columnwidth}{|>{\raggedright\arraybackslash}X|c|c|}
 \hline
 Label & Count & Total Duration (s) \\ \hline
-none & 1969 & 15088.47 \\ \hline
+none & 1969 & 3088.47 \\ \hline
 guu & 290 & 51.58 \\ \hline
 meung & 254 & 52.61 \\ \hline
 hia & 164 & 48.33 \\ \hline
@@ -217,28 +220,102 @@ Number of unique source files & 34 \\ \hline
 \end{Table}
 
 \subsection{Data Processing}
-We match the deployed and evaluation pipelines to the training-time preprocessing used for fine-tuning \texttt{airesearch/wav2vec2-large-xlsr-53-th}. For each windowed slice, we load the exact segment via frame offsets to avoid drift, apply a first-order pre-emphasis filter ($\mathrm{coef}=0.97$), and perform a gentle energy-based gate by attenuating samples below $2.5\times$ the 20th-percentile amplitude. To reduce boundary artifacts without suppressing content, we use a Hamming window technique \cite{shrawankar2013adaptivemethodologyubiquitousasr}, followed by mild dynamic range compression via soft clipping around $2\times$ RMS to stabilize dynamics across windows. Audio is then resampled to 16 kHz mono if needed, normalized by z-scoring (mean/std) and scaled by 0.5 to match training amplitude statistics, and finally padded or truncated to the exact window length in samples (e.g., 0.5\,s $\Rightarrow$ 8000 samples at 16 kHz). For training, we segment windows directly from labeled timestamps. For evaluation and real usage, we slide windows with overlap to avoid splitting words \cite{9900333}, merge adjacent positives into word-level spans, and optionally refine boundaries with a simple VAD (\texttt{librosa.effects.split}, \texttt{top\_db}=20).
+We match the deployed and evaluation pipelines to the training-time preprocessing used for fine-tuning \texttt{airesearch/wav2vec2-large-xlsr-53-th}. For each windowed slice, we load the exact segment via frame offsets to avoid drift, apply a first-order pre-emphasis filter ($\mathrm{coef}=0.97$), and perform a gentle energy-based gate by attenuating samples below $2.5\times$ the 20th-percentile amplitude. To reduce boundary artifacts without suppressing content, we use a Hamming window technique \cite{harris1978windows,allen1977shorttime,shrawankar2013adaptivemethodologyubiquitousasr}, followed by mild dynamic range compression via soft clipping around $2\times$ RMS to stabilize dynamics across windows. Audio is then resampled to 16 kHz mono if needed, normalized by z-scoring (mean/std) and scaled by 0.5 to match training amplitude statistics, and finally padded or truncated to the exact window length in samples (e.g., 0.5\,s $\Rightarrow$ 8000 samples at 16 kHz). For training, we segment windows directly from labeled timestamps. For evaluation and real usage, we slide windows with overlap to avoid splitting words \cite{9900333}, merge adjacent positives into word-level spans, and optionally refine boundaries with a simple VAD via \texttt{librosa} utilities \cite{mcfee2015librosa} or a statistical detector \cite{sohn1999vad} (we use \texttt{librosa.effects.split}, \texttt{top\_db}=20).
 
 \subsection{Model}
-We adopt a Thai wav2vec~2.0 pre-trained \texttt{airesearch/wav2vec2-large-xlsr-53-th} via self-supervised learning \cite{baevski2020wav2vec20frameworkselfsupervised} and fine-tune it for multi-class sequence classification (four profanity types plus none). Input raw waveforms are encoded by a CNN feature encoder and transformer stack; sequence representations are mean-pooled and passed to a classifier.
+We adopt a Thai wav2vec~2.0 backbone (\texttt{airesearch/wav2vec2-large-xlsr-53-th}) \cite{baevski2020wav2vec20frameworkselfsupervised} and fine-tune it for five-way sequence classification with labels \{none, yed, guu, meung, hia\}. At inference time, we run the classifier on overlapping fixed-length windows and then merge contiguous positive predictions into word-level spans (see Fig.~\ref{fig:model_architecture}). Below we describe each component and why it is used, without equations.
+
 
 \subsection{Training}
-Our training methodology leverages transfer learning to address the low-resource nature of Thai profanity detection. We fine-tune the Thai wav2vec~2.0 (\texttt{airesearch/wav2vec2-large-xlsr-53-th}), which provides strong speech representations learned from general Thai audio, and adapt it to multi-class profanity classification. Training is configured to balance learning efficiency and generalization: a batch size of 16 offers stable gradients within available compute; a learning rate of $5\times10^{-5}$ with linear decay enables fine-grained parameter updates without overshooting; and AdamW with weight decay regularizes the parameter space to reduce overfitting. To further handle class imbalance, we apply class weighting as defined in Eqs.~(\ref{eq:weighted-loss})--(\ref{eq:class-weight}), which amplifies the contribution of underrepresented classes. We train for up to 100 epochs with early stopping based on validation performance to prevent premature convergence or overfitting.
+Our training methodology leverages transfer learning to address the low-resource nature of Thai profanity detection. We fine-tune the Thai wav2vec~2.0 backbone, which provides strong speech representations learned from general Thai audio, and adapt it to multi-class profanity classification. Training is configured to balance learning efficiency and generalization: a batch size of 16 offers stable gradients within available compute; a learning rate of 5e-5 with linear decay enables fine-grained updates without overshooting; and AdamW with decoupled weight decay regularizes parameters to reduce overfitting \cite{loshchilov2019decoupled}. To handle class imbalance, we use class-weighted cross-entropy with weights inversely proportional to class frequency, so rare profanity classes contribute more to the loss. We train for up to 100 epochs with early stopping based on validation performance.
 
-\begin{equation}
-\mathcal{L}_{\text{weighted}} = - \sum_{c=1}^{C} w_c\, y_c\, \log(p_c)
-\label{eq:weighted-loss}
-\end{equation}
-\begin{equation}
-w_c = \frac{N}{C\, N_c}
-\label{eq:class-weight}
-\end{equation}
 
-\paragraph{Data augmentation.} We adopt a targeted but comprehensive augmentation suite to expose the model to realistic acoustic variability likely to occur in production: (i) time stretching within a \(\pm10\%\) range to accommodate speaking rate differences; (ii) pitch shifting by \(\pm2\) semitones to simulate speaker characteristics and vocal ranges; (iii) addition of background noise across multiple signal-to-noise ratios (SNRs) to improve robustness in noisy environments; and (iv) random time masking to discourage over-reliance on specific temporal cues and promote invariance to local dropouts.
+
+\paragraph{Data augmentation.} We adopt a targeted but comprehensive augmentation suite to expose the model to realistic acoustic variability likely to occur in production: (i) time stretching within a \(\pm10\%\) range to accommodate speaking rate differences; (ii) pitch shifting by \(\pm2\) semitones to simulate speaker characteristics and vocal ranges; and (iii) random time and frequency masking to discourage over-reliance on specific temporal cues and promote invariance to local dropouts (SpecAugment-style masking) \cite{park2019specaugment,ko2015audio}.
 
 \paragraph{Data selection.} To reflect real-world usage in which profanity must be detected and censored in online media, we construct our splits from Recording, YouTube and other public sources. Audio is collected from diverse channels and content genres (dialogue, livestreams, vlogs, gaming, and music-backed speech) and segmented into clips with annotated profane spans and non-profane speech. For training contain voice recordings and YouTube content, while validation and test sets are held out from distinct YouTube channels. This split strategy evaluates generalization to unseen speakers and contexts, reflecting practical deployment scenarios.
+% Removed old rasterized model figure to rely on the TikZ diagram below
+\begin{Figure}
+	\begin{center}
+		\includegraphics[width=8cm]{img/model_framework.png}
+	\end{center}
+  \captionof{figure}{Model framework overview}\label{fig:model_framework}
+\end{Figure}
+
+\paragraph{Model framework overview.} The profanity detection system processes audio input through several stages to produce segment-level predictions (see Fig.~\ref{fig:model_framework}):
+\begin{itemize}
+  \item \textbf{Audio Segmentation and Pre-processing:} The input audio is divided into overlapping segments (windows) of fixed duration. Each segment undergoes pre-processing, including normalization and optional noise reduction, to standardize input conditions and enhance feature extraction.
+  \item \textbf{Feature Extraction (wav2vec2):} Each pre-processed segment is passed through a wav2vec2 feature encoder. This module consists of a convolutional neural network (CNN) that extracts low-level acoustic features, followed by a stack of transformer layers that model long-range temporal dependencies via self-attention.
+  \item \textbf{Pooling and Classification:} The segment-level representations are aggregated using mean pooling. The pooled features are then fed into a classification head, which consists of a fully connected layer (or layers) that outputs class probabilities for each segment.
+  \item \textbf{Prediction:} The model predicts one of several classes for each segment: non-profanity or one of multiple profanity types. The final output is a sequence of segment-level predictions, which can be post-processed (e.g., merged, filtered) to yield word-level or region-level profanity spans.
+\end{itemize}
+
+\begin{Figure}
+\centering
+\begin{tikzpicture}[
+  font=\small,
+  block/.style={draw, rounded corners=2pt, align=center, minimum width=7.4cm, inner sep=6pt},
+  subblock/.style={draw, rounded corners=2pt, align=center, minimum width=7.0cm, inner sep=6pt, fill=gray!10},
+  header/.style={draw, rounded corners=2pt, align=center, fill=cyan!20, minimum width=7.4cm, inner sep=6pt},
+  arrow/.style={-Latex, thick},
+  dashedbox/.style={draw, dashed, rounded corners=2pt, inner sep=6pt}
+]
+% Top: dataset examples
+\node[dashedbox, label=above:Dataset Examples] (topbox) {%%
+\begin{minipage}{7.2cm}\centering
+Audio: 'audio1.wav' — Duration: 0.0–14.18s — Label: none\\
+Audio: 'audio2.wav' — Duration: 2.19–2.56s — Label: yed\\
+Audio: 'audio3.wav' — Duration: 0.94–1.07s — Label: guu
+\end{minipage}};
+
+% Model body
+\node[header, below=3mm of topbox] (input) {Audio Input Layer\\16kHz Sampling Rate\\Shape: (None, 16000)};
+\node[subblock, below=2mm of input] (feat) {Feature Extractor\\7 Conv1D Layers\\Shape: (None, 49, 512)};
+\node[subblock, below=2mm of feat] (proj) {Feature Projection\\Shape: (None, 49, 1024)};
+\node[block, fill=gray!20, below=2mm of proj] (encoder) {Transformer Encoder\\12 Self-Attention Layers\\12 Feed Forward Layers\\Shape: (None, 49, 1024)};
+\node[header, below=2mm of encoder] (pool) {Mean Pooling Layer\\Shape: (None, 1024)};
+\node[block, fill=gray!10, below=2mm of pool] (cls) {Classification Head\\Dense(1024→1024) — Dropout(0.1)\\Dense(1024→5)};
+
+% Bottom: output classes
+\node[dashedbox, below=2mm of cls, label=below:Output Layer] (out) {%%
+\begin{minipage}{7.2cm}\centering
+5 Classes: {none, yed, guu, meung, hia}\\
+Shape: (None, 5)
+\end{minipage}};
+
+% Arrows
+\draw[arrow] (topbox.south) -- (input.north);
+\draw[arrow] (input.south) -- (feat.north);
+\draw[arrow] (feat.south) -- (proj.north);
+\draw[arrow] (proj.south) -- (encoder.north);
+\draw[arrow] (encoder.south) -- (pool.north);
+\draw[arrow] (pool.south) -- (cls.north);
+\draw[arrow] (cls.south) -- (out.north);
+\end{tikzpicture}
+  \captionof{figure}{Model framework overview (5-label setup)}\label{fig:model_architecture}
+\end{Figure}
+From Figs.~\ref{fig:model_architecture}, the model architecture consists of the following components:
+	\textbf{Input and windowing.} Audio is resampled to 16 kHz mono and segmented into overlapping windows (for example, 0.3--2.0 seconds) using the preprocessing pipeline described earlier. Windowing provides temporal granularity for both detection and timestamping and lets us trade off latency and boundary precision.
+
+	\textbf{CNN feature encoder (7 conv1d layers).} The raw waveform first passes through a stack of seven 1D convolution layers with progressively larger stride. This converts samples into a compact sequence of latent frames at a lower frame rate (roughly a few dozen frames per second). Convolutions are local and efficient; they learn robust low-level acoustics (onsets, formants, energy patterns) while downsampling to reduce the length of the sequence the transformer must process. This stage corresponds to the “Feature Extractor” in the diagram.
+
+	\textbf{Feature projection and positional embedding.} A linear projection lifts the convolutional features to the transformer width (1024 channels), followed by normalization and dropout. A learned convolutional positional embedding is added so the transformer is aware of frame order. This step aligns the representation with the transformer’s expected dimensionality and improves stability.
+
+	\textbf{Transformer encoder (12 layers).} We use a stack of twelve transformer blocks with multi-head self-attention and feed-forward sublayers, each wrapped with residual connections and layer normalization. Self-attention lets the model integrate information across the entire window, capturing long-range dependencies (for example, phoneme context and coarticulation) that are important in Thai. Deeper stacks improve modeling capacity for complex acoustics while residuals maintain trainability.
+
+	\textbf{Temporal pooling.} We summarize the sequence with mean pooling across time to obtain a fixed-length representation per window. Mean pooling is simple, stable across different window sizes, and works well when the relevant acoustic evidence is distributed over the window. Attention pooling is a viable alternative but increases parameters and complexity.
+
+	\textbf{Classification head.} A lightweight multilayer perceptron maps the pooled representation to class logits: one hidden layer of size 1024 with GELU activation and dropout (0.1), followed by a final linear layer to 5 outputs. This head is intentionally small to reduce overfitting on limited data while providing enough capacity to separate profanity types from non-profanity.
+
+	\textbf{Loss and class imbalance.} We train with class-weighted cross-entropy, assigning larger weights to rarer classes (and a smaller weight to the dominant “none” class). This makes the model pay more attention to infrequent profanity categories, improving recall without excessively harming precision.
+
+	\textbf{Why these choices.} Convolutions compress and denoise raw waveforms efficiently; transformers then model long-range context crucial for speech. Mean pooling and a small classification head keep the model robust and data-efficient. Windowed inference yields timestamps and supports merging/refinement steps (e.g., VAD) that align predictions with censorable spans.
+
+\noindent
+	The proposed profanity detection system is based on a transformer architecture, specifically the wav2vec~2.0 model, and operates as follows (see Fig.~\ref{fig:model_architecture}):
 
 
+This framework leverages the strong representational power of self-supervised transformer models for speech, enabling robust detection of profane content even in low-resource and noisy conditions.
 
 \subsection{Evaluation Methodology}
 Our evaluation framework is designed for real-world censoring use cases and systematic evaluation. It assesses performance across a wide range of temporal parameters and four complementary methodologies, while comparing two stride strategies for sliding-window inference.
@@ -247,6 +324,14 @@ Our evaluation framework is designed for real-world censoring use cases and syst
 \begin{itemize}
   \item \textbf{Fixed-time stride:} a constant step of 0.05\,s between consecutive windows and strides.
   \item \textbf{Percentage-based stride:} a relative step (e.g., 10\%, 20\%) of the window length so that overlap scales with window size.
+\end{itemize}
+
+\paragraph{Terminology used in figures.} To avoid ambiguity, we use the following shorthand: \emph{eval by 0.05} denotes the fixed-time stride setting with a 0.05\,s step, while \emph{eval by percent} denotes percentage-of-window strides (e.g., an 80\% stride means a step of 0.8\,$\times$ window length; for a 0.3\,s window, 80\% corresponds to a 0.24\,s step).
+
+\paragraph{Classification.} We evaluate in two label spaces:
+\begin{itemize}
+  \item \textbf{Binary:} Collapse all profanity classes into a single positive label (``profanity'') versus \emph{none} as negative.
+  \item \textbf{Multiclass:} Use the full set of labels \{none, yed, guu, meung, hia\} and compute F1 in this five-class setting.
 \end{itemize}
 
 \subsubsection{Window Evaluation}
@@ -330,7 +415,7 @@ We performed a threshold sensitivity analysis to select the IoU threshold for th
 \end{Figure}
 Using the IoU Area Combination metric, we summarized mean IoU across window/stride Figs. \ref{fig:mean_iou}. Smaller windows (0.3--0.5\,s) generally produce higher mean IoU than larger windows, confirming that finer segmentation improves boundary localization. As an illustrative example for a single ground-truth span [2.00, 5.00]\,s, discontinuous predictions [2.00, 3.00] and [4.00, 5.00] yield an intersection of 2.00\,s and a union of 3.00\,s, giving $\mathrm{IoU}\approx0.67$, which would count as a true positive at a 0.1 threshold. Aggregated results show best mean IoU at small windows with appropriately scaled strides, with fixed 0.05\,s steps yielding competitive performance at 0.3\,s windows.
 
-As illustrated in Fig.\ref{fig:mean_iou}, there is a clear inverse relationship between window size and mean IoU. Smaller window configurations (0.3--0.5\,s) consistently outperform larger windows across both evaluation types. The fixed-step condition (\texttt{eval\_by\_0.05}) shows a slight advantage at small windows, peaking at a combined mean IoU of 29.19\% for a 0.3\,s window with a 0.25\,s stride. Confidence intervals widen for larger windows, indicating higher variance and less consistent temporal localization as window duration increases. These observations align with established time-frequency trade-offs and windowing effects in speech processing, and support the hypothesis that shorter analysis windows provide more precise boundary detection for profanity segments.
+As illustrated in Fig.\ref{fig:mean_iou}, there is a clear inverse relationship between window size and mean IoU. Smaller window configurations (0.3--0.5\,s) consistently outperform larger windows across both evaluation types. The fixed-step condition (\texttt{eval\_by\_0.05}) shows a slight advantage at small windows, peaking at a combined mean IoU of 29.19\% for a 0.3\,s window with a 0.25\,s stride. Confidence intervals widen for larger windows, indicating higher variance and less consistent temporal localization as window duration increases. These observations align with established time-frequency trade-offs and windowing effects in speech processing \cite{harris1978windows,allen1977shorttime}, and support the hypothesis that shorter analysis windows provide more precise boundary detection for profanity segments.
 
 Focusing on window effects, three operating points highlight the trade-off between detection and temporal localization: a large 2.0\,s window with a 1.9\,s stride maximizes binary F1 (47.05\%) but yields a low IoU (9.16\%), indicating coarse boundaries; a short 0.3\,s window with an 80\% stride gives the best multiclass F1 (52.34\%) with improved IoU (24.90\%); and a 0.3\,s window with a 70\% stride attains the highest IoU (25.34\%) with strong multiclass F1 (51.17\%). Overall, 0.3\,s windows consistently tighten temporal boundaries and improve IoU, while very large windows favor presence detection at the expense of precise spans.
 
@@ -350,7 +435,7 @@ Recommendations depend on deployment goals:
 	\end{center}
   \captionof{figure}{Voice Activity Detection (VAD) IoU improvement results across different window}\label{fig:vad}
 \end{Figure}
-As shown in Fig. \ref{fig:vad}, VAD post-processing consistently improves IoU across all window sizes by trimming silence and bridging brief gaps. The most significant gains occur at moderate window lengths (0.5--2.0\,s), where VAD can effectively refine boundaries without excessive fragmentation. For very short windows (0.3\,s), VAD still provides modest IoU improvements, while for large windows (2.0\,s), the impact is less pronounced due to already coarse boundaries. Overall, VAD is a valuable addition to enhance temporal precision in profanity detection outputs.
+As shown in Fig. \ref{fig:vad}, VAD post-processing consistently improves IoU across all window sizes by trimming silence and bridging brief gaps. The most significant gains occur at moderate window lengths (0.5--2.0\,s), where VAD can effectively refine boundaries without excessive fragmentation. For very short windows (0.3\,s), VAD still provides modest IoU improvements, while for large windows (2.0\,s), the impact is less pronounced due to already coarse boundaries. Overall, VAD is a valuable addition to enhance temporal precision in profanity detection outputs \cite{sohn1999vad}.
 
 \section{Future Work and Limitations}
 \subsection{Future Work}
@@ -374,7 +459,7 @@ We present a Thai profanity detection system and comprehensive parameter study u
 \newcommand{\BIBdecl}{\setlength{\itemsep}{-0.3em}}
 \bibliographystyle{IEEEtran}
 % Include all referenced works; replace placeholders in ref.bib with full citations.
-\nocite{bbaevski2020wav2vec20frameworkselfsupervised, 9900333,Davidson_Warmsley_Macy_Weber_2017,THEERAUMPON201113254,devlin-etal-2019-bert, jacobs2023hatespeechdetectionlowresource, an-etal-2024-investigation, hemtanon_phetkrachang_yangyuen_2024, Aljumily2023, sainath15b_interspeech, app6060162, 7324337, suwanbandit2024improving, 9665775}
+\nocite{baevski2020wav2vec20frameworkselfsupervised, 9900333,Davidson_Warmsley_Macy_Weber_2017,THEERAUMPON201113254, jacobs2023hatespeechdetectionlowresource, an-etal-2024-investigation, Hemtanon_Phetkrachang_Yangyuen_2024, Aljumily2023, sainath15b_interspeech, app6060162, 7324337, suwanbandit2024improving, 9665775, shrawankar2013adaptivemethodologyubiquitousasr, conneau2021unsupervised, babu2021xlsr, mcfee2015librosa, park2019specaugment, ko2015audio, harris1978windows, allen1977shorttime, warden2018speechcommands, loshchilov2019decoupled, sohn1999vad}
 \bibliography{ref}
 
 \end{multicols}

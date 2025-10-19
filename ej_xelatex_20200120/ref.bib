@@ -48,25 +48,7 @@ keywords = {Thai phoneme segmentation, Thai phoneme recognition, Hidden markov m
 abstract = {In this paper, we investigate the application of a phoneme recognition system with a soft phoneme segmentation procedure for Thai speech. In addition, we propose a new method to classify the tonal accent of a syllable. The recognition system classifies Thai phonemes, including the 21-class initial consonants, the 18-class vowels, and the 9-class final consonants, using discrete hidden Markov models. Two features, i.e., the Mel frequency with perceptual linear prediction and the Mel frequency cepstrum coefficients, are compared to investigate their utilities in phoneme recognition. Neural networks are applied to classify the 5-class tonal accents by using the temporal variation of pitch frequencies across syllables as features. Speaker-dependent and speaker-independent data sets recorded from 30 speakers are used to test our recognition system. The experimental results show promising recognition performances for the phonemes and tonal accents in both data sets.}
 }
 
-@inproceedings{devlin-etal-2019-bert,
-    title = "{BERT}: Pre-training of Deep Bidirectional Transformers for Language Understanding",
-    author = "Devlin, Jacob  and
-      Chang, Ming-Wei  and
-      Lee, Kenton  and
-      Toutanova, Kristina",
-    editor = "Burstein, Jill  and
-      Doran, Christy  and
-      Solorio, Thamar",
-    booktitle = "Proceedings of the 2019 Conference of the North {A}merican Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)",
-    month = jun,
-    year = "2019",
-    address = "Minneapolis, Minnesota",
-    publisher = "Association for Computational Linguistics",
-    url = "https://aclanthology.org/N19-1423/",
-    doi = "10.18653/v1/N19-1423",
-    pages = "4171--4186",
-    abstract = "We introduce a new language representation model called BERT, which stands for Bidirectional Encoder Representations from Transformers. Unlike recent language representation models (Peters et al., 2018a; Radford et al., 2018), BERT is designed to pre-train deep bidirectional representations from unlabeled text by jointly conditioning on both left and right context in all layers. As a result, the pre-trained BERT model can be fine-tuned with just one additional output layer to create state-of-the-art models for a wide range of tasks, such as question answering and language inference, without substantial task-specific architecture modifications. BERT is conceptually simple and empirically powerful. It obtains new state-of-the-art results on eleven natural language processing tasks, including pushing the GLUE score to 80.5 (7.7 point absolute improvement), MultiNLI accuracy to 86.7{\%} (4.6{\%} absolute improvement), SQuAD v1.1 question answering Test F1 to 93.2 (1.5 point absolute improvement) and SQuAD v2.0 Test F1 to 83.1 (5.1 point absolute improvement)."
-}
+ 
 
 @misc{jacobs2023hatespeechdetectionlowresource,
       title={Towards hate speech detection in low-resource languages: Comparing ASR to acoustic word embeddings on Wolof and Swahili}, 
@@ -135,8 +117,8 @@ abstract = {In this paper, we investigate the application of a phoneme recogniti
   title={Improving thai-dialect automatic speech recognition with curriculum learning},
   journal={Chulalongkorn University Theses and Dissertations (Chula ETD)},
   author={Suwanbandit, Artit},
-  doi={10.58837/CHULA.THE.2024.291}
-  url={https://digital.car.chula.ac.th/chulaetd/11546}
+  doi={10.58837/CHULA.THE.2024.291},
+  url={https://digital.car.chula.ac.th/chulaetd/11546},
   year={2024}
 }
 
@@ -195,4 +177,107 @@ DOI = {10.3390/app6060162}
       archivePrefix={arXiv},
       primaryClass={cs.CL},
       url={https://arxiv.org/abs/1303.3948}, 
+}
+
+ 
+
+ 
+
+ 
+
+@misc{conneau2021unsupervised,
+      title={Unsupervised Cross-Lingual Representation Learning for Speech Recognition},
+      author={Alexis Conneau and Alexei Baevski and Ronan Collobert and Abdelrahman Mohamed and Michael Auli},
+      year={2021},
+      eprint={2006.13979},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2006.13979}
+}
+
+@misc{babu2021xlsr,
+      title={XLS-R: Self-Supervised Cross-Lingual Speech Representation Learning at Scale},
+      author={Arun Babu and Changhan Wang and Andros Tjandra and Artyom Astafurov and Wei-Ning Hsu and Ann Lee and Ahmed Ali and Alexis Conneau},
+      year={2021},
+      eprint={2111.09296},
+      archivePrefix={arXiv},
+      primaryClass={eess.AS},
+      url={https://arxiv.org/abs/2111.09296}
+}
+
+@inproceedings{mcfee2015librosa,
+  title={librosa: Audio and music signal analysis in Python},
+  author={McFee, Brian and Raffel, Colin and Liang, Dawen and Ellis, Daniel PW and McVicar, Matt and Battenberg, Eric and Nieto, Oriol},
+  booktitle={Proceedings of the 14th Python in Science Conference},
+  year={2015},
+  pages={18--25},
+  organization={SciPy}
+}
+
+@inproceedings{park2019specaugment,
+  title={SpecAugment: A Simple Data Augmentation Method for Automatic Speech Recognition},
+  author={Park, Daniel S. and Chan, William and Zhang, Yu and Chiu, Chia-Wei and Zoph, Barret and Cubuk, Ekin D. and Le, Quoc V.},
+  booktitle={Proc. Interspeech},
+  year={2019},
+  pages={2613--2617},
+  doi={10.21437/Interspeech.2019-2680}
+}
+
+@inproceedings{ko2015audio,
+  title={Audio Augmentation for Speech Recognition},
+  author={Ko, Tom and Peddinti, Vijayaditya and Povey, Daniel and Khudanpur, Sanjeev},
+  booktitle={Proc. Interspeech},
+  year={2015},
+  pages={3586--3589}
+}
+
+@article{harris1978windows,
+  title={On the Use of Windows for Harmonic Analysis with the Discrete Fourier Transform},
+  author={Harris, Fredric J.},
+  journal={Proceedings of the IEEE},
+  volume={66},
+  number={1},
+  pages={51--83},
+  year={1978},
+  doi={10.1109/PROC.1978.10837}
+}
+
+@article{allen1977shorttime,
+  title={Short-Time Spectral Analysis, Synthesis, and Modification by Discrete Fourier Transform},
+  author={Allen, Jont B.},
+  journal={IEEE Transactions on Acoustics, Speech, and Signal Processing},
+  volume={25},
+  number={3},
+  pages={235--238},
+  year={1977},
+  doi={10.1109/TASSP.1977.1162920}
+}
+
+@misc{warden2018speechcommands,
+  title={Speech Commands: A Dataset for Limited-Vocabulary Speech Recognition},
+  author={Warden, Pete},
+  year={2018},
+  eprint={1804.03209},
+  archivePrefix={arXiv},
+  primaryClass={cs.SD},
+  url={https://arxiv.org/abs/1804.03209}
+}
+
+@inproceedings{loshchilov2019decoupled,
+  title={Decoupled Weight Decay Regularization},
+  author={Loshchilov, Ilya and Hutter, Frank},
+  booktitle={International Conference on Learning Representations (ICLR)},
+  year={2019},
+  url={https://openreview.net/forum?id=Bkg6RiCqY7}
+}
+
+@article{sohn1999vad,
+  title={A Statistical Model-Based Voice Activity Detection},
+  author={Sohn, Jongseo and Kim, Nam Soo and Sung, Wonyong},
+  journal={IEEE Signal Processing Letters},
+  volume={6},
+  number={1},
+  pages={1--3},
+  year={1999},
+  doi={10.1109/97.736233}
 }
