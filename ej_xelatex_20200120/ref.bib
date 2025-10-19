@@ -1,92 +1,179 @@
-@article{Baevski2020,
-  author    = {Alexei Baevski and Yuhao Zhou and Abdelrahman Mohamed and Michael Auli},
-  title     = {wav2vec 2.0: A Framework for Self-Supervised Learning of Speech Representations},
-  journal   = {Advances in Neural Information Processing Systems},
-  year      = {2020}
+@misc{baevski2020wav2vec20frameworkselfsupervised,
+      title={wav2vec 2.0: A Framework for Self-Supervised Learning of Speech Representations}, 
+      author={Alexei Baevski and Henry Zhou and Abdelrahman Mohamed and Michael Auli},
+      year={2020},
+      eprint={2006.11477},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2006.11477}, 
 }
 
-@inproceedings{Wazir2022,
-  author    = {A. Wazir and others},
-  title     = {Profanity Detection for Film Censorship},
-  booktitle = {Proceedings of an IEEE/ACM Workshop},
-  year      = {2022}
+@ARTICLE{9900333,
+  author={Wazir, Abdulaziz Saleh Ba and Karim, Hezerul Abdul and Lyn, Hor Sui and Ahmad Fauzi, Mohammad Faizal and Mansor, Sarina and Lye, Mohd Haris},
+  journal={IEEE Access}, 
+  title={Deep Learning-Based Detection of Inappropriate Speech Content for Film Censorship}, 
+  year={2022},
+  volume={10},
+  number={},
+  pages={101697-101715},
+  keywords={Speech recognition;Acoustics;Computational modeling;Deep learning;Motion pictures;Censorship;Speech processing;Foul language;speech recognition;key word spotting;spoken term detection;censorship;deep learning;convolutional neural network},
+  doi={10.1109/ACCESS.2022.3208921}}
+
+@article{Davidson_Warmsley_Macy_Weber_2017, 
+  title={Automated Hate Speech Detection and the Problem of Offensive Language}, 
+  volume={11}, 
+  url={https://ojs.aaai.org/index.php/ICWSM/article/view/14955},
+  DOI={10.1609/icwsm.v11i1.14955},
+  abstractNote={ &lt;p&gt; A key challenge for automatic hate-speech detection on social media is the separation of hate speech from other instances of offensive language. Lexical detection methods tend to have low precision because they classify all messages containing particular terms as hate speech and previous work using supervised learning has failed to distinguish between the two categories. We used a crowd-sourced hate speech lexicon to collect tweets containing hate speech keywords. We use crowd-sourcing to label a sample of these tweets into three categories: those containing hate speech, only offensive language, and those with neither. We train a multi-class classifier to distinguish between these different categories. Close analysis of the predictions and the errors shows when we can reliably separate hate speech from other offensive language and when this differentiation is more difficult. We find that racist and homophobic tweets are more likely to be classified as hate speech but that sexist tweets are generally classified as offensive. Tweets without explicit hate keywords are also more difficult to classify. &lt;/p&gt; },
+  number={1},
+  journal={Proceedings of the International AAAI Conference on Web and Social Media},
+  author={Davidson, Thomas and Warmsley, Dana and Macy, Michael and Weber, Ingmar},
+  year={2017}, 
+  month={May}, 
+  pages={512-515} 
 }
 
-@article{Davidson2017,
-  author  = {Thomas Davidson and Dana Warmsley and Michael Macy and Ingmar Weber},
-  title   = {Automated Hate Speech Detection and the Problem of Offensive Language},
-  journal = {Proceedings of ICWSM},
-  year    = {2017}
+@article{THEERAUMPON201113254,
+title = {Phoneme and tonal accent recognition for Thai speech},
+journal = {Expert Systems with Applications},
+volume = {38},
+number = {10},
+pages = {13254-13259},
+year = {2011},
+issn = {0957-4174},
+doi = {https://doi.org/10.1016/j.eswa.2011.04.142},
+url = {https://www.sciencedirect.com/science/article/pii/S0957417411006695},
+author = {Nipon Theera-Umpon and Suppakarn Chansareewittaya and Sansanee Auephanwiriyakul},
+keywords = {Thai phoneme segmentation, Thai phoneme recognition, Hidden markov models, Speech recognition, Mel frequency cepstrum},
+abstract = {In this paper, we investigate the application of a phoneme recognition system with a soft phoneme segmentation procedure for Thai speech. In addition, we propose a new method to classify the tonal accent of a syllable. The recognition system classifies Thai phonemes, including the 21-class initial consonants, the 18-class vowels, and the 9-class final consonants, using discrete hidden Markov models. Two features, i.e., the Mel frequency with perceptual linear prediction and the Mel frequency cepstrum coefficients, are compared to investigate their utilities in phoneme recognition. Neural networks are applied to classify the 5-class tonal accents by using the temporal variation of pitch frequencies across syllables as features. Speaker-dependent and speaker-independent data sets recorded from 30 speakers are used to test our recognition system. The experimental results show promising recognition performances for the phonemes and tonal accents in both data sets.}
 }
 
-@article{TheeraUmpon2011,
-  author  = {N. Theera{-}Umpon and C. Chansareewittaya and C. Auephanwiriyakul},
-  title   = {Speech Processing Challenges in Thai},
-  journal = {Journal of Signal Processing},
-  year    = {2011}
+@inproceedings{devlin-etal-2019-bert,
+    title = "{BERT}: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+    author = "Devlin, Jacob  and
+      Chang, Ming-Wei  and
+      Lee, Kenton  and
+      Toutanova, Kristina",
+    editor = "Burstein, Jill  and
+      Doran, Christy  and
+      Solorio, Thamar",
+    booktitle = "Proceedings of the 2019 Conference of the North {A}merican Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)",
+    month = jun,
+    year = "2019",
+    address = "Minneapolis, Minnesota",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/N19-1423/",
+    doi = "10.18653/v1/N19-1423",
+    pages = "4171--4186",
+    abstract = "We introduce a new language representation model called BERT, which stands for Bidirectional Encoder Representations from Transformers. Unlike recent language representation models (Peters et al., 2018a; Radford et al., 2018), BERT is designed to pre-train deep bidirectional representations from unlabeled text by jointly conditioning on both left and right context in all layers. As a result, the pre-trained BERT model can be fine-tuned with just one additional output layer to create state-of-the-art models for a wide range of tasks, such as question answering and language inference, without substantial task-specific architecture modifications. BERT is conceptually simple and empirically powerful. It obtains new state-of-the-art results on eleven natural language processing tasks, including pushing the GLUE score to 80.5 (7.7 point absolute improvement), MultiNLI accuracy to 86.7{\%} (4.6{\%} absolute improvement), SQuAD v1.1 question answering Test F1 to 93.2 (1.5 point absolute improvement) and SQuAD v2.0 Test F1 to 83.1 (5.1 point absolute improvement)."
 }
 
-@article{Kenton2019,
-  author  = {Jacob Devlin and Ming-Wei Chang and Kenton Lee and Kristina Toutanova},
-  title   = {BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding},
-  journal = {NAACL-HLT},
-  year    = {2019}
+@misc{jacobs2023hatespeechdetectionlowresource,
+      title={Towards hate speech detection in low-resource languages: Comparing ASR to acoustic word embeddings on Wolof and Swahili}, 
+      author={Christiaan Jacobs and Nathanaël Carraz Rakotonirina and Everlyn Asiko Chimoto and Bruce A. Bassett and Herman Kamper},
+      year={2023},
+      eprint={2306.00410},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2306.00410} 
 }
 
-@article{Jacobs2023,
-  author  = {Jacobs and Rakotonirina and Chimoto and Bassett and Kamper},
-  title   = {ASR-based Profanity Detection in Low-resource Settings},
-  journal = {arXiv preprint arXiv:2301.00000},
-  year    = {2023}
+@inproceedings{an-etal-2024-investigation,
+    title = "An Investigation into Explainable Audio Hate Speech Detection",
+    author = "An, Jinmyeong  and
+      Lee, Wonjun  and
+      Jeon, Yejin  and
+      Ok, Jungseul  and
+      Kim, Yunsu  and
+      Lee, Gary Geunbae",
+    editor = "Kawahara, Tatsuya  and
+      Demberg, Vera  and
+      Ultes, Stefan  and
+      Inoue, Koji  and
+      Mehri, Shikib  and
+      Howcroft, David  and
+      Komatani, Kazunori",
+    booktitle = "Proceedings of the 25th Annual Meeting of the Special Interest Group on Discourse and Dialogue",
+    month = sep,
+    year = "2024",
+    address = "Kyoto, Japan",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2024.sigdial-1.45/",
+    doi = "10.18653/v1/2024.sigdial-1.45",
+    pages = "533--543",
+    abstract = "Research on hate speech has predominantly revolved around the detection and interpretation from textual inputs, leaving verbal content largely unexplored. Moreover, while there has been some limited exploration into hate speech detection within verbal acoustic speech inputs, the aspect of interpretability has been overlooked. As such, we introduce a new task within the audio hate speech detection task domain - we specifically aim to identify specific time frames of hate speech within audio utterances. Towards this, we propose two different approaches, cascading and End-to-End (E2E). The first cascading approach initially converts audio to transcripts, identifies hate speech within these transcripts, and subsequently locates the corresponding audio time frames. Conversely, the second E2E approach processes audio utterances directly, which allows it to pinpoint hate speech within specific time frames. Moreover, due to the lack of explainable audio hate speech datasets that include frame-level rationales, we curated a synthetic audio dataset to train our models. We further validate these models on actual human speech utterances and we find that the E2E approach outperforms the cascading method in terms of audio frame Intersection over Union (IoU) metric. Furthermore, we observe that the inclusion of frame-level rationales significantly enhances hate speech detection accuracy for both E2E and cascading approaches."
 }
 
-@article{An2024,
-  author  = {An and others},
-  title   = {Explainable Hate Speech Detection in Speech},
-  journal = {arXiv preprint arXiv:2401.00000},
-  year    = {2024}
-}
-
-@article{Hemtanon2024,
-  author  = {Hemtanon and Phetkrachang and Yangyuen},
-  title   = {Thai Text-based Hate Speech Research},
-  journal = {Thai Journal of Computer Science},
-  year    = {2024}
+@article{Hemtanon_Phetkrachang_Yangyuen_2024, 
+  title={Identifying Text-based Online Thai Hate Speech in Social Media},
+  volume={42},
+  url={https://so03.tci-thaijo.org/index.php/jiskku/article/view/278073}, 
+  DOI={10.14456/jiskku.2024.27},
+  abstractNote={&amp;lt;p&amp;gt;&amp;lt;strong&amp;gt;Purpose:&amp;lt;/strong&amp;gt; This work proposes a method to detect Thai online hate speech which can be categorized to 5 types, including ethnic-based, gender-based, ableism, belief-based, and social status-based hate speech. Online comments from famous social network services in Thailand are collected and annotated for training data.&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;&amp;lt;strong&amp;gt;Methodology:&amp;lt;/strong&amp;gt; Machine learning approaches are employed to perform multiclass classification for identifying the hate speech. Moreover, we exploit the information gain score to determine which terms are significant to relay hateful intent of each hate speech class.&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;&amp;lt;strong&amp;gt;Findings: &amp;lt;/strong&amp;gt;The results of hate speech detection reveal that a language model of combining TF-IDF and trigram using with SVM technique obtained the best performance in detection for 0.76 F-measure score in average. The use of IG score also provides a list of significant terms that related to a specific hate speech class.&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;&amp;lt;strong&amp;gt;Applications of this study:&amp;lt;/strong&amp;gt; Hate speech detection helps to analyze Thai text messages that may be hurtful to recipients. It can actively filter and disallow the message before posting to prevent online cyber bullies in social media platforms, and it reminds users who may unintentionally choose Thai risky words that may cause emotional wound to readers.&amp;lt;/p&amp;gt;},
+  number={4},
+  journal={Journal of Information Science Research and Practice },
+  author={Hemtanon, Siranuch and Phetkrachang, Ketsara and Yangyuen, Wachira},
+  year={2024},
+  month={Sep.},
+  pages={44–56} 
 }
 
 @article{Aljumily2023,
-  author  = {Aljumily},
-  title   = {Keyword-based Profanity Detection: A Survey},
+  author  = {Aljumily, Refat},
+  title   = {An Experiment in Keyword-based Approach for Hate Speech Detection in Online Social Media Comments},
   journal = {Journal of Information Security},
+  doi = {10.2139/ssrn.4651992},
+  url = {http://dx.doi.org/10.2139/ssrn.4651992},
+  mounth = {Dec.},
   year    = {2023}
 }
 
-@article{Suwanbandit2024,
-  author  = {Suwanbandit},
-  title   = {Tones and Phonetics in Thai Speech Processing},
-  journal = {Proceedings of Thai NLP},
-  year    = {2024}
+@article{suwanbandit2024improving,
+  title={Improving thai-dialect automatic speech recognition with curriculum learning},
+  journal={Chulalongkorn University Theses and Dissertations (Chula ETD)},
+  author={Suwanbandit, Artit},
+  doi={10.58837/CHULA.THE.2024.291}
+  url={https://digital.car.chula.ac.th/chulaetd/11546}
+  year={2024}
 }
 
-@inproceedings{Sainath2015KWS,
+@inproceedings{sainath15b_interspeech,
+  title     = {Convolutional neural networks for small-footprint keyword spotting},
   author    = {Tara N. Sainath and Carolina Parada},
-  title     = {Convolutional Neural Networks for Small-Footprint Keyword Spotting},
-  booktitle = {Proceedings of Interspeech},
-  year      = {2015}
+  year      = {2015},
+  booktitle = {Interspeech 2015},
+  pages     = {1478--1482},
+  doi       = {10.21437/Interspeech.2015-352},
+  issn      = {2958-1796}
 }
 
-@inproceedings{Mesaros2016,
-  author    = {Annamaria Mesaros and Toni Heittola and Tuomas Virtanen},
-  title     = {Metrics for Polyphonic Sound Event Detection},
-  booktitle = {Proceedings of WASPAA},
-  year      = {2015}
+@Article{app6060162,
+AUTHOR = {Mesaros, Annamaria and Heittola, Toni and Virtanen, Tuomas},
+TITLE = {Metrics for Polyphonic Sound Event Detection},
+JOURNAL = {Applied Sciences},
+VOLUME = {6},
+YEAR = {2016},
+NUMBER = {6},
+ARTICLE-NUMBER = {162},
+URL = {https://www.mdpi.com/2076-3417/6/6/162},
+ISSN = {2076-3417},
+ABSTRACT = {This paper presents and discusses various metrics proposed for evaluation of polyphonic sound event detection systems used in realistic situations where there are typically multiple sound sources active simultaneously. The system output in this case contains overlapping events, marked as multiple sounds detected as being active at the same time. The polyphonic system output requires a suitable procedure for evaluation against a reference. Metrics from neighboring fields such as speech recognition and speaker diarization can be used, but they need to be partially redefined to deal with the overlapping events. We present a review of the most common metrics in the field and the way they are adapted and interpreted in the polyphonic case. We discuss segment-based and event-based definitions of each metric and explain the consequences of instance-based and class-based averaging using a case study. In parallel, we provide a toolbox containing implementations of presented metrics.},
+DOI = {10.3390/app6060162}
 }
 
-@inproceedings{Piczak2015,
-  author    = {Karol J. Piczak},
-  title     = {Environmental Sound Classification with Convolutional Neural Networks},
-  booktitle = {Proceedings of ICASSP},
-  year      = {2015}
+@INPROCEEDINGS{7324337,
+  author={Piczak, Karol J.},
+  booktitle={2015 IEEE 25th International Workshop on Machine Learning for Signal Processing (MLSP)}, 
+  title={Environmental sound classification with convolutional neural networks}, 
+  year={2015},
+  volume={},
+  number={},
+  pages={1-6},
+  keywords={Neural networks;Training;Accuracy;Convolution;Convolutional codes;Yttrium;Pattern recognition;environmental sound;convolutional neural networks;classification},
+  doi={10.1109/MLSP.2015.7324337}
 }
 
 @ARTICLE{9665775,
@@ -99,3 +186,13 @@
   pages={4169-4199},
   keywords={Hidden Markov models;Acoustics;Feature extraction;Decoding;Computational modeling;Viterbi algorithm;Virtual assistants;Keyword spotting;deep learning;acoustic model;small footprint;robustness},
   doi={10.1109/ACCESS.2021.3139508}}
+
+@misc{shrawankar2013adaptivemethodologyubiquitousasr,
+      title={An Adaptive Methodology for Ubiquitous ASR System}, 
+      author={Urmila Shrawankar and Vilas Thakare},
+      year={2013},
+      eprint={1303.3948},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/1303.3948}, 
+}

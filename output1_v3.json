@@ -1,0 +1,61 @@
+{
+  "censoring_method": "silence",
+  "model_info": {
+    "model_dir": "models\\4_classes_max_steps",
+    "ensemble_size": 1,
+    "confidence_threshold": 0.5,
+    "window_size": 0.5,
+    "overlap": 0.25
+  },
+  "detections": [
+    {
+      "label": "เย็ด",
+      "start_time": 0.412,
+      "end_time": 0.996,
+      "duration": 0.584,
+      "confidence": 0.897
+    },
+    {
+      "label": "มึง",
+      "start_time": 3.636,
+      "end_time": 4.0,
+      "duration": 0.364,
+      "confidence": 0.883
+    },
+    {
+      "label": "เหี้ย",
+      "start_time": 4.5,
+      "end_time": 5.75,
+      "duration": 1.25,
+      "confidence": 0.956
+    },
+    {
+      "label": "เย็ด",
+      "start_time": 6.75,
+      "end_time": 9.25,
+      "duration": 2.5,
+      "confidence": 0.947
+    }
+  ],
+  "summary": {
+    "total_detections": 4,
+    "total_censored_duration": 4.698,
+    "detections_by_class": {
+      "เย็ด": {
+        "count": 2,
+        "total_duration": 3.084,
+        "avg_confidence": 0.922
+      },
+      "มึง": {
+        "count": 1,
+        "total_duration": 0.364,
+        "avg_confidence": 0.883
+      },
+      "เหี้ย": {
+        "count": 1,
+        "total_duration": 1.25,
+        "avg_confidence": 0.956
+      }
+    }
+  }
+}

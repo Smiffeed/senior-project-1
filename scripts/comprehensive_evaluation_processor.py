@@ -20,6 +20,7 @@ from sklearn.metrics import accuracy_score, balanced_accuracy_score, roc_curve, 
 import matplotlib.pyplot as plt
 import seaborn as sns
 from transformers import Wav2Vec2ForSequenceClassification, Wav2Vec2FeatureExtractor
+import torchaudio
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -265,27 +266,106 @@ def setup_thai_font():
         pass
 
 def advanced_preprocess_audio(file_path, start_time, end_time):
-    """Advanced audio preprocessing matching training pipeline"""
+    """Preprocess audio slice using the same steps as the training pipeline.
+
+    Steps:
+    - Slice-load with torchaudio at source sample rate using frame offsets
+    - Convert to mono
+    - Pre-emphasis (librosa.effects.preemphasis, coef=0.97)
+    - Gentle noise gate based on low-energy percentile
+    - Light edge windowing (Hamming blend)
+    - Mild dynamic range compression
+    - Resample to 16kHz if needed
+    - Z-score normalize, then scale to 0.5
+    - Pad/truncate to the exact window length in samples
+    """
     try:
-        # Load audio
-        audio, sr = librosa.load(file_path, sr=16000, offset=start_time, duration=end_time-start_time)
+        # Determine desired output length from the requested window duration
+        duration = max(1e-6, float(end_time) - float(start_time))
+        target_sr = 16000
+        max_length = int(round(duration * target_sr)) or target_sr
+
+        # Load specific slice using torchaudio for precise offsets
+        try:
+            metadata = torchaudio.info(file_path)
+            sr = metadata.sample_rate
+            frame_offset = int(round(start_time * sr))
+            num_frames = max(1, int(round((end_time - start_time) * sr)))
+            audio, sr = torchaudio.load(
+                file_path,
+                frame_offset=frame_offset,
+                num_frames=num_frames,
+            )
+        except Exception:
+            # Fallback to librosa if torchaudio slice-load fails
+            audio_np, sr = librosa.load(file_path, sr=None, offset=start_time, duration=duration)
+            audio = torch.from_numpy(audio_np).unsqueeze(0)
+
+        # Mono
+        if audio.dim() > 1 and audio.shape[0] > 1:
+            audio = torch.mean(audio, dim=0, keepdim=True)
+        audio_np = audio.squeeze().numpy().astype(np.float32, copy=False)
+
+        # Pre-emphasis (preserve high-frequency content)
+        try:
+            audio_np = librosa.effects.preemphasis(audio_np, coef=0.97)
+        except Exception:
+            pass
+
+        # Gentle noise gate using 20th percentile energy
+        if audio_np.size:
+            energy = np.abs(audio_np)
+            noise_threshold = np.percentile(energy, 20)
+            noise_gate_threshold = float(noise_threshold) * 2.5
+            mask = energy < noise_gate_threshold
+            # Attenuate quiet parts but keep signal
+            audio_np = np.where(mask, audio_np * 0.1, audio_np)
+
+        # Light edge windowing to reduce boundary artifacts
+        L = len(audio_np)
+        if L > 160:
+            w = np.hamming(L).astype(np.float32)
+            w = 0.85 + 0.15 * w  # keep mostly original amplitude
+            audio_np = audio_np * w
+
+        # Mild dynamic range compression
+        rms = float(np.sqrt(np.mean(audio_np**2)) + 1e-8)
+        # Soft clipping around 2*rms
+        audio_np = np.tanh(audio_np / (2.0 * rms)) * (2.0 * rms)
+
+        # Convert back to tensor for resampling if needed
+        audio_t = torch.from_numpy(audio_np).unsqueeze(0)
+        if sr != target_sr:
+            try:
+                resampler = torchaudio.transforms.Resample(orig_freq=sr, new_freq=target_sr)
+                audio_t = resampler(audio_t)
+            except Exception:
+                # Fallback to librosa resample
+                audio_np = librosa.resample(audio_np, orig_sr=sr, target_sr=target_sr)
+                audio_t = torch.from_numpy(audio_np).unsqueeze(0)
         
-        # Apply noise reduction
-        audio = librosa.effects.preemphasis(audio)
-        
-        # Normalize
-        if len(audio) > 0:
-            audio = audio / (np.max(np.abs(audio)) + 1e-8)
-        
-        # Ensure minimum length
-        min_length = int(0.1 * sr)  # 0.1 seconds minimum
-        if len(audio) < min_length:
-            audio = np.pad(audio, (0, min_length - len(audio)), mode='constant')
-        
-        return audio
+        # Normalize: z-score then scale
+        mean = audio_t.mean()
+        std = audio_t.std()
+        if float(std) > 1e-8:
+            audio_t = (audio_t - mean) / std
+        else:
+            audio_t = audio_t - mean
+        audio_t = audio_t * 0.5
+
+        # Pad or truncate to exact window length
+        if audio_t.shape[1] < max_length:
+            pad = max_length - audio_t.shape[1]
+            audio_t = torch.nn.functional.pad(audio_t, (0, pad))
+        elif audio_t.shape[1] > max_length:
+            audio_t = audio_t[:, :max_length]
+
+        return audio_t.squeeze().numpy().astype(np.float32, copy=False)
     except Exception as e:
         print(f"Error preprocessing audio {file_path}: {e}")
-        return np.zeros(1600)  # Return 0.1 second of silence
+        # Fallback to silence of the requested duration (at least 0.1s)
+        fallback_len = max(int(round((end_time - start_time) * 16000)), 1600)
+        return np.zeros(fallback_len, dtype=np.float32)
 
 def evaluate_window(model, feature_extractor, file_path, start_time, end_time, device):
     """Evaluate a single window and return predictions"""

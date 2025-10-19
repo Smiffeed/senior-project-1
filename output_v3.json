@@ -1,0 +1,56 @@
+{
+  "censoring_method": "silence",
+  "model_info": {
+    "model_dir": "models\\4_classes_max_steps",
+    "ensemble_size": 1,
+    "confidence_threshold": 0.5,
+    "window_size": 0.5,
+    "overlap": 0.25
+  },
+  "detections": [
+    {
+      "label": "เหี้ย",
+      "start_time": 1.18,
+      "end_time": 2.724,
+      "duration": 1.544,
+      "confidence": 0.962
+    },
+    {
+      "label": "มึง",
+      "start_time": 6.764,
+      "end_time": 7.25,
+      "duration": 0.486,
+      "confidence": 0.895
+    },
+    {
+      "label": "เหี้ย",
+      "start_time": 9.046,
+      "end_time": 9.5,
+      "duration": 0.454,
+      "confidence": 0.944
+    },
+    {
+      "label": "เหี้ย",
+      "start_time": 11.0,
+      "end_time": 11.5,
+      "duration": 0.5,
+      "confidence": 0.924
+    }
+  ],
+  "summary": {
+    "total_detections": 4,
+    "total_censored_duration": 2.984000000000001,
+    "detections_by_class": {
+      "เหี้ย": {
+        "count": 3,
+        "total_duration": 2.498,
+        "avg_confidence": 0.943
+      },
+      "มึง": {
+        "count": 1,
+        "total_duration": 0.486,
+        "avg_confidence": 0.895
+      }
+    }
+  }
+}

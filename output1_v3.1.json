@@ -1,0 +1,42 @@
+{
+  "censoring_method": "silence",
+  "model_info": {
+    "model_dir": "models\\4_classes_max_steps",
+    "ensemble_size": 1,
+    "confidence_threshold": 0.5,
+    "window_size": 2.0,
+    "overlap": 1.0
+  },
+  "detections": [
+    {
+      "label": "เย็ด",
+      "start_time": 0.412,
+      "end_time": 0.996,
+      "duration": 0.584,
+      "confidence": 0.772
+    },
+    {
+      "label": "เหี้ย",
+      "start_time": 9.828,
+      "end_time": 10.668,
+      "duration": 0.84,
+      "confidence": 0.925
+    }
+  ],
+  "summary": {
+    "total_detections": 2,
+    "total_censored_duration": 1.424,
+    "detections_by_class": {
+      "เย็ด": {
+        "count": 1,
+        "total_duration": 0.584,
+        "avg_confidence": 0.772
+      },
+      "เหี้ย": {
+        "count": 1,
+        "total_duration": 0.84,
+        "avg_confidence": 0.925
+      }
+    }
+  }
+}

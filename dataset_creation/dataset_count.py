@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Load the CSV file
-df = pd.read_csv('./csv/train_guu.csv')
+df = pd.read_csv('./csv/eval_5labels.csv')
 
 # Count the occurrences of each word
 word_counts = df['label'].value_counts()

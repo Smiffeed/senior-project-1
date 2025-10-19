@@ -3,6 +3,11 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: abc_senior_project_ej.aux
 Reallocating 'name_of_file' (item size: 1) to 9 items.
 The style file: IEEEtran.bst
+Case mismatch error between cite keys hemtanon_phetkrachang_yangyuen_2024 and Hemtanon_Phetkrachang_Yangyuen_2024
+---line 68 of file abc_senior_project_ej.aux
+ : \citation{hemtanon_phetkrachang_yangyuen_2024
+ :                                              }
+I'm skipping whatever remains of this command
 Reallocating 'name_of_file' (item size: 1) to 4 items.
 Reallocating 'singl_function' (item size: 4) to 100 items.
 Reallocating 'singl_function' (item size: 4) to 100 items.
@@ -10,49 +15,59 @@ Reallocating 'singl_function' (item size: 4) to 100 items.
 Reallocating 'wiz_functions' (item size: 4) to 6000 items.
 Reallocating 'singl_function' (item size: 4) to 100 items.
 Database file #1: ref.bib
+I was expecting a `,' or a `}'---line 139 of file ref.bib
+ :   
+ :   url={https://digital.car.chula.ac.th/chulaetd/11546}
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "jm3"
+Warning--I didn't find a database entry for "librosa_stft"
+Warning--I didn't find a database entry for "bbaevski2020wav2vec20frameworkselfsupervised"
 -- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+Warning--empty year in suwanbandit2024improving
 
 Done.
-You've used 14 entries,
+You've used 15 entries,
             4087 wiz_defined-function locations,
-            899 strings with 9372 characters,
-and the built_in function-call counts, 6729 in all, are:
-= -- 498
-> -- 174
-< -- 11
-+ -- 86
-- -- 39
-* -- 305
-:= -- 1135
-add.period$ -- 28
-call.type$ -- 14
-change.case$ -- 14
-chr.to.int$ -- 27
-cite$ -- 14
-duplicate$ -- 567
-empty$ -- 645
-format.name$ -- 50
-if$ -- 1524
+            921 strings with 11310 characters,
+and the built_in function-call counts, 12164 in all, are:
+= -- 965
+> -- 321
+< -- 90
++ -- 184
+- -- 71
+* -- 626
+:= -- 1832
+add.period$ -- 32
+call.type$ -- 15
+change.case$ -- 19
+chr.to.int$ -- 213
+cite$ -- 16
+duplicate$ -- 850
+empty$ -- 942
+format.name$ -- 73
+if$ -- 2797
 int.to.chr$ -- 0
-int.to.str$ -- 14
-missing$ -- 105
-newline$ -- 65
-num.names$ -- 14
-pop$ -- 289
+int.to.str$ -- 15
+missing$ -- 156
+newline$ -- 88
+num.names$ -- 19
+pop$ -- 382
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 514
+skip$ -- 902
 stack$ -- 0
-substring$ -- 77
-swap$ -- 327
-text.length$ -- 2
+substring$ -- 558
+swap$ -- 704
+text.length$ -- 19
 text.prefix$ -- 0
 top$ -- 5
-type$ -- 14
-warning$ -- 0
-while$ -- 17
-width$ -- 16
-write$ -- 136
+type$ -- 15
+warning$ -- 1
+while$ -- 45
+width$ -- 17
+write$ -- 189
+(There were 2 error messages)

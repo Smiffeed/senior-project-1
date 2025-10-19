@@ -54,6 +54,23 @@
   }%
 }
 
+% Thai font fallback for rendering Thai labels in tables
+% Prefer Noto Sans Thai, fall back to TH Sarabun New or Tahoma (Windows)
+\IfFontExistsTF{Noto Sans Thai}{
+  \newfontfamily\thaifont{Noto Sans Thai}[Script=Thai]
+}{
+  \IfFontExistsTF{TH Sarabun New}{
+    \newfontfamily\thaifont{TH Sarabun New}[Script=Thai]
+  }{
+    \IfFontExistsTF{Tahoma}{
+      \newfontfamily\thaifont{Tahoma}[Script=Thai]
+    }{
+      % Last resort: fall back to main font (may not render Thai properly)
+      \newfontfamily\thaifont{TeX Gyre Termes}
+    }
+  }
+}
+
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\figurename}{Fig.}
 
@@ -67,16 +84,16 @@
 \begin{flushleft}
 \textit{\fontsize{14}{17}\selectfont Review} \\ [4ex]
 \textbf{\fontsize{20}{24}\selectfont Low-Resource Thai Profanity Detection of Speech Recognition} \\ [5ex]
-\textbf{\fontsize{12}{15}\selectfont Nutchapol Rodpholchoo{\normalfont{\textsuperscript{1,a}}}, Nutchanon Tongkumbanchong{\normalfont{\textsuperscript{1,b,*}}}, and Sirinalin Saekhow{\normalfont{\textsuperscript{1}}}} \\ [2ex]
+\textbf{\fontsize{12}{15}\selectfont Nutchapol Rodpholchoo{\normalfont{\textsuperscript{1,a}}}, Nutchanon Tongkumbanchong{\normalfont{\textsuperscript{1,b}}}, and Sirinalin Saekhow{\normalfont{\textsuperscript{1,c}}}} \\ [2ex]
 {\fontsize{8}{12}\selectfont 1} Department of Computer Science and Information Technology, Vincent Mary School of Engineering, Science and Technology, Assumption University, Thailand \\
-E-mail: {\textsuperscript{a}}[nutchapol.r@gmail.com], {\textsuperscript{b}}[not provided] (Corresponding author) \\ [5ex]
+E-mail: {\textsuperscript{a}}[nutchapol.r@gmail.com], {\textsuperscript{b}}[u6511074@au.edu], {\textsuperscript{c}}[u6510240@au.edu] \\ [5ex]
 \end{flushleft}
 
 %--------------------------ABSTRACT-------------------------------------
-{\paragraph{Abstract.} This study develops an initial Thai profanity detection model and, more importantly, identifies effective evaluation settings for practical censorship. We fine-tune a Thai wav2vec~2.0 classifier and perform a systematic parameter study over window sizes (0.3--2.0\,s) and two stride schemes\textemdash{}fixed 0.05\,s and percentage-of-window\textemdash{}assessed under four protocols: (i) window-level classification, (ii) merged-word evaluation, (iii) merged-word with Intersection-over-Union (IoU) thresholds, and (iv) variants incorporating voice activity detection (VAD) for boundary refinement. Across a large grid of configurations, three findings emerge: shorter windows (\textasciitilde{}0.3\,s) improve word-level localization; percentage-based strides maintain consistent overlap across window sizes; and merging with an IoU threshold stabilizes decisions relative to raw window predictions. VAD further trims silence and bridges brief gaps, yielding cleaner, censorable spans. The outcome is an initial, deployable model together with concrete, evidence-based parameter recommendations and a reusable evaluation framework. These results reduce ad hoc tuning, guide future work on Thai profanity detection under data scarcity, and accelerate real-world deployment of automated beep-censoring systems.}
+{\paragraph{Abstract.} This study develops an initial Thai profanity detection model and, more importantly, identifies effective evaluation settings for practical censorship. We fine-tune a Thai wav2vec~2.0 classifier and perform a systematic parameter study over window sizes (0.3--2.0\,s) and two stride schemes\textemdash{}fixed 0.05\,s and percentage-of-window\textemdash{}assessed under four protocols: (i) window-level classification, (ii) merged-word evaluation, (iii) merged-word with Intersection-over-Union (IoU) thresholds, and (iv) variants incorporating voice activity detection (VAD) for boundary refinement. Across a large grid of configurations, three findings emerge: shorter windows (\textasciitilde{}0.3\,s) improve word localization; percentage-based strides maintain consistent overlap across window sizes; and merging with an IoU threshold stabilizes decisions relative to raw window predictions. VAD further trims silence and bridges brief gaps, yielding cleaner, censorable spans. The outcome is an initial, deployable model together with concrete, evidence-based parameter recommendations and a reusable evaluation framework. These results reduce ad hoc tuning, guide future work on Thai profanity detection under data scarcity, and accelerate real-world deployment of automated beep-censoring systems.}
 %---------------------------------------------------------------------------
 
-{\flushleft \textbf{Keywords:} Thai profanity detection, Wav2Vec2, evaluation methodology, VAD, Speech Recognition, Keyword spotting}
+{\flushleft \textbf{Keywords:} Hate Speech, Profanity Detection, Thai, Wav2Vec2, Voice Activity Detection, Speech Recognition, Keyword spotting}
 
 \vfill
 \begin{flushleft}
@@ -102,38 +119,34 @@ DOI:10.4186/ej.20xx.xx.x.xx
 \begin{multicols}{2}
 
 \section{Introduction}
-Content moderation remains a critical challenge for digital media platforms that host large volumes of explicit content, especially in languages with limited computational resources such as Thai. While automated profanity detection systems are well-researched for languages like English in both text \cite{Davidson2017} and audio \cite{Wazir2022}, Thai presents unique computational challenges due to its tonal nature and complex phonetic structure \cite{TheeraUmpon2011}, as well as the scarcity of large-scale profanity-labeled datasets. Moreover, traditional manual censorship is still widely used, but it is time-consuming, inconsistent, and impractical for large-scale content moderation.
+Content moderation remains a critical challenge for digital media platforms that host large volumes of explicit content, especially in languages with limited computational resources such as Thai. While automated profanity detection systems are well-researched for languages like English in both text \cite{Davidson_Warmsley_Macy_Weber_2017} and audio \cite{9900333}, Thai presents unique computational challenges due to its tonal nature and complex phonetic structure \cite{THEERAUMPON201113254}, as well as the scarcity of large-scale profanity-labeled datasets. Moreover, traditional manual censorship is still widely used, but it is time-consuming, especially for large-scale content moderation.
 
-Recent advances in speech recognition and deep learning have enabled more sophisticated content moderation tools. However, most existing models are trained on non-Thai datasets, resulting in higher error rates when applied to Thai profanity detection. Our work addressed these challenges by fine-tuning a pre-trained wav2vec~2.0 model \cite{Baevski2020} specifically for Thai profanity detection through supervised learning with sequence classification. The base model used was \texttt{airesearch/wav2vec2-large-xlsr-53-th}, which had been pre-trained on Thai speech data using self-supervised learning techniques.
+Recent advances in speech recognition and deep learning have enabled more sophisticated content moderation tools. However, most existing models are trained on non-Thai datasets. Therefore, our work addressed these challenges by fine-tuning a pre-trained wav2vec~2.0 model \cite{baevski2020wav2vec20frameworkselfsupervised} specifically for Thai profanity detection through supervised learning with sequence classification. The base model used was \texttt{airesearch/wav2vec2-large-xlsr-53-th}, which had been pre-trained on Thai speech data using self-supervised learning techniques.
 
-While this initial system demonstrated promising results, its performance was constrained by limited training data, time, and computational resources. A fundamental issue in low-resource language processing is that deep learning models typically require extensive labeled datasets to achieve optimal performance—often impractical to obtain for specialized tasks like profanity detection \cite{Kenton2019}.
+While this initial system demonstrated promising results, its performance was constrained by limited training data, time, and computational resources. A fundamental issue in low-resource language processing is that deep learning models typically require extensive labeled datasets to achieve optimal performance.
 
-The development of robust Thai profanity detection models faces this central constraint: the lack of extensive labeled datasets. Although ASR-based pipelines show promise, they struggle with Thai's phonetic diversity, slang variations, and tonal ambiguities, leading to inconsistent profanity detection accuracy. More critically, the evaluation methodologies used to assess these systems often lack systematic analysis of temporal parameters—specifically window size and stride—that significantly impact detection performance in practical deployment scenarios.
+The development of robust Thai profanity detection models faces this central constraint: the lack of extensive labeled datasets. Although ASR-based pipelines show promise, they struggle with Thai's phonetic diversity, slang variations, and tonal ambiguities, leading to inconsistent profanity detection accuracy \cite{THEERAUMPON201113254,suwanbandit2024improving}. More critically, the evaluation methodologies used to assess these systems often lack systematic analysis of temporal parameters, specifically window size and stride that significantly impact detection performance in practical deployment scenarios \cite{9900333,9665775,app6060162}.
 
-Traditional evaluation approaches in speech processing often use fixed parameters without exploring the relationship between temporal segmentation settings and detection accuracy. In profanity detection, the choice of analysis window size and stride directly affects both detection sensitivity and temporal precision, yet existing evaluation methods rarely provide guidance on appropriate stride for parameter optimization \cite{Wazir2022}, especially for Thai where phoneme and tone differences are critical.
+Traditional evaluation approaches in speech processing often use fixed parameters without exploring the relationship between temporal segmentation settings and detection accuracy in detail. In profanity detection, the choice of analysis window size and stride directly affects both detection sensitivity and temporal precision, yet existing evaluation methods rarely provide guidance on appropriate stride for parameter optimization \cite{baevski2020wav2vec20frameworkselfsupervised}, especially for Thai where phoneme and tone differences are critical \cite{THEERAUMPON201113254,suwanbandit2024improving}.
 
 Recognizing the data limitation as an inherent challenge rather than a solvable problem within the scope of our research, this project shifts focus from purely model development to comprehensive evaluation methodology and parameter optimization. The central question becomes: given limited training data, how can we systematically identify the most effective evaluation approaches and optimal system parameters (window size and stride configurations) to guide future research and practical implementation?
 
-This project centers on the comprehensive evaluation and optimization of Thai profanity detection systems in audio content. Building upon the foundational fine-tuned wav2vec~2.0 model developed in Senior Project 1, we design and implement multiple evaluation methodologies to assess detection performance and produce meaningful evaluation results. Concretely, we systematically explore the impact of critical temporal parameters—window size (ranging from 0.3\,s to 2.0\,s) and stride configurations (as a percentage of window length and fixed increments of 0.05\,s)—across different parameter combinations.
+This work conducts a systematic evaluation of temporal segmentation choices for Thai profanity detection in audio. We design and compare multiple evaluation protocols and analyze the effect of window size (0.3--2.0\,s) and stride schemes (fixed 0.05\,s and percentage-of-window) on detection and temporal localization performance.
 
-This research addresses a practical need by identifying optimal window and stride parameters for different evaluation methods. Our contributions are twofold: (1) Optimal parameter identification across evaluation methods, providing concrete guidance for future implementations; and (2) An extensible evaluation system framework that future researchers can directly apply to assess Thai profanity detection models consistently and reliably. The practical impact is that developers can immediately adopt effective configurations (e.g., short windows such as 0.3\,s for word-level tasks) instead of spending significant time on ad hoc parameter exploration, accelerating the development of Thai language content moderation systems.
+Our contributions are: (i) an empirical study quantifying how window size and stride influence F1 and IoU under window-based and IoU-based evaluations; (ii) scenario-oriented parameter recommendations for censorship use (e.g., short windows with high overlap for precise timestamps, larger windows for presence detection); and (iii) a reproducible evaluation toolkit that aligns preprocessing with training to facilitate consistent comparison in future work.
 
 \section{Related Work}
-Profanity detection in speech has been a significant research area in speech processing and NLP. Existing methods generally fall into three main categories: (1) ASR-based text processing \cite{Jacobs2023,An2024}, (2) direct speech-based profanity detection using deep learning \cite{An2024,Wazir2022}, and (3) text-based hate speech \cite{Hemtanon2024} and keyword-based approaches \cite{Aljumily2023}. This section overviews these approaches and their relevance to profanity detection in Thai speech, with emphasis on evaluation methodologies and parameter optimization that inform our research.
+Research on spoken profanity/hate-speech detection spans two main paradigms: (i) cascaded ASR pipelines (including speech-native alternatives like acoustic word embeddings, AWE) and (ii) direct audio methods. Text-only approaches \cite{Hemtanon_Phetkrachang_Yangyuen_2024,Aljumily2023,Davidson_Warmsley_Macy_Weber_2017} are relevant for moderation but do not yield timestamp-accurate spans required for censoring.
 
-Traditional pipelines convert speech to text using Automatic Speech Recognition (ASR) and then apply text-based profanity detection algorithms \cite{Davidson2017}. While this leverages mature text processing techniques and extensive text-based profanity datasets, it is unable to precisely locate timestamps in audio, which limits downstream censoring applications that require accurate time spans.
+	\textbf{ASR vs. AWE.} Jacobs et\,al. \cite{jacobs2023hatespeechdetectionlowresource} compare cascaded ASR systems with AWE models for low-resource languages (Wolof, Swahili), showing that AWE can match or surpass ASR in the presence of transcription errors by operating directly on audio and avoiding error propagation. This supports speech-native representations when labeled text resources are scarce, and motivates evaluation settings that emphasize temporal localization from audio.
 
-Recent advances in deep learning enable direct processing of audio for speech classification, bypassing ASR. Convolutional and recurrent architectures have been applied on spectrograms for classification tasks including profanity \cite{Wazir2022}. More recently, self-supervised models such as wav2vec~2.0 \cite{Baevski2020} operate directly on raw waveforms and offer precise temporal localization of acoustic features. This direct analysis allows fine-grained windowing strategies that can capture the exact boundaries of profane words—crucial for accurate detection and subsequent censoring. Configurable window sizes make such models particularly suitable for tasks where precise temporal localization is essential.
+	\textbf{Direct audio methods.} CNN/RNN classifiers on spectrograms have been used for profanity detection \cite{9900333}. Self-supervised models such as wav2vec2.0 operate on raw waveforms and provide fine temporal sensitivity \cite{baevski2020wav2vec20frameworkselfsupervised}, enabling sliding-window inference that better captures word boundaries.
 
-Keyword spotting focuses on detecting predefined words or phrases in continuous audio streams with low latency and compact models \cite{9665775}. The technique is modern CNN-based small-footprint systems that operate on log-mel features \cite{Sainath2015KWS}. KWS-style modeling and post-processing (e.g., merging adjacent positive frames/windows) provide complementary insights for profanity detection, especially for obtaining robust word-level spans under resource constraints.
+	\textbf{Keyword spotting (KWS).} KWS targets predefined terms with low-latency, small-footprint models \cite{9665775}, commonly using CNNs over log-mel features \cite{sainath15b_interspeech}. KWS-style post-processing (merging adjacent positives) is useful for forming robust word-level spans.
 
-Prior work explores limited segment lengths and overlaps, e.g., 0.3--0.5\,s windows with overlapping strides to reduce word-splitting \cite{Wazir2022}. Frame-level methods evaluate with localization metrics such as IoU \cite{An2024}, but require frame-wise annotations, which are resource-intensive—especially in low-resource languages like Thai. Our study systematizes window/stride choices across evaluation methods to provide practical guidance for downstream censoring.
+	\textbf{Temporal segmentation and evaluation.} Prior work has examined fixed window lengths (0.3--0.5\,s) and overlaps for censorship \cite{9900333}, but systematic analyses of stride relative to window size are limited. Localization-quality metrics from sound event detection (e.g., event/segment measures and IoU) provide objective temporal scoring \cite{app6060162,an-etal-2024-investigation}. These gaps motivate our study of window/stride trade-offs under window- and IoU-based evaluations tailored to censorable spans.
 
-Evaluation methodologies in speech processing commonly include window-based and frame-based paradigms. In window-based evaluation, continuous audio is segmented into fixed-size windows and each segment is classified independently. For instance, \cite{Wazir2022} systematically examined window lengths of 0.3, 0.4, and 0.5\,s for film censorship and found improved F1 and accuracy with longer segments, concluding 0.5\,s as optimal in their setting. They also addressed the word-splitting issue of fixed windows by introducing overlapping windows (stride < 100\%), which reduced false negatives. However, they did not broadly analyze stride values, leaving open the optimal relationship between window size and stride—an explicit focus of our work. Beyond profanity detection, event-detection literature also motivates windowing and overlapping strategies for robustness \cite{Mesaros2016,Piczak2015}.
-
-Frame-level evaluation offers finer temporal resolution by predicting at short frame intervals (e.g., 10\,ms), producing detailed time-stamped rationales for events (e.g., hate speech), and scoring localization quality via metrics like IoU \cite{An2024}. This granularity enables precise temporal alignment but depends on framewise annotations, which are costly to obtain—particularly for low-resource languages. In contrast, window-based evaluation works well with more common word-level or clip-level labels, aligning with our objective to optimize practical profanity detection. Accordingly, we adopt window-based evaluation to conduct a systematic, large-scale study of window and stride configurations without requiring exhaustive frame-level labels, targeting deployable performance and speed.
-
-\section{Proposed Methodology}
+\section{Methodology}
 \subsection{Data Collection}
 We collected data by recording speech and downloading public audio/video content, then labeled profane words in Audacity with start/end timestamps and labels. Labels were consolidated in a CSV containing file path, start time, end time, and label.
 
@@ -148,20 +161,69 @@ file\_path & start\_time & end\_time & label \\ \hline
 \end{tabularx}
 \end{Table}
 
+
+
+% Dataset summary from analysis script
+\begin{Table}
+\captionof{table}{Dataset summary: counts and total duration per label.}
+\small
+\begin{tabularx}{\columnwidth}{|>{\raggedright\arraybackslash}X|c|c|}
+\hline
+Label & Count & Total Duration (s) \\ \hline
+none & 1969 & 15088.47 \\ \hline
+guu & 290 & 51.58 \\ \hline
+meung & 254 & 52.61 \\ \hline
+hia & 164 & 48.33 \\ \hline
+yed & 76 & 15.45 \\ \hline
+\end{tabularx}
+\end{Table}
+
+\begin{Table}
+\captionof{table}{Dataset totals used for training.}
+\small
+\begin{tabularx}{\columnwidth}{|>{\raggedright\arraybackslash}X|c|}
+\hline
+Profanity instances (sum of Thai labels) & 784 \\ \hline
+Non-profanity instances & 1969 \\ \hline
+Total instances & 2753 \\ \hline
+\end{tabularx}
+\end{Table}
+
+% Evaluation dataset summary from analysis script
+\begin{Table}
+\captionof{table}{Evaluation dataset summary: counts and total duration per label.}
+\small
+\begin{tabularx}{\columnwidth}{|>{\raggedright\arraybackslash}X|c|c|}
+\hline
+Label & Count & Total Duration (s) \\ \hline
+none & 298 & 3369.74 \\ \hline
+guu & 157 & 19.14 \\ \hline
+meung & 117 & 17.36 \\ \hline
+hia & 78 & 16.52 \\ \hline
+yed & 26 & 2.43 \\ \hline
+\end{tabularx}
+\end{Table}
+
+\begin{Table}
+\captionof{table}{Evaluation dataset totals.}
+\small
+\begin{tabularx}{\columnwidth}{|>{\raggedright\arraybackslash}X|c|}
+\hline
+Profanity instances (sum of profanity labels) & 378 \\ \hline
+Non-profanity instances & 298 \\ \hline
+Total instances & 676 \\ \hline
+Number of unique source files & 34 \\ \hline
+\end{tabularx}
+\end{Table}
+
 \subsection{Data Processing}
-We match the deployed and evaluation pipelines to the training-time preprocessing used for fine-tuning \texttt{airesearch/wav2vec2-large-xlsr-53-th}. For each windowed slice, we load the exact segment via frame offsets to avoid drift, apply a first-order pre-emphasis filter ($\mathrm{coef}=0.97$), and perform a gentle energy-based gate by attenuating samples below $2.5\times$ the 20th-percentile amplitude. To reduce boundary artifacts without suppressing content, we use a light Hamming blend, followed by mild dynamic range compression via soft clipping around $2\times$ RMS to stabilize dynamics across windows. Audio is then resampled to 16 kHz mono if needed, normalized by z-scoring (mean/std) and scaled by 0.5 to match training amplitude statistics, and finally padded or truncated to the exact window length in samples (e.g., 0.5\,s $\Rightarrow$ 8000 samples at 16 kHz). For training, we segment windows directly from labeled timestamps. For evaluation and real usage, we slide windows with overlap to avoid splitting words \cite{Wazir2022}, merge adjacent positives into word-level spans, and optionally refine boundaries with a simple VAD (\texttt{librosa.effects.split}, \texttt{top\_db}=20, merging gaps $\leq$50 ms and adding $\pm$0.1 s padding within the original span).
+We match the deployed and evaluation pipelines to the training-time preprocessing used for fine-tuning \texttt{airesearch/wav2vec2-large-xlsr-53-th}. For each windowed slice, we load the exact segment via frame offsets to avoid drift, apply a first-order pre-emphasis filter ($\mathrm{coef}=0.97$), and perform a gentle energy-based gate by attenuating samples below $2.5\times$ the 20th-percentile amplitude. To reduce boundary artifacts without suppressing content, we use a Hamming window technique \cite{shrawankar2013adaptivemethodologyubiquitousasr}, followed by mild dynamic range compression via soft clipping around $2\times$ RMS to stabilize dynamics across windows. Audio is then resampled to 16 kHz mono if needed, normalized by z-scoring (mean/std) and scaled by 0.5 to match training amplitude statistics, and finally padded or truncated to the exact window length in samples (e.g., 0.5\,s $\Rightarrow$ 8000 samples at 16 kHz). For training, we segment windows directly from labeled timestamps. For evaluation and real usage, we slide windows with overlap to avoid splitting words \cite{9900333}, merge adjacent positives into word-level spans, and optionally refine boundaries with a simple VAD (\texttt{librosa.effects.split}, \texttt{top\_db}=20).
 
 \subsection{Model}
-We adopt a Thai wav2vec~2.0 backbone pre-trained via self-supervised learning \cite{Baevski2020} and fine-tune it for multi-class sequence classification (four profanity types plus none). Input raw waveforms are encoded by a CNN feature encoder and transformer stack; sequence representations are mean-pooled and passed to a classifier.
+We adopt a Thai wav2vec~2.0 pre-trained \texttt{airesearch/wav2vec2-large-xlsr-53-th} via self-supervised learning \cite{baevski2020wav2vec20frameworkselfsupervised} and fine-tune it for multi-class sequence classification (four profanity types plus none). Input raw waveforms are encoded by a CNN feature encoder and transformer stack; sequence representations are mean-pooled and passed to a classifier.
 
 \subsection{Training}
-Our training methodology leverages transfer learning to address the low-resource nature of Thai profanity detection. We fine-tune the Thai wav2vec~2.0 backbone (\texttt{airesearch/wav2vec2-large-xlsr-53-th}), which provides strong speech representations learned from general Thai audio, and adapt it to multi-class profanity classification. Training is configured to balance learning efficiency and generalization: a batch size of 16 offers stable gradients within available compute; a learning rate of $5\times10^{-5}$ with linear decay enables fine-grained parameter updates without overshooting; and AdamW with weight decay regularizes the parameter space to reduce overfitting. To further handle class imbalance, we apply class weighting as defined in Eqs.~(\ref{eq:weighted-loss})--(\ref{eq:class-weight}), which amplifies the contribution of underrepresented classes. We train for up to 100 epochs with early stopping based on validation performance to prevent premature convergence or overfitting.
-
-To better capture transitions at window boundaries, we pad each training window by 0.2\,s at the edges. We also employ light data augmentation to improve robustness: time stretching (\(\pm10\%\)), pitch shifting (\(\pm2\) semitones), background noise mixing at varying SNRs, and time masking. The dataset is split 80/20 with stratification to maintain label distribution across train and validation sets.
-
-\paragraph{Data augmentation.} We adopt a targeted but comprehensive augmentation suite to expose the model to realistic acoustic variability likely to occur in production: (i) time stretching within a \(\pm10\%\) range to accommodate speaking rate differences; (ii) pitch shifting by \(\pm2\) semitones to simulate speaker characteristics and vocal ranges; (iii) addition of background noise across multiple signal-to-noise ratios (SNRs) to improve robustness in noisy environments; and (iv) random time masking to discourage over-reliance on specific temporal cues and promote invariance to local dropouts.
-
-\paragraph{Validation and model selection.} We use an 80/20 train/validation split with stratified sampling to preserve class distribution across profanity categories. During training, we monitor validation metrics epoch-by-epoch and adjust hyperparameters if instability is observed. Early stopping uses validation performance as the stopping criterion, selecting the checkpoint that maximizes validation performance while preventing overfitting, thereby yielding a model with better generalization to unseen audio.
+Our training methodology leverages transfer learning to address the low-resource nature of Thai profanity detection. We fine-tune the Thai wav2vec~2.0 (\texttt{airesearch/wav2vec2-large-xlsr-53-th}), which provides strong speech representations learned from general Thai audio, and adapt it to multi-class profanity classification. Training is configured to balance learning efficiency and generalization: a batch size of 16 offers stable gradients within available compute; a learning rate of $5\times10^{-5}$ with linear decay enables fine-grained parameter updates without overshooting; and AdamW with weight decay regularizes the parameter space to reduce overfitting. To further handle class imbalance, we apply class weighting as defined in Eqs.~(\ref{eq:weighted-loss})--(\ref{eq:class-weight}), which amplifies the contribution of underrepresented classes. We train for up to 100 epochs with early stopping based on validation performance to prevent premature convergence or overfitting.
 
 \begin{equation}
 \mathcal{L}_{\text{weighted}} = - \sum_{c=1}^{C} w_c\, y_c\, \log(p_c)
@@ -172,13 +234,19 @@ w_c = \frac{N}{C\, N_c}
 \label{eq:class-weight}
 \end{equation}
 
+\paragraph{Data augmentation.} We adopt a targeted but comprehensive augmentation suite to expose the model to realistic acoustic variability likely to occur in production: (i) time stretching within a \(\pm10\%\) range to accommodate speaking rate differences; (ii) pitch shifting by \(\pm2\) semitones to simulate speaker characteristics and vocal ranges; (iii) addition of background noise across multiple signal-to-noise ratios (SNRs) to improve robustness in noisy environments; and (iv) random time masking to discourage over-reliance on specific temporal cues and promote invariance to local dropouts.
+
+\paragraph{Data selection.} To reflect real-world usage in which profanity must be detected and censored in online media, we construct our splits from Recording, YouTube and other public sources. Audio is collected from diverse channels and content genres (dialogue, livestreams, vlogs, gaming, and music-backed speech) and segmented into clips with annotated profane spans and non-profane speech. For training contain voice recordings and YouTube content, while validation and test sets are held out from distinct YouTube channels. This split strategy evaluates generalization to unseen speakers and contexts, reflecting practical deployment scenarios.
+
+
+
 \subsection{Evaluation Methodology}
-Our evaluation framework is designed for real-world censoring use cases. It assesses performance across a wide range of temporal parameters and four complementary methodologies, while comparing two stride strategies for sliding-window inference.
+Our evaluation framework is designed for real-world censoring use cases and systematic evaluation. It assesses performance across a wide range of temporal parameters and four complementary methodologies, while comparing two stride strategies for sliding-window inference.
 
 \paragraph{Stride strategies.} We investigate two ways to advance the analysis window through time:
 \begin{itemize}
-  \item \textbf{Fixed-time stride:} a constant step of 0.05\,s between consecutive windows.
-  \item \textbf{Percentage-based stride:} a relative step (e.g., 10\%, 25\%) of the window length so that overlap scales with window size.
+  \item \textbf{Fixed-time stride:} a constant step of 0.05\,s between consecutive windows and strides.
+  \item \textbf{Percentage-based stride:} a relative step (e.g., 10\%, 20\%) of the window length so that overlap scales with window size.
 \end{itemize}
 
 \subsubsection{Window Evaluation}
@@ -198,29 +266,61 @@ We conducted a broad search over window sizes (0.3--2.0\,s) and both stride stra
 
 \subsection{Model Performance}
 \subsubsection{Evaluation Methodology Selection}
-Before presenting quantitative results, we first selected the most appropriate evaluation methodology. We implemented and compared four approaches: (1) Window Evaluation (direct window classification), (2) Merged-Word Evaluation (merge overlapping positives into word spans), (3) Merged-Word IoU Evaluation (merge then match by IoU threshold), and (4) Merged-Word IoU Area Combination Evaluation (region-centric IoU over all predictions within a ground-truth span). An important observation is that plain Merged-Word Evaluation can artificially inflate F1-scores by focusing evaluation only on regions near annotated profane words, which biases precision upward. To avoid this bias and ensure objective temporal matching, we adopt the IoU-based protocols (3) and (4) as primary, due to their (i) objective overlap quantification, (ii) absence of evaluation bias, (iii) reproducibility, (iv) alignment with temporal detection literature, and (v) clear applicability to real-world censoring when paired with VAD.
+Before demonstrating the results, we first selected the most appropriate evaluation methodology. We implemented and compared four approaches: (1) Window Evaluation (direct window classification), (2) Merged-Word Evaluation (merge overlapping positives into word spans), (3) Merged-Word IoU Evaluation (merge then match by IoU threshold), and (4) Merged-Word IoU Area Combination Evaluation (region-centric IoU over all predictions within a ground-truth span). An important observation is that plain Merged-Word Evaluation can artificially inflate F1-scores by focusing evaluation only on regions near annotated profane words, which biases precision upward. To avoid this bias and ensure objective temporal matching, we select the Merged-Word IoU Area Combination protocol as our primary evaluation. It computes IoU correctly at the region level by summing all matching predicted spans within a ground-truth segment (robust to short gaps/fragmentation), while retaining an interpretable overlap measure. In deployment, we still present plain merged-word outputs to users because contiguous, merged spans align best with real-world censoring workflows, whereas the IoU Area Combination score is a fairer, objective measure of detection overlap for model evaluation and windowing selection. Overall, the IoU-based protocols provide objective overlap quantification, reduce evaluation bias, are reproducible, align with temporal detection literature, and work well with VAD for censoring.
 
-\subsubsection{IoU Threshold Selection}
-We performed a threshold sensitivity analysis to select the IoU threshold for the IoU-based methods. As the IoU threshold increases, F1 decreases as expected, since stricter temporal alignment reduces recall. Across binary and multiclass settings, the highest F1 is achieved at a lenient threshold of 0.1, indicating that the model often captures portions of profane spans without perfectly aligning full duration. Therefore, we use $\mathrm{IoU}=0.1$ for all IoU-based results reported below.
+% Merged into IoU Threshold and Percentage Analysis subsection below.
 
 \subsubsection{Window Size Optimization}
+
 \begin{Figure}
 	\begin{center}
-		\includegraphics[width=8cm]{img/eval_compare.png}
+		\includegraphics[width=8cm]{img/eval_compare_binary.png}
 	\end{center}
-  \label{fig:eval_compare}
-	\captionof{figure}{Binary F1-score and Multiclass F1-score respectively comparison}
+  \captionof{figure}{Binary F1-score eval 0.05 and eval by percent comparison}\label{fig:eval_compare_binary}
+\end{Figure}
+
+\begin{Figure}
+	\begin{center}
+		\includegraphics[width=8cm]{img/eval_compare_multiclass.png}
+	\end{center}
+  \captionof{figure}{Multiclass F1-score eval by 0.05 and eval by percent comparison}\label{fig:eval_compare_multiclass}
 \end{Figure}
 
 We analyzed window size effects by plotting F1 versus window length for each evaluation method and stride strategy.
-Aggregating across stride strategies and methods, we compared F1 versus window size in Fig.\ref{fig:eval_compare}. Trends include: (i) plain Merged-Word Evaluation tends to report the highest F1 due to the aforementioned bias (orange); (ii) the IoU Area Combination method attains moderate F1 and provides a more faithful temporal measure (green); (iii) Window Evaluation produces consistent but lower F1 since it penalizes boundary fragmentation. In our runs, the IoU Area Combination method shows an operating point near 1.2\,s that balances binary and multiclass F1; shorter windows favor precise localization, whereas longer windows trade temporal precision for detection robustness(blue); (iv) Shows the lowest performance with Binary F1 scores around 23\% and Multiclass F1 scores approximately 11\%. This method appears to be the most restrictive in terms of detection criteria (red).\\\indent
-In conclusion, word evaluation gave the best F1 score since it could come from duplication case we discovered. Therefore, Merged word IoU combined Evaluation has potential to be used as it has an optimal point for both binary classification and multiclass classification.
+Aggregating across stride strategies and methods, we compared F1 versus window size in Figs.\ref{fig:eval_compare_binary} and \ref{fig:eval_compare_multiclass}. Trends include: (i) plain Merged-Word Evaluation tends to report the highest F1 due to the aforementioned bias (orange); (ii) the IoU Area Combination method attains moderate F1 and provides a more faithful temporal measure (green); (iii) Window Evaluation produces consistent but lower F1 since it penalizes boundary fragmentation. In our runs, the IoU Area Combination method shows an operating point near 1.2\,s that balances binary and multiclass F1; shorter windows favor precise localization, whereas longer windows trade temporal precision for detection robustness(blue); (iv) Merged-Word IoU Evaluation shows the lowest performance with Binary F1 scores around 23\% and Multiclass F1 scores approximately 11\%. This method appears to be the most restrictive in terms of detection criteria (red).\\\indent
+In conclusion, word evaluation gave the best F1 score since it could come from duplication case we discovered. Therefore, Merged word IoU combined Evaluation has potential to be used as it is fair and logical for evaluation.
 
 \subsubsection{Stride Selection}
-We examined stride by heatmaps over window and stride for both fixed-time and percentage-based advances. For binary classification under the IoU Area Combination protocol, large windows (e.g., 2.0\,s) with large strides can yield higher binary F1, reflecting robust presence detection but less precise boundaries. Conversely, multiclass results favor shorter windows with substantial overlap (e.g., 0.3\,s with 80\% stride), consistent with the need for finer temporal resolution. For the IoU Area Combination method, a 1.2\,s window with an \(\sim\)80--90\% stride yielded a good trade-off in our runs.
+\begin{Figure}
+	\begin{center}
+		\includegraphics[width=8cm]{img/binary_heatmap_percent.png}
+	\end{center}
+  \captionof{figure}{Binary F1-score eval by percentage}\label{fig:binary_heatmap_percent}
+\end{Figure}
+\begin{Figure}
+	\begin{center}
+		\includegraphics[width=8cm]{img/binary_heatmap_0.05.png}
+	\end{center}
+  \captionof{figure}{Binary F1-score eval by 0.05}\label{fig:binary_heatmap_0.05}
+\end{Figure}
+\begin{Figure}
+	\begin{center}
+		\includegraphics[width=8cm]{img/multiclass_heatmap_0.05.png}
+	\end{center}
+  \captionof{figure}{Multiclass F1-score eval by 0.05}\label{fig:multiclass_heatmap_0.05}
+\end{Figure}
+\begin{Figure}
+	\begin{center}
+		\includegraphics[width=8cm]{img/multiclass_heatmap_percent.png}
+	\end{center}
+  \captionof{figure}{Multiclass F1-score eval by percentage}\label{fig:multiclass_heatmap_percent}
+\end{Figure}
+
+We examined stride by heatmaps Figs. \ref{fig:binary_heatmap_percent}, \ref{fig:binary_heatmap_0.05} over window and stride for both fixed-time and percentage-based advances. For binary classification under the IoU Area Combination protocol, large windows (e.g., 2.0\,s) with large strides can yield higher binary F1, reflecting robust presence detection but less precise boundaries. Conversely, multiclass results Figs \ref{fig:multiclass_heatmap_0.05}, \ref{fig:multiclass_heatmap_percent} favor shorter windows with substantial overlap (e.g., 0.3\,s with 80\% stride), consistent with the need for finer temporal resolution. For the IoU Area Combination method, a 1.2\,s window with an \(\sim\)80--90\% stride yielded a good trade-off in our runs.
 
 
-\subsubsection{IoU Percentage Analysis}
+\subsubsection{IoU Threshold and Percentage Analysis}
+We performed a threshold sensitivity analysis to select the IoU threshold for the IoU-based methods. As the IoU threshold increases, F1 decreases as expected, since stricter temporal alignment reduces recall. Across binary and multiclass settings, the highest F1 is achieved at a lenient threshold of 0.1, indicating that the model often captures portions of profane spans without perfectly aligning full duration. Therefore, we use $\mathrm{IoU}=0.1$ for all IoU-based results reported below. Building on this choice, we summarize mean IoU behavior across window/stride configurations as follows.
 \begin{Figure}
 	\begin{center}
 		\includegraphics[width=8cm]{img/mean_iou.png}
@@ -228,11 +328,11 @@ We examined stride by heatmaps over window and stride for both fixed-time and pe
   \captionof{figure}{Mean IoU percentage heatmap across different window and stride configurations}
   \label{fig:mean_iou}
 \end{Figure}
-Using the IoU Area Combination metric, we summarized mean IoU across window/stride grids. Smaller windows (0.3--0.5\,s) generally produce higher mean IoU than larger windows, confirming that finer segmentation improves boundary localization. As an illustrative example for a single ground-truth span [2.00, 5.00]\,s, discontinuous predictions [2.00, 3.00] and [4.00, 5.00] yield an intersection of 2.00\,s and a union of 3.00\,s, giving $\mathrm{IoU}\approx0.67$, which would count as a true positive at a 0.1 threshold. Aggregated results show best mean IoU at small windows with appropriately scaled strides, with fixed 0.05\,s steps yielding competitive performance at 0.3\,s windows.
+Using the IoU Area Combination metric, we summarized mean IoU across window/stride Figs. \ref{fig:mean_iou}. Smaller windows (0.3--0.5\,s) generally produce higher mean IoU than larger windows, confirming that finer segmentation improves boundary localization. As an illustrative example for a single ground-truth span [2.00, 5.00]\,s, discontinuous predictions [2.00, 3.00] and [4.00, 5.00] yield an intersection of 2.00\,s and a union of 3.00\,s, giving $\mathrm{IoU}\approx0.67$, which would count as a true positive at a 0.1 threshold. Aggregated results show best mean IoU at small windows with appropriately scaled strides, with fixed 0.05\,s steps yielding competitive performance at 0.3\,s windows.
 
-As illustrated in Fig.\ref{fig:mean_iou}, there is a clear inverse relationship between window size and mean IoU. Smaller window configurations (0.3--0.5\,s) consistently outperform larger windows across both evaluation types. The fixed-step condition (\texttt{eval\_by\_0.05}) shows a slight advantage at small windows, peaking at a combined mean IoU of 29.19\% for a 0.3\,s window with a 0.25\,s stride. Confidence intervals widen for larger windows, indicating higher variance and less consistent temporal localization as window duration increases. These observations support the hypothesis that shorter analysis windows provide more precise boundary detection for profanity segments.
+As illustrated in Fig.\ref{fig:mean_iou}, there is a clear inverse relationship between window size and mean IoU. Smaller window configurations (0.3--0.5\,s) consistently outperform larger windows across both evaluation types. The fixed-step condition (\texttt{eval\_by\_0.05}) shows a slight advantage at small windows, peaking at a combined mean IoU of 29.19\% for a 0.3\,s window with a 0.25\,s stride. Confidence intervals widen for larger windows, indicating higher variance and less consistent temporal localization as window duration increases. These observations align with established time-frequency trade-offs and windowing effects in speech processing, and support the hypothesis that shorter analysis windows provide more precise boundary detection for profanity segments.
 
-Focusing on window effects, three operating points highlight the trade-off between detection and temporal localization: (i) a large 2.0\,s window with a 1.9\,s stride maximizes binary F1 (47.05\%) but yields a low IoU (9.16\%), indicating coarse boundaries; (ii) a short 0.3\,s window with an 80\% stride gives the best multiclass F1 (52.34\%) with improved IoU (24.90\%); and (iii) a 0.3\,s window with a 70\% stride attains the highest IoU (25.34\%) with strong multiclass F1 (51.17\%). Overall, 0.3\,s windows consistently tighten temporal boundaries and improve IoU, while very large windows favor presence detection at the expense of precise spans.
+Focusing on window effects, three operating points highlight the trade-off between detection and temporal localization: a large 2.0\,s window with a 1.9\,s stride maximizes binary F1 (47.05\%) but yields a low IoU (9.16\%), indicating coarse boundaries; a short 0.3\,s window with an 80\% stride gives the best multiclass F1 (52.34\%) with improved IoU (24.90\%); and a 0.3\,s window with a 70\% stride attains the highest IoU (25.34\%) with strong multiclass F1 (51.17\%). Overall, 0.3\,s windows consistently tighten temporal boundaries and improve IoU, while very large windows favor presence detection at the expense of precise spans.
 
 
 
@@ -244,6 +344,13 @@ Recommendations depend on deployment goals:
   \item Timestamp accuracy and localization (multiclass or span extraction): shorter windows (e.g., 0.3\,s) with substantial overlap perform better on IoU and multiclass F1; use merged-word IoU methods with a low IoU threshold (0.1) and optional VAD refinement.
   \item Balanced operating point: under the IoU Area Combination protocol, a 1.2\,s window with \(\sim\)80--90\% stride provided a reasonable balance between binary and multiclass F1 in our experiments.
 \end{itemize}
+\begin{Figure}
+	\begin{center}
+		\includegraphics[width=8cm]{img/vad.png}
+	\end{center}
+  \captionof{figure}{Voice Activity Detection (VAD) IoU improvement results across different window}\label{fig:vad}
+\end{Figure}
+As shown in Fig. \ref{fig:vad}, VAD post-processing consistently improves IoU across all window sizes by trimming silence and bridging brief gaps. The most significant gains occur at moderate window lengths (0.5--2.0\,s), where VAD can effectively refine boundaries without excessive fragmentation. For very short windows (0.3\,s), VAD still provides modest IoU improvements, while for large windows (2.0\,s), the impact is less pronounced due to already coarse boundaries. Overall, VAD is a valuable addition to enhance temporal precision in profanity detection outputs.
 
 \section{Future Work and Limitations}
 \subsection{Future Work}
@@ -267,7 +374,7 @@ We present a Thai profanity detection system and comprehensive parameter study u
 \newcommand{\BIBdecl}{\setlength{\itemsep}{-0.3em}}
 \bibliographystyle{IEEEtran}
 % Include all referenced works; replace placeholders in ref.bib with full citations.
-\nocite{Baevski2020,Davidson2017,Wazir2022,TheeraUmpon2011,Kenton2019,Jacobs2023,An2024,Hemtanon2024,Aljumily2023,Suwanbandit2024,9665775}
+\nocite{bbaevski2020wav2vec20frameworkselfsupervised, 9900333,Davidson_Warmsley_Macy_Weber_2017,THEERAUMPON201113254,devlin-etal-2019-bert, jacobs2023hatespeechdetectionlowresource, an-etal-2024-investigation, hemtanon_phetkrachang_yangyuen_2024, Aljumily2023, sainath15b_interspeech, app6060162, 7324337, suwanbandit2024improving, 9665775}
 \bibliography{ref}
 
 \end{multicols}
@@ -281,16 +388,16 @@ We present a Thai profanity detection system and comprehensive parameter study u
 \begin{wrapfigure}{l}{3cm}
     \includegraphics[width=2.54cm,height=3.4cm]{img/diff1.jpg}
 \end{wrapfigure}
-\noindent \textbf{Nutchapol Rodpholchoo} and all authors may include biographies. The first paragraph may contain a place and/or date of birth (list place, then date). Next, the author’s educational background is listed. The degrees should be listed with type of degree in what field, which institution, city, state, and country, and year the degree was earned. The author’s major field of study should be lower-cased. The second paragraph uses the pronoun of the person (he or she) and not the author’s last name. It lists work experience. Information concerning previous publications may be included. The third paragraph begins with the author’s title and last name (e.g., Dr. Smith, Prof. Jones, Mr. Kajor, Ms. Hunter). List any memberships in professional societies. Finally, list any awards received. If a photograph is provided, it should be of good quality, and professional-looking. Below is an example of an author’s biography. \\
+\noindent \textbf{Nutchapol Rodpholchoo} was born in Bangkok, Thailand, in 2003, He is currently pursuing a B.Sc. degree in Computer Science at Assumption University, Samut Prakan, Thailand, where his major field of study is computer science. His academic interests include artificial intelligence, programming languages, cloud computing, and computer architecture. In addition, he served as a committee member of the Faculty of Science and Technology at Assumption University, where he contributes to promoting academic activities and enhancing student engagement in information technology and innovation and he was batch leader of 2022 Students which focused on public relation with the same years students. \\
 
 \begin{wrapfigure}{l}{3cm}
     \includegraphics[width=2.54cm,height=3.4cm]{img/nut1.png}
 \end{wrapfigure}
-\noindent \textbf{Nutchanon Tongkumbanchong} was born in Bangkok, Thailand, in 2003. He is currently pursuing a Bachelor of Science degree in Computer Science at Assumption University, Samut Prakan, Thailand, where his major field of study is computer science. His academic interests include artificial intelligence, programming languages, cloud computing, and computer architecture. In addition, he serves as a committee member of the Faculty of Science and Technology at Assumption University, where he contributes to promoting academic activities and enhancing student engagement in information technology and innovation. Mr. Nutchanon Tongkumbanchong is an active student member of Assumption University’s academic community and has participated in several research and technology-oriented projects. \\
+\noindent \textbf{Nutchanon Tongkumbanchong} was born in Bangkok, Thailand, in 2003. He is currently pursuing a B.Sc. degree in Computer Science at Assumption University, Samut Prakan, Thailand, where his major field of study is computer science. His academic interests include artificial intelligence, programming languages, cloud computing, and computer architecture. In addition, he served as a committee member of the Faculty of Science and Technology at Assumption University, where he contributes to promoting academic activities and enhancing student engagement in information technology and innovation. He is an active student member of Assumption University’s academic community and has participated in several research and technology-oriented projects. \\
 
 \begin{wrapfigure}{l}{3cm}
     \includegraphics[width=2.54cm,height=3.4cm]{img/mint.png}
 \end{wrapfigure}
-\noindent \textbf{Sirinalin Saekhow} was born in Bangkok, Thailand in 2004. She is currently pursuing a Bachelor’s degree in Computer Science at Assumption University, Samut Prakan, Thailand, where her major field of study is computer science. Her academic interests include artificial intelligence, computer vision, natural language processing, and computer network. Ms. Sirinalin Saekhow is an active student member of Assumption University’s academic community and has participated in several research and technology-oriented projects.
+\noindent \textbf{Sirinalin Saekhow} was born in Bangkok, Thailand in 2004. She is currently pursuing a B.Sc. degree in Computer Science at Assumption University, Samut Prakan, Thailand, where her major field of study is computer science. Her academic interests include artificial intelligence, computer vision, natural language processing, and computer network. Ms. Sirinalin Saekhow is an active student member of Assumption University’s academic community and has participated in several research and technology-oriented projects.
 
 \end{document}

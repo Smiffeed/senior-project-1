@@ -1,0 +1,15 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build LaTeX with XeLaTeX to verify tables",
+			"type": "shell",
+			"command": "latexmk -f -xelatex -interaction=nonstopmode -file-line-error abc_senior_project_ej.tex",
+			"isBackground": false,
+			"problemMatcher": [
+				"$latex"
+			],
+			"group": "build"
+		}
+	]
+}

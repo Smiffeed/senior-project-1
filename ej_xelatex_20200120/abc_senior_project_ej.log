@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.4) (preloaded format=xelatex 2025.7.8)  16 OCT 2025 04:11
+This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.4) (preloaded format=xelatex 2025.7.8)  19 OCT 2025 09:33
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -495,33 +495,80 @@ Package fontspec Info:
 
 LaTeX Font Info:    Font shape `TU/Garamond(0)/m/n' will be
 (Font)              scaled to size 10.95pt on input line 56.
+
+Package fontspec Info: 
+(fontspec)             Script 'Thai' not explicitly supported within font 'TH
+(fontspec)             Sarabun New'. Check the typeset output, and if it is
+(fontspec)             okay then ignore this warning. Otherwise a different
+(fontspec)             font should be chosen.
+
+
+Package fontspec Info: 
+(fontspec)             TH Sarabun New scale = 1.0.
+
+
+Package fontspec Info: 
+(fontspec)             TH Sarabun New scale = 1.0.
+
+
+Package fontspec Info: 
+(fontspec)             TH Sarabun New/B scale = 1.0.
+
+
+Package fontspec Info: 
+(fontspec)             TH Sarabun New/I scale = 1.0.
+
+
+Package fontspec Info: 
+(fontspec)             TH Sarabun New/BI scale = 1.0.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'THSarabunNew(0)' created for font 'TH
+(fontspec)             Sarabun New' with options
+(fontspec)             [Scale=1.0,Ligatures=TeX,Script=Thai].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.: <->s*[1.0]"TH Sarabun
+(fontspec)             New/OT:script=thai;language=dflt;mapping=tex-text;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.: <->s*[1.0]"TH Sarabun
+(fontspec)             New/B/OT:script=thai;language=dflt;mapping=tex-text;"
+(fontspec)             - 'italic' (m/it) with NFSS spec.: <->s*[1.0]"TH
+(fontspec)             Sarabun
+(fontspec)             New/I/OT:script=thai;language=dflt;mapping=tex-text;"
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.: <->s*[1.0]"TH
+(fontspec)             Sarabun
+(fontspec)             New/BI/OT:script=thai;language=dflt;mapping=tex-text;"
+
 (abc_senior_project_ej.aux)
 \openout1 = `abc_senior_project_ej.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 60.
-LaTeX Font Info:    Trying to load font information for T3+cmr on input line 60
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 77.
+LaTeX Font Info:    Trying to load font information for T3+cmr on input line 77
 .
 
 (C:\Users\muldi\AppData\Local\Programs\MiKTeX\tex/latex/tipa\t3cmr.fd
 File: t3cmr.fd 2001/12/31 TIPA font definitions
 )
-LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    ... okay on input line 77.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
@@ -559,7 +606,7 @@ LaTeX Font Info:    ... okay on input line 60.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: Option `justification=RaggedRight' requires the `ragged2e
-' package on input line 60.
+' package on input line 77.
 (C:\Users\muldi\AppData\Local\Programs\MiKTeX\tex/latex/ragged2e\ragged2e.sty
 Package: ragged2e 2023/06/22 v3.6 ragged2e Package
 \CenteringLeftskip=\skip78
@@ -581,31 +628,31 @@ Package caption Info: End \AtBeginDocument code.
 File: ej_banner.png Graphic file (type bmp)
 <ej_banner.png>
 LaTeX Font Info:    Font shape `TU/Garamond(0)/m/it' will be
-(Font)              scaled to size 10.95pt on input line 68.
+(Font)              scaled to size 10.95pt on input line 85.
 LaTeX Font Info:    Font shape `TU/Garamond(0)/m/it' will be
-(Font)              scaled to size 14.0pt on input line 68.
+(Font)              scaled to size 14.0pt on input line 85.
 LaTeX Font Info:    Font shape `TU/Garamond(0)/b/n' will be
-(Font)              scaled to size 10.95pt on input line 69.
+(Font)              scaled to size 10.95pt on input line 86.
 LaTeX Font Info:    Font shape `TU/Garamond(0)/b/n' will be
-(Font)              scaled to size 20.0pt on input line 69.
+(Font)              scaled to size 20.0pt on input line 86.
 LaTeX Font Info:    Font shape `TU/Garamond(0)/b/n' will be
-(Font)              scaled to size 12.0pt on input line 70.
+(Font)              scaled to size 12.0pt on input line 87.
 LaTeX Font Info:    Font shape `TU/Garamond(0)/m/n' will be
-(Font)              scaled to size 12.0pt on input line 70.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 70.
+(Font)              scaled to size 12.0pt on input line 87.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 87.
 
 
 (C:\Users\muldi\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 70.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 87.
 
 
 (C:\Users\muldi\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `TU/Garamond(0)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 70.
+(Font)              scaled to size 8.0pt on input line 87.
 
 
 [1
@@ -647,9 +694,11 @@ Package geometry Warning: `a4paper': not available in `\newgeometry'; skipped.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 LaTeX Font Info:    Font shape `TU/Garamond(0)/m/n' will be
-(Font)              scaled to size 14.4pt on input line 104.
+(Font)              scaled to size 14.4pt on input line 121.
 LaTeX Font Info:    Font shape `TU/Garamond(0)/b/n' will be
-(Font)              scaled to size 14.4pt on input line 104.
+(Font)              scaled to size 14.4pt on input line 121.
+LaTeX Font Info:    Font shape `TU/Garamond(0)/b/n' will be
+(Font)              scaled to size 11.0pt on input line 150.
 
 
 
@@ -657,20 +706,25 @@ LaTeX Font Info:    Font shape `TU/Garamond(0)/b/n' will be
 
 
 LaTeX Font Info:    Font shape `TU/Garamond(0)/m/n' will be
-(Font)              scaled to size 9.0pt on input line 127.
+(Font)              scaled to size 9.0pt on input line 152.
 [2
 
 ]
-LaTeX Font Info:    Font shape `TU/Garamond(0)/b/n' will be
-(Font)              scaled to size 11.0pt on input line 137.
 LaTeX Font Info:    Font shape `TU/Garamond(0)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 142.
+(Font)              scaled to size 10.0pt on input line 155.
 
-Underfull \hbox (badness 10000) in paragraph at lines 152--153
+Underfull \hbox (badness 10000) in paragraph at lines 220--221
 \TU/lmtt/m/n/10.95 airesearch/wav2vec2-large-xlsr-53-th\TU/Garamond(0)/m/n/10.9
 5 . For
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 223--224
+[]\TU/Garamond(0)/m/n/10.95 We adopt a Thai wav2vec 2.0 pre-trained
+ []
+
+LaTeX Font Info:    Font shape `TU/Garamond(0)/m/n' will be
+(Font)              scaled to size 6.0pt on input line 229.
 
 
 
@@ -678,17 +732,31 @@ Underfull \hbox (badness 10000) in paragraph at lines 152--153
 
 
 [3]
-LaTeX Font Info:    Font shape `TU/Garamond(0)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 167.
-
 
 
 
 
 
 [4]
-File: img/eval_compare.png Graphic file (type bmp)
-<img/eval_compare.png>
+File: img/eval_compare_binary.png Graphic file (type bmp)
+<img/eval_compare_binary.png>
+File: img/eval_compare_multiclass.png Graphic file (type bmp)
+<img/eval_compare_multiclass.png>
+File: img/binary_heatmap_percent.png Graphic file (type bmp)
+<img/binary_heatmap_percent.png>
+File: img/binary_heatmap_0.05.png Graphic file (type bmp)
+<img/binary_heatmap_0.05.png>
+
+
+
+
+
+
+[5]
+File: img/multiclass_heatmap_0.05.png Graphic file (type bmp)
+<img/multiclass_heatmap_0.05.png>
+File: img/multiclass_heatmap_percent.png Graphic file (type bmp)
+<img/multiclass_heatmap_percent.png>
 File: img/mean_iou.png Graphic file (type bmp)
 <img/mean_iou.png>
 
@@ -697,18 +765,25 @@ File: img/mean_iou.png Graphic file (type bmp)
 
 
 
-[5]
+[6]
+File: img/vad.png Graphic file (type bmp)
+<img/vad.png>
 
 
 
 
 
-[6] (abc_senior_project_ej.bbl
-Underfull \hbox (badness 10000) in paragraph at lines 34--36
-[]\TU/Garamond(0)/m/n/10.95 N. Theera-Umpon, C. Chansareewittaya, and
- []
 
-)
+[7]
+
+LaTeX Warning: Citation `bbaevski2020wav2vec20frameworkselfsupervised' undefine
+d on input line 377.
+
+
+LaTeX Warning: Citation `hemtanon_phetkrachang_yangyuen_2024' undefined on inpu
+t line 377.
+
+(abc_senior_project_ej.bbl)
 
 
 
@@ -718,24 +793,84 @@ File: h-bar.png Graphic file (type bmp)
 <h-bar.png>
 
 
-[7]
+[8]
 File: img/diff1.jpg Graphic file (type bmp)
 <img/diff1.jpg>
 
-Underfull \hbox (badness 10000) in paragraph at lines 284--285
+Underfull \hbox (badness 2486) in paragraph at lines 391--392
+\TU/Garamond(0)/m/n/10.95 land, where his major field of study is computer scie
+nce. His academic interests in-
+ []
+
+
+Underfull \hbox (badness 1412) in paragraph at lines 391--392
+\TU/Garamond(0)/m/n/10.95 tecture. In addition, he served as a committee member
+ of the Faculty of Science and
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 391--392
 
  []
 
 File: img/nut1.png Graphic file (type bmp)
 <img/nut1.png>
 
-Underfull \hbox (badness 1394) in paragraph at lines 289--290
+Underfull \hbox (badness 1394) in paragraph at lines 396--397
 []\TU/Garamond(0)/b/n/10.95 Nutchanon Tongkumbanchong \TU/Garamond(0)/m/n/10.95
  was born in Bangkok, Thailand, in 2003. He is cur-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 289--290
+Underfull \hbox (badness 2452) in paragraph at lines 396--397
+\TU/Garamond(0)/m/n/10.95 rently pursuing a B.Sc. degree in Computer Science at
+ Assumption University, Samut
+ []
+
+
+Underfull \hbox (badness 6859) in paragraph at lines 396--397
+\TU/Garamond(0)/m/n/10.95 Prakan, Thailand, where his major field of study is c
+omputer science. His aca-
+ []
+
+
+Underfull \hbox (badness 4454) in paragraph at lines 396--397
+\TU/Garamond(0)/m/n/10.95 demic interests include artificial intelligence, prog
+ramming languages, cloud computing,
+ []
+
+
+Underfull \hbox (badness 4416) in paragraph at lines 396--397
+\TU/Garamond(0)/m/n/10.95 and computer architecture. In addition, he served as 
+a committee member of the
+ []
+
+
+Underfull \hbox (badness 3049) in paragraph at lines 396--397
+\TU/Garamond(0)/m/n/10.95 Faculty of Science and Technology at Assumption Unive
+rsity, where he contributes to
+ []
+
+
+Underfull \hbox (badness 4647) in paragraph at lines 396--397
+\TU/Garamond(0)/m/n/10.95 promoting academic activities and enhancing student e
+ngagement in information tech-
+ []
+
+
+Underfull \hbox (badness 3482) in paragraph at lines 396--397
+\TU/Garamond(0)/m/n/10.95 nology and innovation. He is an active student member
+ of Assumption University’s
+ []
+
+
+Underfull \hbox (badness 5652) in paragraph at lines 396--397
+\TU/Garamond(0)/m/n/10.95 academic community and has participated in several re
+search and technology-oriented
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 396--397
 
  []
 
@@ -743,19 +878,23 @@ File: img/mint.png Graphic file (type bmp)
 <img/mint.png>
 
 
-[8] (abc_senior_project_ej.aux)
+[9] (abc_senior_project_ej.aux)
  ***********
 LaTeX2e <2025-06-01>
 L3 programming layer <2025-05-26>
  ***********
+
+
+LaTeX Warning: There were undefined references.
+
  ) 
 Here is how much of TeX's memory you used:
- 11573 strings out of 403341
- 230300 string characters out of 5463122
- 668712 words of memory out of 5000000
- 39773 multiletter control sequences out of 15000+600000
- 634957 words of font info for 102 fonts, out of 8000000 for 9000
+ 11678 strings out of 403341
+ 233902 string characters out of 5463122
+ 696712 words of memory out of 5000000
+ 39854 multiletter control sequences out of 15000+600000
+ 635045 words of font info for 113 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 73i,13n,96p,1474b,617s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,12n,99p,1615b,617s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on abc_senior_project_ej.pdf (8 pages).
+Output written on abc_senior_project_ej.pdf (9 pages).
